@@ -258,36 +258,47 @@ SELECT ?title ?creator ?publisher ?date WHERE {
   } catch { return null; }
 }
 
-async function fetchMetadata(isbn) {
-  const [ol, gb, ols, bnf] = await Promise.all([fetchOpenLibrary(isbn), fetchGoogleBooks(isbn), fetchOpenLibrarySearch(isbn), fetchBnf(isbn)]);
-  let meta = ol || gb || bnf || ols || null;
-  if (!meta) return null;
-  if (bnf) {
-    meta = { ...meta,
-      title: meta.title === 'Sans titre' ? bnf.title : meta.title,
-      authors: meta.authors.length ? meta.authors : bnf.authors,
-      publisher: meta.publisher || bnf.publisher,
-      publishedDate: meta.publishedDate || bnf.publishedDate,
-      summary: meta.summary || '',
-    };
+async function fetchMetadata(isbn, wantReport = false) {
+  let sources = {};
+  try { sources = JSON.parse(localStorage.getItem('biblio.sources.v1') || '{}'); } catch {}
+  const on = (id) => sources[id] !== false; // toutes actives par defaut
+  const report = { googleBooks: null, bnf: null, openLibrary: null, cover: null };
+  const jobs = [];
+  if (on('googleBooks')) jobs.push(fetchGoogleBooks(isbn).then((r) => { report.googleBooks = r; }));
+  if (on('bnf')) jobs.push(fetchBnf(isbn).then((r) => { report.bnf = r; }));
+  if (on('openLibrary')) {
+    jobs.push(fetchOpenLibrary(isbn).then((r) => { report.openLibrary = r; }));
+    jobs.push(fetchOpenLibrarySearch(isbn).then((r) => { if (!report.openLibrary) report.openLibrary = r; }));
   }
-  if (ol && gb) {
-    meta = {
-      ...ol,
-      publisher: ol.publisher || gb.publisher,
-      publishedDate: ol.publishedDate || gb.publishedDate,
-      pageCount: ol.pageCount || gb.pageCount,
-      summary: ol.summary || gb.summary,
-      cover: ol.cover || gb.cover,
-      categories: (ol.categories.length ? ol.categories : gb.categories),
-      language: gb.language,
-    };
-  } else if (!meta.cover && gb && ols) {
-    meta = { ...meta, publisher: meta.publisher || (ols.publisher || ''), authors: meta.authors.length ? meta.authors : ols.authors };
+  await Promise.all(jobs);
+
+  // Priorite de base : Google Books (riche) > BnF (FR) > Open Library
+  const order = [report.googleBooks, report.bnf, report.openLibrary];
+  let meta = order.find((m) => m) || null;
+  if (!meta) {
+    if (wantReport) return { meta: null, report };
+    return null;
+  }
+  // Fusion par champ : chaque source complete les champs manquants
+  for (const other of order) {
+    if (!other || other === meta) continue;
+    if (!meta.title || meta.title === 'Sans titre') meta.title = other.title;
+    if (!meta.subtitle && other.subtitle) meta.subtitle = other.subtitle;
+    if ((!meta.authors || !meta.authors.length) && other.authors) meta.authors = other.authors;
+    if (!meta.publisher && other.publisher) meta.publisher = other.publisher;
+    if (!meta.publishedDate && other.publishedDate) meta.publishedDate = other.publishedDate;
+    if (!meta.pageCount && other.pageCount) meta.pageCount = other.pageCount;
+    if (!meta.language && other.language) meta.language = other.language;
+    if ((!meta.categories || !meta.categories.length) && other.categories) meta.categories = other.categories;
+    if (!meta.summary && other.summary) meta.summary = other.summary;
+    if (!meta.cover && other.cover) meta.cover = other.cover;
+    if (!meta.isbn10 && other.isbn10) meta.isbn10 = other.isbn10;
   }
   if (!meta.cover) {
     meta.cover = await fetchCoverFallback(isbn);
+    report.cover = meta.cover || null;
   }
+  if (wantReport) return { meta, report };
   return meta;
 }
 
@@ -310,10 +321,50 @@ function blankItem(isbn) {
 /* ---------- Adding flow (with duplicate detection) ---------- */
 let pendingIsbn = null;
 
+function isBlankFiche(item) {
+  if (!item) return false;
+  const hasTitle = item.title && !/^ISBN \d+/.test(item.title);
+  return !hasTitle || (!item.authors.length && !item.summary && !item.cover);
+}
+
+function enrichItem(item, meta) {
+  if (!meta) return item;
+  const before = JSON.stringify(item);
+  if (!item.title || /^ISBN \d+/.test(item.title)) item.title = meta.title;
+  if (!item.subtitle) item.subtitle = meta.subtitle || '';
+  if (!item.authors.length) item.authors = meta.authors || [];
+  if (!item.publisher) item.publisher = meta.publisher || '';
+  if (!item.publishedDate) item.publishedDate = meta.publishedDate || '';
+  if (!item.pageCount) item.pageCount = meta.pageCount || null;
+  if (!item.language) item.language = meta.language || '';
+  if (!item.categories.length) item.categories = meta.categories || [];
+  if (!item.summary) item.summary = meta.summary || '';
+  if (!item.cover) item.cover = meta.cover || '';
+  if (!item.isbn10 && meta.isbn10) item.isbn10 = meta.isbn10;
+  return JSON.stringify(item) !== before;
+}
+
 async function lookupAndMaybeAdd(isbn, silentDup = false) {
   isbn = normalizeIsbn(isbn);
   if (!/^[0-9]{9}[0-9X]|[0-9]{13}$/.test(isbn)) { toast('ISBN invalide (10 ou 13 chiffres attendus).'); return; }
   const dup = store.findByIsbn(isbn);
+  // Rescan d'une fiche vide/incomplete => on la COMPLETE au lieu de dupliquer
+  const blank = dup.find((d) => isBlankFiche(d));
+  if (blank && !silentDup) {
+    toast('Fiche existante incomplète détectée — recherche des informations…');
+    const meta = await fetchMetadata(isbn);
+    if (meta) {
+      enrichItem(blank, meta);
+      store.update(blank);
+      toast(`Fiche complétée : ${blank.title}`, 3500);
+      renderAll();
+      openDetail(blank.id);
+      return;
+    }
+    toast('Toujours introuvable dans les catalogues — ouvrez la fiche pour compléter à la main ou via 🤖 IA.', 4500);
+    openDetail(blank.id);
+    return;
+  }
   if (dup.length && !silentDup) {
     pendingIsbn = isbn;
     $('#dupMsg').innerHTML = `« <b>${esc(dup[0].title || isbn)}</b> » est déjà dans votre bibliothèque${dup.length > 1 ? ` (${dup.length} exemplaires)` : ''}.<br>Voulez-vous ajouter un autre exemplaire ?`;
@@ -2074,6 +2125,11 @@ function gbKeyParam() {
 $('#btnKeysCfg').addEventListener('click', () => {
   $('#keyGoogleBooks').value = apiKeys.googleBooks || '';
   $('#keysTestResult').textContent = '';
+  let sources = {};
+  try { sources = JSON.parse(localStorage.getItem('biblio.sources.v1') || '{}'); } catch {}
+  $('#srcGoogleBooks').checked = sources.googleBooks !== false;
+  $('#srcBnf').checked = sources.bnf !== false;
+  $('#srcOpenLibrary').checked = sources.openLibrary !== false;
   $('#keysModal').classList.remove('hidden');
 });
 
@@ -2082,8 +2138,15 @@ $('#btnCloseKeys').addEventListener('click', () => $('#keysModal').classList.add
 $('#btnSaveKeys').addEventListener('click', () => {
   apiKeys.googleBooks = $('#keyGoogleBooks').value.trim();
   saveApiKeys();
+  const sources = {
+    googleBooks: $('#srcGoogleBooks').checked,
+    bnf: $('#srcBnf').checked,
+    openLibrary: $('#srcOpenLibrary').checked,
+  };
+  try { localStorage.setItem('biblio.sources.v1', JSON.stringify(sources)); } catch {}
   $('#keysModal').classList.add('hidden');
-  toast(apiKeys.googleBooks ? 'Clé Google Books enregistrée dans ce navigateur.' : 'Clé supprimée de ce navigateur.', 3500);
+  const active = Object.entries(sources).filter(([, v]) => v).map(([k]) => ({ googleBooks: 'Google Books', bnf: 'BnF', openLibrary: 'Open Library' }[k])).join(', ');
+  toast(`Réglages enregistrés — sources actives : ${active || 'aucune !'}`, 3500);
 });
 
 $('#btnTestKeys').addEventListener('click', async () => {

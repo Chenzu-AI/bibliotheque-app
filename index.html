@@ -247,6 +247,19 @@
         <p class="hint">Créer une clé : console.cloud.google.com → projet → API et services → Activer « Google Books API » → Identifiants → Clé API.<br>Recommandé : restreindre la clé aux référants HTTP <code>chenzu-ai.github.io/*</code> et <code>localhost</code>.</p>
       </div>
     </div>
+    <h3 style="margin:14px 0 6px">Sources actives</h3>
+    <p class="hint">Toutes les sources actives sont interrogées en parallèle. Priorité de fusion : Google Books → BnF → Open Library ; chaque source complète les champs manquants des autres.</p>
+    <div class="detail-form">
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcGoogleBooks" checked> Google Books <span class="hint">(riches résumés/couvertures — clé ci-dessus)</span></label>
+      </div>
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcBnf" checked> Catalogue BnF <span class="hint">(éditions françaises — gratuit)</span></label>
+      </div>
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcOpenLibrary" checked> Open Library <span class="hint">(monde — gratuit)</span></label>
+      </div>
+    </div>
     <div class="modal-actions">
       <button id="btnSaveKeys" class="btn btn-primary">💾 Enregistrer</button>
       <button id="btnTestKeys" class="btn">🧪 Tester la clé Google Books</button>
