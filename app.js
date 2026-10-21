@@ -824,6 +824,11 @@ function openDetail(id) {
       ${field('URL image dos', `<input type="text" name="coverBack" value="${esc(it.coverBack || '')}">`)}
     </div>
     <p class="refs">Ajouté le ${esc((it.addedAt || '').slice(0, 10))} · ISBN : ${esc(it.isbn)}${it.isbn10 ? ' / ' + esc(it.isbn10) : ''}${it.language ? ' · langue : ' + esc(it.language) : ''}</p>
+    ${it.isbn ? `<div class="form-row ext-links">
+      <a class="btn small" target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/livre/${esc(it.isbn)}">🇫🇷 Chasse aux livres</a>
+      <a class="btn small" target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent('couverture livre ' + (it.title || '') + ' ' + it.isbn)}">🖼️ Image couverture</a>
+      ${it.series ? `<a class="btn small" target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/recherche?q=${encodeURIComponent(it.series)}">📚 La série « ${esc(it.series)} »</a>` : ''}
+    </div>` : ''}
   `;
   $('#detailModal').classList.remove('hidden');
   const btnAiFill = $('#btnAiFill');
@@ -1456,7 +1461,7 @@ function renderGroups() {
       const owned = new Set(vols);
       const missing = [];
       for (let n = 1; n <= first.seriesTotal; n++) if (!owned.has(n)) missing.push(n);
-      const chips = missing.map((n) => `<span class="missing-chip">T. ${n} <button data-series="${esc(name)}" data-vol="${n}" title="Ajouter aux souhaits">🛒</button></span>`).join('');
+      const chips = missing.map((n) => `<span class="missing-chip">T. ${n} <button data-series="${esc(name)}" data-vol="${n}" title="Ajouter aux souhaits">🛒</button> <a target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/recherche?q=${encodeURIComponent(name + ' ' + n)}" title="Chercher ce tome sur Chasse aux livres (comparateur de prix)">🔎</a></span>`).join('');
       missingHtml = missing.length
         ? `<div class="missing"><b>Manquants (${missing.length}/${first.seriesTotal}) :</b> ${chips}</div>`
         : '<div class="missing"><b>✔ Collection complète</b></div>';
