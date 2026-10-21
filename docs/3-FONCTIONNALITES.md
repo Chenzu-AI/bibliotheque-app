@@ -63,6 +63,8 @@
 ## 🔒 Technique
 - Application web progressive (PWA) — fonctionne **hors-ligne** après installation
 - Données **100 % locales** (IndexedDB) : aucun compte, aucun serveur, aucune donnée envoyée
+- **Mises à jour automatiques** : architecture dépôt privé → miroir public → site en ligne ; chaque évolution se propage seule
+- Bouton **⬇️ Installer** intégré à l'interface (Android/PC) ; sur iPhone, installation via le menu Partager de Safari
 - Léger (~100 Ko), aucun framework, aucune dépendance à installer
 ---
 *Ma Bibliothèque — Création AlphaPrim*

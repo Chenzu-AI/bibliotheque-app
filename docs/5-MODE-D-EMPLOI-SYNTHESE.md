@@ -9,7 +9,8 @@
 | | |
 |---|---|
 | **PC** | Ouvrir l'URL dans Edge/Chrome → **⊕ Installer** (30 s, sans serveur) |
-| **Mobile** | Ouvrir l'URL dans Chrome (Android) / Safari (iPhone) → « Ajouter à l'écran d'accueil » |
+| **Mobile Android** | Ouvrir l'URL dans Chrome → bouton **⬇️ Installer** (ou menu ⋯ → « Installer l'application ») |
+| **iPhone** | Ouvrir l'URL dans **Safari** → bouton **Partager** (↑) → **« Sur l'écran d'accueil »** (pas d'autre voie sur iOS) |
 
 > Hors-ligne sans l'URL : dossier de l'app → `python -m http.server 8080` → `http://localhost:8080` dans Edge → **⊕ Installer**
 
@@ -41,6 +42,10 @@
 
 ## 📤 Exports
 **JSON** (sauvegarde) · **CSV** (Excel) · **HTML** (impression) · **Markdown** (notes) · **🏷️ Étiquettes** (cotes 50×30 mm)
+
+## 📱 À retenir sur mobile
+- Boutons secondaires (Sans ISBN, Mode rangement, Inventaire) : derrière **⋯** en bas à gauche
+- Mise à jour de l'app : fermer/rouvrir une fois (deux fois si l'ancienne version persiste)
 
 ## ⚠️ 3 règles d'or
 1. **Export JSON régulier** — les données vivent dans le navigateur de l'appareil

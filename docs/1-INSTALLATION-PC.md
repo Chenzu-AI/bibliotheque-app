@@ -7,8 +7,12 @@
 L'application est déjà hébergée en HTTPS : **https://chenzu-ai.github.io/bibliotheque-app/**
 
 1. Ouvrez cette URL dans **Edge** ou **Chrome**
-2. Icône **⊕ Installer l'application** dans la barre d'adresse → l'app s'installe comme application Windows (menu Démarrer, bureau)
-3. **Avantages** : pas de serveur local à lancer, **scan par webcam possible**, mises à jour automatiques du site
+2. **Trois voies d'installation** (au choix) :
+   - Bouton **« ⬇️ Installer »** dans le bandeau de l'app (apparaît après quelques secondes)
+   - Icône **⊕** dans la barre d'adresse
+   - Menu ⋯ → **Applications** → **Installer ce site sous forme d'application**
+3. L'app s'installe comme application Windows : menu Démarrer, bureau, fenêtre autonome
+4. **Avantages** : pas de serveur local à lancer, **scan par webcam possible**, mises à jour automatiques du site
 
 > Les méthodes A et B ci-dessous ne servent que si vous voulez fonctionner 100 % hors-ligne depuis vos propres fichiers, sans l'URL.
 

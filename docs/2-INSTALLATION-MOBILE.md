@@ -44,14 +44,29 @@ Si un jour vous voulez héberger l'application ailleurs :
 ## Étape 2 — Installer sur Android
 
 1. Ouvrez **https://chenzu-ai.github.io/bibliotheque-app/** dans **Chrome**
-2. Menu ⋯ → **« Ajouter à l'écran d'accueil »** (ou bandeau « Installer l'application » s'il apparaît)
+2. **Deux voies** :
+   - **Bouton « ⬇️ Installer »** dans le bandeau de l'app (apparaît quand le navigateur est prêt) → confirmez
+   - Ou menu **⋯** (en haut à droite) → **« Installer l'application »** / « Ajouter à l'écran d'accueil »
 3. L'icône apparaît sur l'écran d'accueil → l'app s'ouvre **plein écran, sans barre de navigateur**
+
+> 💡 Le bandeau automatique de Chrome n'apparaît qu'après un certain temps d'usage — le bouton ⬇️ de l'app ou le menu ⋯ fonctionnent toujours immédiatement.
 
 ## Étape 2 (iPhone) — Installation sur iOS
 
-1. Ouvrez **https://chenzu-ai.github.io/bibliotheque-app/** dans **Safari**
-2. Bouton **Partager** (carré avec flèche) → **« Sur l'écran d'accueil »**
-3. Nommez l'app → **Ajouter** → l'icône apparaît
+⚠️ **Sur iPhone, il n'existe PAS de bandeau ni de bouton d'installation** : c'est une règle d'Apple pour toutes les applications web, pas un défaut de l'app. La seule voie :
+
+1. Ouvrez **https://chenzu-ai.github.io/bibliotheque-app/** dans **Safari** (obligatoire — pas Chrome iOS)
+2. Bouton **Partager** (carré avec flèche ↑, en bas de l'écran)
+3. Faites défiler la liste → **« Sur l'écran d'accueil »**
+4. **Ajouter** (en haut à droite) → l'icône apparaît sur l'écran d'accueil
+
+> L'app installée fonctionne ensuite comme une vraie app iOS : plein écran, icône propre, caméra autorisée pour le scan.
+
+## 📱 À savoir sur mobile
+
+- **Barre du bas** : en mode portrait, les boutons secondaires (**➕ Sans ISBN**, **📦 Mode rangement**, **🔎 Inventaire**) sont rangés derrière le bouton **⋯** en bas à gauche — un tap pour les afficher, un autre pour refermer
+- **Mises à jour automatiques** : quand l'application évolue, le site se met à jour tout seul — rechargez la page (ou fermez/rouvrez l'app installée) pour prendre la nouvelle version. Si l'ancienne persiste, fermez/rouvrez une deuxième fois : le navigateur finalise la mise à jour du cache
+- **Navigation privée** : l'installation est désactivée en mode privé — utilisez une fenêtre normale
 
 ## Étape 3 — Scanner vos livres
 

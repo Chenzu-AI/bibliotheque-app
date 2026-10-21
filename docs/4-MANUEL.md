@@ -10,6 +10,8 @@ Guide complet, pas à pas. Les fiches **1-INSTALLATION-PC** et **2-INSTALLATION-
 2. Appuyez sur **📷 Scanner** (mobile) ou saisissez un **ISBN** dans la barre du bas (PC)
 3. La fiche se crée avec couverture, résumé, références — cliquez sur la couverture pour tout modifier
 
+> 📱 **Sur mobile en mode portrait**, les boutons secondaires de la barre du bas (**➕ Sans ISBN**, **📦 Mode rangement**, **🔎 Inventaire**) sont derrière le bouton **⋯** : un tap pour les afficher.
+
 ## 1. Ajouter des ouvrages
 
 | Action | Comment |
