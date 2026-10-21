@@ -45,6 +45,7 @@
   <button id="btnBackupCfg" class="nav-btn">⚙️ Sauvegarde auto (<span id="bkCfgLbl">10</span> scans)</button>
   <button id="btnCoversCfg" class="nav-btn">🖼️ Couvertures embarquées</button>
   <button id="btnAiCfg" class="nav-btn">🤖 IA (recherche & fiches)</button>
+  <button id="btnKeysCfg" class="nav-btn">🔑 Clés API (sources)</button>
 </nav>
 
 <main>
@@ -228,6 +229,29 @@
     <div class="row"><input type="text" id="aiQuery" placeholder="Votre demande…"><button id="btnAiRun" class="btn btn-primary">Chercher</button></div>
     <div id="aiResult" class="hint"></div>
     <div id="aiResultGrid" class="grid" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- API keys manager modal -->
+<div id="keysModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>🔑 Clés API — sources de données</h2>
+      <button id="btnCloseKeys" class="btn btn-ghost">✕</button>
+    </div>
+    <p class="hint">Chaque clé reste <b>uniquement dans ce navigateur</b> (localStorage) — jamais dans le code ni sur un serveur. Chaque utilisateur de l'application entre les siennes.</p>
+    <div class="detail-form">
+      <div>
+        <label>Google Books (recommandé — résumés, couvertures, 1000 requêtes/jour gratuites)</label>
+        <input type="text" id="keyGoogleBooks" placeholder="AIza… (https://console.cloud.google.com/apis/credentials)" autocomplete="off">
+        <p class="hint">Créer une clé : console.cloud.google.com → projet → API et services → Activer « Google Books API » → Identifiants → Clé API.<br>Recommandé : restreindre la clé aux référants HTTP <code>chenzu-ai.github.io/*</code> et <code>localhost</code>.</p>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="btnSaveKeys" class="btn btn-primary">💾 Enregistrer</button>
+      <button id="btnTestKeys" class="btn">🧪 Tester la clé Google Books</button>
+    </div>
+    <p class="hint" id="keysTestResult"></p>
   </div>
 </div>
 

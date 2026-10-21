@@ -181,7 +181,7 @@ async function fetchOpenLibrary(isbn) {
 
 async function fetchGoogleBooks(isbn) {
   try {
-    const r = await fetchWithTimeout(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
+    const r = await fetchWithTimeout(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}${gbKeyParam()}`);
     if (!r.ok) return null;
     const data = await r.json();
     if (data.error) return null;
@@ -2056,4 +2056,49 @@ $('#btnInstall').addEventListener('click', async () => {
 window.addEventListener('appinstalled', () => {
   $('#btnInstall').classList.add('hidden');
   toast("Application installée — retrouvez-la sur votre écran d'accueil.");
+});
+
+/* ---------- API keys manager (stored per-browser, never in code) ---------- */
+const KEYS_STORE = 'biblio.keys.v1';
+let apiKeys = { googleBooks: '' };
+try { apiKeys = { ...apiKeys, ...(JSON.parse(localStorage.getItem(KEYS_STORE)) || {}) }; } catch {}
+function saveApiKeys() {
+  try { localStorage.setItem(KEYS_STORE, JSON.stringify(apiKeys)); }
+  catch { toast('Impossible de sauvegarder la clé (stockage plein ?).', 4000); }
+}
+
+function gbKeyParam() {
+  return apiKeys.googleBooks ? `&key=${encodeURIComponent(apiKeys.googleBooks)}` : '';
+}
+
+$('#btnKeysCfg').addEventListener('click', () => {
+  $('#keyGoogleBooks').value = apiKeys.googleBooks || '';
+  $('#keysTestResult').textContent = '';
+  $('#keysModal').classList.remove('hidden');
+});
+
+$('#btnCloseKeys').addEventListener('click', () => $('#keysModal').classList.add('hidden'));
+
+$('#btnSaveKeys').addEventListener('click', () => {
+  apiKeys.googleBooks = $('#keyGoogleBooks').value.trim();
+  saveApiKeys();
+  $('#keysModal').classList.add('hidden');
+  toast(apiKeys.googleBooks ? 'Clé Google Books enregistrée dans ce navigateur.' : 'Clé supprimée de ce navigateur.', 3500);
+});
+
+$('#btnTestKeys').addEventListener('click', async () => {
+  const key = $('#keyGoogleBooks').value.trim();
+  const out = $('#keysTestResult');
+  if (!key) { out.textContent = 'Entrez d\'abord une clé.'; return; }
+  out.textContent = 'Test en cours…';
+  try {
+    const r = await fetchWithTimeout(`https://www.googleapis.com/books/v1/volumes?q=isbn:9782070541270&key=${encodeURIComponent(key)}`, 12000);
+    const data = await r.json();
+    if (data.error) { out.textContent = '❌ ' + (data.error.message || 'erreur') + ' — vérifiez la clé et que « Google Books API » est activée.'; return; }
+    out.textContent = data.totalItems > 0
+      ? '✅ Clé valide — Google Books répond (livre trouvé).'
+      : '✅ Clé valide — Google Books répond (ce livre précis est inconnu, mais la clé fonctionne).';
+  } catch (e) {
+    out.textContent = '❌ Erreur réseau : ' + e.message;
+  }
 });
