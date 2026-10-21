@@ -184,6 +184,7 @@ async function fetchGoogleBooks(isbn) {
     const r = await fetchWithTimeout(`https://www.googleapis.com/books/v1/volumes?q=isbn:${isbn}`);
     if (!r.ok) return null;
     const data = await r.json();
+    if (data.error) return null;
     if (data.totalItems === 0 || !data.items) return null;
     return normalizeGoogleMeta(data.items[0]);
   } catch { return null; }
@@ -223,38 +224,34 @@ async function fetchOpenLibrarySearch(isbn) {
   } catch { return null; }
 }
 
-/* Catalogue BnF (Bibliothèque nationale de France) - API publique, couverture française */
+/* Catalogue BnF via SPARQL public (couverture française, aucune clé requise) */
 async function fetchBnf(isbn) {
   try {
-    const r = await fetchWithTimeout(`https://data.bnf.fr/v1/ark:/isbn/${isbn}.json`, 9000);
+    const q = `PREFIX dcterms: <http://purl.org/dc/terms/>
+SELECT ?title ?creator ?publisher ?date WHERE {
+  ?b dcterms:identifier "${isbn}" .
+  ?b dcterms:title ?title .
+  OPTIONAL { ?b dcterms:creator ?c . ?c foaf:name ?creator }
+  OPTIONAL { ?b dcterms:publisher ?pub . ?pub dcterms:title ?publisher }
+  OPTIONAL { ?b dcterms:date ?date }
+} LIMIT 5`;
+    const url = 'https://data.bnf.fr/sparql?format=json&query=' + encodeURIComponent(q);
+    const r = await fetchWithTimeout(url, 12000);
     if (!r.ok) return null;
     const data = await r.json();
-    if (!data || !data['@graph']) return null;
-    let title = '', authors = [], publisher = '', date = '';
-    for (const node of data['@graph']) {
-      const t = node.title || (node['rdfs:label']);
-      if (typeof t === 'string' && !title) title = t;
-      if (typeof t === 'object' && t['@value'] && !title) title = t['@value'];
-      const a = node.author || node['dcterms:creator'];
-      if (a) {
-        const names = Array.isArray(a) ? a : [a];
-        for (const one of names) {
-          if (typeof one === 'object' && one['@value']) authors.push(one['@value']);
-          else if (typeof one === 'string') authors.push(one);
-        }
-      }
-      const p = node.publisher || node['dcterms:publisher'];
-      if (p && typeof p === 'string' && !publisher) publisher = p;
-      else if (p && typeof p === 'object' && p['@value'] && !publisher) publisher = p['@value'];
-      const d = node.date || node['dcterms:date'];
-      if (d && typeof d === 'string' && !date) date = d.slice(0, 10);
-    }
+    const rows = (data.results && data.results.bindings) || [];
+    if (!rows.length) return null;
+    const first = rows[0];
+    const title = first.title ? first.title.value : '';
     if (!title) return null;
+    const authors = [...new Set(rows.map((x) => x.creator && x.creator.value).filter(Boolean))].slice(0, 4);
+    const publisher = first.publisher ? first.publisher.value : '';
+    const date = first.date ? first.date.value.slice(0, 4) : '';
     return {
       isbn, isbn10: '',
       title,
       subtitle: '',
-      authors: [...new Set(authors)].filter((a) => a && a.length > 2).slice(0, 4),
+      authors,
       publisher, publishedDate: date,
       pageCount: null, language: 'fr', categories: [], summary: '', cover: '',
     };
