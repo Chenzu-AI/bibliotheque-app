@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a2332">
+<meta name="description" content="Ma Bibliothèque — scannez les codes-barres de vos livres, BD et mangas et organisez votre collection.">
+<title>Ma Bibliothèque</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="icons/icon.svg" alt="" class="logo">
+    <h1>Ma Bibliothèque</h1>
+  </div>
+  <div class="topbar-actions">
+    <span id="countBadge" class="badge" title="Nombre d'ouvrages"></span>
+    <button id="btnScan" class="btn btn-primary" title="Scanner un code-barres">📷 Scanner</button>
+    <button id="btnMenu" class="btn btn-ghost" title="Menu">☰</button>
+  </div>
+</header>
+
+<nav id="mainNav" class="nav hidden">
+  <button data-view="grid" class="nav-btn active">📚 Collection</button>
+  <button data-view="groups" class="nav-btn">👥 Par série / auteur</button>
+  <button data-view="loans" class="nav-btn">📤 Prêts</button>
+  <button data-view="lists" class="nav-btn">📋 Mes listes</button>
+  <button data-view="shelves" class="nav-btn">🗂️ Étagères</button>
+  <button data-view="inventory" class="nav-btn">🔎 Inventaire d'étagère</button>
+  <button data-view="stats" class="nav-btn">📊 Statistiques</button>
+  <button id="btnImport" class="nav-btn">📥 Importer JSON</button>
+  <button id="btnExportJson" class="nav-btn">💾 Export JSON</button>
+  <button id="btnExportCsv" class="nav-btn">📄 Export CSV</button>
+  <button id="btnExportHtml" class="nav-btn">🖨️ Export HTML</button>
+  <button id="btnExportMd" class="nav-btn">📝 Export Markdown</button>
+  <button id="btnPrintLabels" class="nav-btn">🏷️ Étiquettes de cote</button>
+  <button id="btnBackupNow" class="nav-btn">💾 Sauvegarde immédiate</button>
+  <button id="btnBackupCfg" class="nav-btn">⚙️ Sauvegarde auto (<span id="bkCfgLbl">10</span> scans)</button>
+  <button id="btnCoversCfg" class="nav-btn">🖼️ Couvertures embarquées</button>
+  <button id="btnAiCfg" class="nav-btn">🤖 IA (recherche & fiches)</button>
+</nav>
+
+<main>
+  <section id="viewGrid">
+    <div class="toolbar">
+      <input type="search" id="searchInput" placeholder="Rechercher (titre, auteur, ISBN, série, tag…)">
+      <select id="sortSelect">
+        <option value="added">Ajout (récent)</option>
+        <option value="title">Titre A→Z</option>
+        <option value="author">Auteur A→Z</option>
+        <option value="rating">Note décroissante</option>
+        <option value="year">Année de publication</option>
+        <option value="dewey">Cote Dewey / genre</option>
+      </select>
+      <select id="shelfFilter"><option value="">Toutes les étagères</option></select>
+      <select id="statusFilter">
+        <option value="">Tous les statuts</option>
+        <option value="unread">À lire</option>
+        <option value="reading">En lecture</option>
+        <option value="read">Lu</option>
+        <option value="wish">🛒 Souhaits (à acheter)</option>
+        <option value="loaned">📤 Prêtés</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="favOnly"> ★ Favoris</label>
+      <button id="btnSaveSearch" class="btn small">💾 Sauver cette recherche</button>
+      <button id="btnAiOpen" class="btn small">🤖 Recherche IA</button>
+      <button id="btnBulkMode" class="btn small">☑ Sélection multiple</button>
+    </div>
+    <div id="bulkBar" class="toolbar hidden">
+      <span id="bulkCount" class="badge"></span>
+      <select id="bulkStatus">
+        <option value="">— Statut —</option>
+        <option value="unread">À lire</option>
+        <option value="reading">En lecture</option>
+        <option value="read">Lu</option>
+        <option value="wish">Souhait</option>
+      </select>
+      <select id="bulkShelfSelect"><option value="">— Étagère —</option></select>
+      <input type="text" id="bulkGenre" placeholder="Genre">
+      <input type="text" id="bulkLocation" placeholder="Meuble · Étagère (emplacement)">
+      <button id="btnBulkApply" class="btn btn-primary small">Appliquer</button>
+      <button id="btnBulkCancel" class="btn small">Quitter</button>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div class="pager">
+      <span id="pageInfo" class="hint"></span>
+      <button id="btnMore" class="btn hidden">Afficher plus</button>
+    </div>
+    <p id="emptyMsg" class="empty hidden">Aucun ouvrage pour le moment.<br>Appuyez sur « Scanner » ou ajoutez un ISBN ci-dessous.</p>
+  </section>
+
+  <section id="viewShelves" class="hidden">
+    <h2>Étagères</h2>
+    <p class="hint">Les étagères servent à regrouper vos ouvrages (par pièce, thème, format…). Chaque ouvrage peut figurer dans plusieurs étagères.</p>
+    <div class="row">
+      <input type="text" id="newShelfName" placeholder="Nom de la nouvelle étagère">
+      <button id="btnAddShelf" class="btn">Créer</button>
+    </div>
+    <ul id="shelfList" class="shelf-list"></ul>
+  </section>
+
+  <section id="viewGroups" class="hidden">
+    <h2>Par série / auteur</h2>
+    <div class="tabs" id="groupTabs">
+      <button data-g="series" class="tab active">Séries</button>
+      <button data-g="authors" class="tab">Auteurs</button>
+      <button data-g="scenario" class="tab">Scénaristes</button>
+      <button data-g="art" class="tab">Dessinateurs</button>
+    </div>
+    <div id="groupBody"></div>
+  </section>
+
+  <section id="viewLists" class="hidden">
+    <h2>Mes listes sauvegardées</h2>
+    <p class="hint">Les listes mémorisent vos critères de recherche/filtres : elles se mettent à jour automatiquement quand la bibliothèque change (idéal pour suivre des achats futurs).</p>
+    <div id="listBody"></div>
+  </section>
+
+  <section id="viewLoans" class="hidden">
+    <h2>Prêts en cours</h2>
+    <p class="hint">Suivi des ouvrages prêtés : qui les détient, depuis quand, date de retour prévue. Un retard est signalé en rouge.</p>
+    <div id="loanBody"></div>
+    <h2 style="margin-top:24px">Par emprunteur</h2>
+    <p class="hint">Historique complet des prêts par personne — conservé après les retours.</p>
+    <div id="borrowerBody"></div>
+  </section>
+
+  <section id="viewInventory" class="hidden">
+    <h2>🔎 Inventaire d'étagère</h2>
+    <p class="hint">Rescanner une étagère pour la vérifier : l'app compare ce que vous scannez avec ce qui est censé y être rangé, et signale les manquants et les intrus.</p>
+    <div class="row">
+      <select id="invLocation"><option value="">— Choisir l'emplacement à inventorier —</option></select>
+      <button id="btnInvStart" class="btn btn-primary">Démarrer l'inventaire</button>
+    </div>
+    <div id="invPanel" class="hidden">
+      <div class="inv-progress">
+        <span id="invCount" class="hint"></span>
+        <button id="btnInvStop" class="btn btn-danger small">Terminer</button>
+      </div>
+      <p class="hint">Scannez maintenant chaque livre de cette étagère (ou saisissez les ISBN ci-dessous l'écran). Chaque scan est vérifié en direct.</p>
+      <div id="invFeed"></div>
+    </div>
+    <div id="invResult"></div>
+    <h2 style="margin-top:26px">Historique des inventaires</h2>
+    <div id="invHistBody"></div>
+  </section>
+
+  <section id="viewStats" class="hidden"></section>
+</section>
+
+<div class="manual-add">
+  <input type="text" id="manualIsbn" inputmode="numeric" placeholder="Saisir un ISBN (10 ou 13 chiffres)… ou mode rangement ci-contre">
+  <button id="btnManualAdd" class="btn">➕ Ajouter</button>
+  <button id="btnAddNoIsbn" class="btn" title="Créer une fiche vierge, sans ISBN">➕ Sans ISBN</button>
+  <button id="btnShelveMode" class="btn" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère">📦 Mode rangement</button>
+  <button id="btnInvQuick" class="btn" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement">🔎 Inventaire</button>
+</div>
+
+<!-- Scanner modal -->
+<div id="scanModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>Scanner un code-barres</h2>
+      <button id="btnCloseScan" class="btn btn-ghost">✕</button>
+    </div>
+    <video id="scanVideo" playsinline muted></video>
+    <div class="scan-frame"></div>
+    <p class="hint" id="scanStatus">Visez le code-barres (EAN-13 / ISBN) au dos du livre…</p>
+    <div class="row">
+      <button id="btnBurst" class="btn hidden" title="Ajouter chaque code scanné sans fermer la caméra">⚡ Mode rafale</button>
+      <button id="btnTorch" class="btn hidden">🔆 Lampe</button>
+    </div>
+  </div>
+</div>
+
+<!-- Duplicate prompt -->
+<div id="dupModal" class="modal hidden">
+  <div class="modal-box">
+    <h2>Ouvrage déjà présent</h2>
+    <p id="dupMsg"></p>
+    <div class="modal-actions">
+      <button id="btnDupAdd" class="btn btn-primary">Ajouter quand même (2ᵉ exemplaire)</button>
+      <button id="btnDupCancel" class="btn">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Detail / edit modal -->
+<div id="detailModal" class="modal hidden">
+  <div class="modal-box detail">
+    <div class="modal-head">
+      <h2 id="detailTitle"></h2>
+      <button id="btnCloseDetail" class="btn btn-ghost">✕</button>
+    </div>
+    <div id="detailBody" class="detail-body">
+      <div class="detail-covers">
+        <img id="coverFront" alt="Couverture devant" class="cover-lg">
+        <img id="coverBack" alt="Couverture derrière" class="cover-lg hidden">
+        <button id="btnShowBack" class="btn small hidden">Voir le dos</button>
+        <button id="btnFlipCover" class="btn small hidden">Retourner</button>
+      </div>
+      <form id="detailForm" class="detail-form"></form>
+    </div>
+    <div class="modal-actions">
+      <button id="btnSaveDetail" class="btn btn-primary">💾 Enregistrer</button>
+      <button id="btnAiFill" class="btn">🤖 Compléter par IA</button>
+      <button id="btnDeleteDetail" class="btn btn-danger">🗑️ Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI result modal -->
+<div id="aiModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>🤖 Recherche IA</h2>
+      <button id="btnCloseAi" class="btn btn-ghost">✕</button>
+    </div>
+    <p class="hint">Décrivez ce que vous cherchez en langage naturel, ex. « les polars de 1990 à 2010 notés au moins 4 » ou « les mangas de la série One Tome non lus ».</p>
+    <div class="row"><input type="text" id="aiQuery" placeholder="Votre demande…"><button id="btnAiRun" class="btn btn-primary">Chercher</button></div>
+    <div id="aiResult" class="hint"></div>
+    <div id="aiResultGrid" class="grid" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<input type="file" id="importFile" accept="application/json" class="hidden">
+<script src="https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
