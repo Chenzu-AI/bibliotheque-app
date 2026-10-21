@@ -200,6 +200,49 @@ async function fetchCoverFallback(isbn) {
   return '';
 }
 
+/* Conversion ISBN-13 (prefixe 978) <-> ISBN-10 */
+function isbn13to10(isbn13) {
+  if (!/^978[0-9]{10}$/.test(isbn13)) return '';
+  const core = isbn13.slice(3, 12);
+  let sum = 0;
+  for (let i = 0; i < 9; i++) sum += parseInt(core[i], 10) * (10 - i);
+  const rest = 11 - (sum % 11);
+  const check = rest === 11 ? '0' : rest === 10 ? 'X' : String(rest);
+  return core + check;
+}
+
+function isbn10to13(isbn10) {
+  if (!/^[0-9]{9}[0-9X]$/.test(isbn10)) return '';
+  const core = '978' + isbn10.slice(0, 9);
+  let sum = 0;
+  for (let i = 0; i < 12; i++) sum += parseInt(core[i], 10) * (i % 2 === 0 ? 1 : 3);
+  const check = String((10 - (sum % 10)) % 10);
+  return core + check;
+}
+
+/* Recherche complete: ISBN fourni, puis son equivalent converti si echec partiel */
+async function fetchMetadataSmart(isbn) {
+  const primary = await fetchMetadata(isbn, true);
+  if (primary.meta && primary.meta.title && primary.meta.title !== 'Sans titre') return primary.meta;
+  const alt = isbn.length === 13 ? isbn13to10(isbn) : isbn10to13(isbn);
+  if (alt) {
+    const second = await fetchMetadata(alt, true);
+    const secondMeta = second.meta;
+    if (secondMeta && secondMeta.title) {
+      if (!primary.meta) return { ...secondMeta, isbn };
+      // fusion: prefer filled fields of second
+      const merged = { ...primary.meta };
+      for (const [k, v] of Object.entries(secondMeta)) {
+        const cur = merged[k];
+        const empty = cur === '' || cur === null || (Array.isArray(cur) && !cur.length) || cur === 'Sans titre';
+        if (empty && v) merged[k] = v;
+      }
+      return merged;
+    }
+  }
+  return primary.meta;
+}
+
 async function fetchOpenLibrarySearch(isbn) {
   try {
     const r = await fetchWithTimeout(`https://openlibrary.org/search.json?isbn=${isbn}&fields=title,author_name,first_publish_year,publisher&limit=1`, 10000);
@@ -353,7 +396,7 @@ async function lookupAndMaybeAdd(isbn, silentDup = false) {
   const blank = dup.find((d) => isBlankFiche(d));
   if (blank && !silentDup) {
     toast('Fiche existante incomplète détectée — recherche des informations…');
-    const meta = await fetchMetadata(isbn);
+    const meta = await fetchMetadataSmart(isbn);
     if (meta) {
       enrichItem(blank, meta);
       store.update(blank);
@@ -373,7 +416,7 @@ async function lookupAndMaybeAdd(isbn, silentDup = false) {
     return;
   }
   toast('Recherche des informations…');
-  const meta = await fetchMetadata(isbn);
+  const meta = await fetchMetadataSmart(isbn);
   const item = { ...blankItem(isbn), ...(meta || {}), duplicateOf: dup.length > 0 };
   applyShelveMode(item);
   autoBackupTick();
