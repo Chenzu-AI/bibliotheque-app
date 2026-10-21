@@ -224,35 +224,36 @@ async function fetchOpenLibrarySearch(isbn) {
   } catch { return null; }
 }
 
-/* Catalogue BnF via SPARQL public (couverture française, aucune clé requise) */
+/* Catalogue BnF via SRU (catalogue.bnf.fr) - API officielle, edition française */
 async function fetchBnf(isbn) {
   try {
-    const q = `PREFIX dcterms: <http://purl.org/dc/terms/>
-SELECT ?title ?creator ?publisher ?date WHERE {
-  ?b dcterms:identifier "${isbn}" .
-  ?b dcterms:title ?title .
-  OPTIONAL { ?b dcterms:creator ?c . ?c foaf:name ?creator }
-  OPTIONAL { ?b dcterms:publisher ?pub . ?pub dcterms:title ?publisher }
-  OPTIONAL { ?b dcterms:date ?date }
-} LIMIT 5`;
-    const url = 'https://data.bnf.fr/sparql?format=json&query=' + encodeURIComponent(q);
+    const q = `bib.persistentid all "isbn:${isbn}" or bib.persistentid all "${isbn}"`;
+    const url = 'https://catalogue.bnf.fr/SRU?version=1.2&operation=searchRetrieve&query=' + encodeURIComponent(q) + '&maximumRecords=1&recordSchema=dc';
     const r = await fetchWithTimeout(url, 12000);
     if (!r.ok) return null;
-    const data = await r.json();
-    const rows = (data.results && data.results.bindings) || [];
-    if (!rows.length) return null;
-    const first = rows[0];
-    const title = first.title ? first.title.value : '';
+    const xml = await r.text();
+    const doc = new DOMParser().parseFromString(xml, 'application/xml');
+    if (doc.querySelector('parsererror')) return null;
+    const numFound = doc.querySelector('numberOfRecords');
+    if (!numFound || parseInt(numFound.textContent, 10) === 0) return null;
+    const rec = doc.querySelector('record');
+    if (!rec) return null;
+    const getTag = (tag) => {
+      const el = rec.querySelector(tag);
+      return el ? el.textContent.trim() : '';
+    };
+    const title = getTag('dc\:title') || rec.getElementsByTagName('dc:title')[0]?.textContent || '';
     if (!title) return null;
-    const authors = [...new Set(rows.map((x) => x.creator && x.creator.value).filter(Boolean))].slice(0, 4);
-    const publisher = first.publisher ? first.publisher.value : '';
-    const date = first.date ? first.date.value.slice(0, 4) : '';
+    const creators = [...rec.getElementsByTagName('dc:creator')].map((e) => e.textContent.trim()).filter(Boolean);
+    const publisher = (rec.getElementsByTagName('dc:publisher')[0] || {}).textContent || '';
+    const date = (rec.getElementsByTagName('dc:date')[0] || {}).textContent || '';
     return {
       isbn, isbn10: '',
       title,
       subtitle: '',
-      authors,
-      publisher, publishedDate: date,
+      authors: creators.slice(0, 4),
+      publisher: publisher.trim(),
+      publishedDate: date.trim().slice(0, 4),
       pageCount: null, language: 'fr', categories: [], summary: '', cover: '',
     };
   } catch { return null; }
@@ -2175,4 +2176,21 @@ $('#btnTestKeys').addEventListener('click', async () => {
   } catch (e) {
     out.textContent = '❌ Erreur réseau : ' + e.message;
   }
+});
+
+/* Diagnostic ISBN: que répond chaque source ? */
+$('#btnDiagIsbn').addEventListener('click', async () => {
+  const isbn = normalizeIsbn($('#diagIsbn').value);
+  const out = $('#diagResult');
+  if (!isbn) { out.textContent = 'Entrez un ISBN.'; return; }
+  out.textContent = 'Interrogation des sources actives…';
+  const lines = [];
+  const jobs = [
+    fetchGoogleBooks(isbn).then((r) => lines.push(r ? `✅ Google Books : « ${r.title} » ${r.cover ? '(couverture ✓)' : '(sans couverture)'} ${r.summary ? '(résumé ✓)' : ''}` : '❌ Google Books : rien (clé absente/invalide, quota, ou livre inconnu)')).catch(() => lines.push('❌ Google Books : erreur réseau')),
+    fetchBnf(isbn).then((r) => lines.push(r ? `✅ BnF : « ${r.title} » — ${r.authors.join(', ')}` : '❌ BnF : livre non trouvé au catalogue')).catch(() => lines.push('❌ BnF : erreur réseau')),
+    fetchOpenLibrary(isbn).then((r) => lines.push(r ? `✅ Open Library : « ${r.title} »` : '❌ Open Library : rien')).catch(() => lines.push('❌ Open Library : erreur réseau')),
+    fetchCoverFallback(isbn).then((r) => lines.push(r ? '✅ Couvertures Open Library : image trouvée' : '❌ Couvertures : aucune image pour cet ISBN')).catch(() => lines.push('❌ Couvertures : erreur réseau')),
+  ];
+  await Promise.all(jobs);
+  out.innerHTML = lines.join('<br>') + '<br><b>Si tout est ❌ : le livre est absent des catalogues en ligne (édition très récente/confidentielle) — complétez la fiche à la main ou via 🤖 IA.</b>';
 });

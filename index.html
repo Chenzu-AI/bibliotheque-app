@@ -264,6 +264,10 @@
       <button id="btnSaveKeys" class="btn btn-primary">💾 Enregistrer</button>
       <button id="btnTestKeys" class="btn">🧪 Tester la clé Google Books</button>
     </div>
+    <h3 style="margin:14px 0 6px">🔍 Diagnostic d'un ISBN</h3>
+    <p class="hint">Testez ce que chaque source active trouve pour un ISBN précis (utile pour comprendre un échec de scan).</p>
+    <div class="row"><input type="text" id="diagIsbn" inputmode="numeric" placeholder="ISBN à diagnostiquer (ex. 9782070541270)"><button id="btnDiagIsbn" class="btn">Diagnostiquer</button></div>
+    <p class="hint" id="diagResult"></p>
     <p class="hint" id="keysTestResult"></p>
   </div>
 </div>
