@@ -189,21 +189,109 @@ async function fetchGoogleBooks(isbn) {
   } catch { return null; }
 }
 
+async function fetchCoverFallback(isbn) {
+  if (!isbn) return '';
+  try {
+    const url = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
+    const r = await fetchWithTimeout(url, 9000);
+    if (r.ok) return url.replace('&default=false', '');
+  } catch {}
+  return '';
+}
+
+async function fetchOpenLibrarySearch(isbn) {
+  try {
+    const r = await fetchWithTimeout(`https://openlibrary.org/search.json?isbn=${isbn}&fields=title,author_name,first_publish_year,publisher&limit=1`, 10000);
+    if (!r.ok) return null;
+    const data = await r.json();
+    const d = data.docs && data.docs[0];
+    if (!d) return null;
+    return {
+      isbn,
+      isbn10: '',
+      title: d.title || 'Sans titre',
+      subtitle: '',
+      authors: d.author_name || [],
+      publisher: (d.publisher || [])[0] || '',
+      publishedDate: d.first_publish_year ? String(d.first_publish_year) : '',
+      pageCount: null,
+      language: '',
+      categories: [],
+      summary: '',
+      cover: '',
+    };
+  } catch { return null; }
+}
+
+/* Catalogue BnF (Bibliothèque nationale de France) - API publique, couverture française */
+async function fetchBnf(isbn) {
+  try {
+    const r = await fetchWithTimeout(`https://data.bnf.fr/v1/ark:/isbn/${isbn}.json`, 9000);
+    if (!r.ok) return null;
+    const data = await r.json();
+    if (!data || !data['@graph']) return null;
+    let title = '', authors = [], publisher = '', date = '';
+    for (const node of data['@graph']) {
+      const t = node.title || (node['rdfs:label']);
+      if (typeof t === 'string' && !title) title = t;
+      if (typeof t === 'object' && t['@value'] && !title) title = t['@value'];
+      const a = node.author || node['dcterms:creator'];
+      if (a) {
+        const names = Array.isArray(a) ? a : [a];
+        for (const one of names) {
+          if (typeof one === 'object' && one['@value']) authors.push(one['@value']);
+          else if (typeof one === 'string') authors.push(one);
+        }
+      }
+      const p = node.publisher || node['dcterms:publisher'];
+      if (p && typeof p === 'string' && !publisher) publisher = p;
+      else if (p && typeof p === 'object' && p['@value'] && !publisher) publisher = p['@value'];
+      const d = node.date || node['dcterms:date'];
+      if (d && typeof d === 'string' && !date) date = d.slice(0, 10);
+    }
+    if (!title) return null;
+    return {
+      isbn, isbn10: '',
+      title,
+      subtitle: '',
+      authors: [...new Set(authors)].filter((a) => a && a.length > 2).slice(0, 4),
+      publisher, publishedDate: date,
+      pageCount: null, language: 'fr', categories: [], summary: '', cover: '',
+    };
+  } catch { return null; }
+}
+
 async function fetchMetadata(isbn) {
-  const [ol, gb] = await Promise.all([fetchOpenLibrary(isbn), fetchGoogleBooks(isbn)]);
-  if (!ol && !gb) return null;
-  if (!ol) return gb;
-  if (!gb) return ol;
-  return {
-    ...ol,
-    publisher: ol.publisher || gb.publisher,
-    publishedDate: ol.publishedDate || gb.publishedDate,
-    pageCount: ol.pageCount || gb.pageCount,
-    summary: ol.summary || gb.summary,
-    cover: ol.cover || gb.cover,
-    categories: (ol.categories.length ? ol.categories : gb.categories),
-    language: gb.language,
-  };
+  const [ol, gb, ols, bnf] = await Promise.all([fetchOpenLibrary(isbn), fetchGoogleBooks(isbn), fetchOpenLibrarySearch(isbn), fetchBnf(isbn)]);
+  let meta = ol || gb || bnf || ols || null;
+  if (!meta) return null;
+  if (bnf) {
+    meta = { ...meta,
+      title: meta.title === 'Sans titre' ? bnf.title : meta.title,
+      authors: meta.authors.length ? meta.authors : bnf.authors,
+      publisher: meta.publisher || bnf.publisher,
+      publishedDate: meta.publishedDate || bnf.publishedDate,
+      summary: meta.summary || '',
+    };
+  }
+  if (ol && gb) {
+    meta = {
+      ...ol,
+      publisher: ol.publisher || gb.publisher,
+      publishedDate: ol.publishedDate || gb.publishedDate,
+      pageCount: ol.pageCount || gb.pageCount,
+      summary: ol.summary || gb.summary,
+      cover: ol.cover || gb.cover,
+      categories: (ol.categories.length ? ol.categories : gb.categories),
+      language: gb.language,
+    };
+  } else if (!meta.cover && gb && ols) {
+    meta = { ...meta, publisher: meta.publisher || (ols.publisher || ''), authors: meta.authors.length ? meta.authors : ols.authors };
+  }
+  if (!meta.cover) {
+    meta.cover = await fetchCoverFallback(isbn);
+  }
+  return meta;
 }
 
 function blankItem(isbn) {
@@ -241,7 +329,7 @@ async function lookupAndMaybeAdd(isbn, silentDup = false) {
   applyShelveMode(item);
   autoBackupTick();
   if (!meta) {
-    toast('Ouvrage introuvable en ligne — ajouté à compléter manuellement.', 3500);
+    toast('Introuvable dans les catalogues (édition française rare ?) — fiche créée : complétez titre/auteur, ou utilisez 🤖 Compléter par IA.', 5000);
     item.title = `ISBN ${isbn}`;
     store.add(item);
     openDetail(item.id);
