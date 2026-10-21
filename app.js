@@ -294,9 +294,6 @@ async function fetchMetadataSmart(isbn) {
       return merged;
     }
   }
-  // Dernier recours: Fnac (nouveautes francaises trop recentes pour les bases internationales)
-  const fnac = await fetchFnac(isbn);
-  if (fnac) return fnac;
   return primary.meta;
 }
 
@@ -366,7 +363,7 @@ async function fetchMetadata(isbn, wantReport = false) {
   const report = { googleBooks: null, bnf: null, openLibrary: null, cover: null };
   const jobs = [];
   if (on('googleBooks')) jobs.push(fetchGoogleBooks(isbn).then((r) => { report.googleBooks = r; }));
-  if (on('bnf')) jobs.push(fetchBnf(isbn).then((r) => { report.bnf = r; }));
+  // NB: fetchBnf/fetchFnac ne sont pas appelables depuis un navigateur (pas d'en-tetes CORS) - gardees en secours pour un futur relais serveur
   if (on('openLibrary')) {
     jobs.push(fetchOpenLibrary(isbn).then((r) => { report.openLibrary = r; }));
     jobs.push(fetchOpenLibrarySearch(isbn).then((r) => { if (!report.openLibrary) report.openLibrary = r; }));
