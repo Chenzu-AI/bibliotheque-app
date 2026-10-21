@@ -73,3 +73,5 @@ Les données vivent **dans le navigateur** (IndexedDB). Si vous réinstallez Win
 - **Sauvegarde manuelle** : menu ☰ → 💾 Sauvegarde immédiate
 - **Restauration** : menu ☰ → 📥 Importer JSON (fusion intelligente, sans doublons)
 - Rangez vos exports JSON dans un dossier cloud (OneDrive…) pour une sécurité maximale
+---
+*Ma Bibliothèque — Création Alphaprim*

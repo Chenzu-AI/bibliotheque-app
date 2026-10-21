@@ -106,3 +106,5 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
 - **Grande collection** : la pagination (60 par page) garde l'interface fluide ; utilisez recherche + filtres
 - **Fiche incomplète après scan** (livre rare) : complétez les champs vides, ou 🤖 Compléter par IA
 - **Changement de PC/téléphone** : exportez le JSON **avant** de changer d'appareil
+---
+*Ma Bibliothèque — Création Alphaprim*

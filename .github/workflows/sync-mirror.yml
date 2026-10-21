@@ -1,0 +1,26 @@
+name: Sync vers miroir public (bibliotheque-app)
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Pousser vers le miroir public
+        env:
+          GH_TOKEN: ${{ secrets.MIRROR_TOKEN }}
+        run: |
+          if [ -z "$GH_TOKEN" ]; then
+            echo "MIRROR_TOKEN absent — synchro ignoree"
+            exit 0
+          fi
+          git clone --depth 1 https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/Bibliotheque.git src
+          cd src
+          git config user.name "Alphaprim (sync)"
+          git config user.email "alphaprim@users.noreply.github.com"
+          git push --force-with-lease https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git main:main

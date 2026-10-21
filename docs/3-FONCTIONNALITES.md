@@ -64,3 +64,5 @@
 - Application web progressive (PWA) — fonctionne **hors-ligne** après installation
 - Données **100 % locales** (IndexedDB) : aucun compte, aucun serveur, aucune donnée envoyée
 - Léger (~100 Ko), aucun framework, aucune dépendance à installer
+---
+*Ma Bibliothèque — Création Alphaprim*
