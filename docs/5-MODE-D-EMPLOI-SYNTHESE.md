@@ -40,6 +40,11 @@
 | Sauvegarder | ☰ → 💾 Sauvegarde immédiate (JSON) |
 | Changer d'appareil | Export JSON → 📥 Importer (fusion auto) |
 
+## 🔑 Reconnaissance des livres
+- Sources par défaut : **BnF + Open Library** (gratuites)
+- Pour le meilleur résultat (éditions FR) : **☰ → 🔑 Clés API** → clé Google Books perso (test intégré) — reste dans votre navigateur
+- Livre introuvable ? Complétez la fiche ou **🤖 Compléter par IA**
+
 ## 📤 Exports
 **JSON** (sauvegarde) · **CSV** (Excel) · **HTML** (impression) · **Markdown** (notes) · **🏷️ Étiquettes** (cotes 50×30 mm)
 
