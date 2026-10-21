@@ -8,22 +8,34 @@
 
 ---
 
-## Étape 1 — Mettre l'app en ligne (une seule fois, depuis un PC)
+## Étape 1 — Mettre l'app en ligne (une seule fois)
 
-L'app est un simple dossier de fichiers : hébergez-le gratuitement sur un service statique :
+L'app est un simple dossier de fichiers statiques : hébergez-la gratuitement en HTTPS.
 
-**Option la plus simple — Netlify Drop** :
+### ⭐ Option recommandée — GitHub Pages (si le dépôt GitHub existe déjà)
+
+1. Sur la page du dépôt GitHub : **Settings** → **Pages** (menu de gauche)
+2. Section « Build and deployment » → **Source** : *Deploy from a branch*
+3. **Branch** : `main` / dossier `/ (root)` → **Save**
+4. Attendez 1-2 minutes (un lien vert apparaît en haut de la page)
+5. Votre app est en ligne : **`https://VOTRE-COMPTE.github.io/Bibliotheque/`**
+   (ex. `https://chenzu-ai.github.io/Bibliotheque/`)
+
+> ✅ L'application est déjà compatible GitHub Pages : aucun réglage de code nécessaire (chemins relatifs). Le scan caméra fonctionne car l'adresse est en HTTPS.
+
+### Alternative — Netlify Drop (sans compte GitHub)
+
 1. Allez sur [app.netlify.com/drop](https://app.netlify.com/drop)
 2. Glissez-déposez le **dossier complet** de l'application
-3. Vous obtenez une adresse du type `https://ma-bibliotheque.netlify.app` — c'est votre app en ligne, en HTTPS
+3. Vous obtenez une adresse du type `https://ma-bibliotheque.netlify.app`
 
-**Autres options** : GitHub Pages, Vercel, Cloudflare Pages — tous gratuits pour un site statique.
+**Autres options** : Vercel, Cloudflare Pages — tous gratuits pour un site statique.
 
 > ⚠️ N'oubliez pas : les données sont stockées **dans le navigateur de chaque appareil**. Le site hébergé ne stocke rien lui-même (pas de compte, pas de serveur de données).
 
 ## Étape 2 — Installer sur Android
 
-1. Ouvrez l'adresse HTTPS dans **Chrome**
+1. Ouvrez l'adresse HTTPS dans **Chrome** (la première fois, ignorez l'avertissement éventuel du dépôt privé : connectez-vous à GitHub ou rendez le dépôt public, voir note ci-dessous)
 2. Menu ⋯ → **« Ajouter à l'écran d'accueil »** (ou bandeau « Installer l'application » s'il apparaît)
 3. L'icône apparaît sur l'écran d'accueil → l'app s'ouvre **plein écran, sans barre de navigateur**
 
@@ -32,6 +44,8 @@ L'app est un simple dossier de fichiers : hébergez-le gratuitement sur un servi
 1. Ouvrez l'adresse HTTPS dans **Safari**
 2. Bouton **Partager** (carré avec flèche) → **« Sur l'écran d'accueil »**
 3. Nommez l'app → **Ajouter** → l'icône apparaît
+
+> 🔑 **Important — dépôt privé** : GitHub Pages d'un dépôt privé n'est accessible qu'en étant connecté à GitHub dans le navigateur du téléphone (l'adresse reste privée). Pour une app d'accès libre : **Settings** → tout en bas → **Change visibility** → *Public*. Sinon, restez connecté avec votre compte GitHub sur le mobile — c'est votre bibliothèque personnelle, autant garder le dépôt privé.
 
 ## Étape 3 — Scanner vos livres
 
