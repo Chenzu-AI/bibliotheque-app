@@ -2,7 +2,19 @@
 
 **Ma Bibliothèque** s'installe sur Windows 11 comme une application autonome, sans store ni exécutable.
 
-## Ce qu'il vous faut
+## ⭐ Méthode express — depuis l'URL en ligne (30 secondes, recommandée)
+
+L'application est déjà hébergée en HTTPS : **https://chenzu-ai.github.io/bibliotheque-app/**
+
+1. Ouvrez cette URL dans **Edge** ou **Chrome**
+2. Icône **⊕ Installer l'application** dans la barre d'adresse → l'app s'installe comme application Windows (menu Démarrer, bureau)
+3. **Avantages** : pas de serveur local à lancer, **scan par webcam possible**, mises à jour automatiques du site
+
+> Les méthodes A et B ci-dessous ne servent que si vous voulez fonctionner 100 % hors-ligne depuis vos propres fichiers, sans l'URL.
+
+---
+
+## Ce qu'il vous faut (méthodes A/B)
 - Windows 11 avec **Microsoft Edge** ou **Google Chrome** (préinstallés)
 - Le dossier de l'application (`index.html`, `app.js`, `style.css`, `manifest.json`, `sw.js`, `icons/`)
 - Python (optionnel, pour le serveur local — voir méthode B)

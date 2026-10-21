@@ -4,12 +4,14 @@
 
 ---
 
-## 🚀 Démarrer
+## 🚀 Démarrer — URL officielle : **https://chenzu-ai.github.io/bibliotheque-app/**
 
 | | |
 |---|---|
-| **PC** | Dossier de l'app → `python -m http.server 8080` → `http://localhost:8080` dans Edge → **⊕ Installer** |
-| **Mobile** | Dossier hébergé en HTTPS (Netlify Drop) → « Ajouter à l'écran d'accueil » |
+| **PC** | Ouvrir l'URL dans Edge/Chrome → **⊕ Installer** (30 s, sans serveur) |
+| **Mobile** | Ouvrir l'URL dans Chrome (Android) / Safari (iPhone) → « Ajouter à l'écran d'accueil » |
+
+> Hors-ligne sans l'URL : dossier de l'app → `python -m http.server 8080` → `http://localhost:8080` dans Edge → **⊕ Installer**
 
 ## ➕ Ajouter un livre
 - **Mobile** : 📷 Scanner → visez le code-barres au dos. En série : ⚡ Mode rafale

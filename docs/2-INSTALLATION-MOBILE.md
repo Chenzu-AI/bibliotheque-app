@@ -8,28 +8,48 @@
 
 ---
 
-## Étape 1 — Mettre l'app en ligne (une seule fois, depuis un PC)
+## Étape 0 — ✅ C'EST DÉJÀ FAIT ! L'app est en ligne
 
-L'app est un simple dossier de fichiers : hébergez-le gratuitement sur un service statique :
+**URL de l'application : https://chenzu-ai.github.io/bibliotheque-app/**
 
-**Option la plus simple — Netlify Drop** :
-1. Allez sur [app.netlify.com/drop](https://app.netlify.com/drop)
-2. Glissez-déposez le **dossier complet** de l'application
-3. Vous obtenez une adresse du type `https://ma-bibliotheque.netlify.app` — c'est votre app en ligne, en HTTPS
+Architecture en place (tout est déjà configuré et automatique) :
 
-**Autres options** : GitHub Pages, Vercel, Cloudflare Pages — tous gratuits pour un site statique.
+```
+Dépôt privé  Chenzu-AI/Bibliotheque       ← référence complète (code + documentation)
+        │  à chaque mise à jour (push)
+        ▼  synchronisation automatique (GitHub Actions)
+Dépôt public Chenzu-AI/bibliotheque-app   ← miroir d'hébergement
+        │
+        ▼
+https://chenzu-ai.github.io/bibliotheque-app/   ← l'application en ligne
+```
+
+> Chaque mise à jour de l'application publiée dans le dépôt privé apparaît automatiquement sur l'URL en ligne ~2 minutes après. Rien à faire.
+> 🔒 **Confidentialité** : le site public ne contient que le **logiciel**, jamais vos données. Vos livres, notes et prêts restent dans le navigateur de chaque appareil.
+
+**Passez directement à l'Étape 2** (installation sur votre téléphone) ci-dessous.
+
+---
+
+## Étape 1 — (Référence) Héberger l'app soi-même
+
+Si un jour vous voulez héberger l'application ailleurs :
+
+- **GitHub Pages** : dépôt → **Settings** → **Pages** → Source : *Deploy from a branch* → `main` / `/ (root)` → **Save** → l'app est servie sur `https://VOTRE-COMPTE.github.io/NOM-DU-DEPOT/`. ⚠️ Le site Pages est toujours public (même depuis un dépôt privé) — d'où l'architecture miroir (privé pour le code, public pour l'hébergement)
+- **Netlify Drop** : [app.netlify.com/drop](https://app.netlify.com/drop) → glissez-déposez le dossier complet → adresse du type `https://ma-bibliotheque.netlify.app`
+- Autres : Vercel, Cloudflare Pages — tous gratuits
 
 > ⚠️ N'oubliez pas : les données sont stockées **dans le navigateur de chaque appareil**. Le site hébergé ne stocke rien lui-même (pas de compte, pas de serveur de données).
 
 ## Étape 2 — Installer sur Android
 
-1. Ouvrez l'adresse HTTPS dans **Chrome**
+1. Ouvrez **https://chenzu-ai.github.io/bibliotheque-app/** dans **Chrome**
 2. Menu ⋯ → **« Ajouter à l'écran d'accueil »** (ou bandeau « Installer l'application » s'il apparaît)
 3. L'icône apparaît sur l'écran d'accueil → l'app s'ouvre **plein écran, sans barre de navigateur**
 
 ## Étape 2 (iPhone) — Installation sur iOS
 
-1. Ouvrez l'adresse HTTPS dans **Safari**
+1. Ouvrez **https://chenzu-ai.github.io/bibliotheque-app/** dans **Safari**
 2. Bouton **Partager** (carré avec flèche) → **« Sur l'écran d'accueil »**
 3. Nommez l'app → **Ajouter** → l'icône apparaît
 
@@ -46,6 +66,8 @@ L'app est un simple dossier de fichiers : hébergez-le gratuitement sur un servi
 - **📦 Mode rangement** : indiquez « Meuble X, Étagère Y » une fois, puis scannez toute l'étagère : chaque livre est rangé automatiquement
 
 ## 📲 Usage PC + mobile ensemble
+
+L'URL **https://chenzu-ai.github.io/bibliotheque-app/** fonctionne aussi sur PC (Edge/Chrome → icône ⊕ Installer) — sans serveur local : le HTTPS de GitHub Pages permet l'installation en application Windows et même le scan par webcam.
 
 Chaque appareil a sa propre base locale. Pour partager la bibliothèque :
 1. Sur l'appareil source : menu ☰ → **💾 Export JSON**

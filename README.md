@@ -18,13 +18,14 @@ Scannez les codes-barres de vos livres, BD et mangas ; la fiche se crée automat
 
 ## ⚡ Démarrage rapide
 
+**L'application est en ligne : https://chenzu-ai.github.io/bibliotheque-app/** — ouvrez cette URL sur PC (icône ⊕ Installer) ou mobile (« Ajouter à l'écran d'accueil »).
+
+Hors-ligne / en local :
 ```bash
 cd chemin/vers/le/dossier
 python -m http.server 8080
 # → http://localhost:8080 dans Edge/Chrome → icône « Installer »
 ```
-
-Sur mobile : héberger le dossier sur un service statique HTTPS (Netlify Drop, GitHub Pages…), puis « Ajouter à l'écran d'accueil ».
 
 ## 🧩 En bref
 
