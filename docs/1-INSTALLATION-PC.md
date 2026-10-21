@@ -82,6 +82,8 @@ L'application est déjà hébergée en HTTPS : **https://chenzu-ai.github.io/bib
 
 **Via clé API (Mistral, OpenAI…)** : menu ☰ → 🤖 IA → fournisseur **api**, collez votre clé (stockée uniquement dans votre navigateur).
 
+**Clé Google Books** (recommandée pour la reconnaissance des livres français) : menu ☰ → **🔑 Clés API (sources)** → collez votre clé (console.cloud.google.com, 1000 requêtes/jour gratuites) → **🧪 Tester** → **💾 Enregistrer**. Elle reste dans votre navigateur uniquement.
+
 ## 💾 Sauvegarde des données
 
 Les données vivent **dans le navigateur** (IndexedDB). Si vous réinstallez Windows ou changez de navigateur, elles ne suivent pas :
