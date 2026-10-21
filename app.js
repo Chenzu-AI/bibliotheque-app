@@ -2094,7 +2094,18 @@ $('#btnTestKeys').addEventListener('click', async () => {
   try {
     const r = await fetchWithTimeout(`https://www.googleapis.com/books/v1/volumes?q=isbn:9782070541270&key=${encodeURIComponent(key)}`, 12000);
     const data = await r.json();
-    if (data.error) { out.textContent = '❌ ' + (data.error.message || 'erreur') + ' — vérifiez la clé et que « Google Books API » est activée.'; return; }
+    if (data.error) {
+      const code = data.error.code || '?';
+      const msg = data.error.message || 'erreur';
+      let hint = '';
+      if (/has not been used in project|is disabled/i.test(msg)) hint = '→ L\'API « Google Books API » n\'est PAS activée sur ce projet. Ouvrez https://console.cloud.google.com/apis/library/books.googleapis.com (vérifiez le projet sélectionné en haut) → Activer.';
+      else if (/Service temporarily unavailable/i.test(msg)) hint = '→ Cause la plus fréquente : API non activée sur le projet de la clé, ou clé et API dans deux projets différents. Ouvrez https://console.cloud.google.com/apis/library/books.googleapis.com, vérifiez le projet en haut à droite, activez.';
+      else if (/API key not valid|API_KEY_INVALID/i.test(msg)) hint = '→ Clé invalide : recopiez-la entièrement depuis Identifiants (elle commence par AIza).';
+      else if (/RefererNotAllowed|referrer/i.test(msg)) hint = '→ Restriction référants : ajoutez https://chenzu-ai.github.io/* dans les restrictions de la clé (Identifiants → clé → Restrictions).';
+      else if (data.error.status === 'RESOURCE_EXHAUSTED') hint = '→ Quota du jour épuisé (1000/jour) : réessayez demain.';
+      out.textContent = `❌ ${code} — ${msg} ${hint}`;
+      return;
+    }
     out.textContent = data.totalItems > 0
       ? '✅ Clé valide — Google Books répond (livre trouvé).'
       : '✅ Clé valide — Google Books répond (ce livre précis est inconnu, mais la clé fonctionne).';
