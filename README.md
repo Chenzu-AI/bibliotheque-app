@@ -51,3 +51,4 @@ sw.js           mode hors-ligne
 icons/          icônes
 docs/           documentation (5 fiches)
 ```
+<!-- sync test 2026-10-21T18:53:23Z -->
