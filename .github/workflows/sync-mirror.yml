@@ -23,4 +23,4 @@ jobs:
           cd src
           git config user.name "Alphaprim (sync)"
           git config user.email "alphaprim@users.noreply.github.com"
-          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git main:main
+          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git +main:main
