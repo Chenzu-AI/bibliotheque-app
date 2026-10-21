@@ -822,6 +822,13 @@ function openDetail(id) {
     <div class="form-row">
       ${field('URL image couverture', `<input type="text" name="cover" value="${esc(it.cover || '')}">`)}
       ${field('URL image dos', `<input type="text" name="coverBack" value="${esc(it.coverBack || '')}">`)}
+      <div class="hint">
+        💡 Pour trouver les images (les 4 photos du livre : recto, dos, 4ᵉ de couverture) :
+        <a target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/livre/${esc(it.isbn)}">fiche Chasse aux livres</a>
+        (connectez-vous, clic droit sur la photo → « Copier l'adresse de l'image », collez ci-dessus) ·
+        ou <a target="_blank" rel="noopener" href="https://www.google.com/search?tbm=isch&q=${encodeURIComponent('couverture ' + (it.title || '') + ' ' + it.isbn)}">Google Images</a>
+        <br>En local : photographiez le livre, hébergez l'image (par ex. sur votre cloud) et collez le lien direct.
+      </div>
     </div>
     <p class="refs">Ajouté le ${esc((it.addedAt || '').slice(0, 10))} · ISBN : ${esc(it.isbn)}${it.isbn10 ? ' / ' + esc(it.isbn10) : ''}${it.language ? ' · langue : ' + esc(it.language) : ''}</p>
     ${it.isbn ? `<div class="form-row ext-links">
