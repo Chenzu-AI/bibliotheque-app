@@ -2,7 +2,7 @@
 
 Application web progressive (PWA) : **installable sur PC Windows 11 et sur mobile**, sans compte, sans serveur, 100 % locale et privée.
 
-> ✨ **Création Alphaprim**
+> ✨ **Création AlphaPrim**
 
 Scannez les codes-barres de vos livres, BD et mangas ; la fiche se crée automatiquement (couverture, résumé, références). Organisez, prêtez, inventoriez, exportez.
 

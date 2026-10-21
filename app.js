@@ -1947,3 +1947,5 @@ $('#btnBulkApply').addEventListener('click', () => {
   $('#bulkCount').textContent = '';
   renderAll();
 });
+
+$('#btnMoreActions').addEventListener('click', () => $('#manualAddBar').classList.toggle('open'));

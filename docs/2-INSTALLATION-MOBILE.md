@@ -76,4 +76,4 @@ Chaque appareil a sa propre base locale. Pour partager la bibliothèque :
 
 > Sur mobile, restez en mode « couvertures par URL » (défaut) : l'option « couvertures embarquées » consomme du stockage et iOS purge le stockage des apps peu utilisées. Pensez aux exports JSON réguliers.
 ---
-*Ma Bibliothèque — Création Alphaprim*
+*Ma Bibliothèque — Création AlphaPrim*

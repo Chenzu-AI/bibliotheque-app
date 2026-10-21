@@ -50,4 +50,4 @@
 ---
 *Ma Bibliothèque — app locale et privée, sans compte, sans serveur. Détails : docs 1-4.*
 ---
-*Ma Bibliothèque — Création Alphaprim*
+*Ma Bibliothèque — Création AlphaPrim*

@@ -107,4 +107,4 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
 - **Fiche incomplète après scan** (livre rare) : complétez les champs vides, ou 🤖 Compléter par IA
 - **Changement de PC/téléphone** : exportez le JSON **avant** de changer d'appareil
 ---
-*Ma Bibliothèque — Création Alphaprim*
+*Ma Bibliothèque — Création AlphaPrim*

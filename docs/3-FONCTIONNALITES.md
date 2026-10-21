@@ -65,4 +65,4 @@
 - Données **100 % locales** (IndexedDB) : aucun compte, aucun serveur, aucune donnée envoyée
 - Léger (~100 Ko), aucun framework, aucune dépendance à installer
 ---
-*Ma Bibliothèque — Création Alphaprim*
+*Ma Bibliothèque — Création AlphaPrim*

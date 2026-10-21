@@ -1,7 +1,7 @@
 {
   "name": "Ma Bibliothèque",
   "short_name": "Bibliothèque",
-  "description": "Création Alphaprim — Scannez les codes-barres de vos livres, BD et mangas et organisez votre bibliothèque personnelle.",
+  "description": "Création AlphaPrim — Scannez les codes-barres de vos livres, BD et mangas et organisez votre bibliothèque personnelle.",
   "lang": "fr",
   "start_url": "./index.html",
   "scope": "./",
@@ -27,5 +27,5 @@
       "type": "image/png"
     }
   ],
-  "author": "Alphaprim"
+  "author": "AlphaPrim"
 }

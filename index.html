@@ -16,7 +16,7 @@
     <img src="icons/icon.svg" alt="" class="logo">
     <div class="brand-text">
       <h1>Ma Bibliothèque</h1>
-      <span class="brand-by">Création Alphaprim</span>
+      <span class="brand-by">Création AlphaPrim</span>
     </div>
   </div>
   <div class="topbar-actions">
@@ -154,12 +154,13 @@
   <section id="viewStats" class="hidden"></section>
 </section>
 
-<div class="manual-add">
-  <input type="text" id="manualIsbn" inputmode="numeric" placeholder="Saisir un ISBN (10 ou 13 chiffres)… ou mode rangement ci-contre">
+<div class="manual-add" id="manualAddBar">
+  <button class="manual-add-more" id="btnMoreActions" title="Actions supplémentaires">⋯</button>
+  <input type="text" id="manualIsbn" inputmode="numeric" placeholder="Saisir un ISBN (10 ou 13 chiffres)">
   <button id="btnManualAdd" class="btn">➕ Ajouter</button>
-  <button id="btnAddNoIsbn" class="btn" title="Créer une fiche vierge, sans ISBN">➕ Sans ISBN</button>
-  <button id="btnShelveMode" class="btn" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère">📦 Mode rangement</button>
-  <button id="btnInvQuick" class="btn" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement">🔎 Inventaire</button>
+  <button id="btnAddNoIsbn" class="btn btn-extra" title="Créer une fiche vierge, sans ISBN">➕ Sans ISBN</button>
+  <button id="btnShelveMode" class="btn btn-extra" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère">📦 Mode rangement</button>
+  <button id="btnInvQuick" class="btn btn-extra" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement">🔎 Inventaire</button>
 </div>
 
 <!-- Scanner modal -->

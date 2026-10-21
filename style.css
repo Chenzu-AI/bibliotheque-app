@@ -166,12 +166,25 @@ input:focus, select:focus, textarea:focus {
 /* ---------- Bottom bar (manual add) ---------- */
 .manual-add {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 25;
-  display: flex; gap: 9px;
-  padding: 13px 18px calc(13px + env(safe-area-inset-bottom));
+  display: flex; flex-wrap: wrap; gap: 9px; align-items: center;
+  padding: 10px 14px calc(10px + env(safe-area-inset-bottom));
   background: var(--panel); border-top: 1px solid var(--line);
   box-shadow: 0 -3px 16px rgba(43,33,24,0.09);
 }
-.manual-add input { flex: 1; font-size: 0.95rem; }
+.manual-add input { flex: 1 1 150px; min-width: 130px; font-size: 0.95rem; }
+.manual-add .btn { flex-shrink: 0; }
+.manual-add-more { display: none; }
+@media (max-width: 640px) {
+  .manual-add .btn-extra { display: none; }
+  .manual-add-more {
+    display: inline-flex; order: -1;
+    border: 1px solid var(--line); background: var(--bg); border-radius: 7px;
+    width: 38px; height: 38px; align-items: center; justify-content: center;
+    font-size: 1rem; cursor: pointer; flex-shrink: 0;
+  }
+  .manual-add.open .btn-extra { display: inline-block; }
+  .manual-add .btn { font-size: 0.8rem; padding: 7px 10px; }
+}
 #btnShelveMode.shelve-on {
   background: var(--blue); border-color: var(--blue); color: #fff;
   box-shadow: 0 0 0 3px rgba(47, 93, 138, 0.25);
