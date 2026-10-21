@@ -11,7 +11,7 @@ jobs:
     permissions:
       contents: read
     steps:
-      - name: Pousser vers le miroir public
+      - name: Pousser vers le miroir public (sans les workflows)
         env:
           GH_TOKEN: ${{ secrets.MIRROR_TOKEN }}
         run: |
@@ -21,6 +21,6 @@ jobs:
           fi
           git clone --depth 1 https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/Bibliotheque.git src
           cd src
-          git config user.name "Alphaprim (sync)"
-          git config user.email "alphaprim@users.noreply.github.com"
-          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git +main:main
+          git rm -r --cached .github -q 2>/dev/null || true
+          git -c user.name="Alphaprim (sync)" -c user.email="alphaprim@users.noreply.github.com" commit --allow-empty -m "Sync miroir public" -q
+          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git +HEAD:main
