@@ -1,4 +1,4 @@
-const CACHE = 'biblio-v2';
+const CACHE = 'biblio-v3';
 const ASSETS = ['./', './index.html', './style.css', './app.js', './manifest.json', './icons/icon.svg'];
 
 self.addEventListener('install', (e) => {
@@ -14,9 +14,16 @@ self.addEventListener('activate', (e) => {
 
 self.addEventListener('fetch', (e) => {
   const url = new URL(e.request.url);
-  if (url.origin === self.location.origin) {
-    e.respondWith(
-      caches.match(e.request).then((hit) => hit || fetch(e.request))
-    );
-  }
+  if (url.origin !== self.location.origin) return;
+  e.respondWith(
+    fetch(e.request)
+      .then((res) => {
+        if (res.ok && (e.request.method === 'GET')) {
+          const copy = res.clone();
+          caches.open(CACHE).then((c) => c.put(e.request, copy));
+        }
+        return res;
+      })
+      .catch(() => caches.match(e.request))
+  );
 });
