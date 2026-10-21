@@ -8,7 +8,8 @@
 - **Scan de codes-barres** (EAN-13/ISBN) par caméra du téléphone
 - **Saisie manuelle** d'ISBN, ou **douchette USB** sur PC (saisie instantanée)
 - **Sans ISBN** : fiche vierge à compléter (vieux livres, éditions rares)
-- **Recherche automatique des informations** : Open Library + Google Books combinés — titre, auteurs, éditeur, date, pages, résumé, couverture
+- **Recherche automatique des informations** : **4 catalogues interrogés en parallèle** — Google Books, **catalogue BnF** (Bibliothèque nationale de France — idéal pour l'édition française), Open Library (2 APIs) + service de couvertures en secours
+- **🔑 Clés API personnelles** (menu ☰ → Clés API) : chaque utilisateur colle sa clé Google Books dans SON navigateur (jamais dans le code public) — bouton de test intégré. Sans clé, l'app fonctionne avec les sources gratuites (BnF, Open Library)
 - **⚡ Scan en rafale** : caméra qui reste ouverte, ajout en chaîne
 - **⚠ Détection de doublons** : l'app demande si vous ajoutez un 2ᵉ exemplaire
 

@@ -85,6 +85,17 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
 - **🤖 Recherche IA** (barre d'outils) : décrivez en langage naturel → « les BD de Uderzo non lues rangées au salon »
 - **🤖 Compléter par IA** (dans une fiche) : génère résumé, genre, cote Dewey pour les fiches incomplètes
 
+## 7 bis. Améliorer la reconnaissance des livres (clé Google Books)
+
+Par défaut, l'app interroge le catalogue **BnF** et **Open Library** (gratuits, sans clé). Pour la reconnaissance la plus complète (résumés + couvertures des éditions françaises), activez **Google Books** avec votre clé personnelle :
+
+1. Créez une clé API gratuite : [console.cloud.google.com](https://console.cloud.google.com) → projet → *API et services* → activer **« Google Books API »** → *Identifiants* → **Créer des identifiants** → **Clé API** (1000 requêtes/jour offertes)
+2. Dans l'app : **☰ → 🔑 Clés API (sources)** → collez la clé → **🧪 Tester** (doit afficher ✅) → **💾 Enregistrer**
+3. La clé reste **uniquement dans votre navigateur** (jamais dans le code de l'application, jamais envoyée ailleurs qu'à Google). Recommandé : restreignez la clé aux référants HTTP `chenzu-ai.github.io/*` et `localhost` dans la console Google
+4. Rescannez les livres mal reconnus : la détection de doublon propose de compléter la fiche existante
+
+> 💡 Si un livre reste introuvable partout (édition confidentielle, paru depuis peu) : complétez la fiche à la main ou utilisez **🤖 Compléter par IA**.
+
 ## 8. Sauvegarder, exporter, restaurer
 
 | Besoin | Action |
