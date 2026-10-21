@@ -221,6 +221,60 @@ function isbn10to13(isbn10) {
 }
 
 /* Recherche complete: ISBN fourni, puis son equivalent converti si echec partiel */
+/* Fnac: catalogue francais, couvre les nouveautes (parutions trop recentes pour BnF/OL/GB) */
+async function fetchFnac(isbn) {
+  try {
+    const url = 'https://www.fnac.com/SearchResult/ResultList.aspx?Search=' + encodeURIComponent(isbn) + '&SCat=0%21&sft=1&sa=0';
+    const r = await fetchWithTimeout(url, 15000);
+    if (!r.ok) return null;
+    const html = await r.text();
+    // Extraction depuis le HTML de la page de resultats
+    const titleMatch = html.match(/<a[^>]*class="[^"]*Article-title[^"]*"[^>]*>([^<]+)<\/a>/) || html.match(/<h2[^>]*>([^<]{5,150})<\/h2>/);
+    if (!titleMatch) return null;
+    let title = titleMatch[1].trim();
+    // nettoyage des titres Fnac: "Titre - : Titre reel Tout savoir sur ..." et suffixes promo
+    const cutIdx = title.indexOf('Tout savoir sur');
+    if (cutIdx > 0) {
+      let base = title.slice(0, cutIdx).replace(/[\s:,-]+$/, '').trim();
+      // le titre reel est souvent apres "Titre commercial - : "
+      const sepIdx = base.indexOf('- :');
+      if (sepIdx >= 0 && sepIdx < base.length - 4) base = base.slice(sepIdx + 3).trim();
+      title = base;
+    }
+    title = title.replace(/\s*-\s*Tout savoir sur.*$/i, '').trim();
+    // Auteurs
+    const authors = [];
+    const authorBlock = html.match(/class="[^"]*Article-descSub[^"]*"[^>]*>([^<]+)</) || html.match(/([A-Z][a-zA-ZÀ-ÿ' -]+)\s*\(Illustration\)/);
+    if (authorBlock) {
+      for (const a of authorBlock[1].split(/,|\bet\b/)) {
+        const name = a.trim().replace(/\(.*\)/, '').trim();
+        if (name && name.length > 2 && !/^\d/.test(name)) authors.push(name);
+      }
+    }
+    // Editeur
+    let publisher = '';
+    const pubMatch = html.match(/Editeur\s*<[^>]*>\s*([A-Za-zÀ-ÿ .]+?)\s*<\//i) || html.match(/Editeur ([A-Za-zÀ-ÿ .]+)\s/i);
+    if (pubMatch) publisher = pubMatch[1].trim();
+    // Date de parution
+    let date = '';
+    const dateMatch = html.match(/Parution\s*<[^>]*>\s*(\d{2}\/\d{2}\/(\d{4}))|Parution (\d{2}\/\d{2}\/(\d{4}))/);
+    if (dateMatch) date = ((dateMatch[2] || dateMatch[4])) || '';
+    return {
+      isbn, isbn10: '',
+      title,
+      subtitle: '',
+      authors: authors.slice(0, 4),
+      publisher,
+      publishedDate: date,
+      pageCount: null,
+      language: 'fr',
+      categories: [],
+      summary: '',
+      cover: '',
+    };
+  } catch { return null; }
+}
+
 async function fetchMetadataSmart(isbn) {
   const primary = await fetchMetadata(isbn, true);
   if (primary.meta && primary.meta.title && primary.meta.title !== 'Sans titre') return primary.meta;
@@ -240,6 +294,9 @@ async function fetchMetadataSmart(isbn) {
       return merged;
     }
   }
+  // Dernier recours: Fnac (nouveautes francaises trop recentes pour les bases internationales)
+  const fnac = await fetchFnac(isbn);
+  if (fnac) return fnac;
   return primary.meta;
 }
 
