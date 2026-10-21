@@ -294,6 +294,18 @@ async function fetchMetadataSmart(isbn) {
       return merged;
     }
   }
+  // Dernier recours: relais FR (Fnac/BnF via micro-service Cloudflare) si configure
+  const relay = await fetchRelay(isbn);
+  if (relay) {
+    if (!primary.meta) return relay;
+    const merged = { ...primary.meta };
+    for (const [k, v] of Object.entries(relay)) {
+      const cur = merged[k];
+      const empty = cur === '' || cur === null || (Array.isArray(cur) && !cur.length) || cur === 'Sans titre';
+      if (empty && v) merged[k] = v;
+    }
+    return merged;
+  }
   return primary.meta;
 }
 

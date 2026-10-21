@@ -247,6 +247,11 @@
         <p class="hint">Créer une clé : console.cloud.google.com → projet → API et services → Activer « Google Books API » → Identifiants → Clé API.<br>Recommandé : restreindre la clé aux référants HTTP <code>chenzu-ai.github.io/*</code> et <code>localhost</code>.</p>
       </div>
     </div>
+    <div>
+      <label>URL du relais français (optionnel — pour les nouveautés FR via Fnac/BnF)</label>
+      <input type="text" id="keyRelay" placeholder="https://biblio-relais.VOTRE-SOUS-DOMAINE.workers.dev" autocomplete="off">
+      <p class="hint">Le relais interroge Fnac + BnF (inaccessibles directement depuis un navigateur) via un micro-service gratuit Cloudflare Workers. Code et procédure : fichier <code>worker.js</code> du dépôt.</p>
+    </div>
     <h3 style="margin:14px 0 6px">Sources actives</h3>
     <p class="hint">Toutes les sources actives sont interrogées en parallèle. Priorité de fusion : Google Books → BnF → Open Library ; chaque source complète les champs manquants des autres.</p>
     <div class="detail-form">
