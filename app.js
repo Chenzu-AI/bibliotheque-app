@@ -1949,3 +1949,26 @@ $('#btnBulkApply').addEventListener('click', () => {
 });
 
 $('#btnMoreActions').addEventListener('click', () => $('#manualAddBar').classList.toggle('open'));
+
+/* ---------- Install button (PWA) ---------- */
+let deferredPrompt = null;
+window.addEventListener('beforeinstallprompt', (e) => {
+  e.preventDefault();
+  deferredPrompt = e;
+  const btn = $('#btnInstall');
+  if (btn) btn.classList.remove('hidden');
+});
+
+$('#btnInstall').addEventListener('click', async () => {
+  if (!deferredPrompt) return;
+  deferredPrompt.prompt();
+  const { outcome } = await deferredPrompt.userChoice;
+  if (outcome === 'accepted') toast('Application installée !');
+  deferredPrompt = null;
+  $('#btnInstall').classList.add('hidden');
+});
+
+window.addEventListener('appinstalled', () => {
+  $('#btnInstall').classList.add('hidden');
+  toast("Application installée — retrouvez-la sur votre écran d'accueil.");
+});
