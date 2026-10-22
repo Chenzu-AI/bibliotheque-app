@@ -330,6 +330,54 @@
 </div>
 
 <div id="guestBtns" class="hidden" style="position:fixed;top:12px;right:12px;z-index:60"><button id="btnExitGuest" class="btn btn-primary small">Quitter le catalogue invité</button></div>
+
+<!-- Help center modal -->
+<div id="helpModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>❓ Centre d'aide</h2>
+      <button id="btnCloseHelp" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <div class="help-body">
+      <details open><summary>🚀 Démarrer (5 min)</summary>
+        <p>1. <b>Ajouter un livre</b> : bouton 📷 Scanner (téléphone) ou ISBN dans la barre du bas (PC / douchette USB). Cliquez une couverture pour tout modifier.</p>
+        <p>2. <b>Ranger</b> : bouton 📦 Mode rangement (⋯ sur mobile) → indiquez « Meuble / Étagère » → scannez toute l'étagère : rangement automatique.</p>
+        <p>3. <b>Sauvegarder</b> : ☰ → 💾 Sauvegarde immédiate (JSON). Faites un export par mois.</p>
+      </details>
+      <details><summary>📷 Ajouter des livres — toutes les voies</summary>
+        <p>• <b>Scan caméra</b> (+ ⚡ mode rafale) · <b>Douchette USB</b> · <b>➕ Sans ISBN</b></p>
+        <p>• <b>Photo d'étagère IA</b> (☰ → 📷) : l'IA lit les tranches rangée par rangée — nécessite une IA vision (☰ → 🤖)</p>
+        <p>• <b>Import</b> : ☰ → 📥 JSON (fusion) ou CSV (Libib/Excel)</p>
+      </details>
+      <details><summary>🤖 Reconnaissance — optimiser</summary>
+        <p>• <b>Clé Google Books</b> (☰ → 🔑) : résumés + couvertures, 1000 requêtes/jour gratuites</p>
+        <p>• <b>Relais BnF/Fnac</b> (☰ → 🔑) : indispensable pour les livres FR d'avant 2010 — déployez <code>worker.js</code> sur Cloudflare Workers (gratuit)</p>
+        <p>• <b>Diagnostic ISBN</b> (☰ → 🔑 → 🔍) : voyez ce que chaque source répond</p>
+      </details>
+      <details><summary>📚 Organiser</summary>
+        <p>• Étagères virtuelles, tags, favoris ♥, souhaits 🛒 · <b>Séries</b> (☰ → 👥) : tomes manquants, dispersion</p>
+        <p>• Cote Dewey, collection, format, type d'édition (1ʳᵉ, collector, rare), prix éditeur · recherche plein texte</p>
+      </details>
+      <details><summary>📤 Prêts et inventaire</summary>
+        <p>• <b>Prêter</b> : fiche → « Prêté à… » + retour prévu. Rappels à l'ouverture · <b>Réservations</b> (« Réservé pour »)</p>
+        <p>• <b>Inventaire d'étagère</b> (☰ → 🔎) : manquants / intrus / inconnus + historique</p>
+      </details>
+      <details><summary>📖 Ma lecture</summary>
+        <p>Objectif annuel 🎯 · file « à lire ensuite » · 🎲 prochain livre · progression (page courante) · journal daté</p>
+      </details>
+      <details><summary>💾 Exports et pro</summary>
+        <p>• JSON / CSV / HTML / Markdown · <b>🏷️ étiquettes de cote</b> et <b>🏷️ étiquettes QR</b> (scan QR = fiche)</p>
+        <p>• <b>📤 UNIMARC</b> : export compatible Koha/PMB (catalogues professionnels)</p>
+        <p>• <b>👁️ Catalogue invité</b> : consultation protégée par PIN pour montrer la collection</p>
+      </details>
+      <details><summary>📄 Documentation complète</summary>
+        <p>Fiches détaillées : <a href="https://github.com/Chenzu-AI/Bibliotheque/tree/main/docs" target="_blank" rel="noopener">github.com/Chenzu-AI/Bibliotheque/docs</a></p>
+      </details>
+      <p class="hint" style="margin-top:10px">Ma Bibliothèque — Création AlphaPrim · version <span id="appVersion"></span></p>
+    </div>
+  </div>
+</div>
+
 <div id="toast" class="toast hidden"></div>
 <input type="file" id="importFile" accept="application/json" class="hidden">
 <input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
