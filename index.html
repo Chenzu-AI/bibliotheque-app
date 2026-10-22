@@ -32,10 +32,12 @@
   <button data-view="groups" class="nav-btn">👥 Par série / auteur</button>
   <button data-view="loans" class="nav-btn">📤 Prêts</button>
   <button data-view="lists" class="nav-btn">📋 Mes listes</button>
+  <button data-view="reading" class="nav-btn">📖 Ma lecture</button>
   <button data-view="shelves" class="nav-btn">🗂️ Étagères</button>
   <button data-view="inventory" class="nav-btn">🔎 Inventaire d'étagère</button>
   <button data-view="stats" class="nav-btn">📊 Statistiques</button>
   <button id="btnImport" class="nav-btn">📥 Importer JSON</button>
+  <button id="btnImportCsv" class="nav-btn">📥 Importer CSV</button>
   <button id="btnExportJson" class="nav-btn">💾 Export JSON</button>
   <button id="btnExportCsv" class="nav-btn">📄 Export CSV</button>
   <button id="btnExportHtml" class="nav-btn">🖨️ Export HTML</button>
@@ -152,6 +154,20 @@
     <div id="invResult"></div>
     <h2 style="margin-top:26px">Historique des inventaires</h2>
     <div id="invHistBody"></div>
+  </section>
+
+  <section id="viewReading" class="hidden">
+    <h2>📖 Ma lecture</h2>
+    <div class="group-card" id="goalCard"></div>
+    <div class="row">
+      <button id="btnSetGoal" class="btn small">🎯 Définir mon objectif annuel</button>
+      <button id="btnRandomNext" class="btn small">🎲 Choisir mon prochain livre</button>
+    </div>
+    <h3>File « à lire ensuite »</h3>
+    <p class="hint">Cochez « Inclure dans ma file de lecture » dans une fiche pour l'ajouter ici. L'ordre suit la date d'ajout.</p>
+    <div id="queueBody"></div>
+    <h3>📚 En cours</h3>
+    <div id="inprogressBody"></div>
   </section>
 
   <section id="viewStats" class="hidden"></section>
@@ -305,6 +321,7 @@
 
 <div id="toast" class="toast hidden"></div>
 <input type="file" id="importFile" accept="application/json" class="hidden">
+<input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
 <script src="https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js"></script>
 <script src="app.js"></script>
 </body>

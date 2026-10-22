@@ -30,6 +30,10 @@ function normalizeIsbn(raw) {
 const STORE_KEY = 'biblio.items.v1';
 const SHELF_KEY = 'biblio.shelves.v1';
 const LISTS_KEY = 'biblio.lists.v1';
+const GOALS_KEY = 'biblio.goals.v1';
+let readingGoals = { year: new Date().getFullYear() + 1, target: 0 };
+try { readingGoals = { ...readingGoals, ...(JSON.parse(localStorage.getItem(GOALS_KEY)) || {}) }; } catch {}
+function saveGoals() { try { localStorage.setItem(GOALS_KEY, JSON.stringify(readingGoals)); } catch {} }
 const DB_NAME = 'biblio';
 const DB_VERSION = 1;
 
@@ -429,6 +433,10 @@ function blankItem(isbn) {
     loan: null, loanHistory: [],
     dewey: '', genre: '',
     collection: '', format: '', editionType: 'standard', price: null, audience: '',
+    borrowedFrom: '', acquiredAt: '', acquiredFrom: '', acquiredPrice: null,
+    disposedAt: '', disposedHow: '', disposedPrice: null,
+    currentPage: null, readNext: false, nextOrder: null,
+    readingLog: [],
     seriesState: '', seriesTotal: null,
     addedAt: new Date().toISOString(),
   };
@@ -767,6 +775,12 @@ function renderShelves() {
 function renderStats() {
   const v = $('#viewStats');
   const items = store.items;
+  const yNow = String(readingGoals.year);
+  const doneY = items.filter((i) => i.status === 'read' && (i.readFinish || '').startsWith(yNow)).length;
+  const pagesY = items.filter((i) => i.status === 'read' && (i.readFinish || '').startsWith(yNow)).reduce((s2, i) => s2 + (i.pageCount || 0), 0);
+  const estHoursY = Math.round(pagesY / 30);
+  const inProg = items.filter((i) => i.status === 'reading' && !i.disposedHow);
+  const queueN = items.filter((i) => i.readNext && !i.disposedHow).length;
   const rated = items.filter((i) => i.rating > 0);
   const avg = rated.length ? (rated.reduce((s, i) => s + i.rating, 0) / rated.length).toFixed(1) : '—';
   const authors = new Set(items.flatMap((i) => i.authors));
@@ -802,6 +816,14 @@ function renderStats() {
       return `<div class="stat-card"><div class="num">${its.length}</div><div class="lbl">${esc(loc)}</div>
         <div class="heat"><div class="heat-fill" style="width:${pct}%"></div></div></div>`;
     }).join('') || '<p class="hint">Aucun emplacement renseigné.</p>'}</div>
+    <h2>📖 Lecture (année ${readingGoals.year})</h2>
+    <div class="stats-grid">
+      <div class="stat-card"><div class="num">${doneY}</div><div class="lbl">Livres terminés (objectif : ${readingGoals.target || '—'})</div></div>
+      <div class="stat-card"><div class="num">${pagesY.toLocaleString('fr-FR')}</div><div class="lbl">Pages lues (${estHoursY} h de lecture est. à 30 p./h)</div></div>
+      <div class="stat-card"><div class="num">${inProg.length}</div><div class="lbl">Lectures en cours</div></div>
+      <div class="stat-card"><div class="num">${Math.round(pagesY / Math.max(1, doneY))}</div><div class="lbl">Pages moyennes / livre terminé</div></div>
+      <div class="stat-card"><div class="num">${queueN}</div><div class="lbl">Dans la file « à lire ensuite »</div></div>
+    </div>
     <h2>📈 Ajouts dans le temps</h2>
     ${additionsChart()}
     <h2>⭐ Top auteurs</h2>
@@ -842,6 +864,7 @@ function renderAll() {
   if (typeof renderLists === 'function') renderLists();
   if (typeof renderLoans === 'function') renderLoans();
   if (typeof renderBorrowers === 'function') renderBorrowers();
+  if (typeof renderReading === 'function') renderReading();
 }
 
 /* ---------- Detail / edit ---------- */
@@ -913,6 +936,23 @@ function openDetail(id) {
     </div>
     <div class="form-row">
       ${field('Public (ex. Dès 10 ans, Adulte)', `<input type="text" name="audience" value="${esc(it.audience || '')}">`)}
+      ${field("Emprunté à quelqu'un ? (ce livre vient de…)", `<input type="text" name="borrowedFrom" value="${esc(it.borrowedFrom || '')}" placeholder="ex. Marie — à rendre">`)}
+    </div>
+    <div class="form-row">
+      ${field('Acquis le', `<input type="date" name="acquiredAt" value="${esc(it.acquiredAt || '')}">`)}
+      ${field('Acquis chez / comment', `<input type="text" name="acquiredFrom" value="${esc(it.acquiredFrom || '')}" placeholder="ex. Librairie Decitre, brocante…">`)}
+      ${field('Prix payé (€)', `<input type="number" name="acquiredPrice" step="0.01" min="0" value="${esc(it.acquiredPrice ?? '')}">`)}
+    </div>
+    <div class="form-row">
+      ${field('Cédé / vendu / perdu ?', `<select name="disposedHow">
+        ${[['', '— toujours en bibliothèque'], ['sold', 'Vendu'], ['given', 'Donné'], ['lost', 'Perdu'], ['lent-away', 'Prêté non rendu']].map(([v, lbl]) => `<option value="${v}" ${it.disposedHow === v ? 'selected' : ''}>${lbl}</option>`).join('')}
+      </select>`)}
+      ${field('Cédé le', `<input type="date" name="disposedAt" value="${esc(it.disposedAt || '')}">`)}
+      ${field('Prix de cession (€)', `<input type="number" name="disposedPrice" step="0.01" min="0" value="${esc(it.disposedPrice ?? '')}">`)}
+    </div>
+    <div class="form-row">
+      ${field('Page courante (pour suivi de lecture)', `<input type="number" name="currentPage" min="0" value="${esc(it.currentPage ?? '')}">`)}
+      ${field('File « à lire ensuite »', `<label class="chk"><input type="checkbox" name="readNext" ${it.readNext ? 'checked' : ''}> Inclure dans ma file de lecture</label>`)}
     </div>
     <div class="form-row">
       ${field('État de la série', `<select name="seriesState">
@@ -972,6 +1012,7 @@ function openDetail(id) {
     </div>` : ''}
   `;
   $('#detailModal').classList.remove('hidden');
+  addLogToDetail(it);
   const btnAiFill = $('#btnAiFill');
   if (btnAiFill) btnAiFill.addEventListener('click', async () => {
     if (!aiCfg.key && aiCfg.provider !== 'ollama') { toast('Configurez d’abord l’IA dans le menu 🤖 IA.', 4000); return; }
@@ -1033,7 +1074,10 @@ $('#btnSaveDetail').addEventListener('click', () => {
   it.subtitle = val('subtitle');
   it.authors = val('authors').split(',').map((s) => s.trim()).filter(Boolean);
   it.medium = f.querySelector('[name="medium"]').value;
-  it.status = f.querySelector('[name="status"]').value;
+  const newStatus = f.querySelector('[name="status"]').value;
+  if (newStatus === 'read' && it.status !== 'read') it.readFinish = todayISO();
+  if (newStatus !== 'read') it.readFinish = '';
+  it.status = newStatus;
   it.series = val('series');
   it.volume = val('volume');
   it.scenario = val('scenario').split(',').map((s) => s.trim()).filter(Boolean);
@@ -1049,6 +1093,15 @@ $('#btnSaveDetail').addEventListener('click', () => {
   it.editionType = f.querySelector('[name="editionType"]').value;
   it.price = +val('price') || null;
   it.audience = val('audience');
+  it.borrowedFrom = val('borrowedFrom');
+  it.acquiredAt = val('acquiredAt');
+  it.acquiredFrom = val('acquiredFrom');
+  it.acquiredPrice = +val('acquiredPrice') || null;
+  it.disposedAt = val('disposedAt');
+  it.disposedHow = f.querySelector('[name="disposedHow"]').value;
+  it.disposedPrice = +val('disposedPrice') || null;
+  it.currentPage = +val('currentPage') || null;
+  it.readNext = f.querySelector('[name="readNext"]').checked;
   const loanTo = val('loanTo');
   const loanDue = val('loanDue') || null;
   if (loanTo) {
@@ -1117,7 +1170,7 @@ $('#mainNav').addEventListener('click', (e) => {
   if (!btn) return;
   $('#mainNav').classList.add('hidden');
   document.querySelectorAll('main > section').forEach((s) => s.classList.add('hidden'));
-  const view = { grid: '#viewGrid', shelves: '#viewShelves', stats: '#viewStats', groups: '#viewGroups', lists: '#viewLists', loans: '#viewLoans', inventory: '#viewInventory' }[btn.dataset.view] || '#viewGrid';
+  const view = { grid: '#viewGrid', shelves: '#viewShelves', stats: '#viewStats', groups: '#viewGroups', lists: '#viewLists', loans: '#viewLoans', inventory: '#viewInventory', reading: '#viewReading' }[btn.dataset.view] || '#viewGrid';
   if (btn.dataset.view === 'inventory') renderInventoryLocations();
   $(view).classList.remove('hidden');
   document.querySelectorAll('.nav-btn').forEach((b) => b.classList.toggle('active', b === btn));
@@ -1562,7 +1615,7 @@ $('#btnCoversCfg').addEventListener('click', async () => {
 });
 
 /* ---------- Init ---------- */
-store.init().then(async () => { await coversInit(); renderAll(); updateShelveUI(); });
+store.init().then(async () => { await coversInit(); renderAll(); updateShelveUI(); lateLoansReminder(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 
 window.__app = { store, lookupAndMaybeAdd, openDetail, renderGrid, renderStats, renderAll, $, esc, starStr, coverSrc, fetchWithTimeout, toast, todayISO, blankItem, download, stamp,
@@ -1970,6 +2023,49 @@ $('#btnCloseAi').addEventListener('click', () => $('#aiModal').classList.add('hi
 $('#btnAiOpen') && $('#btnAiOpen').addEventListener('click', () => $('#aiModal').classList.remove('hidden'));
 
 window.__ai = { getCfg: () => aiCfg, setCfg: (c) => { aiCfg = { ...aiCfg, ...c }; saveAiCfg(); }, aiSearch, aiFillItem };
+
+/* ---------- CSV import (from Libib / CLZ / Excel) ---------- */
+$('#btnImportCsv').addEventListener('click', () => $('#importCsvFile').click());
+$('#importCsvFile').addEventListener('change', async (e) => {
+  const file = e.target.files[0];
+  e.target.value = '';
+  if (!file) return;
+  try {
+    const text = await file.text();
+    const lines = text.replace(/^\ufeff/, '').split(/\r?\n/).filter((l) => l.trim());
+    if (lines.length < 2) { toast('CSV vide.'); return; }
+    const sep = (lines[0].split(';').length > lines[0].split(',').length) ? ';' : ',';
+    const heads = lines[0].split(sep).map((h) => h.replace(/"/g, '').trim().toLowerCase());
+    const findCol = (names) => heads.findIndex((h) => names.some((n) => h.includes(n)));
+    const cIsbn = findCol(['isbn13', 'isbn']);
+    const cTitle = findCol(['titre', 'title']);
+    const cAuthors = findCol(['auteur', 'author']);
+    const cStatus = findCol(['statut', 'status']);
+    if (cTitle < 0) { toast('Colonne titre introuvable — vérifiez le CSV (colonnes: titre, auteur, isbn…).'); return; }
+    let added = 0, skipped = 0;
+    for (const line of lines.slice(1)) {
+      const cells = line.split(sep).map((c) => c.replace(/^"|"$/g, '').trim());
+      const title = cells[cTitle];
+      if (!title) { skipped++; continue; }
+      const isbn = cIsbn >= 0 ? normalizeIsbn(cells[cIsbn]) : '';
+      if (isbn && store.items.some((i) => i.isbn === isbn && i.title === title)) { skipped++; continue; }
+      const item = blankItem(isbn);
+      item.title = title;
+      if (cAuthors >= 0) item.authors = cells[cAuthors].split(/[,;/]/).map((a) => a.trim()).filter(Boolean);
+      if (cStatus >= 0) {
+        const st = cells[cStatus].toLowerCase();
+        if (/lus?|read|fini/.test(st)) { item.status = 'read'; item.readFinish = todayISO(); }
+        else if (/cours|reading|en cours/.test(st)) item.status = 'reading';
+        else if (/souhait|wish|acheter/.test(st)) { item.status = 'wish'; item.wishlist = true; }
+      }
+      store.items.push(item);
+      added++;
+    }
+    store.save();
+    renderAll();
+    toast(`Import CSV : ${added} ajouté(s), ${skipped} ignoré(s).`, 4000);
+  } catch (err) { toast('Erreur CSV : ' + err.message, 4000); }
+});
 
 /* ---------- Inventory mode (rescan a shelf and check it) ---------- */
 let invSession = null;
@@ -2535,3 +2631,89 @@ Si un texte est illisible, omette le livre. Sois exhaustif mais ne devine pas.`;
     $('#shelfStatus').textContent = 'Erreur IA : ' + e.message + (aiCfg.provider === 'ollama' ? ' — utilisez un modèle avec vision (ex. llama3.2-vision).' : ' — vérifiez que votre modèle gère les images (pixtral, gpt-4o…).');
   }
 });
+
+/* ---------- Reading view: goal, queue, in-progress, random pick ---------- */
+function booksFinishedThisYear() {
+  const y = String(readingGoals.year);
+  return store.items.filter((i) => i.status === 'read' && (i.readFinish || '').startsWith(y));
+}
+
+function renderReading() {
+  const v = $('#viewReading');
+  if (!v) return;
+  const done = booksFinishedThisYear().length;
+  const target = readingGoals.target || 0;
+  $('#goalCard').innerHTML = target
+    ? `<h3>🎯 Objectif ${readingGoals.year} : ${done}/${target} livres</h3><div class="heat"><div class="heat-fill" style="width:${Math.min(100, Math.round(done / target * 100))}%"></div></div><p class="hint">${Math.max(0, target - done)} restant(s) · ${target - done > 0 ? Math.ceil((target - done) / Math.max(1, (new Date(readingGoals.year, 11, 31) - Date.now()) / 86400000)) + ' livres/semaine possibles' : 'Objectif atteint ! 🎉'}</p>`
+    : '<p class="hint">Pas encore d\'objectif — fixez-en un pour suivre votre rythme de lecture annuel.</p>';
+
+  const queue = store.items.filter((i) => i.readNext && !i.disposedHow).sort((a, b) => (a.nextOrder || 0) - (b.nextOrder || 0));
+  $('#queueBody').innerHTML = queue.length ? queue.map((it) => `
+    <div class="inv-line ok">📖 <b>${esc(it.title)}</b>${it.series ? ' (' + esc(it.series) + (it.volume ? ' T.' + esc(it.volume) : '') + ')' : ''}
+      <button class="btn small queue-open" data-id="${esc(it.id)}">Ouvrir</button>
+      <button class="btn small queue-remove" data-id="${esc(it.id)}">Retirer de la file</button></div>`).join('')
+    : '<p class="hint">File vide — cochez « Inclure dans ma file de lecture » dans les fiches de vos prochaines lectures.</p>';
+  $('#queueBody').querySelectorAll('.queue-open').forEach((b) => b.addEventListener('click', () => openDetail(b.dataset.id)));
+  $('#queueBody').querySelectorAll('.queue-remove').forEach((b) => b.addEventListener('click', () => {
+    const it = store.findById(b.dataset.id);
+    if (it) { it.readNext = false; store.update(it); renderAll(); }
+  }));
+
+  const prog = store.items.filter((i) => i.status === 'reading' && !i.disposedHow);
+  $('#inprogressBody').innerHTML = prog.length ? prog.map((it) => {
+    const pct = it.currentPage && it.pageCount ? Math.min(100, Math.round(it.currentPage / it.pageCount * 100)) : null;
+    return `<div class="inv-line warn">📚 <b>${esc(it.title)}</b>${pct !== null ? ` — page ${it.currentPage}/${it.pageCount} (${pct} %) <div class="heat"><div class="heat-fill" style="width:${pct}%"></div></div>` : ' — renseignez la page courante pour suivre la progression'} <button class="btn small queue-open2" data-id="${esc(it.id)}">Ouvrir</button></div>`;
+  }).join('') : '<p class="hint">Aucune lecture en cours — passez un livre en statut « En lecture ».</p>';
+  $('#inprogressBody').querySelectorAll('.queue-open2').forEach((b) => b.addEventListener('click', () => openDetail(b.dataset.id)));
+}
+
+$('#btnSetGoal').addEventListener('click', () => {
+  const y = prompt('Année de l\'objectif :', String(readingGoals.year));
+  if (y === null) return;
+  const t = prompt('Nombre de livres visés pour cette année :', String(readingGoals.target || 50));
+  if (t === null) return;
+  readingGoals = { year: parseInt(y, 10) || new Date().getFullYear(), target: parseInt(t, 10) || 0 };
+  saveGoals();
+  renderReading();
+  toast('Objectif enregistré.');
+});
+
+$('#btnRandomNext').addEventListener('click', () => {
+  const pool = store.items.filter((i) => i.status === 'unread' && !i.disposedHow && !i.loan);
+  if (!pool.length) { toast('Aucun livre « à lire » disponible.'); return; }
+  const pick = pool[Math.floor(Math.random() * pool.length)];
+  if (confirm(`Le hasard a parlé : « ${pick.title} »${pick.series ? ' (' + pick.series + ')' : ''}\n\nOuvrir la fiche ?`)) openDetail(pick.id);
+});
+
+/* ---------- Reading log (journal daté) in detail ---------- */
+function addLogToDetail(it) {
+  const logDiv = document.createElement('div');
+  logDiv.innerHTML = `${field('Journal de lecture (notes datées)', `
+    <textarea name="newLogEntry" placeholder="Nouvelle note de lecture (sera horodatée)…"></textarea>
+    <button type="button" class="btn small" id="btnAddLog">➕ Ajouter au journal</button>
+    <div class="hint" id="logHistory">${(it.readingLog || []).slice().reverse().map((l) => `📅 ${esc(l.date)} — ${esc(l.text)}`).join('<br>') || 'Aucune note datée pour l\'instant.'}</div>`)}`;
+  $('#detailForm').appendChild(logDiv);
+  logDiv.querySelector('#btnAddLog').addEventListener('click', () => {
+    const txt = logDiv.querySelector('[name="newLogEntry"]').value.trim();
+    if (!txt) return;
+    const fresh = store.findById(editingId);
+    if (!fresh) return;
+    if (!Array.isArray(fresh.readingLog)) fresh.readingLog = [];
+    fresh.readingLog.push({ date: todayISO(), text: txt });
+    store.update(fresh);
+    logDiv.querySelector('[name="newLogEntry"]').value = '';
+    logDiv.querySelector('#logHistory').innerHTML = fresh.readingLog.slice().reverse().map((l) => `📅 ${esc(l.date)} — ${esc(l.text)}`).join('<br>');
+    toast('Note ajoutée au journal.');
+  });
+}
+
+/* ---------- Late loans reminder at startup ---------- */
+function lateLoansReminder() {
+  const today = todayISO();
+  const late = store.items.filter((i) => i.loan && i.loan.due && i.loan.due < today);
+  const due = store.items.filter((i) => i.loan && i.loan.due === today);
+  let msg = '';
+  if (late.length) msg = `⏰ ${late.length} prêt(s) en retard : ` + late.slice(0, 3).map((i) => `« ${i.title} » (${i.loan.to})`).join(', ') + (late.length > 3 ? '…' : '');
+  else if (due.length) msg = `📅 ${due.length} retour(s) de prêt prévu(s) aujourd'hui.`;
+  if (msg) setTimeout(() => toast(msg, 6000), 1200);
+}
