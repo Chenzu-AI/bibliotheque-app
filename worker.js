@@ -22,7 +22,11 @@ function json(data, status = 200) {
 async function fetchFnac(isbn) {
   try {
     const url = 'https://www.fnac.com/SearchResult/ResultList.aspx?Search=' + encodeURIComponent(isbn) + '&SCat=0%21&sft=1&sa=0';
-    const r = await fetch(url, { headers: { 'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36' } });
+    const r = await fetch(url, { headers: {
+      'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/125.0 Safari/537.36',
+      'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8',
+      'Accept-Language': 'fr-FR,fr;q=0.9',
+    } });
     if (!r.ok) return null;
     const html = await r.text();
     const titleMatch = html.match(/<a[^>]*class="[^"]*Article-title[^"]*"[^>]*>([^<]+)<\/a>/) || html.match(/<h2[^>]*>([^<]{5,150})<\/h2>/);
@@ -68,19 +72,21 @@ async function fetchFnac(isbn) {
 
 async function fetchBnfSru(isbn) {
   try {
-    const q = `bib.persistentid all "isbn:${isbn}" or bib.persistentid all "${isbn}"`;
-    const url = 'https://catalogue.bnf.fr/SRU?version=1.2&operation=searchRetrieve&query=' + encodeURIComponent(q) + '&maximumRecords=1&recordSchema=dc';
+    const q = `bib.isbn all "${isbn}"`;
+    const url = 'https://catalogue.bnf.fr/api/SRU?version=1.2&operation=searchRetrieve&query=' + encodeURIComponent(q) + '&maximumRecords=1&recordSchema=dublincore';
     const r = await fetch(url);
     if (!r.ok) return null;
     const xml = await r.text();
-    const numMatch = xml.match(/<numberOfRecords>(\d+)<\/numberOfRecords>/);
+    const numMatch = xml.match(/<srw:numberOfRecords>(\d+)<\/srw:numberOfRecords>/);
     if (!numMatch || parseInt(numMatch[1], 10) === 0) return null;
-    const title = (xml.match(/<dc:title[^>]*>([^<]+)<\/dc:title>/) || [])[1];
+    let title = (xml.match(/<dc:title[^>]*>([^<]+)<\/dc:title>/) || [])[1];
     if (!title) return null;
-    const authors = [...xml.matchAll(/<dc:creator[^>]*>([^<]+)<\/dc:creator>/g)].map((m) => m[1].trim());
-    const publisher = (xml.match(/<dc:publisher[^>]*>([^<]+)<\/dc:publisher>/) || [])[1] || '';
-    const date = (xml.match(/<dc:date[^>]*>([^<]{4})[\d-]*<\/dc:date>/) || [])[1] || '';
-    return { source: 'bnf', title: title.trim(), authors: authors.slice(0, 4), publisher: publisher.trim(), date, summary: '', cover: '' };
+    title = title.split(' / ')[0].replace(/\s*:\s*roman\s*$/i, '').trim();
+    const authors = [...xml.matchAll(/<dc:creator[^>]*>([^<]+)<\/dc:creator>/g)].map((m) => m[1].split('(')[0].trim()).filter((a) => a && !/^\d/.test(a));
+    const publisher = ((xml.match(/<dc:publisher[^>]*>([^<]+)<\/dc:publisher>/) || [])[1] || '').replace(/\s*\([^)]*\)\s*$/, '').trim();
+    const date = (xml.match(/<dc:date[^>]*>(\d{4})/) || [])[1] || '';
+    const pages = (xml.match(/\((\d{2,4})\s*p\.\)/) || [])[1] || null;
+    return { source: 'bnf', title, authors: authors.slice(0, 4), publisher, date, pages, summary: '', cover: '' };
   } catch { return null; }
 }
 
@@ -91,14 +97,17 @@ export default {
     const isbn = (url.searchParams.get('isbn') || '').replace(/[^0-9Xx]/g, '');
     if (!isbn) return json({ found: false, error: 'isbn manquant' }, 400);
     // Essai Fnac puis BnF en parallèle; on garde le meilleur résultat
-    const [fnac, bnf] = await Promise.all([fetchFnac(isbn), fetchBnfSru(isbn)]);
-    const meta = fnac || bnf || null;
+    const [fnac, bnf] = await Promise.all([fetchFnac(isbn).catch(() => null), fetchBnfSru(isbn).catch(() => null)]);
+    let meta = fnac || bnf || null;
     if (!meta) return json({ found: false, isbn });
-    // fusion simple si les deux trouvent
     if (fnac && bnf) {
-      meta.publisher = meta.publisher || bnf.publisher;
-      meta.authors = meta.authors.length ? meta.authors : bnf.authors;
-      meta.summary = meta.summary || bnf.summary;
+      meta = { ...fnac,
+        publisher: fnac.publisher || bnf.publisher,
+        authors: fnac.authors.length ? fnac.authors : bnf.authors,
+        summary: fnac.summary || bnf.summary,
+        date: fnac.date || bnf.date,
+        pages: fnac.pages || bnf.pages || null,
+      };
     }
     return json({ found: true, isbn, ...meta });
   },
