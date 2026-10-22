@@ -428,6 +428,7 @@ function blankItem(isbn) {
     scenario: [], art: [], favorite: false, wishlist: false,
     loan: null, loanHistory: [],
     dewey: '', genre: '',
+    collection: '', format: '', editionType: 'standard', price: null, audience: '',
     seriesState: '', seriesTotal: null,
     addedAt: new Date().toISOString(),
   };
@@ -660,7 +661,7 @@ function currentFilter() {
   if (q) {
     items = items.filter((i) =>
       [i.title, i.subtitle, i.authors.join(', '), i.isbn, i.series, i.publisher,
-       i.tags.join(' '), i.notes, i.categories.join(' '), i.dewey, i.genre, i.location, i.furniture, i.slot]
+       i.tags.join(' '), i.notes, i.categories.join(' '), i.dewey, i.genre, i.location, i.furniture, i.slot, i.collection, i.audience]
         .join(' ').toLowerCase().includes(q));
   }
   const cmp = {
@@ -701,6 +702,7 @@ function renderGrid() {
           ${it.location ? '<span class="chip shelf">📍 ' + esc(it.location) + '</span>' : ''}
           ${(it.shelves || []).map((s) => `<span class="chip shelf">${esc(s)}</span>`).join('')}
           ${it.duplicateOf ? '<span class="chip dup">⚠ doublon</span>' : ''}
+          ${it.editionType && it.editionType !== 'standard' ? `<span class="chip ed">${{ first: '1ʳᵉ éd.', collector: '⭐ collector', rare: '💎 rare', incunable: '📜 incunable' }[it.editionType] || ''}</span>` : ''}
         </div>
       </div>`;
     if (bulkMode) {
@@ -788,6 +790,8 @@ function renderStats() {
       <div class="stat-card"><div class="num">${byStatus.wish}</div><div class="lbl">Souhaits (à acheter)</div></div>
       <div class="stat-card"><div class="num">${loaned}</div><div class="lbl">Prêtés ${late ? `(${late} en retard)` : ''}</div></div>
       <div class="stat-card"><div class="num">${store.items.filter((i) => i.favorite).length}</div><div class="lbl">Favoris</div></div>
+      <div class="stat-card"><div class="num">${(() => { const tot = store.items.reduce((s2, i) => s2 + (i.price || 0), 0); return tot ? Math.round(tot).toLocaleString('fr-FR') + ' €' : '—'; })()}</div><div class="lbl">Valeur catalogue (prix éditeur)</div></div>
+      <div class="stat-card"><div class="num">${store.items.filter((i) => i.editionType && i.editionType !== 'standard').length}</div><div class="lbl">Éditions remarquables (1ʳᵉᵉˢ, collector, rares…)</div></div>
       ${Object.entries(mediums).map(([m, n]) =>
         `<div class="stat-card"><div class="num">${n}</div><div class="lbl">${esc(mediumLabel(m))}</div></div>`).join('')}
     </div>
@@ -893,6 +897,22 @@ function openDetail(id) {
     <div class="form-row">
       ${field('Cote Dewey (ex. 843, 741.5)', `<input type="text" name="dewey" inputmode="decimal" value="${esc(it.dewey || '')}">`)}
       ${field('Genre (ex. Polar, SF, Heroic fantasy)', `<input type="text" name="genre" value="${esc(it.genre || '')}">`)}
+    </div>
+    <div class="form-row">
+      ${field('Collection éditoriale (ex. Folio, Shonen Kana, Pléiade)', `<input type="text" name="collection" list="collectionList" value="${esc(it.collection || '')}"><datalist id="collectionList">${[...new Set(store.items.map((i) => i.collection).filter(Boolean))].map((c) => `<option value="${esc(c)}">`).join('')}</datalist>`)}
+      ${field('Format', `<select name="format">
+        <option value="">—</option>
+        ${['Broché', 'Poche', 'Relié', 'Grand format', 'Cartonné', 'Digital'].map((f) => `<option value="${f}" ${it.format === f ? 'selected' : ''}>${f}</option>`).join('')}
+      </select>`)}
+    </div>
+    <div class="form-row">
+      ${field('Type d’édition', `<select name="editionType">
+        ${[['standard', 'Édition standard'], ['first', '1ʳᵉ édition'], ['collector', 'Édition collector / limitée'], ['rare', 'Édition rare'], ['incunable', 'Incunable (avant 1501)']].map(([v, lbl]) => `<option value="${v}" ${it.editionType === v ? 'selected' : ''}>${lbl}</option>`).join('')}
+      </select>`)}
+      ${field('Prix éditeur (€)', `<input type="number" name="price" step="0.01" min="0" value="${esc(it.price ?? '')}">`)}
+    </div>
+    <div class="form-row">
+      ${field('Public (ex. Dès 10 ans, Adulte)', `<input type="text" name="audience" value="${esc(it.audience || '')}">`)}
     </div>
     <div class="form-row">
       ${field('État de la série', `<select name="seriesState">
@@ -1024,6 +1044,11 @@ $('#btnSaveDetail').addEventListener('click', () => {
   it.wishlist = f.querySelector('[name="wishlist"]').checked;
   it.dewey = val('dewey').replace(',', '.').trim();
   it.genre = val('genre');
+  it.collection = val('collection');
+  it.format = f.querySelector('[name="format"]').value;
+  it.editionType = f.querySelector('[name="editionType"]').value;
+  it.price = +val('price') || null;
+  it.audience = val('audience');
   const loanTo = val('loanTo');
   const loanDue = val('loanDue') || null;
   if (loanTo) {
@@ -1241,6 +1266,11 @@ $('#btnExportMd').addEventListener('click', () => {
       meta.push(`**Statut :** ${{ unread: 'à lire', reading: 'en lecture', read: 'lu', wish: 'souhait (à acheter)' }[it.status] || it.status}`);
       if (it.dewey) meta.push(`**Cote :** ${it.dewey}`);
       if (it.genre) meta.push(`**Genre :** ${it.genre}`);
+      if (it.collection) meta.push(`**Collection :** ${it.collection}`);
+      if (it.format) meta.push(`**Format :** ${it.format}`);
+      if (it.editionType && it.editionType !== 'standard') meta.push(`**Édition :** ${{ first: '1ʳᵉ édition', collector: 'collector / limitée', rare: 'rare', incunable: 'incunable' }[it.editionType]}`);
+      if (it.price) meta.push(`**Prix éditeur :** ${it.price} €`);
+      if (it.audience) meta.push(`**Public :** ${it.audience}`);
       if (it.loan) meta.push(`**Prêté à :** ${it.loan.to}${it.loan.due ? ` (retour prévu le ${it.loan.due})` : ''}`);
       if ((it.loanHistory || []).length) meta.push(`**Historique prêts :** ${it.loanHistory.map((h) => `${h.to} (${h.date}${h.returned ? ` → ${h.returned}` : ' en cours'})`).join(' ; ')}`);
       if (it.rating) meta.push(`**Note :** ${'★'.repeat(it.rating)}${'☆'.repeat(5 - it.rating)}`);
@@ -1260,7 +1290,7 @@ $('#btnExportMd').addEventListener('click', () => {
 
 $('#btnExportCsv').addEventListener('click', () => {
   const cols = ['isbn', 'title', 'subtitle', 'authors', 'medium', 'series', 'volume', 'publisher',
-    'publishedDate', 'pageCount', 'status', 'rating', 'tags', 'shelves', 'location', 'notes', 'summary', 'dewey', 'genre', 'loanTo', 'loanDue', 'addedAt'];
+    'publishedDate', 'pageCount', 'status', 'rating', 'tags', 'shelves', 'location', 'notes', 'summary', 'dewey', 'genre', 'collection', 'format', 'editionType', 'price', 'audience', 'loanTo', 'loanDue', 'addedAt'];
   const q = (s) => `"${String(s ?? '').replace(/"/g, '""')}"`;
   const rows = [cols.join(',')];
   for (const it of store.items) {

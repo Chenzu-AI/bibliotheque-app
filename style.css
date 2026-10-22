@@ -340,3 +340,5 @@ input:focus, select:focus, textarea:focus {
 /* Install button */
 .btn-install { background: var(--green-soft); border-color: #bcd8c2; color: var(--green); font-weight: 600; }
 .btn-install:hover { background: #d5e9da; }
+
+.chip.ed { background: #f3e8ff; color: #7e22ce; border: 1px solid #d8b4fe; }
