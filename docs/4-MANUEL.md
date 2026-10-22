@@ -44,7 +44,7 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
 ## 3. Organiser la collection
 
 - **Étagères virtuelles** (☰ → 🗂️ Étagères) : groupes libres ( « Polars », «À prêter »…), un livre peut en faire partie de plusieurs — cochées dans sa fiche
-- **Fiche d'un ouvrage** : note ★★★★★, annotation, tags, série + tome + état (en cours/complète), scénariste/dessinateur, **cote Dewey + genre**, favori ♥, souhait 🛒, résumé, couvertures devant/dos
+- **Fiche d'un ouvrage** : note ★★★★★, annotation, tags, série + tome + état (en cours/complète), scénariste/dessinateur, **cote Dewey + genre**, **collection éditoriale + format + type d'édition (1ʳᵉ édition, collector, rare, incunable) + prix éditeur + public**, favori ♥, souhait 🛒, résumé, couvertures devant/dos. Les éditions remarquables affichent un badge (⭐ collector, 💎 rare…) sur la couverture ; la statistique « Valeur catalogue » totalise les prix éditeurs (estimation d'assurance)
 - **Recherche** : tapez n'importe quoi (titre, auteur, ISBN, genre, meuble…) — filtrage instantané
 - **Filtres** : étagère, statut (à lire / en lecture / lu / souhait / prêté), ★ favoris
 - **Tri** : ajout, titre, auteur, note, année, **cote Dewey**
@@ -77,6 +77,21 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
    - ❓ **Inconnu** : pas dans la bibliothèque → **➕ L'intégrer** (ajouté ici avec ses infos)
 4. **Terminer** → **bilan** : manquants (avec mention « prêté à… » le cas échéant), intrus, inconnus
 5. L'**historique** des inventaires se constitue en bas de page
+
+## 6 bis. Photographier une étagère (photo + IA)
+
+Complément visuel de l'inventaire : une photo au lieu de scanner chaque code-barres. **Nécessite l'IA configurée avec un modèle vision** (☰ → 🤖 → ex. `pixtral-12b` chez Mistral, ou `llama3.2-vision` via Ollama en local).
+
+1. **☰ → 📷 Photo d'étagère (IA)** → prenez la photo **en paysage** (l'appareil photo s'ouvre directement)
+2. Renseignez le **Meuble** (ex. « Bibliothèque salon », avec suggestions) et le **Préfixe d'étagère** (ex. « Étagère ») — les rangées détectées, de haut en bas, deviennent automatiquement **« Étagère 1 », « Étagère 2 »…** (le rangement est automatique)
+3. **🤖 Analyser** (10-60 s) — l'IA lit chaque tranche, rangée par rangée
+4. Résultat comparé à **votre** collection :
+   - ✅ **déjà à cet emplacement** — confirmé
+   - ⚠ **censé être ailleurs** → **📦 Ranger ici** (met à jour la fiche)
+   - ❓ **inconnu** → **🔎 Rechercher & ajouter** (fiche créée via Google Books, rangée au bon endroit)
+5. Bilan : X bien rangés · Y mal placés · Z inconnus
+
+> 💡 Usage idéal : saisir une étagère entière en une photo (création + rangement), ou vérifier un rangement existant. La précision dépend du modèle IA (80-95 % des tranches bien lues sur photo nette) — les boutons de correction couvrent le reste. La photo est envoyée au fournisseur IA choisi ; en local (Ollama), tout reste chez vous.
 
 ## 7. Utiliser l'IA (optionnel)
 

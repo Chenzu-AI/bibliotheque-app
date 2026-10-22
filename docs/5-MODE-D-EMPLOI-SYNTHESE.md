@@ -35,6 +35,7 @@
 | Voir les tomes manquants d'une série | ☰ → 👥 Par série |
 | Prêter un livre | Fiche → « Prêté à… » + retour prévu |
 | Vérifier une étagère (récolement) | ☰ → 🔎 Inventaire → scanner → bilan |
+| Saisir/vérifier une étagère **en photo** (IA vision) | ☰ → 📷 Photo d'étagère → paysage → meuble + préfixe (« Étagère ») → Analyser |
 | Chercher en langage naturel | 🤖 Recherche IA (à configurer : ☰ → 🤖 IA) |
 | Modifier plein de livres d'un coup | ☑ Sélection multiple → cocher → Appliquer |
 | Sauvegarder | ☰ → 💾 Sauvegarde immédiate (JSON) |

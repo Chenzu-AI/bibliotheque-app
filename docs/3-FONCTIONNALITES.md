@@ -13,6 +13,7 @@
 - **🔑 Clés API personnelles** (menu ☰ → Clés API) : clé Google Books + URL du relais, stockées dans SON navigateur uniquement (jamais dans le code public) — boutons de test intégrés (test de clé + **diagnostic par ISBN** qui montre ce que chaque source répond)
 - **Sources activables au choix** (cases à cocher) : Google Books / BnF / Open Library
 - **⚡ Scan en rafale** : caméra qui reste ouverte, ajout en chaîne
+- **📷 Photo d'étagère IA** : une photo paysage → l'IA lit les tranches **rangée par rangée** (rangées numérotées automatiquement : « Étagère 1, 2, 3… ») et compare à votre collection : ✅ bien rangés · ⚠ mal placés (bouton « Ranger ici ») · ❓ inconnus (recherche et ajout en 1 clic)
 - **⚠ Détection de doublons** : l'app demande si vous ajoutez un 2ᵉ exemplaire
 
 ## 🗂️ Organisation
@@ -21,6 +22,8 @@
 - **📦 Mode rangement** : scannez une étagère entière, chaque livre est rangé automatiquement au bon endroit
 - **Type** (livre / BD / manga), **série + tome**, **scénariste / dessinateur** (BD)
 - **Cote Dewey + genre**, tri par cote comme en bibliothèque
+- **Champs bibliophiles** : **collection éditoriale** (Folio, Pléiade… avec suggestions), **format** (broché, poche, relié…), **type d'édition** (standard, **1ʳᵉ édition, collector/limitée, rare, incunable**), **prix éditeur**, **public** — badges sur les couvertures (⭐ collector, 💎 rare…)
+- **Valeur catalogue** : statistique totale des prix éditeurs (estimation d'assurance) + décompte des éditions remarquables
 - **Statuts** : à lire / en lecture / lu / souhait (à acheter)
 - **Favoris ♥** et **notes sur 5 étoiles** avec annotations personnelles
 - **Recherche plein texte** (titre, auteur, ISBN, série, tags, genre, emplacement…), filtres et tris multiples
@@ -43,6 +46,7 @@
 
 ## 🤖 IA intégrée (optionnelle)
 - **Recherche en langage naturel** : « les polars des années 90 notés 4+ »
+- **Photo d'étagère** : lecture des tranches par vision IA (modèle vision requis : Pixtral, GPT-4o, llama3.2-vision…)
 - **Complétion de fiches** : résumé, genre, cote Dewey générés par IA
 - Compatible **API** (Mistral, OpenAI…, clé stockée localement) ou **Ollama local** (gratuit, privé)
 

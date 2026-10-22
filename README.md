@@ -32,7 +32,8 @@ python -m http.server 8080
 - **Scan** : caméra (mobile), douchette USB ou saisie manuelle (PC), mode rafale, détection de doublons
 - **Reconnaissance multi-sources** : Open Library + Google Books (clé perso) + conversion ISBN-10/13 + **relais BnF/Fnac** (micro-service gratuit, `worker.js`) — optimisé pour l'édition française, y compris le fonds ancien
 - **Organisation** : étagères, tags, séries (tomes manquants, état), auteurs/scénaristes/dessinateurs, cote Dewey, favoris, souhaits
-- **Rangement physique** : meuble + étagère, mode rangement, détection de séries dispersées, **inventaire d'étagère** avec historique
+- **Rangement physique** : meuble + étagère, mode rangement, détection de séries dispersées, **inventaire d'étagère** avec historique, **photo d'étagère IA** (lecture des tranches rangée par rangée)
+- **Champs bibliophiles** : collection éditoriale, format, type d'édition (1ʳᵉ édition, collector, rare, incunable), prix éditeur, public — badges et statistique « valeur catalogue »
 - **Prêts** : emprunteurs, retours prévus, retards, historique par personne
 - **IA optionnelle** : recherche en langage naturel + complétion de fiches (API ou Ollama local)
 - **Sauvegarde** : auto + manuelle, exports JSON / CSV / HTML / Markdown / étiquettes imprimables, import fusionnant
