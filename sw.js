@@ -1,4 +1,4 @@
-const CACHE = 'biblio-v5';
+const CACHE = 'biblio-v6';
 const ASSETS = ['./', './index.html', './style.css', './app.js', './i18n.js', './manifest.json', './icons/icon.svg', './vendor/zxing.min.js', './vendor/qrcode.js'];
 
 self.addEventListener('install', (e) => {
