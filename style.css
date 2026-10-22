@@ -381,3 +381,9 @@ input:focus, select:focus, textarea:focus {
   input, select, textarea { background: var(--panel); }
   .toast { background: #efe6d8; color: #1c1712; }
 }
+
+/* Guest catalog & QR */
+.qr-label { display: flex; align-items: center; gap: 4px; border: 1px dashed var(--line); border-radius: 6px; padding: 4px; }
+.qr-label img { width: 44px; height: 44px; }
+.qr-title { font-size: 0.68rem; font-weight: 600; }
+.qr-loc { font-size: 0.62rem; color: var(--muted); }

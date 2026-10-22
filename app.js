@@ -563,6 +563,12 @@ async function startScan() {
     await codeReader.decodeFromVideoDevice(null, $('#scanVideo'), (result, err) => {
       if (result && scanActive) {
         const txt = result.getText();
+        if (txt && txt.startsWith('BIBLIO:')) {
+          if (invSession) { toast('QR ignoré en mode inventaire.'); return; }
+          stopScan();
+          tryHandleQrCode(txt);
+          return;
+        }
         if (/^[0-9]{13}$/.test(txt) || /^[0-9]{9}[0-9X]$/.test(txt)) {
           if (invSession) { invHandleScan(txt); return; }
           if (burstScan) {
@@ -2726,3 +2732,173 @@ $('#btnHelp').addEventListener('click', () => {
   $('#helpModal').classList.remove('hidden');
 });
 $('#btnCloseHelp').addEventListener('click', () => $('#helpModal').classList.add('hidden'));
+
+/* ---------- QR codes d'exemplaires ---------- */
+function qrDataUrl(text, size) {
+  try {
+    const qr = qrcode(0, 'M');
+    qr.addData(text, 'Byte');
+    qr.make();
+    const n = qr.getModuleCount();
+    const cell = Math.max(2, Math.floor(size / (n + 4)));
+    const dim = cell * (n + 4);
+    const canvas = document.createElement('canvas');
+    canvas.width = dim; canvas.height = dim;
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, dim, dim);
+    ctx.fillStyle = '#000';
+    for (let r = 0; r < n; r++) for (let c = 0; c < n; c++) {
+      if (qr.isDark(r, c)) ctx.fillRect((c + 2) * cell, (r + 2) * cell, cell, cell);
+    }
+    return canvas.toDataURL('image/png');
+  } catch { return ''; }
+}
+
+/* Scan QR => open item: handled in scan flow via BIBLIO: prefix */
+function tryHandleQrCode(txt) {
+  if (txt && txt.startsWith('BIBLIO:')) {
+    const id = txt.slice(7).trim();
+    const it = store.findById(id);
+    if (it) { openDetail(it.id); return true; }
+    toast('QR inconnu de cette bibliothèque.');
+    return true;
+  }
+  return false;
+}
+
+/* Etiquettes QR (50x30 avec QR + titre + emplacement) */
+$('#btnQrLabels').addEventListener('click', () => {
+  const items = store.items.filter((i) => !i.wishlist && !i.disposedHow);
+  if (!items.length) { toast('Aucun ouvrage.'); return; }
+  const labels = items.slice(0, 300).map((i) => {
+    const qr = qrDataUrl('BIBLIO:' + i.id, 120);
+    return `<div class="qr-label">
+      <img src="${qr}" alt="">
+      <div class="qr-txt">
+        <div class="qr-title">${esc((i.title || '').slice(0, 30))}</div>
+        <div class="qr-loc">${esc(i.location || i.isbn || '')}</div>
+      </div>
+    </div>`;
+  }).join('');
+  const win = window.open('', '_blank');
+  if (!win) { toast('Autorisez les pop-ups.', 3000); return; }
+  win.document.write(`<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Étiquettes QR — Ma Bibliothèque</title>
+  <style>
+    @page { margin: 8mm; }
+    body { font-family: "Segoe UI", sans-serif; margin: 0; padding: 8px; }
+    .sheet { display: flex; flex-wrap: wrap; gap: 3mm; }
+    .qr-label { width: 64mm; height: 25mm; border: 1px dashed #999; display: flex; align-items: center; gap: 2mm; padding: 1.5mm; page-break-inside: avoid; }
+    .qr-label img { height: 20mm; width: 20mm; }
+    .qr-txt { flex: 1; overflow: hidden; }
+    .qr-title { font-size: 7.5pt; font-weight: 600; }
+    .qr-loc { font-size: 6.5pt; color: #555; margin-top: 1mm; }
+    .no-print { font-size: 8pt; color: #777; margin-bottom: 8px; }
+    @media print { .no-print { display: none; } }
+  </style></head><body>
+  <p class="no-print">Étiquettes QR d'exemplaires (64 × 25 mm). Scannez un QR avec l'app (📷 Scanner) → la fiche s'ouvre instantanément.</p>
+  <div class="sheet">${labels}</div>
+  <script>window.onload = () => setTimeout(() => window.print(), 400);<\/script>
+  </body></html>`);
+  win.document.close();
+});
+
+/* ---------- Export UNIMARC (compatibilite catalogues pro) ---------- */
+function pad(s, n) { return String(s).padStart(n, '0'); }
+function unimarcField(tag, value) {
+  if (!value) return '';
+  const ind1 = ' ', ind2 = ' ';
+  return tag + ind1 + ind2 + String(value) + '\x1e';
+}
+function itemToUnimarc(it) {
+  const f200 = '200  \x1fa' + (it.title || 'Sans titre') + (it.authors.length ? '\x1ff' + it.authors.join(', ') : '');
+  const f210 = (it.publisher || it.publishedDate) ? '210  ' + (it.publisher ? '\x1fc' + it.publisher : '') + (it.publishedDate ? '\x1fd' + it.publishedDate : '') : '';
+  const f215 = it.pageCount ? '215  \x1fa' + it.pageCount + ' p.' : '';
+  const f010 = it.isbn ? '010  \x1fa' + (it.isbn.length === 10 ? it.isbn : it.isbn.replace(/(\d{3})(\d{1,5})(\d{1,3})(\d)/, '$1-$2-$3-$4')) : '';
+  const f690 = it.genre ? '690  \x1fa' + it.genre : '';
+  const f330 = it.summary ? '330  \x1fa' + it.summary.replace(/\n+/g, ' ').slice(0, 900) : '';
+  const f910 = it.location ? '910  \x1fa' + it.location : '';
+  return '\x1d' + (f010 ? f010 + '\x1f' : '') + f200 + '\x1e' + (f210 ? f210 + '\x1e' : '') + (f215 ? f215 + '\x1e' : '') + (f330 ? f330 + '\x1e' : '') + (f690 ? f690 + '\x1e' : '') + (f910 ? f910 + '\x1e' : '');
+}
+
+$('#btnUnimarc').addEventListener('click', () => {
+  const items = store.items.filter((i) => !i.wishlist && !i.disposedHow);
+  if (!items.length) { toast('Aucun ouvrage.'); return; }
+  // Format ISO 2709 (structure UNIMARC echange)
+  let out = '';
+  for (const it of items) {
+    const base = itemToUnimarc(it);
+    if (!base) continue;
+    const dirLen = 24 + ((base.match(/\x1e/g) || []).length * 12);
+    const total = 24 + dirLen + 1 + base.length;
+    const leader = pad(total, 5) + 'nam a22     450 ' + pad(base.length, 5);
+    out += leader + base + '\n';
+  }
+  const win = window.open('', '_blank');
+  if (!win) { toast('Autorisez les pop-ups.', 3000); return; }
+  win.document.write('<!DOCTYPE html><html lang="fr"><head><meta charset="UTF-8"><title>Export UNIMARC</title></head><body style="font-family:monospace;white-space:pre-wrap;font-size:11px">' + esc(out).replace(/\x1e/g, '$\n').replace(/\x1f/g, ' | ') + '</body></html>');
+  win.document.close();
+  const blob = new Blob([out], { type: 'text/plain' });
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `bibliotheque-unimarc-${stamp()}.txt`;
+  a.click();
+  toast(`Export UNIMARC : ${items.length} notices (compatible Koha/PMB).`, 4000);
+});
+
+/* ---------- Reservations ---------- */
+/* champ 'reserved' dans la fiche: { to, date } — ajoute au bloc pret */
+function reservationField(it) {
+  const cur = it.reserved || null;
+  const html = field('Réservation (ce livre est mis de côté pour…)', `<input type="text" name="reservedTo" placeholder="ex. Claire — quand il revient" value="${cur ? esc(cur.to) : ''}">`);
+  return html;
+}
+
+/* ---------- Catalogue invite (OPAC local protege par PIN) ---------- */
+let guestMode = { active: false, pin: '' };
+try { guestMode.pin = JSON.parse(localStorage.getItem('biblio.pin.v1') || '""') || ''; } catch {}
+
+function renderGuestCatalog() {
+  const v = $('#viewGuest');
+  if (!v) return;
+  const q = ($('#guestSearch') && $('#guestSearch').value || '').toLowerCase();
+  let items = store.items.filter((i) => !i.wishlist && !i.disposedHow);
+  if (q) items = items.filter((i) => [i.title, i.authors.join(', '), i.isbn, i.series].join(' ').toLowerCase().includes(q));
+  items = items.slice(0, 120);
+  v.innerHTML = `
+    <h2>👁️ Catalogue en consultation</h2>
+    <p class="hint">Mode lecture seule : ${(guestMode.pin ? 'protégé par PIN' : 'sans PIN — définissez-en un (☰ → 👁️)')}. Fermez la page ou rechargez l'app pour sortir.</p>
+    <input type="search" id="guestSearch" placeholder="Rechercher (titre, auteur, ISBN…)" value="${esc(q)}">
+    <div class="grid" style="margin-top:14px">
+      ${items.map((i) => `<div class="card"><div class="meta" style="padding:10px 12px">
+        <h3>${esc(i.title)}</h3>
+        <p>${esc(i.authors.join(', ') || '')}</p>
+        ${i.loan ? '<p class="hint">📤 actuellement prêté à ' + esc(i.loan.to) + '</p>' : ''}
+        ${i.location ? '<p class="hint">📍 ' + esc(i.location) + '</p>' : ''}
+      </div></div>`).join('')}
+    </div>`;
+  const gs = $('#guestSearch');
+  if (gs) gs.addEventListener('input', renderGuestCatalog);
+}
+
+$('#btnGuest').addEventListener('click', () => {
+  if (guestMode.pin) {
+    const entry = prompt('Code PIN du catalogue invité :');
+    if (entry === null) return;
+    if (entry !== guestMode.pin) { toast('PIN incorrect.'); return; }
+  } else if (confirm('Aucun PIN défini. Définir un code PIN maintenant ? (Sinon, le catalogue sera accessible sans protection)')) {
+    const pin = prompt('Choisissez un code PIN (chiffres) :');
+    if (pin) { guestMode.pin = pin; localStorage.setItem('biblio.pin.v1', JSON.stringify(pin)); }
+  }
+  document.querySelectorAll('main > section').forEach((s) => s.classList.add('hidden'));
+  $('#viewGuest').classList.remove('hidden');
+  $('#mainNav').classList.add('hidden');
+  $('#guestBtns').classList.remove('hidden');
+  renderGuestCatalog();
+});
+
+$('#btnExitGuest').addEventListener('click', () => {
+  $('#guestBtns').classList.add('hidden');
+  $('#viewGuest').classList.add('hidden');
+  $('#viewGrid').classList.remove('hidden');
+  renderAll();
+});

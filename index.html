@@ -54,6 +54,9 @@
   <button id="btnAiCfg" class="nav-btn">🤖 IA (recherche & fiches)</button>
   <button id="btnKeysCfg" class="nav-btn">🔑 Clés API (sources)</button>
   <button id="btnShelfPhoto" class="nav-btn">📷 Photo d'étagère (IA)</button>
+  <button id="btnUnimarc" class="nav-btn">📤 Export UNIMARC (pro)</button>
+  <button id="btnQrLabels" class="nav-btn">🏷️ Étiquettes QR</button>
+  <button id="btnGuest" class="nav-btn">👁️ Catalogue invité</button>
 </nav>
 
 <main role="main">
@@ -174,6 +177,8 @@
     <h3>📚 En cours</h3>
     <div id="inprogressBody"></div>
   </section>
+
+  <section id="viewGuest" class="hidden"></section>
 
   <section id="viewStats" class="hidden"></section>
 </section>
@@ -324,10 +329,12 @@
   </div>
 </div>
 
+<div id="guestBtns" class="hidden" style="position:fixed;top:12px;right:12px;z-index:60"><button id="btnExitGuest" class="btn btn-primary small">Quitter le catalogue invité</button></div>
 <div id="toast" class="toast hidden"></div>
 <input type="file" id="importFile" accept="application/json" class="hidden">
 <input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
 <script src="vendor/zxing.min.js"></script>
+<script src="vendor/qrcode.js"></script>
 <script src="app.js"></script>
 </body>
 </html>
