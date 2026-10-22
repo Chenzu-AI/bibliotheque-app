@@ -1002,6 +1002,18 @@ function openDetail(id) {
     <div class="form-row">
       ${field(t('f_cover'), `<input type="text" name="cover" value="${esc(it.cover || '')}">`)}
       ${field(t('f_coverback'), `<input type="text" name="coverBack" value="${esc(it.coverBack || '')}">`)}
+      <div class="form-row">
+        <div>
+          <label>Importer une image depuis l'appareil (contourne les liens bloqués — image stockée dans la fiche, à vie)</label>
+          <div class="row">
+            <input type="file" id="importCoverFront" accept="image/*" class="hidden">
+            <button type="button" class="btn small" id="btnImportCoverFront">📷 Couverture devant…</button>
+            <input type="file" id="importCoverBack" accept="image/*" class="hidden">
+            <button type="button" class="btn small" id="btnImportCoverBack">📷 Dos…</button>
+          </div>
+          <p class="hint" id="importCoverStatus"></p>
+        </div>
+      </div>
       <div class="hint">
         💡 Pour trouver les images (les 4 photos du livre : recto, dos, 4ᵉ de couverture) :
         <a target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/livre/${esc(it.isbn)}">fiche Chasse aux livres</a>
@@ -1019,6 +1031,8 @@ function openDetail(id) {
   `;
   $('#detailModal').classList.remove('hidden');
   addLogToDetail(it);
+  wireCoverImport('importCoverFront', 'btnImportCoverFront', 'cover');
+  wireCoverImport('importCoverBack', 'btnImportCoverBack', 'coverBack');
   const btnAiFill = $('#btnAiFill');
   if (btnAiFill) btnAiFill.addEventListener('click', async () => {
     if (!aiCfg.key && aiCfg.provider !== 'ollama') { toast('Configurez d’abord l’IA dans le menu 🤖 IA.', 4000); return; }
@@ -2910,3 +2924,49 @@ $('#btnLang').addEventListener('click', () => {
   renderAll();
   toast(LANG === 'fr' ? 'Langue : Français' : 'Language: English');
 });
+
+/* ---------- Import local d'images de couverture (contourne le hotlinking bloque) ---------- */
+function compressImageFile(file, maxDim, cb) {
+  const fr = new FileReader();
+  fr.onload = () => {
+    const img = new Image();
+    img.onload = () => {
+      let { width, height } = img;
+      const scale = Math.min(1, maxDim / Math.max(width, height));
+      width = Math.round(width * scale);
+      height = Math.round(height * scale);
+      const canvas = document.createElement('canvas');
+      canvas.width = width; canvas.height = height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0, width, height);
+      let dataUrl;
+      try { dataUrl = canvas.toDataURL('image/jpeg', 0.82); } catch { dataUrl = fr.result; }
+      cb(dataUrl, width, height);
+    };
+    img.onerror = () => cb(fr.result, 0, 0);
+    img.src = fr.result;
+  };
+  fr.readAsDataURL(file);
+}
+
+function wireCoverImport(fileInputId, btnId, targetFieldName) {
+  const input = document.getElementById(fileInputId);
+  const btn = document.getElementById(btnId);
+  if (!input || !btn) return;
+  btn.addEventListener('click', () => input.click());
+  input.addEventListener('change', () => {
+    const file = input.files && input.files[0];
+    input.value = '';
+    if (!file) return;
+    const status = document.getElementById('importCoverStatus');
+    if (status) status.textContent = 'Compression de l\u2019image\u2026';
+    compressImageFile(file, 600, (dataUrl, w, h) => {
+      const fieldEl = document.getElementById('detailForm').querySelector(`[name="${targetFieldName}"]`);
+      if (fieldEl) fieldEl.value = dataUrl;
+      if (status) status.textContent = `Image int\u00e9gr\u00e9e (${w}\u00d7${h} px) \u2014 cliquez \u00ab Enregistrer \u00bb pour la fixer dans la fiche.`;
+    });
+  });
+}
+
+wireCoverImport('importCoverFront', 'btnImportCoverFront', 'cover');
+wireCoverImport('importCoverBack', 'btnImportCoverBack', 'coverBack');
