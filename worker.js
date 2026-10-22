@@ -50,11 +50,19 @@ async function fetchFnac(isbn) {
     let date = '';
     const dateMatch = html.match(/Parution\s*<[^>]*>\s*(\d{2}\/\d{2}\/(\d{4}))|Parution (\d{2}\/\d{2}\/(\d{4}))/);
     if (dateMatch) date = ((dateMatch[2] || dateMatch[4])) || '';
+    let pages = null;
+    const pagesMatch = html.match(/(\d{2,4})\s*pages/);
+    if (pagesMatch) pages = parseInt(pagesMatch[1], 10);
     let summary = '';
     const sumMatch = html.match(/Lire la suite"\s*([^"]{40,600})/) || html.match(/class="[^"]*Article-description[^"]*"[^>]*>([^<]{40,600})</);
     if (sumMatch) summary = sumMatch[1].replace(/\s+/g, ' ').trim();
     if (!title) return null;
-    return { source: 'fnac', title, authors: authors.slice(0, 4), publisher, date, summary, cover: '' };
+    // Couverture: miniature Fnac embarquee dans les resultats
+    let cover = '';
+    const coverRe = new RegExp('https://[^"\']+978' + isbn.replace(/[^0-9]/g, '') + '[^"\']*\.jpg', 'i');
+    const coverMatch = html.match(coverRe) || html.match(new RegExp('https://[^"\s]+\.jpg', 'i'));
+    if (coverMatch) cover = coverMatch[0];
+    return { source: 'fnac', title, authors: authors.slice(0, 4), publisher, date, summary, cover, pages };
   } catch { return null; }
 }
 
