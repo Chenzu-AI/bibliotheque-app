@@ -192,11 +192,16 @@ async function fetchGoogleBooks(isbn) {
 
 async function fetchCoverFallback(isbn) {
   if (!isbn) return '';
-  try {
-    const url = `https://covers.openlibrary.org/b/isbn/${isbn}-L.jpg?default=false`;
-    const r = await fetchWithTimeout(url, 9000);
-    if (r.ok) return url.replace('&default=false', '');
-  } catch {}
+  const variants = [isbn];
+  const alt = isbn.length === 13 ? isbn13to10(isbn) : isbn10to13(isbn);
+  if (alt) variants.push(alt);
+  for (const v of variants) {
+    try {
+      const url = `https://covers.openlibrary.org/b/isbn/${v}-L.jpg?default=false`;
+      const r = await fetchWithTimeout(url, 9000);
+      if (r.ok) return url.replace('&default=false', '');
+    } catch {}
+  }
   return '';
 }
 
