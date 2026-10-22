@@ -19,79 +19,80 @@
   <div class="brand">
     <img src="icons/icon.svg" alt="" class="logo">
     <div class="brand-text">
-      <h1>Ma Bibliothèque</h1>
+      <h1 data-i18n="app_title">Ma Bibliothèque</h1>
       <span class="brand-by">Création AlphaPrim</span>
     </div>
   </div>
   <div class="topbar-actions">
     <span id="countBadge" class="badge" title="Nombre d'ouvrages"></span>
     <button id="btnInstall" class="btn btn-install hidden" title="Installer l'application">⬇️ Installer</button>
-    <button id="btnScan" class="btn btn-primary" title="Scanner un code-barres">📷 Scanner</button>
-    <button id="btnHelp" class="btn btn-ghost" title="Centre d'aide" aria-label="Centre d'aide">❓</button>
+    <button id="btnScan" class="btn btn-primary" title="Scanner un code-barres" aria-label="Scanner un code-barres" data-i18n="scan">📷 Scanner</button>
+    <button id="btnLang" class="btn btn-ghost" title="FR / EN">🌐</button>
+    <button id="btnHelp" class="btn btn-ghost" title="Centre d'aide" aria-label="Centre d'aide" data-i18n="help">❓</button>
     <button id="btnMenu" class="btn btn-ghost" title="Menu" aria-label="Menu principal">☰</button>
   </div>
 </header>
 
 <nav id="mainNav" class="nav hidden">
-  <button data-view="grid" class="nav-btn active">📚 Collection</button>
-  <button data-view="groups" class="nav-btn">👥 Par série / auteur</button>
-  <button data-view="loans" class="nav-btn">📤 Prêts</button>
-  <button data-view="lists" class="nav-btn">📋 Mes listes</button>
-  <button data-view="reading" class="nav-btn">📖 Ma lecture</button>
-  <button data-view="shelves" class="nav-btn">🗂️ Étagères</button>
-  <button data-view="inventory" class="nav-btn">🔎 Inventaire d'étagère</button>
-  <button data-view="stats" class="nav-btn">📊 Statistiques</button>
-  <button id="btnImport" class="nav-btn">📥 Importer JSON</button>
-  <button id="btnImportCsv" class="nav-btn">📥 Importer CSV</button>
-  <button id="btnExportJson" class="nav-btn">💾 Export JSON</button>
-  <button id="btnExportCsv" class="nav-btn">📄 Export CSV</button>
-  <button id="btnExportHtml" class="nav-btn">🖨️ Export HTML</button>
-  <button id="btnExportMd" class="nav-btn">📝 Export Markdown</button>
+  <button data-view="grid" class="nav-btn active" data-i18n="nav_collection">📚 Collection</button>
+  <button data-view="groups" class="nav-btn" data-i18n="nav_groups">👥 Par série / auteur</button>
+  <button data-view="loans" class="nav-btn" data-i18n="nav_loans">📤 Prêts</button>
+  <button data-view="lists" class="nav-btn" data-i18n="nav_lists">📋 Mes listes</button>
+  <button data-view="reading" class="nav-btn" data-i18n="nav_reading">📖 Ma lecture</button>
+  <button data-view="shelves" class="nav-btn" data-i18n="nav_shelves">🗂️ Étagères</button>
+  <button data-view="inventory" class="nav-btn" data-i18n="nav_inventory">🔎 Inventaire d'étagère</button>
+  <button data-view="stats" class="nav-btn" data-i18n="nav_stats">📊 Statistiques</button>
+  <button id="btnImport" class="nav-btn" data-i18n="nav_import_json">📥 Importer JSON</button>
+  <button id="btnImportCsv" class="nav-btn" data-i18n="nav_import_csv">📥 Importer CSV</button>
+  <button id="btnExportJson" class="nav-btn" data-i18n="nav_export_json">💾 Export JSON</button>
+  <button id="btnExportCsv" class="nav-btn" data-i18n="nav_export_csv">📄 Export CSV</button>
+  <button id="btnExportHtml" class="nav-btn" data-i18n="nav_export_html">🖨️ Export HTML</button>
+  <button id="btnExportMd" class="nav-btn" data-i18n="nav_export_md">📝 Export Markdown</button>
   <button id="btnPrintLabels" class="nav-btn">🏷️ Étiquettes de cote</button>
-  <button id="btnBackupNow" class="nav-btn">💾 Sauvegarde immédiate</button>
-  <button id="btnBackupCfg" class="nav-btn">⚙️ Sauvegarde auto (<span id="bkCfgLbl">10</span> scans)</button>
-  <button id="btnCoversCfg" class="nav-btn">🖼️ Couvertures embarquées</button>
-  <button id="btnAiCfg" class="nav-btn">🤖 IA (recherche & fiches)</button>
-  <button id="btnKeysCfg" class="nav-btn">🔑 Clés API (sources)</button>
-  <button id="btnShelfPhoto" class="nav-btn">📷 Photo d'étagère (IA)</button>
-  <button id="btnUnimarc" class="nav-btn">📤 Export UNIMARC (pro)</button>
-  <button id="btnQrLabels" class="nav-btn">🏷️ Étiquettes QR</button>
-  <button id="btnGuest" class="nav-btn">👁️ Catalogue invité</button>
+  <button id="btnBackupNow" class="nav-btn" data-i18n="nav_backup_now">💾 Sauvegarde immédiate</button>
+  <button id="btnBackupCfg" class="nav-btn" data-i18n="nav_backup_cfg">⚙️ Sauvegarde auto (<span id="bkCfgLbl">10</span> scans)</button>
+  <button id="btnCoversCfg" class="nav-btn" data-i18n="nav_covers">🖼️ Couvertures embarquées</button>
+  <button id="btnAiCfg" class="nav-btn" data-i18n="nav_ai">🤖 IA (recherche & fiches)</button>
+  <button id="btnKeysCfg" class="nav-btn" data-i18n="nav_keys">🔑 Clés API (sources)</button>
+  <button id="btnShelfPhoto" class="nav-btn" data-i18n="nav_shelf_photo">📷 Photo d'étagère (IA)</button>
+  <button id="btnUnimarc" class="nav-btn" data-i18n="nav_unimarc">📤 Export UNIMARC (pro)</button>
+  <button id="btnQrLabels" class="nav-btn" data-i18n="nav_qr_labels">🏷️ Étiquettes QR</button>
+  <button id="btnGuest" class="nav-btn" data-i18n="nav_guest">👁️ Catalogue invité</button>
 </nav>
 
 <main role="main">
   <section id="viewGrid">
     <div class="toolbar">
-      <input type="search" id="searchInput" placeholder="Rechercher (titre, auteur, ISBN, série, tag…)">
+      <input type="search" id="searchInput" data-i18n="search_placeholder" placeholder="Rechercher (titre, auteur, ISBN, série, tag…)">
       <select id="sortSelect">
-        <option value="added">Ajout (récent)</option>
-        <option value="title">Titre A→Z</option>
-        <option value="author">Auteur A→Z</option>
-        <option value="rating">Note décroissante</option>
-        <option value="year">Année de publication</option>
-        <option value="dewey">Cote Dewey / genre</option>
+        <option value="added" data-i18n="sort_added">Ajout (récent)</option>
+        <option value="title" data-i18n="sort_title">Titre A→Z</option>
+        <option value="author" data-i18n="sort_author">Auteur A→Z</option>
+        <option value="rating" data-i18n="sort_rating">Note décroissante</option>
+        <option value="year" data-i18n="sort_year">Année de publication</option>
+        <option value="dewey" data-i18n="sort_dewey">Cote Dewey / genre</option>
       </select>
-      <select id="shelfFilter"><option value="">Toutes les étagères</option></select>
+      <select id="shelfFilter"><option value="" data-i18n="all_shelves">Toutes les étagères</option></select>
       <select id="statusFilter">
-        <option value="">Tous les statuts</option>
-        <option value="unread">À lire</option>
-        <option value="reading">En lecture</option>
-        <option value="read">Lu</option>
-        <option value="wish">🛒 Souhaits (à acheter)</option>
-        <option value="loaned">📤 Prêtés</option>
+        <option value="" data-i18n="all_status">Tous les statuts</option>
+        <option value="unread" data-i18n="st_unread">À lire</option>
+        <option value="reading" data-i18n="st_reading">En lecture</option>
+        <option value="read" data-i18n="st_read">Lu</option>
+        <option value="wish" data-i18n="st_wish">🛒 Souhaits (à acheter)</option>
+        <option value="loaned" data-i18n="st_loaned">📤 Prêtés</option>
       </select>
       <label class="chk"><input type="checkbox" id="favOnly"> ★ Favoris</label>
-      <button id="btnSaveSearch" class="btn small">💾 Sauver cette recherche</button>
-      <button id="btnAiOpen" class="btn small">🤖 Recherche IA</button>
-      <button id="btnBulkMode" class="btn small">☑ Sélection multiple</button>
+      <button id="btnSaveSearch" class="btn small" data-i18n="save_search">💾 Sauver cette recherche</button>
+      <button id="btnAiOpen" class="btn small" data-i18n="ai_search">🤖 Recherche IA</button>
+      <button id="btnBulkMode" class="btn small" data-i18n="bulk_mode">☑ Sélection multiple</button>
     </div>
     <div id="bulkBar" class="toolbar hidden">
       <span id="bulkCount" class="badge"></span>
       <select id="bulkStatus">
         <option value="">— Statut —</option>
-        <option value="unread">À lire</option>
-        <option value="reading">En lecture</option>
-        <option value="read">Lu</option>
+        <option value="unread" data-i18n="st_unread">À lire</option>
+        <option value="reading" data-i18n="st_reading">En lecture</option>
+        <option value="read" data-i18n="st_read">Lu</option>
         <option value="wish">Souhait</option>
       </select>
       <select id="bulkShelfSelect"><option value="">— Étagère —</option></select>
@@ -103,7 +104,7 @@
     <div id="grid" class="grid"></div>
     <div class="pager">
       <span id="pageInfo" class="hint"></span>
-      <button id="btnMore" class="btn hidden">Afficher plus</button>
+      <button id="btnMore" class="btn hidden" data-i18n="more">Afficher plus</button>
     </div>
     <p id="emptyMsg" class="empty hidden">Aucun ouvrage pour le moment.<br>Appuyez sur « Scanner » ou ajoutez un ISBN ci-dessous.</p>
   </section>
@@ -185,11 +186,11 @@
 
 <div class="manual-add" id="manualAddBar">
   <button class="manual-add-more" id="btnMoreActions" title="Actions supplémentaires" aria-label="Actions supplémentaires">⋯</button>
-  <input type="text" id="manualIsbn" inputmode="numeric" placeholder="Saisir un ISBN (10 ou 13 chiffres)">
-  <button id="btnManualAdd" class="btn">➕ Ajouter</button>
-  <button id="btnAddNoIsbn" class="btn btn-extra" title="Créer une fiche vierge, sans ISBN">➕ Sans ISBN</button>
-  <button id="btnShelveMode" class="btn btn-extra" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère">📦 Mode rangement</button>
-  <button id="btnInvQuick" class="btn btn-extra" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement">🔎 Inventaire</button>
+  <input type="text" id="manualIsbn" inputmode="numeric" data-i18n="isbn_placeholder" placeholder="Saisir un ISBN (10 ou 13 chiffres)">
+  <button id="btnManualAdd" class="btn" data-i18n="add">➕ Ajouter</button>
+  <button id="btnAddNoIsbn" class="btn btn-extra" title="Créer une fiche vierge, sans ISBN" data-i18n="add_no_isbn">➕ Sans ISBN</button>
+  <button id="btnShelveMode" class="btn btn-extra" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère" data-i18n="shelve_mode">📦 Mode rangement</button>
+  <button id="btnInvQuick" class="btn btn-extra" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement" data-i18n="inv_quick">🔎 Inventaire</button>
 </div>
 
 <!-- Scanner modal -->
@@ -383,6 +384,7 @@
 <input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
 <script src="vendor/zxing.min.js"></script>
 <script src="vendor/qrcode.js"></script>
+<script src="i18n.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

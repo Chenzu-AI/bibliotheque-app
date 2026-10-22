@@ -1621,6 +1621,7 @@ $('#btnCoversCfg').addEventListener('click', async () => {
 });
 
 /* ---------- Init ---------- */
+if (typeof applyI18n === 'function') applyI18n();
 store.init().then(async () => { await coversInit(); renderAll(); updateShelveUI(); lateLoansReminder(); });
 if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(() => {});
 
@@ -2901,4 +2902,11 @@ $('#btnExitGuest').addEventListener('click', () => {
   $('#viewGuest').classList.add('hidden');
   $('#viewGrid').classList.remove('hidden');
   renderAll();
+});
+
+/* ---------- Language toggle ---------- */
+$('#btnLang').addEventListener('click', () => {
+  setLang(LANG === 'fr' ? 'en' : 'fr');
+  renderAll();
+  toast(LANG === 'fr' ? 'Langue : Français' : 'Language: English');
 });
