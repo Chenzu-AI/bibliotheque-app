@@ -1007,9 +1007,9 @@ function openDetail(id) {
           <label>Importer une image depuis l'appareil (contourne les liens bloqués — image stockée dans la fiche, à vie)</label>
           <div class="row">
             <input type="file" id="importCoverFront" accept="image/*" class="hidden">
-            <button type="button" class="btn small" id="btnImportCoverFront">📷 Couverture devant…</button>
+            <label for="importCoverFront" class="btn small" style="cursor:pointer">📷 Couverture devant…</label>
             <input type="file" id="importCoverBack" accept="image/*" class="hidden">
-            <button type="button" class="btn small" id="btnImportCoverBack">📷 Dos…</button>
+            <label for="importCoverBack" class="btn small" style="cursor:pointer">📷 Dos…</label>
           </div>
           <p class="hint" id="importCoverStatus"></p>
         </div>
@@ -1031,8 +1031,8 @@ function openDetail(id) {
   `;
   $('#detailModal').classList.remove('hidden');
   addLogToDetail(it);
-  wireCoverImport('importCoverFront', 'btnImportCoverFront', 'cover');
-  wireCoverImport('importCoverBack', 'btnImportCoverBack', 'coverBack');
+  wireCoverImport('importCoverFront', 'cover');
+  wireCoverImport('importCoverBack', 'coverBack');
   const btnAiFill = $('#btnAiFill');
   if (btnAiFill) btnAiFill.addEventListener('click', async () => {
     if (!aiCfg.key && aiCfg.provider !== 'ollama') { toast('Configurez d’abord l’IA dans le menu 🤖 IA.', 4000); return; }
@@ -2949,11 +2949,9 @@ function compressImageFile(file, maxDim, cb) {
   fr.readAsDataURL(file);
 }
 
-function wireCoverImport(fileInputId, btnId, targetFieldName) {
+function wireCoverImport(fileInputId, targetFieldName) {
   const input = document.getElementById(fileInputId);
-  const btn = document.getElementById(btnId);
-  if (!input || !btn) return;
-  btn.addEventListener('click', () => input.click());
+  if (!input) return;
   input.addEventListener('change', () => {
     const file = input.files && input.files[0];
     input.value = '';
@@ -2968,5 +2966,5 @@ function wireCoverImport(fileInputId, btnId, targetFieldName) {
   });
 }
 
-wireCoverImport('importCoverFront', 'btnImportCoverFront', 'cover');
-wireCoverImport('importCoverBack', 'btnImportCoverBack', 'coverBack');
+wireCoverImport('importCoverFront', 'cover');
+wireCoverImport('importCoverBack', 'coverBack');
