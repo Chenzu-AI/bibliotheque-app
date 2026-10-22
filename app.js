@@ -2313,5 +2313,22 @@ $('#btnDiagIsbn').addEventListener('click', async () => {
     fetchCoverFallback(isbn).then((r) => lines.push(r ? '✅ Couvertures Open Library : image trouvée' : '❌ Couvertures : aucune image pour cet ISBN')).catch(() => lines.push('❌ Couvertures : erreur réseau')),
   ];
   await Promise.all(jobs);
-  out.innerHTML = lines.join('<br>') + '<br><b>Si tout est ❌ : le livre est absent des catalogues en ligne (édition très récente/confidentielle) — complétez la fiche à la main ou via 🤖 IA.</b>';
+  // Deuxieme vague: ISBN-10 converti + relais FR
+  const alt = isbn.length === 13 ? isbn13to10(isbn) : isbn10to13(isbn);
+  if (alt) {
+    const jobs2 = [
+      fetchGoogleBooks(alt).then((r) => lines.push(r ? `✅ Google Books (ISBN-10 ${alt}) : « ${r.title} »` : `❌ Google Books (ISBN-10 ${alt}) : rien`)).catch(() => lines.push(`❌ Google Books (ISBN-10) : erreur réseau`)),
+      fetchOpenLibrary(alt).then((r) => lines.push(r ? `✅ Open Library (ISBN-10 ${alt}) : « ${r.title} »` : `❌ Open Library (ISBN-10 ${alt}) : rien`)).catch(() => lines.push(`❌ Open Library (ISBN-10) : erreur réseau`)),
+    ];
+    await Promise.all(jobs2);
+  }
+  if (apiKeys.relay) {
+    try {
+      const rr = await fetchRelay(isbn);
+      lines.push(rr ? `✅ Relais FR (Fnac/BnF) : « ${rr.title} » — ${rr.publisher}` : '❌ Relais FR : rien (relais configuré mais livre introuvable)');
+    } catch { lines.push("❌ Relais FR : erreur (vérifiez l'URL du worker)"); }
+  } else {
+    lines.push('ℹ️ Relais FR non configuré (☰ → 🔑 → champ URL du relais) — utile pour les nouveautés françaises');
+  }
+  out.innerHTML = lines.join('<br>') + '<br><b>Si tout est ❌ : le livre est absent des catalogues en ligne (édition très récente/confidentielle) — complétez la fiche à la main ou via 🤖 IA, ou attendez que les bases le cataloguent (jours/semaines).</b>';
 });
