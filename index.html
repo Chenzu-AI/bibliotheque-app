@@ -339,7 +339,7 @@
       <h2>❓ Centre d'aide</h2>
       <button id="btnCloseHelp" class="btn btn-ghost" aria-label="Fermer">✕</button>
     </div>
-    <div class="help-body">
+    <div class="help-body help-fr">
       <details open><summary>🚀 Démarrer (5 min)</summary>
         <p>1. <b>Ajouter un livre</b> : bouton 📷 Scanner (téléphone) ou ISBN dans la barre du bas (PC / douchette USB). Cliquez une couverture pour tout modifier.</p>
         <p>2. <b>Ranger</b> : bouton 📦 Mode rangement (⋯ sur mobile) → indiquez « Meuble / Étagère » → scannez toute l'étagère : rangement automatique.</p>
@@ -374,8 +374,44 @@
       <details><summary>📄 Documentation complète</summary>
         <p>Fiches détaillées : <a href="https://github.com/Chenzu-AI/Bibliotheque/tree/main/docs" target="_blank" rel="noopener">github.com/Chenzu-AI/Bibliotheque/docs</a></p>
       </details>
-      <p class="hint" style="margin-top:10px">Ma Bibliothèque — Création AlphaPrim · version <span id="appVersion"></span></p>
-    </div>
+      <p class="hint" style="margin-top:10px">Ma Bibliothèque — Création AlphaPrim · version <span id="appVersion"></span></p></div>
+    <div class="help-body help-en" style="display:none">
+      <details open><summary>🚀 Getting started (5 min)</summary>
+        <p>1. <b>Add a book</b>: tap 📷 Scan (phone) or enter an ISBN in the bottom bar (PC / USB scanner). Tap a cover to edit everything.</p>
+        <p>2. <b>Shelve</b>: tap 📦 Shelving mode (⋯ on mobile) → enter “Bookcase / Shelf” → scan the whole shelf: automatic shelving.</p>
+        <p>3. <b>Back up</b>: ☰ → 💾 Backup now (JSON). Export once a month.</p>
+      </details>
+      <details><summary>📷 Adding books — all methods</summary>
+        <p>• <b>Camera scan</b> (+ ⚡ burst mode) · <b>USB scanner</b> · <b>➕ No ISBN</b></p>
+        <p>• <b>Shelf photo AI</b> (☰ → 📷): the AI reads spines row by row — requires a vision AI (☰ → 🤖)</p>
+        <p>• <b>Import</b>: ☰ → 📥 JSON (merge) or CSV (Libib/Excel)</p>
+      </details>
+      <details><summary>🤖 Recognition — optimize</summary>
+        <p>• <b>Google Books key</b> (☰ → 🔑): summaries + covers, 1000 free queries/day</p>
+        <p>• <b>BnF/Fnac relay</b> (☰ → 🔑): essential for pre-2010 French books — deploy <code>worker.js</code> on Cloudflare Workers (free)</p>
+        <p>• <b>ISBN diagnostic</b> (☰ → 🔑 → 🔍): see what each source returns</p>
+      </details>
+      <details><summary>📚 Organize</summary>
+        <p>• Virtual shelves, tags, favorites ♥, wishlist 🛒 · <b>Series</b> (☰ → 👥): missing volumes, scatter detection</p>
+        <p>• Dewey, collection, format, edition type (1st, collector, rare), list price · full-text search</p>
+      </details>
+      <details><summary>📤 Loans & inventory</summary>
+        <p>• <b>Loan</b>: record → “Loaned to…” + due date. Reminders on launch · <b>Reservations</b> (“Reserved for”)</p>
+        <p>• <b>Shelf inventory</b> (☰ → 🔎): missing / misplaced / unknown + history</p>
+      </details>
+      <details><summary>📖 My reading</summary>
+        <p>Annual goal 🎯 · “read next” queue · 🎲 random pick · progress (current page) · dated journal</p>
+      </details>
+      <details><summary>💾 Exports & pro</summary>
+        <p>• JSON / CSV / HTML / Markdown · <b>🏷️ spine labels</b> and <b>🏷️ QR labels</b> (scan QR = record)</p>
+        <p>• <b>📤 UNIMARC</b>: export compatible with Koha/PMB (professional catalogs)</p>
+        <p>• <b>👁️ Guest catalog</b>: PIN-protected read-only view to show your collection</p>
+      </details>
+      <details><summary>📄 Full documentation</summary>
+        <p>Detailed guides: <a href="https://github.com/Chenzu-AI/Bibliotheque/tree/main/docs" target="_blank" rel="noopener">github.com/Chenzu-AI/Bibliotheque/docs</a></p>
+      </details>
+      <p class="hint" style="margin-top:10px">My Library — by AlphaPrim · version <span id="appVersion"></span></p></div>
+  </div>
   </div>
 </div>
 

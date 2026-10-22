@@ -387,3 +387,7 @@ input:focus, select:focus, textarea:focus {
 .qr-label img { width: 44px; height: 44px; }
 .qr-title { font-size: 0.68rem; font-weight: 600; }
 .qr-loc { font-size: 0.62rem; color: var(--muted); }
+/* Help center i18n */
+html[lang="en"] .help-fr { display: none !important; }
+html[lang="en"] .help-en { display: block !important; }
+html[lang="fr"] .help-en { display: none !important; }

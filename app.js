@@ -899,9 +899,9 @@ function openDetail(id) {
     `<label class="chk"><input type="checkbox" name="shelves" value="${esc(s)}" ${it.shelves.includes(s) ? 'checked' : ''}> ${esc(s)}</label>`).join('');
   const tagsStr = (it.tags || []).join(', ');
   $('#detailForm').innerHTML = `
-    ${field('Titre', `<input type="text" name="title" value="${esc(it.title)}">`)}
-    ${field('Sous-titre', `<input type="text" name="subtitle" value="${esc(it.subtitle || '')}">`)}
-    ${field('Auteur(s) — séparés par des virgules', `<input type="text" name="authors" value="${esc(it.authors.join(', '))}">`)}
+    ${field(t('f_title'), `<input type="text" name="title" value="${esc(it.title)}">`)}
+    ${field(t('f_subtitle'), `<input type="text" name="subtitle" value="${esc(it.subtitle || '')}">`)}
+    ${field(t('f_authors'), `<input type="text" name="authors" value="${esc(it.authors.join(', '))}">`)}
     <div class="form-row">
       ${field('Type', `<select name="medium">
         <option value="book" ${it.medium === 'book' ? 'selected' : ''}>Livre</option>
@@ -916,19 +916,19 @@ function openDetail(id) {
       </select>`)}
     </div>
     <div class="form-row">
-      ${field('Série', `<input type="text" name="series" value="${esc(it.series || '')}">`)}
-      ${field('Tome / Volume', `<input type="text" name="volume" value="${esc(it.volume || '')}">`)}
+      ${field(t('f_series'), `<input type="text" name="series" value="${esc(it.series || '')}">`)}
+      ${field(t('f_volume'), `<input type="text" name="volume" value="${esc(it.volume || '')}">`)}
     </div>
     <div class="form-row">
-      ${field('Scénariste(s) — virgules', `<input type="text" name="scenario" value="${esc((it.scenario || []).join(', '))}">`)}
-      ${field('Dessinateur(s) — virgules', `<input type="text" name="art" value="${esc((it.art || []).join(', '))}">`)}
+      ${field(t('f_scenario'), `<input type="text" name="scenario" value="${esc((it.scenario || []).join(', '))}">`)}
+      ${field(t('f_art'), `<input type="text" name="art" value="${esc((it.art || []).join(', '))}">`)}
     </div>
     <div class="form-row">
-      ${field('Cote Dewey (ex. 843, 741.5)', `<input type="text" name="dewey" inputmode="decimal" value="${esc(it.dewey || '')}">`)}
-      ${field('Genre (ex. Polar, SF, Heroic fantasy)', `<input type="text" name="genre" value="${esc(it.genre || '')}">`)}
+      ${field(t('f_dewey'), `<input type="text" name="dewey" inputmode="decimal" value="${esc(it.dewey || '')}">`)}
+      ${field(t('f_genre'), `<input type="text" name="genre" value="${esc(it.genre || '')}">`)}
     </div>
     <div class="form-row">
-      ${field('Collection éditoriale (ex. Folio, Shonen Kana, Pléiade)', `<input type="text" name="collection" list="collectionList" value="${esc(it.collection || '')}"><datalist id="collectionList">${[...new Set(store.items.map((i) => i.collection).filter(Boolean))].map((c) => `<option value="${esc(c)}">`).join('')}</datalist>`)}
+      ${field(t('f_collection'), `<input type="text" name="collection" list="collectionList" value="${esc(it.collection || '')}"><datalist id="collectionList">${[...new Set(store.items.map((i) => i.collection).filter(Boolean))].map((c) => `<option value="${esc(c)}">`).join('')}</datalist>`)}
       ${field('Format', `<select name="format">
         <option value="">—</option>
         ${['Broché', 'Poche', 'Relié', 'Grand format', 'Cartonné', 'Digital'].map((f) => `<option value="${f}" ${it.format === f ? 'selected' : ''}>${f}</option>`).join('')}
@@ -938,10 +938,10 @@ function openDetail(id) {
       ${field('Type d’édition', `<select name="editionType">
         ${[['standard', 'Édition standard'], ['first', '1ʳᵉ édition'], ['collector', 'Édition collector / limitée'], ['rare', 'Édition rare'], ['incunable', 'Incunable (avant 1501)']].map(([v, lbl]) => `<option value="${v}" ${it.editionType === v ? 'selected' : ''}>${lbl}</option>`).join('')}
       </select>`)}
-      ${field('Prix éditeur (€)', `<input type="number" name="price" step="0.01" min="0" value="${esc(it.price ?? '')}">`)}
+      ${field(t('f_price'), `<input type="number" name="price" step="0.01" min="0" value="${esc(it.price ?? '')}">`)}
     </div>
     <div class="form-row">
-      ${field('Public (ex. Dès 10 ans, Adulte)', `<input type="text" name="audience" value="${esc(it.audience || '')}">`)}
+      ${field(t('f_audience'), `<input type="text" name="audience" value="${esc(it.audience || '')}">`)}
       ${field("Emprunté à quelqu'un ? (ce livre vient de…)", `<input type="text" name="borrowedFrom" value="${esc(it.borrowedFrom || '')}" placeholder="ex. Marie — à rendre">`)}
     </div>
     <div class="form-row">
@@ -961,12 +961,12 @@ function openDetail(id) {
       ${field('File « à lire ensuite »', `<label class="chk"><input type="checkbox" name="readNext" ${it.readNext ? 'checked' : ''}> Inclure dans ma file de lecture</label>`)}
     </div>
     <div class="form-row">
-      ${field('État de la série', `<select name="seriesState">
+      ${field(t('f_seriesstate'), `<select name="seriesState">
         <option value="" ${!it.seriesState ? 'selected' : ''}>—</option>
         <option value="ongoing" ${it.seriesState === 'ongoing' ? 'selected' : ''}>Série en cours (suite prévue)</option>
         <option value="complete" ${it.seriesState === 'complete' ? 'selected' : ''}>Série complète</option>
       </select>`)}
-      ${field('Nombre de tomes de la série', `<input type="number" name="seriesTotal" min="1" value="${esc(it.seriesTotal ?? '')}">`)}
+      ${field(t('f_seriestotal'), `<input type="number" name="seriesTotal" min="1" value="${esc(it.seriesTotal ?? '')}">`)}
     </div>
     <div class="form-row">
       <label class="chk"><input type="checkbox" name="favorite" ${it.favorite ? 'checked' : ''}> ♥ Favori</label>
@@ -979,29 +979,29 @@ function openDetail(id) {
         ${it.loan ? '<button type="button" class="btn small" id="btnReturnLoan">↩ Retour</button>' : ''}
       </div>`)}
     </div>
-    ${field('Note (sur 5)', `<div class="stars-input" id="starsInput">${[1,2,3,4,5].map((n) =>
+    ${field(t('f_rating') || 'Note (sur 5)', `<div class="stars-input" id="starsInput">${[1,2,3,4,5].map((n) =>
       `<span data-n="${n}" class="${n <= (it.rating || 0) ? 'on' : ''}">★</span>`).join('')}</div>`)}
-    ${field('Annotation / avis personnel', `<textarea name="notes">${esc(it.notes || '')}</textarea>`)}
-    ${field('Étagères', shelvesChecks || '<span class="hint">Aucune étagère — créez-en une dans l\'onglet Étagères.</span>')}
-    ${field('Tags (virgules)', `<input type="text" name="tags" value="${esc(tagsStr)}">`)}
-    ${field('Emplacement physique', `<div class="form-row location-row">
+    ${field(t('f_notes'), `<textarea name="notes">${esc(it.notes || '')}</textarea>`)}
+    ${field(t('f_shelves'), shelvesChecks || '<span class="hint">Aucune étagère — créez-en une dans l\'onglet Étagères.</span>')}
+    ${field(t('f_tags'), `<input type="text" name="tags" value="${esc(tagsStr)}">`)}
+    ${field(t('f_location'), `<div class="form-row location-row">
       <input type="text" name="furniture" list="furnitureList" placeholder="Meuble (ex. Bibliothèque salon)" value="${esc(it.furniture || '')}">
       <input type="text" name="slot" list="slotList" placeholder="Étagère / rayon (ex. Étagère 4)" value="${esc(it.slot || '')}">
       <datalist id="furnitureList">${knownFurniture().map((f) => `<option value="${esc(f)}">`).join('')}</datalist>
       <datalist id="slotList">${knownSlots().map((s) => `<option value="${esc(s)}">`).join('')}</datalist>
     </div>`)}
-    ${field('Résumé', `<textarea name="summary" rows="4">${esc(it.summary || '')}</textarea>`)}
+    ${field(t('f_summary'), `<textarea name="summary" rows="4">${esc(it.summary || '')}</textarea>`)}
     <div class="form-row">
-      ${field('Éditeur', `<input type="text" name="publisher" value="${esc(it.publisher || '')}">`)}
-      ${field('Date de publication', `<input type="text" name="publishedDate" value="${esc(it.publishedDate || '')}">`)}
+      ${field(t('f_publisher'), `<input type="text" name="publisher" value="${esc(it.publisher || '')}">`)}
+      ${field(t('f_pubdate'), `<input type="text" name="publishedDate" value="${esc(it.publishedDate || '')}">`)}
     </div>
     <div class="form-row">
-      ${field('ISBN', `<input type="text" name="isbn" value="${esc(it.isbn)}">`)}
-      ${field('Pages', `<input type="number" name="pageCount" value="${esc(it.pageCount ?? '')}">`)}
+      ${field(t('f_isbn'), `<input type="text" name="isbn" value="${esc(it.isbn)}">`)}
+      ${field(t('f_pages'), `<input type="number" name="pageCount" value="${esc(it.pageCount ?? '')}">`)}
     </div>
     <div class="form-row">
-      ${field('URL image couverture', `<input type="text" name="cover" value="${esc(it.cover || '')}">`)}
-      ${field('URL image dos', `<input type="text" name="coverBack" value="${esc(it.coverBack || '')}">`)}
+      ${field(t('f_cover'), `<input type="text" name="cover" value="${esc(it.cover || '')}">`)}
+      ${field(t('f_coverback'), `<input type="text" name="coverBack" value="${esc(it.coverBack || '')}">`)}
       <div class="hint">
         💡 Pour trouver les images (les 4 photos du livre : recto, dos, 4ᵉ de couverture) :
         <a target="_blank" rel="noopener" href="https://www.chasse-aux-livres.fr/livre/${esc(it.isbn)}">fiche Chasse aux livres</a>
