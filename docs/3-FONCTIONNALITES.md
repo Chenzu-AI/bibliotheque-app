@@ -8,8 +8,10 @@
 - **Scan de codes-barres** (EAN-13/ISBN) par caméra du téléphone
 - **Saisie manuelle** d'ISBN, ou **douchette USB** sur PC (saisie instantanée)
 - **Sans ISBN** : fiche vierge à compléter (vieux livres, éditions rares)
-- **Recherche automatique des informations** : **4 catalogues interrogés en parallèle** — Google Books, **catalogue BnF** (Bibliothèque nationale de France — idéal pour l'édition française), Open Library (2 APIs) + service de couvertures en secours
-- **🔑 Clés API personnelles** (menu ☰ → Clés API) : chaque utilisateur colle sa clé Google Books dans SON navigateur (jamais dans le code public) — bouton de test intégré. Sans clé, l'app fonctionne avec les sources gratuites (BnF, Open Library)
+- **Recherche automatique multi-sources avec fusion** : Open Library (2 APIs) + Google Books + conversion ISBN-10/13 automatique + **relais BnF/Fnac** (micro-service gratuit) + couvertures en secours (2 formats d'ISBN). Chaque source complète les champs manquants des autres — la fiche finale est la plus complète possible
+- **🇫🇷 Relais BnF/Fnac** (clé de voûte pour les livres français) : la BnF couvre **tout le dépôt légal français** (idéal pour les livres d'avant 2010, mal indexés dans les bases internationales) ; la Fnac couvre les nouveautés. Déploiement gratuit en 5 min (fichier `worker.js` → Cloudflare Workers), l'URL du relais se colle dans ☰ → 🔑
+- **🔑 Clés API personnelles** (menu ☰ → Clés API) : clé Google Books + URL du relais, stockées dans SON navigateur uniquement (jamais dans le code public) — boutons de test intégrés (test de clé + **diagnostic par ISBN** qui montre ce que chaque source répond)
+- **Sources activables au choix** (cases à cocher) : Google Books / BnF / Open Library
 - **⚡ Scan en rafale** : caméra qui reste ouverte, ajout en chaîne
 - **⚠ Détection de doublons** : l'app demande si vous ajoutez un 2ᵉ exemplaire
 

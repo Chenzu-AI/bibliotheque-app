@@ -85,16 +85,29 @@ Au scan, si le livre appartient à une **série rangée à plusieurs endroits**,
 - **🤖 Recherche IA** (barre d'outils) : décrivez en langage naturel → « les BD de Uderzo non lues rangées au salon »
 - **🤖 Compléter par IA** (dans une fiche) : génère résumé, genre, cote Dewey pour les fiches incomplètes
 
-## 7 bis. Améliorer la reconnaissance des livres (clé Google Books)
+## 7 bis. Optimiser la reconnaissance des livres (clé Google Books + relais BnF/Fnac)
 
-Par défaut, l'app interroge le catalogue **BnF** et **Open Library** (gratuits, sans clé). Pour la reconnaissance la plus complète (résumés + couvertures des éditions françaises), activez **Google Books** avec votre clé personnelle :
+La chaîne de recherche automatique : Open Library → Google Books → conversion ISBN-10 → **relais BnF/Fnac** → couvertures en secours. Deux réglages optionnels la rendent complète :
 
-1. Créez une clé API gratuite : [console.cloud.google.com](https://console.cloud.google.com) → projet → *API et services* → activer **« Google Books API »** → *Identifiants* → **Créer des identifiants** → **Clé API** (1000 requêtes/jour offertes)
-2. Dans l'app : **☰ → 🔑 Clés API (sources)** → collez la clé → **🧪 Tester** (doit afficher ✅) → **💾 Enregistrer**
-3. La clé reste **uniquement dans votre navigateur** (jamais dans le code de l'application, jamais envoyée ailleurs qu'à Google). Recommandé : restreignez la clé aux référants HTTP `chenzu-ai.github.io/*` et `localhost` dans la console Google
-4. Rescannez les livres mal reconnus : la détection de doublon propose de compléter la fiche existante
+### A. Clé Google Books (résumés et couvertures, 1000 requêtes/jour gratuites)
+1. [console.cloud.google.com](https://console.cloud.google.com) → projet → *API et services* → activer **« Google Books API »** → *Identifiants* → **Créer des identifiants** → **Clé API**
+2. **☰ → 🔑 Clés API** → collez la clé → **🧪 Tester** (✅ = clé valide) → **💾 Enregistrer**
+3. La clé reste **uniquement dans votre navigateur**. Recommandé : restreindre aux référants `chenzu-ai.github.io/*`
 
-> 💡 Si un livre reste introuvable partout (édition confidentielle, paru depuis peu) : complétez la fiche à la main ou utilisez **🤖 Compléter par IA**.
+### B. Relais BnF/Fnac (indispensable pour les livres français, surtout d'avant 2010)
+Les bases internationales ignorent une partie du fonds français ancien ; la **BnF, elle, a tout** (dépôt légal). Comme un navigateur ne peut pas interroger la BnF directement (CORS), un micro-service gratuit sert de relais :
+
+1. **https://dash.cloudflare.com** → compte gratuit → **Workers & Pages** → Create → **« Commencez avec Hello World ! »** → nommez `biblio-relais` → Deploy
+2. **Edit code** → remplacez le code par le fichier **`worker.js`** du dépôt → **Deploy**
+3. Testez : `https://biblio-relais.votre-sous-domaine.workers.dev/?isbn=9782221110003` → JSON avec le titre = ✅
+4. **☰ → 🔑 Clés API** → champ **« URL du relais français »** → collez l'URL → **💾 Enregistrer**
+
+> Coût : 0 € (100 000 requêtes/jour gratuites). Le worker ne stocke rien ; seuls les ISBN consultés transitent. Sous-domaine personnalisable si vous ne voulez pas votre nom dans l'URL (Workers & Pages → réglages du sous-domaine).
+
+### Diagnostic en cas d'échec
+**☰ → 🔑 → « 🔍 Diagnostic d'un ISBN »** : entrez un ISBN → l'app montre ce que **chaque source** répond (y compris l'ISBN-10 converti et le relais). Si tout est ❌ : le livre est absent des catalogues → complétez à la main ou via **🤖 Compléter par IA**.
+
+> 💡 **Rescan d'une fiche incomplète** : l'app complète automatiquement la fiche existante (pas de doublon). Pour un vrai 2ᵉ exemplaire, répondez « Ajouter quand même » quand la fiche est déjà complète.
 
 ## 8. Sauvegarder, exporter, restaurer
 

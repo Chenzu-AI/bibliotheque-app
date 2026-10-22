@@ -30,6 +30,7 @@ python -m http.server 8080
 ## 🧩 En bref
 
 - **Scan** : caméra (mobile), douchette USB ou saisie manuelle (PC), mode rafale, détection de doublons
+- **Reconnaissance multi-sources** : Open Library + Google Books (clé perso) + conversion ISBN-10/13 + **relais BnF/Fnac** (micro-service gratuit, `worker.js`) — optimisé pour l'édition française, y compris le fonds ancien
 - **Organisation** : étagères, tags, séries (tomes manquants, état), auteurs/scénaristes/dessinateurs, cote Dewey, favoris, souhaits
 - **Rangement physique** : meuble + étagère, mode rangement, détection de séries dispersées, **inventaire d'étagère** avec historique
 - **Prêts** : emprunteurs, retours prévus, retards, historique par personne
@@ -39,7 +40,7 @@ python -m http.server 8080
 
 ## 🔒 Confidentialité
 
-Vos données restent **dans le navigateur de votre appareil**. Aucun compte, aucune télémétrie. Les métadonnées sont récupérées auprès d'Open Library et Google Books uniquement lors d'un scan ; l'IA ne fonctionne que si vous la configurez.
+Vos données restent **dans le navigateur de votre appareil**. Aucun compte, aucune télémétrie. Les métadonnées sont récupérées auprès d'Open Library et Google Books uniquement lors d'un scan ; l'IA ne fonctionne que si vous la configurez. Le relais BnF/Fnac (optionnel, Cloudflare Workers) ne stocke rien : seuls les ISBN consultés transitent, et son URL reste dans votre navigateur.
 
 ## 📁 Fichiers
 
@@ -49,6 +50,7 @@ app.js          toute la logique (aucune dépendance)
 style.css       interface
 manifest.json   installation PWA
 sw.js           mode hors-ligne
+worker.js       relais BnF/Fnac à déployer sur Cloudflare Workers (optionnel, gratuit)
 icons/          icônes
 docs/           documentation (5 fiches)
 ```
