@@ -52,6 +52,9 @@ Objectif annuel 🎯 · file « à lire ensuite » · 🎲 prochain livre · pro
 ## 📤 Exports
 **JSON** (sauvegarde) · **CSV** (Excel) · **HTML** (impression) · **Markdown** (notes) · **🏷️ Étiquettes** (cotes 50×30 mm)
 
+## 🌐 Langue
+Bouton 🌐 (barre du haut) : FR ↔ EN instantané, mémorisé. Le Centre d'aide ❓ suit la langue.
+
 ## 📱 À retenir sur mobile
 - Boutons secondaires (Sans ISBN, Mode rangement, Inventaire) : derrière **⋯** en bas à gauche
 - Mise à jour de l'app : fermer/rouvrir une fois (deux fois si l'ancienne version persiste)

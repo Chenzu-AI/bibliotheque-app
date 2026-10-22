@@ -12,6 +12,10 @@ Guide complet, pas à pas. Les fiches **1-INSTALLATION-PC** et **2-INSTALLATION-
 
 > 📱 **Sur mobile en mode portrait**, les boutons secondaires de la barre du bas (**➕ Sans ISBN**, **📦 Mode rangement**, **🔎 Inventaire**) sont derrière le bouton **⋯** : un tap pour les afficher.
 
+## 0. Langue de l'interface
+
+L'app est **bilingue FR/EN** : bouton **🌐** (barre du haut) pour basculer instantanément. Au premier lancement, la langue suit celle de votre navigateur ; votre choix est mémorisé. Le Centre d'aide (❓) suit la langue active.
+
 ## 1. Ajouter des ouvrages
 
 | Action | Comment |

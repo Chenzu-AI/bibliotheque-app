@@ -84,6 +84,7 @@
 - **JSON** (fusion intelligente sans doublons) · **CSV** (Libib, CLZ, Excel — colonnes titre/auteur/ISBN/statut reconnues, FR ou EN)
 
 ## 🔒 Technique
+- **🌐 Bilingue FR/EN** : bascule instantanée (bouton 🌐), détection automatique de la langue du navigateur, choix mémorisé — interface complète + Centre d'aide traduits
 - Application web progressive (PWA) — fonctionne **hors-ligne** après installation, **scanner inclus** (aucune dépendance CDN)
 - Données **100 % locales** (IndexedDB) : aucun compte, aucun serveur, aucune donnée envoyée
 - **Mises à jour automatiques** : architecture dépôt privé → miroir public → site en ligne ; chaque évolution se propage seule

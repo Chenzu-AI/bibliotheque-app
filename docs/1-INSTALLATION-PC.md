@@ -93,3 +93,5 @@ Les données vivent **dans le navigateur** (IndexedDB). Si vous réinstallez Win
 - Rangez vos exports JSON dans un dossier cloud (OneDrive…) pour une sécurité maximale
 ---
 *Ma Bibliothèque — Création AlphaPrim*
+
+> 🌐 **Langue** : l'interface est bilingue FR/EN — bouton 🌐, détection automatique du navigateur.
