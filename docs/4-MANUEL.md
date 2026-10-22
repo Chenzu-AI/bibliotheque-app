@@ -124,6 +124,24 @@ Les bases internationales ignorent une partie du fonds français ancien ; la **B
 
 > 💡 **Rescan d'une fiche incomplète** : l'app complète automatiquement la fiche existante (pas de doublon). Pour un vrai 2ᵉ exemplaire, répondez « Ajouter quand même » quand la fiche est déjà complète.
 
+## 7 ter. Suivre sa lecture (vue « Ma lecture »)
+
+**☰ → 📖 Ma lecture** — votre cockpit de lecture :
+- **🎯 Objectif annuel** : bouton « Définir mon objectif » (ex. 40 livres en 2027) — barre de progression, livres restants, rythme possible
+- **🎲 Choisir mon prochain livre** : tirage aléatoire parmi vos « à lire »
+- **File « à lire ensuite »** : cochez la case dans une fiche ; gestion (ouvrir/retirer) dans la vue
+- **En cours** : les livres en statut « En lecture » avec leur progression — renseignez **page courante** dans la fiche pour la barre d'avancement
+- **Journal de lecture** : dans chaque fiche, ajoutez des notes horodatées (« 15/03 : chapitre 3 excellent »)
+
+> Le passage d'un livre en statut « **Lu** » enregistre automatiquement la date de fin — c'est ce qui alimente les statistiques annuelles (livres terminés, pages lues, heures de lecture estimées) dans l'onglet Statistiques.
+
+## 7 quater. Cycle de vie d'un livre (acquisition et cession)
+
+Dans chaque fiche :
+- **Acquis le / chez / prix payé** — distinct du prix éditeur (valeur catalogue)
+- **Emprunté à quelqu'un ?** — le miroir des prêts : tracez les livres que d'autres vous ont prêtés
+- **Cédé** : Vendu / Donné / Perdu / Prêté non rendu + date + prix de cession. La fiche est conservée (historique), le livre sort automatiquement des vues et statistiques actives
+
 ## 8. Sauvegarder, exporter, restaurer
 
 | Besoin | Action |

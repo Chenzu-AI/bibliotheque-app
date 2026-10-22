@@ -4,7 +4,11 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="theme-color" content="#1a2332">
-<meta name="description" content="Ma Bibliothèque — scannez les codes-barres de vos livres, BD et mangas et organisez votre collection.">
+<meta name="description" content="Ma Bibliothèque (Création AlphaPrim) — scannez les codes-barres et photographiez vos étagères : gestion complète de votre bibliothèque personnelle. Livres, BD, mangas. 100 % gratuit et privé.">
+<meta property="og:title" content="Ma Bibliothèque — gestion de bibliothèque personnelle">
+<meta property="og:description" content="Scan de codes-barres, photo d'étagère IA, prêts, inventaire, étiquettes — 100 % gratuit et privé. Création AlphaPrim.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="icons/icon-512.png">
 <title>Ma Bibliothèque</title>
 <link rel="manifest" href="manifest.json">
 <link rel="icon" href="icons/icon.svg" type="image/svg+xml">
@@ -23,7 +27,8 @@
     <span id="countBadge" class="badge" title="Nombre d'ouvrages"></span>
     <button id="btnInstall" class="btn btn-install hidden" title="Installer l'application">⬇️ Installer</button>
     <button id="btnScan" class="btn btn-primary" title="Scanner un code-barres">📷 Scanner</button>
-    <button id="btnMenu" class="btn btn-ghost" title="Menu">☰</button>
+    <button id="btnHelp" class="btn btn-ghost" title="Centre d'aide" aria-label="Centre d'aide">❓</button>
+    <button id="btnMenu" class="btn btn-ghost" title="Menu" aria-label="Menu principal">☰</button>
   </div>
 </header>
 
@@ -51,7 +56,7 @@
   <button id="btnShelfPhoto" class="nav-btn">📷 Photo d'étagère (IA)</button>
 </nav>
 
-<main>
+<main role="main">
   <section id="viewGrid">
     <div class="toolbar">
       <input type="search" id="searchInput" placeholder="Rechercher (titre, auteur, ISBN, série, tag…)">
@@ -174,7 +179,7 @@
 </section>
 
 <div class="manual-add" id="manualAddBar">
-  <button class="manual-add-more" id="btnMoreActions" title="Actions supplémentaires">⋯</button>
+  <button class="manual-add-more" id="btnMoreActions" title="Actions supplémentaires" aria-label="Actions supplémentaires">⋯</button>
   <input type="text" id="manualIsbn" inputmode="numeric" placeholder="Saisir un ISBN (10 ou 13 chiffres)">
   <button id="btnManualAdd" class="btn">➕ Ajouter</button>
   <button id="btnAddNoIsbn" class="btn btn-extra" title="Créer une fiche vierge, sans ISBN">➕ Sans ISBN</button>
@@ -187,7 +192,7 @@
   <div class="modal-box">
     <div class="modal-head">
       <h2>Scanner un code-barres</h2>
-      <button id="btnCloseScan" class="btn btn-ghost">✕</button>
+      <button id="btnCloseScan" class="btn btn-ghost" aria-label="Fermer">✕</button>
     </div>
     <video id="scanVideo" playsinline muted></video>
     <div class="scan-frame"></div>
@@ -216,7 +221,7 @@
   <div class="modal-box detail">
     <div class="modal-head">
       <h2 id="detailTitle"></h2>
-      <button id="btnCloseDetail" class="btn btn-ghost">✕</button>
+      <button id="btnCloseDetail" class="btn btn-ghost" aria-label="Fermer">✕</button>
     </div>
     <div id="detailBody" class="detail-body">
       <div class="detail-covers">
@@ -254,7 +259,7 @@
   <div class="modal-box">
     <div class="modal-head">
       <h2>🔑 Clés API — sources de données</h2>
-      <button id="btnCloseKeys" class="btn btn-ghost">✕</button>
+      <button id="btnCloseKeys" class="btn btn-ghost" aria-label="Fermer">✕</button>
     </div>
     <p class="hint">Chaque clé reste <b>uniquement dans ce navigateur</b> (localStorage) — jamais dans le code ni sur un serveur. Chaque utilisateur de l'application entre les siennes.</p>
     <div class="detail-form">
@@ -299,7 +304,7 @@
   <div class="modal-box">
     <div class="modal-head">
       <h2>📷 Photo d'étagère (IA)</h2>
-      <button id="btnCloseShelf" class="btn btn-ghost">✕</button>
+      <button id="btnCloseShelf" class="btn btn-ghost" aria-label="Fermer">✕</button>
     </div>
     <p class="hint">Photographiez l'étagère <b>en paysage</b>. L'IA lit les tranches et compare avec votre collection : ✅ déjà rangés ici · ⚠ censés être ailleurs · ❓ inconnus (recherche en 1 clic).</p>
     <div class="detail-form">
@@ -322,7 +327,7 @@
 <div id="toast" class="toast hidden"></div>
 <input type="file" id="importFile" accept="application/json" class="hidden">
 <input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
-<script src="https://unpkg.com/@zxing/library@0.21.3/umd/index.min.js"></script>
+<script src="vendor/zxing.min.js"></script>
 <script src="app.js"></script>
 </body>
 </html>

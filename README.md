@@ -35,7 +35,10 @@ python -m http.server 8080
 - **Rangement physique** : meuble + étagère, mode rangement, détection de séries dispersées, **inventaire d'étagère** avec historique, **photo d'étagère IA** (lecture des tranches rangée par rangée)
 - **Champs bibliophiles** : collection éditoriale, format, type d'édition (1ʳᵉ édition, collector, rare, incunable), prix éditeur, public — badges et statistique « valeur catalogue »
 - **Prêts** : emprunteurs, retours prévus, retards, historique par personne
-- **IA optionnelle** : recherche en langage naturel + complétion de fiches (API ou Ollama local)
+- **IA optionnelle** : recherche en langage naturel + complétion de fiches + photo d'étagère (API ou Ollama local)
+- **Suivi de lecture** : objectif annuel, file « à lire ensuite », choix aléatoire, progression par page, journal daté, statistiques annuelles
+- **Cycle de vie** : acquisition (date/origine/prix), emprunts inverses, cession (vendu/donné/perdu) — valeur catalogue
+- **Qualité** : centre d'aide intégré, mode sombre, accessibilité, scanner autonome (sans CDN), import CSV/JSON
 - **Sauvegarde** : auto + manuelle, exports JSON / CSV / HTML / Markdown / étiquettes imprimables, import fusionnant
 - **Capacité** : testée pour 50 000+ ouvrages (IndexedDB, pagination)
 

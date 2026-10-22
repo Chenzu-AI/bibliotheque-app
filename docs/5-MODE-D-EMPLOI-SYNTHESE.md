@@ -46,6 +46,9 @@
 - **Relais BnF/Fnac** : déployer `worker.js` sur Cloudflare (5 min, gratuit) → coller l'URL dans ☰ → 🔑 — **indispensable pour les livres FR d'avant 2010** (la BnF a tout le dépôt légal)
 - Livre introuvable ? **🔍 Diagnostic** (dans ☰ → 🔑) ou **🤖 Compléter par IA**
 
+## 📖 Ma lecture (☰)
+Objectif annuel 🎯 · file « à lire ensuite » · 🎲 prochain livre · progression (page courante) · journal de notes datées
+
 ## 📤 Exports
 **JSON** (sauvegarde) · **CSV** (Excel) · **HTML** (impression) · **Markdown** (notes) · **🏷️ Étiquettes** (cotes 50×30 mm)
 

@@ -67,11 +67,31 @@
 - **☑ Sélection multiple** : modifier statut/étagère/genre/emplacement de N ouvrages d'un coup
 - **Fiche complète éditable** : couvertures devant/dos, résumé, toutes les références
 
+## 📖 Suivi de lecture
+- **Objectif annuel** 🎯 : X livres/an avec progression et rythme nécessaire
+- **File « à lire ensuite »** et **🎲 choix aléatoire** du prochain livre
+- **Position de lecture** : page courante → progression en % avec barre d'avancement
+- **Journal de lecture daté** : notes horodatées au fil de la lecture
+- Fin de lecture **horodatée automatiquement** → statistiques annuelles (pages lues, heures estimées, moyenne/livre)
+
+## 💼 Cycle de vie des livres
+- **Acquisition** : date, lieu/origine, prix payé
+- **Emprunts inverses** : « ce livre vient de… » (traces de qui vous l'a prêté)
+- **Cession** : vendu / donné / perdu / prêté non rendu, avec date et prix — la fiche reste, le livre sort des vues actives
+- **Valeur catalogue** (prix éditeur cumulés) et comparaison payé/vaut possible via les exports
+
+## 📥 Import
+- **JSON** (fusion intelligente sans doublons) · **CSV** (Libib, CLZ, Excel — colonnes titre/auteur/ISBN/statut reconnues, FR ou EN)
+
 ## 🔒 Technique
-- Application web progressive (PWA) — fonctionne **hors-ligne** après installation
+- Application web progressive (PWA) — fonctionne **hors-ligne** après installation, **scanner inclus** (aucune dépendance CDN)
 - Données **100 % locales** (IndexedDB) : aucun compte, aucun serveur, aucune donnée envoyée
 - **Mises à jour automatiques** : architecture dépôt privé → miroir public → site en ligne ; chaque évolution se propage seule
 - Bouton **⬇️ Installer** intégré à l'interface (Android/PC) ; sur iPhone, installation via le menu Partager de Safari
-- Léger (~100 Ko), aucun framework, aucune dépendance à installer
+- **❓ Centre d'aide intégré** (bouton en haut) : guide condensé hors-ligne + liens vers la documentation complète
+- **Mode sombre automatique** (selon le réglage du système)
+- **Accessibilité** : labels sur les boutons, navigation clavier
+- **Rappels de prêt** à l'ouverture (retards et retours du jour)
+- Léger, aucun framework
 ---
 *Ma Bibliothèque — Création AlphaPrim*

@@ -1,5 +1,5 @@
-const CACHE = 'biblio-v3';
-const ASSETS = ['./', './index.html', './style.css', './app.js', './manifest.json', './icons/icon.svg'];
+const CACHE = 'biblio-v4';
+const ASSETS = ['./', './index.html', './style.css', './app.js', './manifest.json', './icons/icon.svg', './vendor/zxing.min.js'];
 
 self.addEventListener('install', (e) => {
   e.waitUntil(caches.open(CACHE).then((c) => c.addAll(ASSETS)).then(() => self.skipWaiting()));

@@ -2717,3 +2717,12 @@ function lateLoansReminder() {
   else if (due.length) msg = `📅 ${due.length} retour(s) de prêt prévu(s) aujourd'hui.`;
   if (msg) setTimeout(() => toast(msg, 6000), 1200);
 }
+
+/* ---------- Help center ---------- */
+const APP_VERSION = '2.0.0';
+$('#btnHelp').addEventListener('click', () => {
+  const v = $('#appVersion');
+  if (v) v.textContent = APP_VERSION;
+  $('#helpModal').classList.remove('hidden');
+});
+$('#btnCloseHelp').addEventListener('click', () => $('#helpModal').classList.add('hidden'));

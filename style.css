@@ -344,3 +344,40 @@ input:focus, select:focus, textarea:focus {
 .chip.ed { background: #f3e8ff; color: #7e22ce; border: 1px solid #d8b4fe; }
 
 .shelf-preview { width: 100%; max-height: 300px; object-fit: contain; border-radius: var(--radius); border: 1px solid var(--line); background: var(--bg-accent); }
+
+/* Help center */
+.help-body details { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 8px; background: var(--panel); }
+.help-body summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
+.help-body details[open] summary { margin-bottom: 6px; }
+.help-body p { font-size: 0.85rem; margin: 5px 0; color: #4b4036; }
+.help-body code { background: var(--bg-accent); padding: 1px 5px; border-radius: 4px; font-size: 0.78rem; }
+
+/* ---------- Dark mode (automatique selon le système) ---------- */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #1c1712;
+    --bg-accent: #262019;
+    --panel: #2a221b;
+    --ink: #efe6d8;
+    --muted: #a3947f;
+    --line: #3d332a;
+    --accent: #d8814e;
+    --accent-hover: #e5935f;
+    --accent-soft: #3a2a1d;
+    --blue: #7ba7d0;
+    --blue-soft: #22303f;
+    --green: #7cbf8f;
+    --green-soft: #213227;
+    --amber: #d8ab5e;
+    --amber-soft: #3a2f1c;
+    --red: #d97676;
+    --red-soft: #3f2424;
+    --shadow: 0 1px 3px rgba(0,0,0,0.4), 0 4px 14px rgba(0,0,0,0.3);
+    --shadow-lg: 0 6px 24px rgba(0,0,0,0.5);
+  }
+  .topbar { background: linear-gradient(135deg, #14100c 0%, #2b2118 100%); }
+  .card .thumb.placeholder { filter: brightness(0.85); }
+  .btn:hover { background: #322a21; }
+  input, select, textarea { background: var(--panel); }
+  .toast { background: #efe6d8; color: #1c1712; }
+}
