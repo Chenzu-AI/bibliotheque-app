@@ -1,4 +1,9 @@
 # Ma Bibliothèque — gestion de bibliothèque personnelle
+# 📚 My Library — Personal Book Collection Manager
+
+**[🇬🇧 English below](#-english)**
+
+---
 
 Application web progressive (PWA) : **installable sur PC Windows 11 et sur mobile**, sans compte, sans serveur, 100 % locale et privée.
 
@@ -59,3 +64,32 @@ icons/          icônes
 docs/           documentation (5 fiches)
 ```
 <!-- sync test 2026-10-21T18:53:23Z -->
+
+---
+
+## 🇬🇧 English
+
+**My Library** — a complete personal book collection manager as a Progressive Web App (PWA): installable on Windows 11 and mobile, with **no account, no server, 100 % local and private**. Scanning barcodes creates records automatically (cover, summary, references). Organize, lend, inventory, export.
+
+> ✨ **by AlphaPrim**
+
+### Highlights
+
+- **Scan** — camera (phone), USB barcode scanner or manual ISBN entry, burst mode, duplicate detection, **AI shelf photo** (reads book spines row by row)
+- **Multi-source recognition** — Open Library + Google Books (your own key) + automatic ISBN-10/13 conversion + **BnF/Fnac relay** (free Cloudflare Worker) — optimized for French editions including pre-2010 backlist. Field-level merging across sources.
+- **Organize** — shelves, tags, series (missing volumes, ongoing/complete status), Dewey, bibliophile fields (publisher collection, format, edition type: first/collector/rare/incunable, list price), favorites, wishlist
+- **Physical shelving** — bookcase + shelf tracking, shelving mode, scattered-series detection, **shelf inventory** with history
+- **Loans** — borrower, due dates, late reminders, per-person history, reservations, reverse loans ("borrowed from")
+- **Reading tracking** — annual goal 🎯, "read next" queue, 🎲 random pick, page progress, dated reading journal
+- **Life cycle** — acquisition (date/source/price paid), disposal (sold/given/lost), catalog value estimation
+- **Pro & interoperability** — UNIMARC export (Koha/PMB compatible), QR-code labels (scan QR = record), CSV import (Libib/Excel), PIN-protected guest catalog
+- **Privacy-first** — all data stays in **your browser** (IndexedDB). No account, no telemetry. JSON export at any time.
+- **🌐 Bilingual FR/EN** — instant toggle, auto-detection · Dark mode, accessibility labels, built-in help center, fully offline scanner (no CDN)
+
+### Quick start
+
+The app runs entirely client-side — open `index.html` directly, or serve the folder (`python -m http.server 8080`) for PWA install + camera scanning. Each user's data and API keys live in their own browser. French guides in [`docs/`](docs/): installation, features, manual, quick reference.
+
+### License
+
+MIT — © 2026 AlphaPrim. See [LICENSE](LICENSE).
