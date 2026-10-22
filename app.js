@@ -2367,3 +2367,171 @@ $('#btnDiagIsbn').addEventListener('click', async () => {
   }
   out.innerHTML = lines.join('<br>') + '<br><b>Si tout est ❌ : le livre est absent des catalogues en ligne (édition très récente/confidentielle) — complétez la fiche à la main ou via 🤖 IA, ou attendez que les bases le cataloguent (jours/semaines).</b>';
 });
+
+/* ---------- Shelf photo AI (lecture des tranches par rangées) ---------- */
+let shelfPhotoData = null;
+
+$('#btnShelfPhoto').addEventListener('click', () => {
+  $('#shelfModal').classList.remove('hidden');
+  const fl = document.getElementById('furnitureList');
+  if (!fl) {
+    const dl = document.createElement('datalist');
+    dl.id = 'furnitureList';
+    dl.innerHTML = knownFurniture().map((f) => `<option value="${esc(f)}">`).join('');
+    document.body.appendChild(dl);
+  }
+  $('#shelfStatus').textContent = aiCfg.key || aiCfg.provider === 'ollama' ? '' : 'Configurez d\'abord l\'IA (☰ → 🤖 IA) — un modèle avec vision est requis (ex. Mistral, GPT-4o, llama3.2-vision via Ollama).';
+});
+
+$('#btnCloseShelf').addEventListener('click', () => $('#shelfModal').classList.add('hidden'));
+
+$('#shelfPhotoInput').addEventListener('change', (e) => {
+  const file = e.target.files && e.target.files[0];
+  if (!file) return;
+  const fr = new FileReader();
+  fr.onload = () => {
+    shelfPhotoData = fr.result;
+    const img = $('#shelfPreview');
+    img.src = shelfPhotoData;
+    img.classList.remove('hidden');
+  };
+  fr.readAsDataURL(file);
+});
+
+async function aiVisionShelf(prompt, imageDataUrl) {
+  const sys = 'Tu es un assistant expert en reconnaissance de tranches de livres sur une photo d\'étagère. Réponds UNIQUEMENT en JSON valide.';
+  const user = prompt;
+  if (aiCfg.provider === 'ollama') {
+    const r = await fetchWithTimeout((aiCfg.url || 'http://localhost:11434') + '/api/generate', 120000, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ model: aiCfg.model || 'llama3.2-vision', prompt: sys + '\n' + user, images: [imageDataUrl.split(',')[1]], stream: false, format: 'json' }),
+    });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const data = await r.json();
+    return (data.response || '').trim();
+  }
+  const r = await fetchWithTimeout(aiEndpoint(), 120000, {
+    method: 'POST',
+    headers: aiHeaders(),
+    body: JSON.stringify({
+      model: aiCfg.model,
+      messages: [{ role: 'user', content: [
+        { type: 'text', text: sys + '\n' + user },
+        { type: 'image_url', image_url: { url: imageDataUrl } },
+      ] }],
+      temperature: 0.1,
+    }),
+  });
+  if (!r.ok) throw new Error('HTTP ' + r.status);
+  const data = await r.json();
+  return (data.choices && data.choices[0] && data.choices[0].message && data.choices[0].message.content || '').trim();
+}
+
+function matchShelfTitle(title, row, prefix, furniture) {
+  const norm = (x) => String(x || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, '').replace(/[^a-z0-9 ]/g, ' ').replace(/\s+/g, ' ').trim();
+  const t = norm(title);
+  if (!t) return null;
+  let best = null;
+  let bestScore = 0;
+  for (const it of store.items) {
+    const cand = norm([it.title, it.series, it.volume ? 'tome ' + it.volume : '', it.authors.join(' ')].join(' '));
+    const words = t.split(' ').filter((wd) => wd.length > 2);
+    if (!words.length) continue;
+    const hits = words.filter((wd) => cand.includes(wd)).length;
+    const score = hits / words.length;
+    if (score > bestScore) { bestScore = score; best = it; }
+  }
+  return bestScore >= 0.6 ? best : null;
+}
+
+$('#btnShelfAnalyze').addEventListener('click', async () => {
+  if (!shelfPhotoData) { $('#shelfStatus').textContent = 'Prenez d\'abord une photo.'; return; }
+  if (!aiCfg.key && aiCfg.provider !== 'ollama') { $('#shelfStatus').textContent = 'IA non configurée (☰ → 🤖 IA).'; return; }
+  const prefix = $('#shelfPrefix').value.trim() || 'Rangée';
+  const furniture = $('#shelfFurniture').value.trim();
+  const rowsHint = $('#shelfRows').value ? ` La photo montre environ ${$('#shelfRows').value} rangées.` : '';
+  $('#shelfStatus').textContent = 'Analyse IA en cours (10-60 s selon le modèle)…';
+  $('#shelfResult').innerHTML = '';
+  try {
+    const prompt = `Analyse cette photo d'étagère de livres (prise en paysage, tranches visibles).${rowsHint}
+Identifie chaque livre visible PAR RANGÉE, de haut en bas puis de gauche à droite.
+Pour chaque livre, donne le titre lu sur la tranche, le numéro de tome si visible, et l'auteur si visible.
+Réponds UNIQUEMENT avec un JSON: {"rows":[{"n":1,"books":[{"title":"...","volume":"...","author":"..."}]}]}
+Si un texte est illisible, omette le livre. Sois exhaustif mais ne devine pas.`;
+    const resp = await aiVisionShelf(prompt, shelfPhotoData);
+    const m = resp.match(/\{[\s\S]*\}/);
+    if (!m) throw new Error('réponse IA non parsable');
+    const parsed = JSON.parse(m[0]);
+    const rows = parsed.rows || [];
+    let knownHere = 0, misplaced = 0, unknown = 0;
+    let html = '';
+    for (const row of rows) {
+      const rowNum = row.n || (rows.indexOf(row) + 1);
+      const slotName = `${prefix} ${rowNum}`;
+      const rowLoc = furniture ? `${furniture} · ${slotName}` : slotName;
+      html += `<h3 style="margin:12px 0 6px">${esc(slotName)}${furniture ? ' (' + esc(furniture) + ')' : ''}</h3>`;
+      for (const b of (row.books || [])) {
+        const match = matchShelfTitle([b.title, b.volume, b.author].join(' '));
+        if (!match) {
+          unknown++;
+          html += `<div class="inv-line warn">❓ <b>${esc(b.title || '?')}</b>${b.volume ? ' T.' + esc(b.volume) : ''}${b.author ? ' — ' + esc(b.author) : ''} — inconnu de votre bibliothèque. <button class="btn small shelf-search" data-q="${esc([b.title, b.author].filter(Boolean).join(' '))}" data-loc="${esc(rowLoc)}">🔎 Rechercher & ajouter</button></div>`;
+        } else {
+          const itLoc = match.furniture && match.slot ? `${match.furniture} · ${match.slot}` : (match.location || '');
+          if (!furniture || itLoc === rowLoc || (match.furniture === furniture && match.slot === slotName)) {
+            knownHere++;
+            html += `<div class="inv-line ok">✅ <b>${esc(match.title)}</b> — déjà à cet emplacement</div>`;
+          } else {
+            misplaced++;
+            html += `<div class="inv-line miss">⚠ <b>${esc(match.title)}</b> — répertorié à « ${esc(itLoc || 'emplacement non renseigné')} » <button class="btn small shelf-move" data-id="${esc(match.id)}" data-loc="${esc(rowLoc)}" data-f="${esc(furniture)}" data-s="${esc(slotName)}">📦 Ranger ici</button></div>`;
+          }
+        }
+      }
+    }
+    html = `<div class="group-card"><b>Bilan photo</b> — ${knownHere} bien rangés · ${misplaced} mal placés · ${unknown} inconnus</div>` + html;
+    $('#shelfResult').innerHTML = html;
+    $('#shelfStatus').textContent = 'Analyse terminée.';
+
+    $('#shelfResult').querySelectorAll('.shelf-search').forEach((btn) => btn.addEventListener('click', async () => {
+      const q = btn.dataset.q;
+      const loc = btn.dataset.loc;
+      const parts = loc.includes('·') ? loc.split('·').map((p) => p.trim()) : ['', loc];
+      $('#shelfStatus').textContent = 'Recherche de « ' + q + ' » sur Google Books…';
+      try {
+        const r = await fetchWithTimeout('https://www.googleapis.com/books/v1/volumes?q=' + encodeURIComponent('intitle:' + q.split(' ')[0] + ' ' + q.split(' ').slice(1).join(' ')) + gbKeyParam(), 15000);
+        const data = await r.json();
+        if (data.items && data.items.length) {
+          const meta = normalizeGoogleMeta(data.items[0]);
+          const item = { ...blankItem(meta.isbn || ''), ...meta, isbn: meta.isbn || '' };
+          item.furniture = parts[0]; item.slot = parts[1]; item.location = loc;
+          store.add(item);
+          renderAll();
+          $('#shelfStatus').textContent = 'Ajouté : ' + item.title;
+        } else {
+          const item = blankItem('');
+          item.title = q;
+          item.furniture = parts[0]; item.slot = parts[1]; item.location = loc;
+          store.add(item);
+          renderAll();
+          openDetail(item.id);
+          $('#shelfStatus').textContent = 'Non trouvé en ligne — fiche créée à compléter.';
+        }
+      } catch { $('#shelfStatus').textContent = 'Erreur réseau lors de la recherche.'; }
+    }));
+
+    $('#shelfResult').querySelectorAll('.shelf-move').forEach((btn) => btn.addEventListener('click', () => {
+      const it = store.findById(btn.dataset.id);
+      if (!it) return;
+      it.furniture = btn.dataset.f;
+      it.slot = btn.dataset.s;
+      it.location = [btn.dataset.f, btn.dataset.s].filter(Boolean).join(' · ');
+      store.update(it);
+      renderAll();
+      btn.closest('.inv-line').className = 'inv-line ok';
+      btn.closest('.inv-line').innerHTML = `✅ <b>${esc(it.title)}</b> — rangé ici`;
+      toast('Emplacement mis à jour.');
+    }));
+  } catch (e) {
+    $('#shelfStatus').textContent = 'Erreur IA : ' + e.message + (aiCfg.provider === 'ollama' ? ' — utilisez un modèle avec vision (ex. llama3.2-vision).' : ' — vérifiez que votre modèle gère les images (pixtral, gpt-4o…).');
+  }
+});

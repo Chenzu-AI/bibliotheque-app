@@ -342,3 +342,5 @@ input:focus, select:focus, textarea:focus {
 .btn-install:hover { background: #d5e9da; }
 
 .chip.ed { background: #f3e8ff; color: #7e22ce; border: 1px solid #d8b4fe; }
+
+.shelf-preview { width: 100%; max-height: 300px; object-fit: contain; border-radius: var(--radius); border: 1px solid var(--line); background: var(--bg-accent); }

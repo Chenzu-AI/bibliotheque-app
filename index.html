@@ -46,6 +46,7 @@
   <button id="btnCoversCfg" class="nav-btn">🖼️ Couvertures embarquées</button>
   <button id="btnAiCfg" class="nav-btn">🤖 IA (recherche & fiches)</button>
   <button id="btnKeysCfg" class="nav-btn">🔑 Clés API (sources)</button>
+  <button id="btnShelfPhoto" class="nav-btn">📷 Photo d'étagère (IA)</button>
 </nav>
 
 <main>
@@ -274,6 +275,31 @@
     <div class="row"><input type="text" id="diagIsbn" inputmode="numeric" placeholder="ISBN à diagnostiquer (ex. 9782070541270)"><button id="btnDiagIsbn" class="btn">Diagnostiquer</button></div>
     <p class="hint" id="diagResult"></p>
     <p class="hint" id="keysTestResult"></p>
+  </div>
+</div>
+
+<!-- Shelf photo AI modal -->
+<div id="shelfModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>📷 Photo d'étagère (IA)</h2>
+      <button id="btnCloseShelf" class="btn btn-ghost">✕</button>
+    </div>
+    <p class="hint">Photographiez l'étagère <b>en paysage</b>. L'IA lit les tranches et compare avec votre collection : ✅ déjà rangés ici · ⚠ censés être ailleurs · ❓ inconnus (recherche en 1 clic).</p>
+    <div class="detail-form">
+      <div class="row">
+        <input type="file" id="shelfPhotoInput" accept="image/*" capture="environment">
+      </div>
+      <img id="shelfPreview" class="shelf-preview hidden" alt="Aperçu de l'étagère">
+      <div class="form-row">
+        <div><label>Meuble (optionnel, pour le rangement auto)</label><input type="text" id="shelfFurniture" list="furnitureList" placeholder="ex. Bibliothèque salon"></div>
+        <div><label>Préfixe d'étagère — les rangées deviennent « préfixe 1, 2… »</label><input type="text" id="shelfPrefix" placeholder="ex. Étagère"></div>
+      </div>
+      <div><label>Nombre de rangées visibles (facultatif, aide l'IA)</label><input type="number" id="shelfRows" min="1" max="10" placeholder="auto"></div>
+      <button id="btnShelfAnalyze" class="btn btn-primary">🤖 Analyser la photo</button>
+      <p class="hint" id="shelfStatus"></p>
+      <div id="shelfResult"></div>
+    </div>
   </div>
 </div>
 
