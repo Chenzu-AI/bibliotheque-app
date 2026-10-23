@@ -355,7 +355,7 @@ input:focus, select:focus, textarea:focus {
 .help-body details { border: 1px solid var(--line); border-radius: var(--radius-sm); padding: 10px 14px; margin-bottom: 8px; background: var(--panel); }
 .help-body summary { cursor: pointer; font-weight: 600; font-size: 0.92rem; }
 .help-body details[open] summary { margin-bottom: 6px; }
-.help-body p { font-size: 0.85rem; margin: 5px 0; color: #4b4036; }
+.help-body p { font-size: 0.85rem; margin: 5px 0; color: #5b4a3a; }
 .help-body code { background: var(--bg-accent); padding: 1px 5px; border-radius: 4px; font-size: 0.78rem; }
 
 /* ---------- Dark mode (automatique selon le système) ---------- */
@@ -401,4 +401,10 @@ html[lang="fr"] .help-en { display: none !important; }
 /* Fix: nav-btn active lisible en dark mode */
 @media (prefers-color-scheme: dark) {
   .nav-btn.active { background: #6b543d; border-color: #8a6a4d; }
+}
+
+/* Fix: centre d'aide lisible en dark mode */
+@media (prefers-color-scheme: dark) {
+  .help-body p { color: #d8cbb8; }
+  .help-body code { background: #3a2f24; color: #e8d9c4; }
 }
