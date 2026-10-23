@@ -1,5 +1,5 @@
 'use strict';
-/* ---------- i18n — FR (défaut) / EN — Création AlphaPrim ---------- */
+/* ---------- i18n — FR (défaut) / EN — Création PrimAlph ---------- */
 const I18N = {
   fr: {
     // Topbar + nav

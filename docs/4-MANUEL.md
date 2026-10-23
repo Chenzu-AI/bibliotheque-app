@@ -170,4 +170,4 @@ Dans chaque fiche :
 - **Fiche incomplète après scan** (livre rare) : complétez les champs vides, ou 🤖 Compléter par IA
 - **Changement de PC/téléphone** : exportez le JSON **avant** de changer d'appareil
 ---
-*Ma Bibliothèque — Création AlphaPrim*
+*Ma Bibliothèque — Création PrimAlph*
