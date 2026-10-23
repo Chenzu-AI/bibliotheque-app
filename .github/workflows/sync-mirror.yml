@@ -19,8 +19,9 @@ jobs:
             echo "MIRROR_TOKEN absent — synchro ignoree"
             exit 0
           fi
-          git clone --depth 1 https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/Bibliotheque.git src
+          git clone --depth 5 https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/Bibliotheque.git src
           cd src
+          git checkout main -q
           git rm -r --cached .github -q 2>/dev/null || true
-          git -c user.name="Alphaprim (sync)" -c user.email="alphaprim@users.noreply.github.com" commit --allow-empty -m "Sync miroir public" -q
-          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git +HEAD:main
+          git -c user.name="PrimAlph (sync)" -c user.email="primalph@users.noreply.github.com" commit --allow-empty -m "Sync miroir public" -q
+          git push https://x-access-token:${GH_TOKEN}@github.com/Chenzu-AI/bibliotheque-app.git +HEAD:main --force
