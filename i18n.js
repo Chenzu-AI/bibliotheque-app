@@ -78,6 +78,15 @@ const I18N = {
     h_exports: '💾 Exports et pro',
     h_docs: '📄 Documentation complète',
     version: 'version',
+    // Onboarding
+    ob_welcome: 'Bienvenue !',
+    ob_s1_t: 'Commencez par scanner',
+    ob_s1_x: "Appuyez sur « 📷 Scanner » et visez le code-barres d'un livre — la fiche se crée seule (couverture, résumé, auteur). Sur PC : une douchette USB ou la saisie ISBN suffisent.",
+    ob_s2_t: 'Protégez vos données',
+    ob_s2_x: "Tout vit dans votre navigateur — aucune donnée envoyée. Pensez à exporter une sauvegarde JSON de temps en temps : ☰ → 💾 Sauvegarde immédiate (30 secondes par mois = tranquillité à vie).",
+    ob_s3_t: 'Livres français ?',
+    ob_s3_x: "Pour le meilleur taux de reconnaissance (notamment avant 2010) : ☰ → 🔑 Clés API → ajoutez votre clé Google Books (gratuite) et, si vous le souhaitez, le relais BnF/Fnac (déploiement 5 min, gratuit — guide dans l'aide ❓).",
+    ob_next: 'Suivant →', ob_prev: '← Précédent', ob_done: "C'est parti ! 🚀", ob_skip: 'Passer',
   },
 
   en: {
@@ -149,6 +158,14 @@ const I18N = {
     h_exports: '💾 Exports & pro',
     h_docs: '📄 Full documentation',
     version: 'version',
+    ob_welcome: 'Welcome!',
+    ob_s1_t: 'Start by scanning',
+    ob_s1_x: "Tap “📷 Scan” and point at a book's barcode — the record builds itself (cover, summary, author). On PC: a USB scanner or ISBN entry works too.",
+    ob_s2_t: 'Protect your data',
+    ob_s2_x: "Everything lives in your browser — nothing is sent anywhere. Export a JSON backup from time to time: ☰ → 💾 Backup now (30 seconds a month = peace of mind).",
+    ob_s3_t: 'French books?',
+    ob_s3_x: "For the best recognition rate (especially pre-2010): ☰ → 🔑 API keys → add your Google Books key (free) and, if you wish, the BnF/Fnac relay (5-min setup, free — guide in Help ❓).",
+    ob_next: 'Next →', ob_prev: '← Previous', ob_done: "Let's go! 🚀", ob_skip: 'Skip',
   },
 };
 

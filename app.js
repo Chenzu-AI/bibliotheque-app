@@ -2968,3 +2968,54 @@ function wireCoverImport(fileInputId, targetFieldName) {
 
 wireCoverImport('importCoverFront', 'cover');
 wireCoverImport('importCoverBack', 'coverBack');
+
+/* ---------- Onboarding (premier lancement) ---------- */
+const OB_KEY = 'biblio.onboarded.v1';
+let obStep = 1;
+
+function obApplyLang() {
+  const m = { obTitle1: ['ob_s1_t', 'obText1', 'ob_s1_x'], obTitle2: ['ob_s2_t', 'obText2', 'ob_s2_x'], obTitle3: ['ob_s3_t', 'obText3', 'ob_s3_x'] };
+  for (const [id, [tk, tx, xk]] of Object.entries(m)) {
+    const el = document.getElementById(id); if (el) el.textContent = t(tk);
+    const ex = document.getElementById(tx); if (ex) ex.textContent = t(xk);
+  }
+  const btns = { obNext: 'ob_next', obPrev: 'ob_prev', obDone: 'ob_done', obSkip: 'ob_skip' };
+  for (const [id, k] of Object.entries(btns)) { const el = document.getElementById(id); if (el) el.textContent = t(k); }
+  const w = document.querySelector('#onboardingModal h2'); if (w) w.textContent = t('ob_welcome') + ' · ' + (LANG === 'fr' ? 'Welcome!' : 'Bienvenue !');
+}
+
+function obShow(step) {
+  obStep = step;
+  [1, 2, 3].forEach((n) => { const el = document.getElementById('obStep' + n); if (el) el.classList.toggle('hidden', n !== step); });
+  const prev = document.getElementById('obPrev');
+  const next = document.getElementById('obNext');
+  const done = document.getElementById('obDone');
+  if (prev) prev.classList.toggle('hidden', step === 1);
+  if (next) next.classList.toggle('hidden', step === 3);
+  if (done) done.classList.toggle('hidden', step !== 3);
+  obApplyLang();
+}
+
+function obClose() {
+  const m = document.getElementById('onboardingModal');
+  if (m) m.classList.add('hidden');
+  try { localStorage.setItem(OB_KEY, '1'); } catch {}
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+  let seen = null;
+  try { seen = localStorage.getItem(OB_KEY); } catch {}
+  if (seen) return;
+  const m = document.getElementById('onboardingModal');
+  if (!m) return;
+  m.classList.remove('hidden');
+  obShow(1);
+  const next = document.getElementById('obNext');
+  const prev = document.getElementById('obPrev');
+  const done = document.getElementById('obDone');
+  const skip = document.getElementById('obSkip');
+  if (next) next.addEventListener('click', () => obShow(Math.min(3, obStep + 1)));
+  if (prev) prev.addEventListener('click', () => obShow(Math.max(1, obStep - 1)));
+  if (done) done.addEventListener('click', obClose);
+  if (skip) skip.addEventListener('click', obClose);
+});
