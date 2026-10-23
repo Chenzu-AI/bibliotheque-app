@@ -1,4 +1,4 @@
-# Changelog — Ma Bibliothèque (Création AlphaPrim)
+# Changelog — Ma Bibliothèque (Création PrimAlph)
 
 ## 2.1.0 — i18n FR/EN
 - 🌐 Bascule de langue FR/EN (bouton 🌐, détection automatique du navigateur, choix mémorisé)

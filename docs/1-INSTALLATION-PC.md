@@ -92,6 +92,6 @@ Les données vivent **dans le navigateur** (IndexedDB). Si vous réinstallez Win
 - **Restauration** : menu ☰ → 📥 Importer JSON (fusion intelligente, sans doublons)
 - Rangez vos exports JSON dans un dossier cloud (OneDrive…) pour une sécurité maximale
 ---
-*Ma Bibliothèque — Création AlphaPrim*
+*Ma Bibliothèque — Création PrimAlph*
 
 > 🌐 **Langue** : l'interface est bilingue FR/EN — bouton 🌐, détection automatique du navigateur.

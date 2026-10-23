@@ -7,7 +7,7 @@
 
 Application web progressive (PWA) : **installable sur PC Windows 11 et sur mobile**, sans compte, sans serveur, 100 % locale et privée.
 
-> ✨ **Création AlphaPrim**
+> ✨ **Création PrimAlph**
 
 Scannez les codes-barres de vos livres, BD et mangas ; la fiche se crée automatiquement (couverture, résumé, références). Organisez, prêtez, inventoriez, exportez.
 
@@ -71,7 +71,7 @@ docs/           documentation (5 fiches)
 
 **My Library** — a complete personal book collection manager as a Progressive Web App (PWA): installable on Windows 11 and mobile, with **no account, no server, 100 % local and private**. Scanning barcodes creates records automatically (cover, summary, references). Organize, lend, inventory, export.
 
-> ✨ **by AlphaPrim**
+> ✨ **by PrimAlph**
 
 ### Highlights
 
@@ -92,4 +92,4 @@ The app runs entirely client-side — open `index.html` directly, or serve the f
 
 ### License
 
-MIT — © 2026 AlphaPrim. See [LICENSE](LICENSE).
+MIT — © 2026 PrimAlph. See [LICENSE](LICENSE).

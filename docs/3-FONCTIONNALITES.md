@@ -95,4 +95,4 @@
 - **Rappels de prêt** à l'ouverture (retards et retours du jour)
 - Léger, aucun framework
 ---
-*Ma Bibliothèque — Création AlphaPrim*
+*Ma Bibliothèque — Création PrimAlph*

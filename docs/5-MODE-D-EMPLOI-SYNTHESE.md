@@ -67,4 +67,4 @@ Bouton 🌐 (barre du haut) : FR ↔ EN instantané, mémorisé. Le Centre d'aid
 ---
 *Ma Bibliothèque — app locale et privée, sans compte, sans serveur. Détails : docs 1-4.*
 ---
-*Ma Bibliothèque — Création AlphaPrim*
+*Ma Bibliothèque — Création PrimAlph*

@@ -1,4 +1,4 @@
-# Banque de couvertures AlphaPrim (privée)
+# Banque de couvertures PrimAlph (privée)
 
 Couvertures nommées par ISBN : `covers/<ISBN>.jpg` (max 600 px, JPEG ~80 %).
 
