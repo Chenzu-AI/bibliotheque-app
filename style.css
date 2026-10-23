@@ -101,7 +101,7 @@ h2:first-child { margin-top: 6px; }
   transition: all 0.15s;
 }
 .nav-btn:hover { background: var(--accent-soft); border-color: #e0c4ab; }
-.nav-btn.active { background: var(--ink); color: #f9f5ee; border-color: var(--ink); }
+.nav-btn.active { background: #5b4632; color: #f9f5ee; border-color: #5b4632; }
 
 main { padding: 18px; max-width: 1240px; margin: 0 auto; }
 .hidden { display: none !important; }
@@ -397,3 +397,8 @@ input:focus, select:focus, textarea:focus {
 html[lang="en"] .help-fr { display: none !important; }
 html[lang="en"] .help-en { display: block !important; }
 html[lang="fr"] .help-en { display: none !important; }
+
+/* Fix: nav-btn active lisible en dark mode */
+@media (prefers-color-scheme: dark) {
+  .nav-btn.active { background: #6b543d; border-color: #8a6a4d; }
+}
