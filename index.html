@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#1a2332">
+<meta name="description" content="Ma Bibliothèque (Création PrimAlph) — scannez les codes-barres et photographiez vos étagères : gestion complète de votre bibliothèque personnelle. Livres, BD, mangas. 100 % gratuit et privé.">
+<meta property="og:title" content="Ma Bibliothèque — gestion de bibliothèque personnelle">
+<meta property="og:description" content="Scan de codes-barres, photo d'étagère IA, prêts, inventaire, étiquettes — 100 % gratuit et privé. Création PrimAlph.">
+<meta property="og:type" content="website">
+<meta property="og:image" content="icons/icon-512.png">
+<title>Ma Bibliothèque</title>
+<link rel="manifest" href="manifest.json">
+<link rel="icon" href="icons/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand">
+    <img src="icons/icon.svg" alt="" class="logo">
+    <div class="brand-text">
+      <h1 data-i18n="app_title">Ma Bibliothèque</h1>
+      <span class="brand-by">Création PrimAlph</span>
+    </div>
+  </div>
+  <div class="topbar-actions">
+    <span id="countBadge" class="badge" title="Nombre d'ouvrages"></span>
+    <button id="btnInstall" class="btn btn-install hidden" title="Installer l'application" aria-label="Installer l'application" data-i18n="install_btn">⬇️ Installer</button>
+    <button id="btnScan" class="btn btn-primary" title="Scanner un code-barres" aria-label="Scanner un code-barres" data-i18n="scan">📷 Scanner</button>
+    <button id="btnLang" class="btn btn-ghost" title="FR / EN" aria-label="Changer de langue / Switch language" onclick="__toggleLang()">🌐</button>
+    <button id="btnHelp" class="btn btn-ghost" title="Centre d'aide" aria-label="Centre d'aide" data-i18n="help">❓</button>
+    <button id="btnMenu" class="btn btn-ghost" title="Menu" aria-label="Menu principal">☰</button>
+  </div>
+</header>
+
+<nav id="mainNav" class="nav hidden">
+  <div class="nav-search"><input type="search" id="navSearch" data-i18n="nav_search_placeholder" placeholder="🔍 Rechercher une fonction…"><span id="navSearchCount" class="hint"></span></div>
+  <div class="nav-group" data-group="navg_main"><span class="nav-group-title" data-i18n="navg_main">📚 Collection & saisie</span><div class="nav-group-btns">
+    <button id="btnLangMenu" class="nav-btn nav-item" data-i18n="nav_lang" onclick="this.closest(&quot;nav&quot;).classList.add(&quot;hidden&quot;); __toggleLang()">🌐 Langue : FR ⇄ EN</button>
+    <button data-view="grid" class="nav-btn nav-item active" data-i18n="nav_collection">📚 Collection</button>
+    <button data-view="groups" class="nav-btn nav-item" data-i18n="nav_groups">👥 Par série / auteur</button>
+    <button data-view="loans" class="nav-btn nav-item" data-i18n="nav_loans">📤 Prêts</button>
+    <button data-view="lists" class="nav-btn nav-item" data-i18n="nav_lists">📋 Mes listes</button>
+    <button data-view="reading" class="nav-btn nav-item" data-i18n="nav_reading">📖 Ma lecture</button>
+    <button data-view="shelves" class="nav-btn nav-item" data-i18n="nav_shelves">🗂️ Étagères</button>
+    <button id="btnScatterReport" class="nav-btn nav-item" data-i18n="nav_scatter_report">📦 Séries dispersées</button>
+  <button data-view="inventory" class="nav-btn nav-item" data-i18n="nav_inventory">🔎 Inventaire d'étagère</button>
+    <button data-view="stats" class="nav-btn nav-item" data-i18n="nav_stats">📊 Statistiques</button>
+    <button id="btnShelfPhoto" class="nav-btn nav-item" data-i18n="nav_shelf_photo">📷 Photo d'étagère (IA)</button>
+  </div></div>
+  <div class="nav-group" data-group="navg_backup"><span class="nav-group-title" data-i18n="navg_backup">💾 Sauvegarder & échanger</span><div class="nav-group-btns">
+    <button id="btnBackupNow" class="nav-btn nav-item" data-i18n="nav_backup_now">💾 Sauvegarde immédiate</button>
+    <button id="btnCloudPush" class="nav-btn nav-item" data-i18n="nav_cloud_push">☁️ Sauvegarde sur GitHub (privée)</button>
+    <button id="btnCloudPull" class="nav-btn nav-item" data-i18n="nav_cloud_pull">☁️ Récupérer depuis GitHub</button>
+    <button id="btnBackupCfg" class="nav-btn nav-item" data-i18n="nav_backup_cfg">⚙️ Sauvegarde auto (<span id="bkCfgLbl">10</span> scans)</button>
+    <button id="btnShareFund" class="nav-btn nav-item" data-i18n="nav_share_fund">🤝 Partager mes couvertures avec la banque (fond)</button>
+    <button id="btnImport" class="nav-btn nav-item" data-i18n="nav_import_json">📥 Importer JSON</button>
+    <button id="btnImportCsv" class="nav-btn nav-item" data-i18n="nav_import_csv">📥 Importer CSV</button>
+    <button id="btnExportJson" class="nav-btn nav-item" data-i18n="nav_export_json">💾 Export JSON</button>
+    <button id="btnExportCsv" class="nav-btn nav-item" data-i18n="nav_export_csv">📄 Export CSV</button>
+    <button id="btnExportHtml" class="nav-btn nav-item" data-i18n="nav_export_html">🖨️ Export HTML</button>
+    <button id="btnExportMd" class="nav-btn nav-item" data-i18n="nav_export_md">📝 Export Markdown</button>
+    <button id="btnPrintLabels" class="nav-btn nav-item" data-i18n="nav_print_labels">🏷️ Étiquettes de cote</button>
+    <button id="btnQrLabels" class="nav-btn nav-item" data-i18n="nav_qr_labels">🏷️ Étiquettes QR</button>
+  </div></div>
+  <div class="nav-group" data-group="navg_pro"><span class="nav-group-title" data-i18n="navg_pro">⚙️ Professionnel & réglages</span><div class="nav-group-btns">
+    <button id="btnUnimarc" class="nav-btn nav-item" data-i18n="nav_unimarc">📤 Export UNIMARC (pro)</button>
+    <button id="btnImportUnimarc" class="nav-btn nav-item" data-i18n="nav_import_unimarc">📥 Import UNIMARC (reprise de fonds)</button>
+    <button id="btnCoversCfg" class="nav-btn nav-item" data-i18n="nav_covers">🖼️ Couvertures embarquées</button>
+    <button id="btnAiCfg" class="nav-btn nav-item" data-i18n="nav_ai">🤖 IA (recherche & fiches)</button>
+    <button id="btnKeysCfg" class="nav-btn nav-item" data-i18n="nav_keys">🔑 Clés API (sources)</button>
+    <button id="btnGuest" class="nav-btn nav-item" data-i18n="nav_guest">👁️ Catalogue invité</button>
+  </div></div>
+</nav>
+
+<main role="main">
+  <section id="viewGrid">
+    <div id="ctxBar" class="ctx-bar hidden">
+      <span id="ctxCount" class="badge"></span>
+      <button id="ctxFilterOps" class="btn small">⚡ Actions</button>
+      <button id="ctxBulkMode" class="btn small">☑ Sélection</button>
+      <button id="ctxClear" class="btn small" data-i18n="ctx_clear">✕ Filtre</button>
+    </div>
+    <div class="toolbar">
+      <input type="search" id="searchInput" data-i18n="search_placeholder" placeholder="Rechercher (titre, auteur, ISBN, série, tag…)">
+      <select id="sortSelect">
+        <option value="added" data-i18n="sort_added">Ajout (récent)</option>
+        <option value="title" data-i18n="sort_title">Titre A→Z</option>
+        <option value="author" data-i18n="sort_author">Auteur A→Z</option>
+        <option value="rating" data-i18n="sort_rating">Note décroissante</option>
+        <option value="year" data-i18n="sort_year">Année de publication</option>
+        <option value="dewey" data-i18n="sort_dewey">Cote Dewey / genre</option>
+      </select>
+      <select id="shelfFilter"><option value="" data-i18n="all_shelves">Toutes les étagères</option></select>
+      <select id="genreFilter" title="Parcourir par catégorie — liste vos genres réels + la taxonomie">
+        <option value="" data-i18n="all_genres">Tous les genres</option>
+      </select>
+      <select id="mediumFilter">
+        <option value="" data-i18n="all_mediums">Tous les supports</option>
+        <option value="book" data-i18n="f_medium_book">Livre</option>
+        <option value="comic" data-i18n="f_medium_comic">BD</option>
+        <option value="manga" data-i18n="f_medium_manga">Manga</option>
+        <option value="film" data-i18n="f_medium_film">Film</option>
+        <option value="series" data-i18n="f_medium_series">Série</option>
+        <option value="music" data-i18n="f_medium_music">Musique</option>
+        <option value="game" data-i18n="f_medium_game">Jeu</option>
+        <option value="boardgame" data-i18n="f_medium_boardgame">Jeu de société</option>
+        <option value="videogame" data-i18n="f_medium_videogame">Jeu vidéo</option>
+        <option value="rpg" data-i18n="f_medium_rpg">JDR</option>
+      </select>
+      <select id="statusFilter">
+        <option value="" data-i18n="all_status">Tous les statuts</option>
+        <option value="unread" data-i18n="st_unread">À lire</option>
+        <option value="reading" data-i18n="st_reading">En lecture</option>
+        <option value="read" data-i18n="st_read">Lu</option>
+        <option value="wish" data-i18n="st_wish">🛒 Souhaits (à acheter)</option>
+        <option value="loaned" data-i18n="st_loaned">📤 Prêtés</option>
+      </select>
+      <label class="chk"><input type="checkbox" id="favOnly"> <span data-i18n="fav_only">★ Favoris</span></label>
+      <button id="btnSaveSearch" class="btn small" data-i18n="save_search">💾 Sauver cette recherche</button>
+      <button id="btnAiOpen" class="btn small" data-i18n="ai_search">🤖 Recherche IA</button>
+      <button id="btnBulkMode" class="btn small" data-i18n="bulk_mode">☑ Sélection multiple</button>
+      <button id="btnFilterOps" class="btn small" data-i18n="filter_ops">⚡ Actions sur l'affichage</button>
+    </div>
+    <div id="filterOpsBar" class="toolbar hidden">
+      <span id="filterOpsCount" class="badge"></span>
+      <button id="btnFilterAiComplete" class="btn small">🤝 Compléter par IA</button>
+      <button id="btnFilterRefresh" class="btn small">🔄 Mettre à jour (sources)</button>
+      <button id="btnFilterDiag" class="btn small">🔍 Diagnostiquer</button>
+      <button id="btnFilterShareCover" class="btn small">🖼️ Partager couvertures</button>
+      <button id="btnFilterShareRecord" class="btn small">📝 Partager fiches</button>
+      <button id="btnFilterDelete" class="btn btn-danger small" data-i18n="bulk_delete">🗑️ Supprimer</button>
+      <button id="btnFilterSelectAll" class="btn small">☑ Tout sélectionner</button>
+      <button id="btnFilterOpsClose" class="btn small" data-i18n="quit_btn">Quitter</button>
+    </div>
+    <div id="bulkBar" class="toolbar hidden">
+      <span id="bulkCount" class="badge"></span>
+      <select id="bulkStatus">
+        <option value="" data-i18n="bulk_status">— Statut —</option>
+        <option value="unread" data-i18n="st_unread">À lire</option>
+        <option value="reading" data-i18n="st_reading">En lecture</option>
+        <option value="read" data-i18n="st_read">Lu</option>
+        <option value="wish" data-i18n="st_wish">Souhait</option>
+      </select>
+      <select id="bulkShelfSelect"><option value="" data-i18n="g_shelf">— Étagère —</option></select>
+      <input type="text" id="bulkGenre" data-i18n="f_genre_ph" placeholder="Genre">
+      <input type="text" id="bulkLocation" data-i18n="bulk_loc_ph" placeholder="Meuble · Étagère (emplacement)">
+      <button id="btnBulkDelete" class="btn btn-danger small" data-i18n="bulk_delete">🗑️ Supprimer</button>
+      <button id="btnBulkApply" class="btn btn-primary small" data-i18n="apply_btn">Appliquer</button>
+      <button id="btnBulkCancel" class="btn small" data-i18n="quit_btn">Quitter</button>
+    </div>
+    <div id="grid" class="grid"></div>
+    <div class="pager">
+      <span id="pageInfo" class="hint"></span>
+      <button id="btnMore" class="btn hidden" data-i18n="more">Afficher plus</button>
+    </div>
+    <p id="emptyMsg" class="empty hidden" data-i18n="empty_msg">Aucun ouvrage pour le moment.<br>Appuyez sur « Scanner » ou ajoutez un ISBN ci-dessous.</p>
+  </section>
+
+  <section id="viewShelves" class="hidden">
+    <h2 data-i18n="view_shelves">Étagères</h2>
+    <p class="hint" data-i18n="shelves_hint">Les étagères servent à regrouper vos ouvrages (par pièce, thème, format…). Chaque ouvrage peut figurer dans plusieurs étagères.</p>
+    <div class="row">
+      <input type="text" id="newShelfName" data-i18n="shelves_new_ph" placeholder="Nom de la nouvelle étagère">
+      <button id="btnAddShelf" class="btn" data-i18n="create_btn">Créer</button>
+    </div>
+    <ul id="shelfList" class="shelf-list"></ul>
+  </section>
+
+  <section id="viewGroups" class="hidden">
+    <h2 data-i18n="view_groups">Par série / auteur</h2>
+    <div class="tabs" id="groupTabs">
+      <button data-g="series" class="tab active" data-i18n="tab_series">Séries</button>
+      <button data-g="universe" class="tab" data-i18n="tab_universe">🌌 Univers</button>
+      <button data-g="authors" class="tab" data-i18n="tab_authors">Auteurs</button>
+      <button data-g="scenario" class="tab" data-i18n="tab_scenario">Scénaristes</button>
+      <button data-g="art" class="tab" data-i18n="tab_art">Dessinateurs</button>
+    </div>
+    <div id="groupBody"></div>
+  </section>
+
+  <section id="viewLists" class="hidden">
+    <h2 data-i18n="view_lists">Mes listes sauvegardées</h2>
+    <p class="hint" data-i18n="hint_lists">Les listes mémorisent vos critères de recherche/filtres : elles se mettent à jour automatiquement quand la bibliothèque change (idéal pour suivre des achats futurs).</p>
+    <div id="listBody"></div>
+  </section>
+
+  <section id="viewLoans" class="hidden">
+    <h2 data-i18n="view_loans">Prêts en cours</h2>
+    <p class="hint" data-i18n="hint_loans">Suivi des ouvrages prêtés : qui les détient, depuis quand, date de retour prévue. Un retard est signalé en rouge.</p>
+    <div id="loanBody"></div>
+    <h2 style="margin-top:24px" data-i18n="hint_byborrower">Par emprunteur</h2>
+    <p class="hint" data-i18n="hint_borrowerhist">Historique complet des prêts par personne — conservé après les retours.</p>
+    <div id="borrowerBody"></div>
+  </section>
+
+  <section id="viewInventory" class="hidden">
+    <h2 data-i18n="view_inventory">🔎 Inventaire d'étagère</h2>
+    <p class="hint" data-i18n="hint_inventory">Rescanner une étagère pour la vérifier : l'app compare ce que vous scannez avec ce qui est censé y être rangé, et signale les manquants et les intrus.</p>
+    <div class="row">
+      <select id="invLocation"><option value="">— Choisir l'emplacement à inventorier —</option></select>
+      <button id="btnInvStart" class="btn btn-primary" data-i18n="inv_start">Démarrer l'inventaire</button>
+    </div>
+    <div id="invPanel" class="hidden">
+      <div class="inv-progress">
+        <span id="invCount" class="hint"></span>
+        <button id="btnInvStop" class="btn btn-danger small" data-i18n="inv_stop">Terminer</button>
+      </div>
+      <p class="hint" data-i18n="hint_scanning">Scannez maintenant chaque livre de cette étagère (ou saisissez les ISBN ci-dessous l'écran). Chaque scan est vérifié en direct.</p>
+      <div id="invFeed"></div>
+    </div>
+    <div id="invResult"></div>
+    <h2 style="margin-top:26px" data-i18n="inv_history">Historique des inventaires</h2>
+    <div id="invHistBody"></div>
+  </section>
+
+  <section id="viewReading" class="hidden">
+    <h2 data-i18n="view_reading">📖 Ma lecture</h2>
+    <div class="group-card" id="goalCard"></div>
+    <div class="row">
+      <button id="btnSetGoal" class="btn small" data-i18n="r_goal">🎯 Définir mon objectif annuel</button>
+      <button id="btnRandomNext" class="btn small" data-i18n="r_random_guided" title="Tient compte de vos filtres actifs (genre, étagère, support, recherche…)">🎯 Prochain — guidé (filtres actifs)</button>
+      <button id="btnRandomFull" class="btn small" data-i18n="r_random_full" title="Tire parmi TOUTES vos œuvres non lues, tous supports confondus (livres, films, jeux…)">🎲 Hasard complet (tous supports)</button>
+    </div>
+    <h3 data-i18n="r_queue">File « à lire ensuite »</h3>
+    <p class="hint" data-i18n="hint_queue">Cochez « Inclure dans ma file de lecture » dans une fiche pour l'ajouter ici. L'ordre suit la date d'ajout.</p>
+    <div id="queueBody"></div>
+    <h3 data-i18n="r_inprogress">📚 En cours</h3>
+    <div id="inprogressBody"></div>
+  </section>
+
+  <section id="viewGuest" class="hidden"></section>
+
+  <section id="viewStats" class="hidden"></section>
+</main>
+
+<div class="manual-add" id="manualAddBar">
+  <button class="manual-add-more" id="btnMoreActions" title="Actions supplémentaires" aria-label="Actions supplémentaires">⋯</button>
+  <input type="text" id="manualIsbn" inputmode="numeric" data-i18n="isbn_placeholder" placeholder="Saisir un ISBN (10 ou 13 chiffres)">
+  <button id="btnManualAdd" class="btn" data-i18n="add">➕ Ajouter</button>
+  <button id="btnAddNoIsbn" class="btn btn-extra" title="Créer une fiche vierge, sans ISBN" data-i18n="add_no_isbn">➕ Sans ISBN</button>
+  <button id="btnShelveMode" class="btn btn-extra" title="Scanner/ranger en série : chaque ajout reçoit le même meuble + étagère" data-i18n="shelve_mode">📦 Mode rangement</button>
+  <button id="btnInvQuick" class="btn btn-extra" title="Inventaire : comparer le contenu scanné avec ce qui est censé être rangé à un emplacement" data-i18n="inv_quick">🔎 Inventaire</button>
+</div>
+
+<!-- Scanner modal -->
+<div id="scanModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 data-i18n="view_scan">Scanner un code-barres</h2>
+      <button id="btnCloseScan" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <video id="scanVideo" playsinline muted></video>
+    <div class="scan-frame"></div>
+    <p class="hint" id="scanStatus" data-i18n="scan_aim">Visez le code-barres (EAN-13 / ISBN) au dos du livre…</p>
+    <div class="row">
+      <button id="btnBurst" class="btn hidden" data-i18n="burst_mode" title="Ajouter chaque code scanné sans fermer la caméra">⚡ Mode rafale</button>
+      <button id="btnTorch" class="btn hidden" data-i18n="torch">🔆 Lampe</button>
+    </div>
+  </div>
+</div>
+
+<!-- Duplicate prompt -->
+<div id="dupModal" class="modal hidden">
+  <div class="modal-box">
+    <h2 data-i18n="view_dup">Ouvrage déjà présent</h2>
+    <p id="dupMsg"></p>
+    <div class="modal-actions">
+      <button id="btnDupAdd" class="btn btn-primary" data-i18n="dup_add">Ajouter quand même (2ᵉ exemplaire)</button>
+      <button id="btnDupCancel" class="btn" data-i18n="cancel">Annuler</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scatter report modal -->
+<div id="scatterReportModal" class="modal hidden">
+  <div class="modal-box" style="max-width:680px;max-height:86vh;overflow-y:auto">
+    <h2 data-i18n="scatter_report_title">📦 Séries dispersées</h2>
+    <p class="hint" data-i18n="scatter_report_hint">Toutes les séries éparpillées dans votre bibliothèque — regroupez-les en 1 clic.</p>
+    <div id="scatterReportBody"></div>
+    <div class="modal-actions"><button id="btnCloseScatterReport" class="btn" data-i18n="quit_btn">Quitter</button></div>
+  </div>
+</div>
+
+<!-- Share suggestion prompt -->
+<div id="sharePromptModal" class="modal hidden">
+  <div class="modal-box" style="max-width:420px;text-align:center">
+    <h2 data-i18n="share_prompt_title">🤝 Partager au fond communautaire ?</h2>
+    <p class="hint" data-i18n="share_prompt_text">Seules les métadonnées de la fiche seront partagées (titre, résumé, éditeur…). Vos données personnelles (prêts, notes, prix payé) ne sont jamais envoyées.</p>
+    <label class="chk" style="margin:10px 0"><input type="checkbox" id="chkShareRemember"> <span data-i18n="share_remember">Se souvenir de mon choix (modifiable via 📝 dans la fiche)</span></label>
+    <div class="modal-actions">
+      <button id="btnShareNo" class="btn" data-i18n="share_no">Non</button>
+      <button id="btnShareYes" class="btn btn-primary" data-i18n="share_yes">Oui, partager</button>
+    </div>
+  </div>
+</div>
+
+<!-- Detail / edit modal -->
+<div id="detailModal" class="modal hidden">
+  <div class="modal-box detail">
+    <div class="modal-head">
+      <h2 id="detailTitle"></h2>
+      <button id="btnCloseDetail" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <div id="detailBody" class="detail-body">
+      <div class="detail-covers">
+        <img id="coverFront" alt="Couverture devant" class="cover-lg">
+        <img id="coverBack" alt="Couverture derrière" class="cover-lg hidden">
+        <button id="btnShowBack" class="btn small hidden" data-i18n="see_back">Voir le dos</button>
+        <button id="btnFlipCover" class="btn small hidden" data-i18n="flip">Retourner</button>
+      </div>
+      <form id="detailForm" class="detail-form"></form>
+    </div>
+    <div class="modal-actions">
+      <button id="btnSaveDetail" class="btn btn-primary" data-i18n="save">💾 Enregistrer</button>
+      <button id="btnDeleteDetail" class="btn btn-danger" data-i18n="delete">🗑️ Supprimer</button>
+    </div>
+  </div>
+</div>
+
+<!-- AI result modal -->
+<div id="aiModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 data-i18n="ai_title">🤖 Recherche IA</h2>
+      <button id="btnCloseAi" class="btn btn-ghost" data-i18n="close" title="Fermer" aria-label="Fermer">✕</button>
+    </div>
+    <p class="hint">Décrivez ce que vous cherchez en langage naturel, ex. « les polars de 1990 à 2010 notés au moins 4 » ou « les mangas de la série One Tome non lus ».</p>
+    <div class="row"><input type="text" id="aiQuery" data-i18n="ai_query_placeholder" placeholder="Votre demande…"><button id="btnAiRun" class="btn btn-primary" data-i18n="ai_run">Chercher</button></div>
+    <div id="aiResult" class="hint"></div>
+    <div id="aiResultGrid" class="grid" style="margin-top:10px"></div>
+  </div>
+</div>
+
+<!-- API keys manager modal -->
+<div id="keysModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 data-i18n="keys_title">🔑 Clés API — sources de données</h2>
+      <button id="btnCloseKeys" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <p class="hint">Chaque clé reste <b>uniquement dans ce navigateur</b> (localStorage) — jamais dans le code ni sur un serveur. Chaque utilisateur de l'application entre les siennes.</p>
+    <div class="detail-form">
+      <div>
+        <label>Google Books (recommandé — résumés, couvertures, 1000 requêtes/jour gratuites)</label>
+        <input type="text" id="keyGoogleBooks" data-i18n="keys_google" placeholder="AIza… (https://console.cloud.google.com/apis/credentials)" autocomplete="off">
+        <p class="hint">Créer une clé : console.cloud.google.com → projet → API et services → Activer « Google Books API » → Identifiants → Clé API.<br>Recommandé : restreindre la clé aux référants HTTP <code>chenzu-ai.github.io/*</code> et <code>localhost</code>.</p>
+      </div>
+    </div>
+    <div>
+      <label>URL du relais français (optionnel — pour les nouveautés FR via Fnac/BnF)</label>
+      <input type="text" id="keyRelay" placeholder="https://biblio-relais.VOTRE-SOUS-DOMAINE.workers.dev" autocomplete="off">
+      <p class="hint">Le relais interroge Fnac + BnF (inaccessibles directement depuis un navigateur) via un micro-service gratuit Cloudflare Workers. Code et procédure : fichier <code>worker.js</code> du dépôt.</p>
+    </div>
+    <div>
+      <label>URL de la banque de couvertures (optionnel — dossier raw du dépôt privé)</label>
+      <input type="text" id="keyBank" placeholder="https://raw.githubusercontent.com/Chenzu-AI/Bibliotheque/main/covers/" autocomplete="off">
+      <p class="hint">Dernier recours de la reconnaissance : si <code>&lt;URL&gt;&lt;ISBN&gt;.jpg</code> existe, la couverture est utilisée.</p>
+    </div>
+    <div>
+      <label>Token GitHub (pour partager vos couvertures avec la banque — 🤝 dans les fiches)</label>
+      <input type="text" id="keyGhToken" placeholder="ghp_… (droits repo sur le dépôt Bibliotheque)" autocomplete="off">
+      <p class="hint">Stocké uniquement dans votre navigateur. Sert uniquement à envoyer les images que VOUS choisissez de partager.</p>
+    </div>
+    <h3 style="margin:14px 0 6px" data-i18n="keys_active">Sources actives</h3>
+    <p class="hint">Toutes les sources actives sont interrogées en parallèle. Priorité de fusion : Google Books → BnF → Open Library ; chaque source complète les champs manquants des autres.</p>
+    <div class="detail-form">
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcGoogleBooks" checked> Google Books <span class="hint">(riches résumés/couvertures — clé ci-dessus)</span></label>
+      </div>
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcBnf" checked> Catalogue BnF <span class="hint">(éditions françaises — gratuit)</span></label>
+      </div>
+      <div class="form-row">
+        <label class="chk"><input type="checkbox" id="srcOpenLibrary" checked> Open Library <span class="hint">(monde — gratuit)</span></label>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="btnSaveKeys" class="btn btn-primary" data-i18n="save">💾 Enregistrer</button>
+      <button id="btnTestKeys" class="btn" data-i18n="keys_test">🧪 Tester la clé Google Books</button>
+    </div>
+    <h3 style="margin:14px 0 6px" data-i18n="diag_title">🔍 Diagnostic d'un ISBN</h3>
+    <p class="hint">Testez ce que chaque source active trouve pour un ISBN précis (utile pour comprendre un échec de scan).</p>
+    <div class="row"><input type="text" id="diagIsbn" inputmode="numeric" placeholder="ISBN à diagnostiquer (ex. 9782070541270)"><button id="btnDiagIsbn" class="btn" data-i18n="diag_run">Diagnostiquer</button></div>
+    <p class="hint" id="diagResult"></p>
+    <p class="hint" id="keysTestResult"></p>
+  </div>
+</div>
+
+<!-- Shelf photo AI modal -->
+<div id="shelfModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2 data-i18n="shelf_photo_title">📷 Photo d'étagère (IA)</h2>
+      <button id="btnCloseShelf" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <p class="hint">Photographiez l'étagère <b>en paysage</b>. L'IA lit les tranches et compare avec votre collection : ✅ déjà rangés ici · ⚠ censés être ailleurs · ❓ inconnus (recherche en 1 clic).</p>
+    <div class="detail-form">
+      <div class="row">
+        <div class="row" style="gap:10px;justify-content:center">
+        <button type="button" class="btn small" id="btnShelfPhotoCam" data-i18n="take_photo">📷 Prendre une photo</button>
+        <label for="shelfPhotoInput" class="btn small" style="cursor:pointer" data-i18n="choose_file">📁 Choisir un fichier</label>
+      </div>
+      <input type="file" id="shelfPhotoCamInput" accept="image/*" capture="environment" class="hidden">
+      <input type="file" id="shelfPhotoInput" accept="image/*">
+      </div>
+      <img id="shelfPreview" class="shelf-preview hidden" alt="Aperçu de l'étagère">
+      <div class="form-row">
+        <div><label>Meuble (optionnel, pour le rangement auto)</label><input type="text" id="shelfFurniture" list="furnitureList" placeholder="ex. Bibliothèque salon"></div>
+        <div><label>Préfixe d'étagère — les rangées deviennent « préfixe 1, 2… »</label><input type="text" id="shelfPrefix" placeholder="ex. Étagère"></div>
+      </div>
+      <div class="form-row">
+        <div><label>Nombre de rangées visibles (facultatif, aide l'IA)</label><input type="number" id="shelfRows" min="1" max="10" placeholder="auto"></div>
+        <div style="flex:1 1 100%"><label>Par rangée (facultatif — l'IA vérifie chaque décompte contre le vôtre)</label>
+        <input type="text" id="shelfBooksPerRow" placeholder="ex. 2+5g+8+4m+6+5d+3p=33, 4g+5+4g+3+5m+2+4d+2+5d=34">
+        <p class="hint" data-i18n="ph_rows_hint">Segments dans l'ordre gauche→droite : nombre seul = debout, N+p = pile sur le dessus, N+g = pile à gauche, N+d = pile à droite, N+m = pile au milieu. =total en fin de rangée (facultatif, vérifié). Rangées séparées par des virgules.</p></div>
+      </div>
+      <button id="btnShelfAnalyze" class="btn btn-primary" data-i18n="shelf_analyze">🤖 Analyser la photo</button>
+        <button id="btnShelfScanMode" class="btn btn-extra" data-i18n="shelf_scan_mode" title="Chaque scan de cette étagère crée une fiche rangée ici">📷 Scanner cette étagère</button>
+      <p class="hint" id="shelfStatus"></p>
+      <div id="shelfResult"></div>
+    </div>
+  </div>
+</div>
+
+<div id="guestBtns" class="hidden" style="position:fixed;top:12px;right:12px;z-index:60"><button id="btnExitGuest" class="btn btn-primary small" data-i18n="guest_exit">Quitter le catalogue invité</button></div>
+
+<!-- Help center modal -->
+<div id="helpModal" class="modal hidden">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h2>❓ Centre d'aide</h2>
+      <button id="btnCloseHelp" class="btn btn-ghost" aria-label="Fermer">✕</button>
+    </div>
+    <div class="help-body help-fr">
+      <details open><summary>🚀 Démarrer (5 min)</summary>
+        <p>1. <b>Ajouter un livre</b> : bouton 📷 Scanner (téléphone) ou ISBN dans la barre du bas (PC / douchette USB). Cliquez une couverture pour tout modifier.</p>
+        <p>2. <b>Ranger</b> : bouton 📦 Mode rangement (⋯ sur mobile) → indiquez « Meuble / Étagère » → scannez toute l'étagère : rangement automatique.</p>
+        <p>3. <b>Sauvegarder</b> : ☰ → 💾 Sauvegarde immédiate (JSON). Faites un export par mois.</p>
+      </details>
+      <details><summary>📷 Ajouter des livres — toutes les voies</summary>
+        <p>• <b>Scan caméra</b> (+ ⚡ mode rafale) · <b>Douchette USB</b> · <b>➕ Sans ISBN</b></p>
+        <p>• <b>Photo d'étagère IA</b> (☰ → 📷) : l'IA lit les tranches rangée par rangée — nécessite une IA vision (☰ → 🤖)</p>
+        <p>• <b>Import</b> : ☰ → 📥 JSON (fusion) ou CSV (Libib/Excel)</p>
+      </details>
+      <details><summary>🤖 Reconnaissance — optimiser</summary>
+        <p>• <b>Clé Google Books</b> (☰ → 🔑) : résumés + couvertures, 1000 requêtes/jour gratuites</p>
+        <p>• <b>Relais BnF/Fnac</b> (☰ → 🔑) : indispensable pour les livres FR d'avant 2010 — déployez <code>worker.js</code> sur Cloudflare Workers (gratuit)</p>
+        <p>• <b>Diagnostic ISBN</b> (☰ → 🔑 → 🔍) : voyez ce que chaque source répond</p>
+      </details>
+      <details><summary>📚 Organiser</summary>
+        <p>• Étagères virtuelles, tags, favoris ♥, souhaits 🛒 · <b>Séries</b> (☰ → 👥) : tomes manquants, dispersion</p>
+        <p>• Cote Dewey, collection, format, type d'édition (1ʳᵉ, collector, rare), prix éditeur · recherche plein texte</p>
+      </details>
+      <details><summary>📤 Prêts et inventaire</summary>
+        <p>• <b>Prêter</b> : fiche → « Prêté à… » + retour prévu. Rappels à l'ouverture · <b>Réservations</b> (« Réservé pour »)</p>
+        <p>• <b>Inventaire d'étagère</b> (☰ → 🔎) : manquants / intrus / inconnus + historique</p>
+      </details>
+      <details><summary>📖 Ma lecture</summary>
+        <p>Objectif annuel 🎯 · file « à lire ensuite » · 🎲 prochain livre · progression (page courante) · journal daté</p>
+      </details>
+      <details><summary>💾 Exports et pro</summary>
+        <p>• JSON / CSV / HTML / Markdown · <b>🏷️ étiquettes de cote</b> et <b>🏷️ étiquettes QR</b> (scan QR = fiche)</p>
+        <p>• <b>☁️ Sauvegarde cloud GitHub</b> : vos livres dans votre dépôt privé (jeton dans 🔑) — historique des versions, multi-appareils</p>
+        <p>• <b>🏛️ SIGB pro</b> : export UNIMARC et MARC21 XML · import UNIMARC (reprise de fonds Koha/PMB)</p>
+        <p>• <b>📤 UNIMARC</b> : export compatible Koha/PMB (catalogues professionnels)</p>
+        <p>• <b>👁️ Catalogue invité</b> : consultation protégée par PIN pour montrer la collection</p>
+      </details>
+      <details><summary>📄 Documentation complète</summary>
+        <p>Fiches détaillées : <a href="https://github.com/Chenzu-AI/Bibliotheque/tree/main/docs" target="_blank" rel="noopener">github.com/Chenzu-AI/Bibliotheque/docs</a></p>
+      </details>
+      <p class="hint" style="margin-top:10px">Ma Bibliothèque — Création PrimAlph · version <span id="appVersion"></span></p></div>
+    <div class="help-body help-en" style="display:none">
+      <details open><summary>🚀 Getting started (5 min)</summary>
+        <p>1. <b>Add a book</b>: tap 📷 Scan (phone) or enter an ISBN in the bottom bar (PC / USB scanner). Tap a cover to edit everything.</p>
+        <p>2. <b>Shelve</b>: tap 📦 Shelving mode (⋯ on mobile) → enter “Bookcase / Shelf” → scan the whole shelf: automatic shelving.</p>
+        <p>3. <b>Back up</b>: ☰ → 💾 Backup now (JSON). Export once a month.</p>
+      <p>• <b>☰ Menu</b>: 3 groups (Collection & capture · Back up & exchange · Professional & settings) + <b>feature search</b> at the top of the menu</p></details>
+      <details><summary>📷 Adding books — all methods</summary>
+        <p>• <b>Camera scan</b> (+ ⚡ burst mode) · <b>USB scanner</b> · <b>➕ No ISBN</b></p>
+        <p>• <b>Shelf photo AI</b> (☰ → 📷): the AI reads spines row by row — requires a vision AI (☰ → 🤖)</p>
+        <p>• <b>Import</b>: ☰ → 📥 JSON (merge) or CSV (Libib/Excel)</p>
+      </details>
+      <details><summary>🤖 Recognition — optimize</summary>
+        <p>• <b>Google Books key</b> (☰ → 🔑): summaries + covers, 1000 free queries/day</p>
+        <p>• <b>BnF/Fnac relay</b> (☰ → 🔑): essential for pre-2010 French books — deploy <code>worker.js</code> on Cloudflare Workers (free)</p>
+        <p>• <b>ISBN diagnostic</b> (☰ → 🔑 → 🔍): see what each source returns</p>
+      </details>
+      <details><summary>📚 Organize</summary>
+        <p>• Virtual shelves, tags, favorites ♥, wishlist 🛒 · <b>Series</b> (☰ → 👥): missing volumes, scatter detection</p>
+        <p>• Dewey, collection, format, edition type (1st, collector, rare), list price · full-text search</p>
+      </details>
+      <details><summary>📤 Loans & inventory</summary>
+        <p>• <b>Loan</b>: record → “Loaned to…” + due date. Reminders on launch · <b>Reservations</b> (“Reserved for”)</p>
+        <p>• <b>Shelf inventory</b> (☰ → 🔎): missing / misplaced / unknown + history</p>
+      </details>
+      <details><summary>📖 My reading</summary>
+        <p>Annual goal 🎯 · “read next” queue · 🎲 random pick · progress (current page) · dated journal</p>
+      </details>
+      <details><summary>💾 Exports & pro</summary>
+        <p>• JSON / CSV / HTML / Markdown · <b>🏷️ spine labels</b> and <b>🏷️ QR labels</b> (scan QR = record)</p>
+        <p>• <b>📤 UNIMARC</b>: export compatible with Koha/PMB (professional catalogs) · <b>MARC21 XML</b> international export · <b>UNIMARC import</b> (holdings takeover from Koha/PMB)</p>
+        <p>• <b>☁️ GitHub cloud backup</b>: your books in your private repository (token in 🔑) — version history, multi-device push/pull</p>
+        <p>• <b>👁️ Guest catalog</b>: PIN-protected read-only view to show your collection</p>
+      </details>
+      <details><summary>📄 Full documentation</summary>
+        <p>Detailed guides: <a href="https://github.com/Chenzu-AI/Bibliotheque/tree/main/docs/en" target="_blank" rel="noopener">github.com/Chenzu-AI/Bibliotheque/docs/en</a></p>
+      </details>
+      <p class="hint" style="margin-top:10px">My Library — by PrimAlph · version <span id="appVersion"></span></p></div>
+  </div>
+</div>
+
+<div id="toast" class="toast hidden"></div>
+<input type="file" id="importFile" accept="application/json" class="hidden">
+<input type="file" id="importCsvFile" accept=".csv,text/csv" class="hidden">
+<input type="file" id="unimarcFile" class="hidden">
+<script src="vendor/zxing.min.js"></script>
+<script src="vendor/qrcode.js"></script>
+<script src="i18n.js"></script>
+<script src="app.js"></script>
+<!-- Onboarding (premier lancement) -->
+<div id="onboardingModal" class="modal hidden" style="z-index:100">
+  <div class="modal-box" style="max-width:520px;text-align:center">
+    <div id="obStep1">
+      <div style="font-size:3rem;margin:16px 0">📚</div>
+      <h2 data-i18n="ob_welcome">Bienvenue ! · Welcome!</h2>
+      <p class="hint" id="obLangHint">Ma Bibliothèque — Création PrimAlph<br>Scannez vos livres, l'app fait le reste. 100 % local et privé.</p>
+      <p style="margin:18px 0"><b>1/3</b> — <span id="obTitle1" data-i18n="ob_title1">Commencez par scanner</span></p>
+      <p class="hint" id="obText1">Appuyez sur « 📷 Scanner » et visez le code-barres d'un livre — la fiche se crée seule (couverture, résumé, auteur). Sur PC : une douchette USB ou la saisie ISBN suffisent.</p>
+    </div>
+    <div id="obStep2" class="hidden">
+      <div style="font-size:3rem;margin:16px 0">💾</div>
+      <p style="margin:18px 0"><b>2/3</b> — <span id="obTitle2" data-i18n="ob_title2">Protégez vos données</span></p>
+      <p class="hint" id="obText2">Tout vit dans votre navigateur — aucune donnée envoyée. Pensez à exporter une sauvegarde JSON de temps en temps : ☰ → 💾 Sauvegarde immédiate (30 secondes par mois = tranquillité à vie).</p>
+    </div>
+    <div id="obStep3" class="hidden">
+      <div style="font-size:3rem;margin:16px 0">🇫🇷</div>
+      <p style="margin:18px 0"><b>3/3</b> — <span id="obTitle3" data-i18n="ob_title3">Livres français ?</span></p>
+      <p class="hint" id="obText3">Pour le meilleur taux de reconnaissance (notamment avant 2010) : ☰ → 🔑 Clés API → ajoutez votre clé Google Books (gratuite) et, si vous le souhaitez, le relais BnF/Fnac (déploiement 5 min, gratuit — guide dans l'aide ❓).</p>
+    </div>
+    <div class="row" style="justify-content:center;margin-top:22px;gap:10px">
+      <button id="obPrev" class="btn hidden" data-i18n="ob_prev">← Précédent</button>
+      <button id="obNext" class="btn btn-primary" data-i18n="ob_next">Suivant →</button>
+      <button id="obDone" class="btn btn-primary hidden" data-i18n="ob_done">C'est parti ! 🚀</button>
+      <button id="obSkip" class="btn btn-ghost" data-i18n="ob_skip">Passer</button>
+    </div>
+  </div>
+</div>
+</body>
+</html>

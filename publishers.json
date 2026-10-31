@@ -1,0 +1,80 @@
+{
+  "$comment": "Règles de récupération des pages produits éditeurs. Le worker relais charge ce fichier à l'exécution (miroir public) — ajouter un éditeur ici SUFFIT, aucun re-déploiement du worker n'est nécessaire. Champs : publisher = mots-clés à matcher dans le nom d'éditeur (BnF/Fnac) ; url = gabarit avec {isbn} et/ou {slug} ; slugFrom = source du slug (title) ; slugCut = séparateurs où couper le titre avant slugification. NOTE TESTS REELS (2026): la plupart des sites editeurs FR bloquent le scraping (Actes Sud 403, First bloque, Gallmeister 500). Ajouter une regle UNIQUEMENT apres avoir verifie que le site repond. Rustica = valide (teste bout en bout).",
+  "rules": [
+    {
+      "publisher": [
+        "rustica"
+      ],
+      "url": "https://www.rusticaeditions.com/{isbn}-{slug}.html",
+      "slugFrom": "title",
+      "slugCut": [
+        " : ",
+        " / "
+      ]
+    },
+    {
+      "publisher": [
+        "hachette",
+        "hachette pratique",
+        "hachette cuisine"
+      ],
+      "url": "https://www.hachette-pratique.com/livre/{slug}-{isbn}/",
+      "slugFrom": "title",
+      "slugCut": [
+        " : ",
+        " / "
+      ],
+      "slugPrefix": [
+        "simplissime",
+        "mini-simplissime"
+      ],
+      "note": "Teste le slug seul, puis avec chaque prefixe de collection en minuscule (simplissime-le-titre...). Site ouvert (pas de 403) — valide par lecture reelle de la fiche produit."
+    },
+    {
+      "publisher": [
+        "larousse"
+      ],
+      "url": "https://www.editions-larousse.fr/livre/{slug}-{isbn}/",
+      "slugFrom": "title",
+      "slugCut": [
+        " : ",
+        " / "
+      ],
+      "note": "Meme plateforme que hachette-pratique (groupe Hachette Livre) — teste sur cas reel (P'tits Sherlock)."
+    }
+  ],
+  "tested": {
+    "rustica": "OK — schema <isbn>-<slug>.html valide, extraction complete",
+    "actes-sud": "BLOQUE 403 sur TOUTES les pages (catalogue, collections, auteurs) — anti-bot strict, datacenter filtré. Ne pas insister : respect de la politique du site. Leurs données passeront par la banque communautaire.",
+    "editions-first": "BLOQUE — pas de contenu lisible",
+    "gallmeister": "ERREUR — 500",
+    "larousse/le-robert": "non pertinent — dictionnaires, pas de fiches produits par ISBN",
+    "actes-sud-urls": {
+      "catalogue": "https://actes-sud.fr/catalogue (13443 œuvres)",
+      "livre": "https://actes-sud.fr/catalogue/le-vent-de-la-plaine-014814",
+      "collections": "https://actes-sud.fr/collections/",
+      "series": "https://actes-sud.fr/serie/",
+      "rayons": "https://actes-sud.fr/rayons/litterature-000027"
+    },
+    "hachette-pratique": "OUVERT — page produit lisible (resume, collection, prix, pages, ISBN). Recherche ?s= inoperante mais URL directe /livre/<slug>-<isbn>/ fonctionne. Simplissime = Hachette Pratique (correction utilisateur).",
+    "editions-larousse": "OUVERT — page produit lisible (titre, collection P'tits Sherlock, resume complet, prix, pages, date). Schema /livre/<slug>-<isbn>/ identique Hachette Pratique. Larousse editions = maison du groupe Hachette Livre (les dictionnaires larousse.fr sont un autre site, non pertinent).",
+    "flammarion": "BLOQUE — WAF enterprise ('Request Rejected' + support ID) sur la page produit. Le site existe (catalogue https://editions.flammarion.com/Catalogue, schema /<slug>/<isbn>) mais rejette l'acces automatise. Pas de contournement (respect). Banque communautaire pour leur fonds.",
+    "flammarion-urls": {
+      "catalogue": "https://editions.flammarion.com/Catalogue",
+      "livre": "https://editions.flammarion.com/apollonios/9782080155542"
+    },
+    "glenat": "SITE OUVERT (404 propre) — schema produit non confirme (URL utilisateur 404, vrai format a retrouver)",
+    "kana": "SITE OUVERT (404 propre, pas de WAF) — URL produit exacte a confirmer (essaie /manga/<serie>-tome-N/<isbn> ?)",
+    "pika": "SITE OUVERT — URL utilisateur 404, vrai schema a confirmer",
+    "casterman": "BLOQUE — WAF 'Request Rejected' (comme Flammarion)",
+    "dargaud": "SITE OUVERT — page utilisateur 404, schema reel inconnu (site par series)"
+  },
+  "hint-groupe-hachette": "hachette-pratique.com et editions-larousse.fr partagent la meme plateforme /livre/<slug>-<isbn>/. A tester de meme: hachette-romans.fr? marabout.com? casterman? (groupe Hachette Livre inclut aussi Grasset, Fayard, Stock... mais leur plateforme peut differer).",
+  "annuaire-ia-liste": {
+    "$note": "Liste d'editeurs fournie par l'utilisateur (source IA generatrice) — URLs d'exemple NON VERIFIEES. A confirmer livre par livre via la methode Rustica/Larousse (URL copiee depuis un navigateur sur une fiche produit reelle).",
+    "verdicts-echantillon": {
+      "seuil": "SITE OUVERT (404 propre, pas de WAF) — schema /ouvrage/<slug>/<isbn> plausible, URL exacte a voir sur un livre reel",
+      "rue-de-sevres": "BLOQUE — acces automatise refuse"
+    }
+  }
+}

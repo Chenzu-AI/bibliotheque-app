@@ -1,0 +1,191 @@
+# 📖 Manuel d'utilisation
+
+Guide complet, pas à pas. Les fiches **1-INSTALLATION-PC** et **2-INSTALLATION-MOBILE** expliquent l'installation.
+
+---
+
+## Premiers pas
+
+1. Ouvrez l'application (menu Démarrer / écran d'accueil)
+2. Appuyez sur **📷 Scanner** (mobile) ou saisissez un **ISBN** dans la barre du bas (PC)
+3. La fiche se crée avec couverture, résumé, références — cliquez sur la couverture pour tout modifier
+
+> 📱 **Sur mobile en mode portrait**, les boutons secondaires de la barre du bas (**➕ Sans ISBN**, **📦 Mode rangement**, **🔎 Inventaire**) sont derrière le bouton **⋯** : un tap pour les afficher.
+
+## 0. Langue et premier lancement
+
+L'app est **bilingue FR/EN** : bouton **🌐** (barre du haut) pour basculer instantanément. Au premier lancement, la langue suit celle de votre navigateur ; votre choix est mémorisé. Le Centre d'aide (❓) et tous les messages suivent la langue active.
+
+**Au tout premier lancement**, un mini-guide de 3 écrans s'affiche (scanner → sauvegarder → sources françaises). Il ne réapparaît plus ensuite ; « Passer » le ferme aussi.
+
+## 1. Ajouter des ouvrages
+
+| Action | Comment |
+|---|---|
+| Scanner avec le téléphone | **📷 Scanner** → visez le code-barres au dos du livre |
+| Scanner plusieurs d'affilée | Dans la fenêtre scan : **⚡ Mode rafale** → chaque livre s'ajoute sans fermer la caméra |
+| Saisir un ISBN | Barre du bas → tapez les chiffres sous le code-barres → **➕ Ajouter** (ou Entrée) |
+| Avec une douchette USB | Branchez-la, cliquez dans la barre du bas, scannez chaque livre : saisie + validation automatiques |
+| Livre sans code-barres | **➕ Sans ISBN** → fiche vierge → complétez |
+| Livre introuvable en ligne | L'app crée la fiche quand même → complétez à la main (ou bouton 🤖 Compléter par IA) |
+
+**Doublons** : si l'ISBN est déjà connu, l'app vous demande « Ajouter quand même (2ᵉ exemplaire) ? ». Les doublons sont marqués ⚠ sur les couvertures.
+
+## 2. Ranger les livres physiquement
+
+### Mode rangement (une étagère entière en 2 minutes)
+1. **📦 Mode rangement** (barre du bas)
+2. Indiquez le **Meuble** (ex. « Bibliothèque salon ») et l'**Étagère** (ex. « Étagère 4 »)
+3. Scannez tous les livres de l'étagère — chacun reçoit l'emplacement automatiquement
+4. Re-cliquez **📦** pour arrêter
+
+L'app **suggère** les meubles/étagères déjà connus (listes déroulantes dans les fiches).
+
+### Modifier l'emplacement d'un livre
+Ouvrez la fiche (clic sur la couverture) → **Meuble** + **Étagère** → 💾 Enregistrer.
+
+### Alerte de dispersion
+Au scan, si le livre appartient à une **série rangée à plusieurs endroits**, l'app vous prévient : « ⚠ Série « X » dispersée ! Ce tome ici, les autres à tel endroit — voulez-vous ouvrir la fiche ? ». La vue **👥 Par série / auteur** affiche les emplacements de chaque série en permanence.
+
+## 3. Organiser la collection
+
+- **Étagères virtuelles** (☰ → 🗂️ Étagères) : groupes libres ( « Polars », «À prêter »…), un livre peut en faire partie de plusieurs — cochées dans sa fiche
+- **Fiche d'un ouvrage** : note ★★★★★, annotation, tags, série + tome + état (en cours/complète), scénariste/dessinateur, **cote Dewey + genre**, **collection éditoriale + format + type d'édition (1ʳᵉ édition, collector, rare, incunable) + prix éditeur + public**, favori ♥, souhait 🛒, résumé, couvertures devant/dos. Les éditions remarquables affichent un badge (⭐ collector, 💎 rare…) sur la couverture ; la statistique « Valeur catalogue » totalise les prix éditeurs (estimation d'assurance)
+- **Recherche** : tapez n'importe quoi (titre, auteur, ISBN, genre, meuble…) — filtrage instantané
+- **Filtres** : étagère, statut (à lire / en lecture / lu / souhait / prêté), ★ favoris
+- **Tri** : ajout, titre, auteur, note, année, **cote Dewey**
+- **Listes dynamiques** (☰ → 📋 Mes listes) : filtrez puis **💾 Sauver cette recherche** — la liste se met à jour toute seule (idéal pour une liste d'achats)
+
+### Sélection multiple (édition en masse)
+1. **☑ Sélection multiple** (barre d'outils) → des cases apparaissent
+2. Cochez les ouvrages → choisissez le nouveau statut / étagère / genre / emplacement → **Appliquer**
+
+## 4. Gérer les séries
+
+**☰ → 👥 Par série / auteur** : onglets Séries / Auteurs / Scénaristes / Dessinateurs. Pour chaque série :
+- tomes possédés · badge *série en cours* / *série complète*
+- **tomes manquants** calculés automatiquement (si le nombre total est indiqué) → bouton 🛒 pour les ajouter aux souhaits
+- 📍 emplacements de rangement (et alerte si dispersée)
+
+## 5. Prêter un livre
+
+1. Ouvrez la fiche → champ **Prêté à…** + date de retour prévue → 💾
+2. Le livre affiche le badge 📤 sur sa couverture
+3. **☰ → 📤 Prêts** : prêts en cours (retards en rouge ⚠), bouton **↩ Retour**, et **historique par emprunteur** conservé après retour
+
+## 6. Faire l'inventaire d'une étagère (récolement)
+
+1. **☰ → 🔎 Inventaire d'étagère**
+2. Choisissez l'emplacement → **Démarrer l'inventaire** (la caméra se propose automatiquement)
+3. Scannez chaque livre de l'étagère, feedback en direct :
+   - ✅ **bien rangé ici**
+   - ⚠ **Intrus** : censé être ailleurs → **📦 Le ranger ici** ou ignorer
+   - ❓ **Inconnu** : pas dans la bibliothèque → **➕ L'intégrer** (ajouté ici avec ses infos)
+4. **Terminer** → **bilan** : manquants (avec mention « prêté à… » le cas échéant), intrus, inconnus
+5. L'**historique** des inventaires se constitue en bas de page
+
+## 6 bis. Photographier une étagère (photo + IA)
+
+Complément visuel de l'inventaire : une photo au lieu de scanner chaque code-barres. **Nécessite l'IA configurée avec un modèle vision** (☰ → 🤖 → ex. `pixtral-12b` chez Mistral, ou `llama3.2-vision` via Ollama en local).
+
+1. **☰ → 📷 Photo d'étagère (IA)** → prenez la photo **en paysage** (l'appareil photo s'ouvre directement)
+2. Renseignez le **Meuble** (ex. « Bibliothèque salon », avec suggestions) et le **Préfixe d'étagère** (ex. « Étagère ») — les rangées détectées, de haut en bas, deviennent automatiquement **« Étagère 1 », « Étagère 2 »…** (le rangement est automatique)
+3. **🤖 Analyser** (10-60 s) — l'IA lit chaque tranche, rangée par rangée
+4. Résultat comparé à **votre** collection :
+   - ✅ **déjà à cet emplacement** — confirmé
+   - ⚠ **censé être ailleurs** → **📦 Ranger ici** (met à jour la fiche)
+   - ❓ **inconnu** → **🔎 Rechercher & ajouter** (fiche créée via Google Books, rangée au bon endroit)
+5. Bilan : X bien rangés · Y mal placés · Z inconnus
+
+> 💡 Usage idéal : saisir une étagère entière en une photo (création + rangement), ou vérifier un rangement existant. La précision dépend du modèle IA (80-95 % des tranches bien lues sur photo nette) — les boutons de correction couvrent le reste. La photo est envoyée au fournisseur IA choisi ; en local (Ollama), tout reste chez vous.
+
+## 7. Utiliser l'IA (optionnel)
+
+**Configuration** (☰ → 🤖 IA) : fournisseur `api` (clé Mistral/OpenAI) ou `ollama` (local, gratuit).
+
+- **🤖 Recherche IA** (barre d'outils) : décrivez en langage naturel → « les BD de Uderzo non lues rangées au salon »
+- **🤖 Compléter par IA** (dans une fiche) : génère résumé, genre, cote Dewey pour les fiches incomplètes
+
+## 7 bis. Optimiser la reconnaissance des livres (clé Google Books + relais BnF/Fnac)
+
+La chaîne de recherche automatique : Open Library → Google Books → conversion ISBN-10 → **relais BnF/Fnac** → couvertures en secours. Deux réglages optionnels la rendent complète :
+
+### A. Clé Google Books (résumés et couvertures, 1000 requêtes/jour gratuites)
+1. [console.cloud.google.com](https://console.cloud.google.com) → projet → *API et services* → activer **« Google Books API »** → *Identifiants* → **Créer des identifiants** → **Clé API**
+2. **☰ → 🔑 Clés API** → collez la clé → **🧪 Tester** (✅ = clé valide) → **💾 Enregistrer**
+3. La clé reste **uniquement dans votre navigateur**. Recommandé : restreindre aux référants `chenzu-ai.github.io/*`
+
+### B. Relais BnF/Fnac (indispensable pour les livres français, surtout d'avant 2010)
+Les bases internationales ignorent une partie du fonds français ancien ; la **BnF, elle, a tout** (dépôt légal). Comme un navigateur ne peut pas interroger la BnF directement (CORS), un micro-service gratuit sert de relais :
+
+1. **https://dash.cloudflare.com** → compte gratuit → **Workers & Pages** → Create → **« Commencez avec Hello World ! »** → nommez `biblio-relais` → Deploy
+2. **Edit code** → remplacez le code par le fichier **`worker.js`** du dépôt → **Deploy**
+3. Testez : `https://biblio-relais.votre-sous-domaine.workers.dev/?isbn=9782221110003` → JSON avec le titre = ✅
+4. **☰ → 🔑 Clés API** → champ **« URL du relais français »** → collez l'URL → **💾 Enregistrer**
+
+> Coût : 0 € (100 000 requêtes/jour gratuites). Le worker ne stocke rien ; seuls les ISBN consultés transitent. Sous-domaine personnalisable si vous ne voulez pas votre nom dans l'URL (Workers & Pages → réglages du sous-domaine).
+
+### Diagnostic en cas d'échec
+**☰ → 🔑 → « 🔍 Diagnostic d'un ISBN »** : entrez un ISBN → l'app montre ce que **chaque source** répond (y compris l'ISBN-10 converti et le relais). Si tout est ❌ : le livre est absent des catalogues → complétez à la main ou via **🤖 Compléter par IA**.
+
+> 💡 **Rescan d'une fiche incomplète** : l'app complète automatiquement la fiche existante (pas de doublon). Pour un vrai 2ᵉ exemplaire, répondez « Ajouter quand même » quand la fiche est déjà complète.
+
+## 7 ter. Suivre sa lecture (vue « Ma lecture »)
+
+**☰ → 📖 Ma lecture** — votre cockpit de lecture :
+- **🎯 Objectif annuel** : bouton « Définir mon objectif » (ex. 40 livres en 2027) — barre de progression, livres restants, rythme possible
+- **🎲 Choisir mon prochain livre** : tirage aléatoire parmi vos « à lire »
+- **File « à lire ensuite »** : cochez la case dans une fiche ; gestion (ouvrir/retirer) dans la vue
+- **En cours** : les livres en statut « En lecture » avec leur progression — renseignez **page courante** dans la fiche pour la barre d'avancement
+- **Journal de lecture** : dans chaque fiche, ajoutez des notes horodatées (« 15/03 : chapitre 3 excellent »)
+
+> Le passage d'un livre en statut « **Lu** » enregistre automatiquement la date de fin — c'est ce qui alimente les statistiques annuelles (livres terminés, pages lues, heures de lecture estimées) dans l'onglet Statistiques.
+
+## 7 quater. Cycle de vie d'un livre (acquisition et cession)
+
+Dans chaque fiche :
+- **Acquis le / chez / prix payé** — distinct du prix éditeur (valeur catalogue)
+- **Emprunté à quelqu'un ?** — le miroir des prêts : tracez les livres que d'autres vous ont prêtés
+- **Cédé** : Vendu / Donné / Perdu / Prêté non rendu + date + prix de cession. La fiche est conservée (historique), le livre sort automatiquement des vues et statistiques actives
+
+## 8. Sauvegarder, exporter, restaurer
+
+| Besoin | Action |
+|---|---|
+| Sauvegarde complète | ☰ → **💾 Sauvegarde immédiate** (JSON) |
+| Sauvegarde automatique | ☰ → **⚙️ Sauvegarde auto** → tous les N scans (0 = off) |
+| Transférer vers un autre appareil | **💾 Export JSON** → fichier → sur l'autre appareil : **📥 Importer JSON** (fusion sans doublons) |
+| Tableur Excel | ☰ → **📄 Export CSV** |
+| Catalogue à imprimer/partager | ☰ → **🖨️ Export HTML** |
+| Obsidian/Notion/GitHub | ☰ → **📝 Export Markdown** |
+| Étiquettes de cote à coller | ☰ → **🏷️ Étiquettes de cote** → imprimer (50×30 mm) |
+| Couvertures hors-ligne à vie | ☰ → **🖼️ Couvertures embarquées** (recommandé PC uniquement) |
+| Sauvegarde dans votre GitHub privé | ☰ → **☁️ Sauvegarde sur GitHub** (v2.3 — jeton dans 🔑, historique de versions inclus) |
+| SIGB professionnel (Koha/PMB) | ☰ → **📤 Export UNIMARC** ou **📤 Export MARC21 XML** |
+| Reprise d'un fonds pro existant | ☰ → **📥 Import UNIMARC** (export ISO 2709 du SIGB) |
+
+## 9. Suivre l'activité
+
+**☰ → 📊 Statistiques** : totaux, statuts, prêts, favoris, **répartition par emplacement**, **courbe des ajouts** (12 mois), **top auteurs**.
+
+## 10. Conseils
+
+- **Rythme de sauvegarde** : un export JSON par mois minimum ; rangez-le dans un cloud (OneDrive…)
+
+### ☁️ Sauvegarde cloud GitHub (v2.3)
+
+La sauvegarde la plus solide — vos données dans **votre dépôt GitHub privé**, avec l'historique des versions offert par GitHub (vous pouvez revenir à n'importe quelle sauvegarde antérieure).
+
+1. **Créer un jeton GitHub** : github.com/settings/tokens → *Generate new token (classic)* → cochez `repo` → copiez le `ghp_…`
+2. **Coller le jeton dans l'app** : ☰ → 🔑 Clés API → champ *Token GitHub* → Enregistrer (le jeton reste dans votre navigateur, jamais ailleurs)
+3. **☁️ Sauvegarde sur GitHub** (menu) : la bibliothèque complète est poussée dans le fichier `bibliotheque-sauvegarde.json` du dépôt privé
+4. **☁️ Récupérer depuis GitHub** (menu) : fusionne la sauvegarde distante dans la bibliothèque locale — rien n'est jamais écrasé
+
+**Multi-appareils sans serveur** : sauvegardez depuis le PC, récupérez sur le mobile (ou l'inverse). Le jeton doit être configuré sur chaque appareil.
+- **Grande collection** : la pagination (60 par page) garde l'interface fluide ; utilisez recherche + filtres
+- **Fiche incomplète après scan** (livre rare) : complétez les champs vides, ou 🤖 Compléter par IA
+- **Changement de PC/téléphone** : exportez le JSON **avant** de changer d'appareil
+---
+*Ma Bibliothèque — Création PrimAlph*
+
+> 🇬🇧 **English version**: [`docs/en/`](en/4-MANUAL.md)

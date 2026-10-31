@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ma Bibliothèque PRO — pour librairies, bibliothèques et structures</title>
+<style>
+:root { --bg:#f6f3ec; --panel:#fff; --ink:#2b2118; --muted:#8a7f70; --accent:#a5552a; --blue:#2f5d8a; --line:#e7e0d2; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; }
+.hero { background:linear-gradient(135deg,#1c2733,#2f5d8a); color:#f9f5ee; padding:64px 20px 72px; text-align:center; }
+.hero h1 { font-size:clamp(1.8rem,5vw,2.8rem); margin-bottom:12px; }
+.hero p { max-width:680px; margin:0 auto 28px; font-size:1.05rem; opacity:.92; }
+.cta { display:inline-block; background:var(--accent); color:#fff; padding:14px 34px; border-radius:999px; text-decoration:none; font-weight:600; font-size:1.05rem; }
+.cta.blue { background:var(--blue); }
+.badge { display:inline-block; background:#ffffff22; border-radius:999px; padding:4px 14px; font-size:.8rem; margin-top:18px; }
+.wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; margin:48px 0; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px; }
+.card h3 { font-size:1.05rem; margin-bottom:8px; }
+.card p { font-size:.9rem; color:var(--muted); }
+section { padding:28px 0; }
+h2 { text-align:center; font-size:1.6rem; margin-bottom:8px; }
+.center { text-align:center; }
+table { width:100%; border-collapse:collapse; background:var(--panel); border-radius:12px; overflow:hidden; margin:20px 0; }
+th,td { padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); font-size:.9rem; }
+th { background:#e3ecf5; }
+.price-card { background:var(--panel); border:2px solid var(--line); border-radius:16px; padding:28px; text-align:center; max-width:420px; margin:24px auto; }
+.price { font-size:2.6rem; font-weight:700; color:var(--blue); }
+.per { color:var(--muted); }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); }
+.check { color:#3c7a4d; font-weight:700; }
+.tag { display:inline-block; font-size:.68rem; font-weight:700; border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle; letter-spacing:.02em; }
+.tag.soon { background:#e3ecf5; color:#2f5d8a; }
+.tag.dev { background:#f5e8d3; color:#8a5a2a; }
+</style>
+</head>
+<body>
+<div class="hero" style="position:relative">
+  <a style="position:absolute;top:14px;right:16px;color:#f9f5eecc;font-size:.85rem;text-decoration:none" href="en/pro.html">🇬🇧 English</a>
+  <h1>🏛️ Ma Bibliothèque <span style="color:#7ba7d0">PRO</span></h1>
+  <p>Pour les <b>librairies, bibliothèques de quartier, médiathèques, associations et collections professionnelles</b> — la puissance de catalogage la plus rapide du marché, compatible avec vos outils existants.</p>
+  <a class="cta blue" href="mailto:contact@primalph.lu?subject=Ma%20Biblioth%C3%A8que%20PRO">Demander une présentation</a><br>
+  <span class="badge">Création PrimAlph</span>
+</div>
+<div class="wrap">
+  <section>
+    <h2>Pensé pour les professionnels du livre</h2>
+    <div class="grid">
+      <div class="card"><h3>⚡ Catalogage le plus rapide du marché</h3><p>Douchette USB + mode rafale : ~2 secondes par livre. La reconnaissance française (BnF, Google Books, Fnac) remplit les fiches automatiquement — titre, résumé, couverture, éditeur.</p></div>
+      <div class="card"><h3>📷 Inventaire par photo IA</h3><p>Une photo d'étagère = inventaire complet avec manquants, mal placés, inconnus. Le récolement ne prend plus des jours, mais des minutes.</p></div>
+      <div class="card"><h3>📤 Compatible Koha, PMB & UNIMARC</h3><p>Export <b>UNIMARC</b> et <b>MARC21 XML</b> : vos notices s'intègrent dans votre SIGB existant. Et surtout : <b>reprise de fonds</b> — importez votre catalogue Koha/PMB, chaque notice devient une fiche, sans doublons. Pas de lock-in : export libre en JSON, CSV, MARC.</p></div>
+      <div class="card"><h3>🏷️ Étiquettes QR & cotes</h3><p>Génération d'étiquettes imprimables (cotes Dewey + QR code d'exemplaire) : scan QR = fiche ouverte, prêt et retour en un geste.</p></div>
+      <div class="card"><h3>📤 Prêts & adhérents</h3><p>Emprunteurs, dates de retour, retards signalés, historique complet par personne, réservations, rappels à l'ouverture.</p></div>
+      <div class="card"><h3>👁️ Catalogue invité / OPAC<span class="tag dev">En développement</span></h3><p>Le catalogue invité protégé par PIN fonctionne dès aujourd'hui (tablette en boutique, accueil de la médiathèque). L'OPAC public hébergé sur votre domaine arrive<span class="tag soon">À venir</span>.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Catalogage terrain — le comparatif</h2>
+    <table>
+      <tr><th></th><th>Ma Bibliothèque PRO</th><th>SIGB classique (Koha, PMB…)</th></tr>
+      <tr><td>Temps de saisie d'un livre</td><td class="check">~2 s (scan)</td><td>5-15 min (saisie manuelle)</td></tr>
+      <tr><td>Matériel requis</td><td class="check">Téléphone ou PC + douchette USB (20 €)</td><td>Serveur, poste dédié, formation</td></tr>
+      <tr><td>Installation</td><td class="check">Aucune — navigateur</td><td>Jours à semaines</td></tr>
+      <tr><td>Inventaire par photo IA</td><td class="check">Oui</td><td>Non</td></tr>
+      <tr><td>Export UNIMARC</td><td class="check">Oui</td><td>Oui (format natif)</td></tr>
+      <tr><td>Coût de départ</td><td class="check">0 € matériel inclus</td><td>Serveur + intégrateur</td></tr>
+    </table>
+    <p class="center" style="color:var(--muted)">Le positionnement : pas remplacer votre SIGB — être l'<b>outil de saisie terrain</b> le plus rapide, qui alimente votre système professionnel via UNIMARC.</p>
+  </section>
+  <section>
+    <h2>Formule PRO</h2>
+    <div class="price-card">
+      <div class="price">19 €<span class="per">/mois</span></div>
+      <p style="color:var(--muted);margin:8px 0 18px">par établissement · sans engagement</p>
+      <p style="text-align:left;font-size:.9rem">
+        <span class="check">✓</span> Toutes les fonctions de la version gratuite<br>
+        <span class="check">✓</span> <b>Reprise de fonds UNIMARC</b> (import Koha/PMB)<br>
+        <span class="check">✓</span> Sauvegarde cloud gérée (sans configuration)<br>
+        <span class="check">✓</span> Catalogue invité personnalisable (logo)<br>
+        <span class="check">✓</span> Banque de couvertures mutualisée (contribution)<br>
+        <span class="check">✓</span> Support prioritaire & paramétrage<br>
+        <span class="check">✓</span> Formation d'équipe incluse (visio)<br>
+        <span style="color:var(--muted);font-size:.82rem;display:block;margin-top:12px">Inclus dès que disponible :</span>
+        <span class="check">✓</span> OPAC public hébergé<span class="tag soon">À venir</span><br>
+        <span class="check">✓</span> Multi-agents sur la même collection<span class="tag soon">À venir</span><br>
+        <span class="check">✓</span> Statistiques d'activité lecteurs<span class="tag soon">À venir</span>
+      </p>
+    </div>
+    <p class="center" style="color:var(--muted);font-size:.85rem">Associations et structures à budget serré : tarif solidaire sur simple demande.<br>Essai 30 jours gratuit.</p>
+  </section>
+  <section class="center">
+    <h2> Parlons de votre structure</h2>
+    <p style="color:var(--muted)">Chaque bibliothèque est différente — présentation sur mesure en 30 minutes.</p>
+    <p><a class="cta blue" href="mailto:contact@primalph.lu?subject=Demande%20de%20pr%C3%A9sentation%20PRO">Demander une présentation</a></p>
+  </section>
+</div>
+<footer>Ma Bibliothèque PRO — Création PrimAlph · PrimAlph S.à r.l.-S (Luxembourg) · <a href="public.html" style="color:inherit">Version personnelle gratuite</a> · contact@primalph.lu</footer>
+</body>
+</html>
