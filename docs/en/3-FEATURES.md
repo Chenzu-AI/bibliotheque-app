@@ -1,0 +1,120 @@
+# 📚 Features overview
+
+**My Library (Ma Bibliothèque)** — personal library management: books, comics, manga. Installable web app (PC + mobile), 100% local and private, no account, no subscription.
+
+---
+
+## 📷 Adding books
+- **Barcode scanning** (EAN-13/ISBN) with the phone's camera
+- **Manual ISBN entry**, or **USB scanner** on PC (instant input)
+- **No ISBN**: blank record to fill in (old books, rare editions)
+- **Automatic multi-source recognition with merge** (with a **30-day local cache** per ISBN — repeated updates are instant and free): Open Library (2 APIs) + Google Books + **BnF catalog queried directly** + automatic ISBN-10/13 conversion + **BnF/Fnac relay** (free micro-service; its last resort is **Sudoc**, the university catalog, for academic and old works) + fallback covers (both ISBN formats). Each source fills the fields the others miss — the final record is as complete as possible
+- **Per-record source indicator**: every record shows which sources filled it (e.g. "sources: Google Books, BnF, FR relay") + **🔍 Diagnose button**: what each source answers for THIS exact ISBN
+- **🤝 Community bank (records + covers)**: at scan time, if the catalogs fail, the user-shared fund answers as a last resort. Voluntary per-record sharing (📝 metadata only — loans, notes, price paid and any personal data automatically excluded); when saving a completed record, the app asks "Share to the community fund?" (Yes/No + remember my choice); sharing the whole fund is a PRO feature
+- **🔑 Personal API keys** (menu ☰ → API keys): Google Books key + relay URL, stored in YOUR browser only (never in the public code) — built-in test buttons (key test + **ISBN diagnostics** showing what each source answers)
+- **Toggleable sources** (checkboxes): Google Books / BnF / Open Library
+- **⚡ Burst mode**: camera stays open, chained additions
+- **📷 AI shelf photo**: one landscape photo → the AI reads spines **row by row** (rows auto-numbered: "Shelf 1, 2, 3…") and compares with your collection: ✅ shelved correctly · ⚠ misplaced ("Shelve here" button) · ❓ unknown (search and add in 1 click)
+- **⚠ Duplicate detection**: the app asks before adding a 2nd copy
+- **🧪 Demo library**: on first launch with an empty library, 6 sample books can be loaded to explore everything in 1 minute (deletable in one go)
+
+## 🗂️ Organization
+- **Custom virtual shelves** (multi-membership) + free **tags**
+- **Structured physical location**: bookcase + shelf, with auto-suggestions
+- **📦 Shelving mode**: scan a whole shelf, every book is filed automatically
+- **⚠ One-click series gathering**: when scanning a volume whose series is scattered, the app offers to gather ALL volumes to a single location (defaults to the current volume's) — multiple locations flagged, moves counted
+- **📐 Shelf photo: positions**: enter your own "books per row" count (the AI checks its own), every detected book carries its position [n] from the left, and a **Shelving tips** section detects complete runs, missing volumes, disorders and suspect insertions
+- **Type** (book / comic / manga), **series + volume**, **scriptwriter / artist** (comics)
+- **Dewey call number + genre**, sort by call number like a real library
+- **Bibliophile fields**: **publisher collection** (Folio, Pléiade… with suggestions), **format** (paperback, pocket, hardcover…), **edition type** (standard, **1st edition, collector/limited, rare, incunable**), **list price**, **audience** — badges on covers (⭐ collector, 💎 rare…)
+- **Catalog value**: total list-price statistic (insurance estimate) + count of remarkable editions
+- **Statuses**: to read / reading / read / wishlist (to buy)
+- **Favorites ♥** and **5-star ratings** with personal notes
+- **Full-text search** (title, author, ISBN, series, tags, genre, location…), multiple filters and sorts
+- **Smooth pagination** even with 50,000 books
+
+## 👥 Series / author views
+- Automatic groupings: **series, authors, scriptwriters, artists**
+- **Series**: owned volumes, **missing volumes** (one-click add to wishlist 🛒), **"ongoing / complete"** status
+- **📍 Scatter detection**: if a series is shelved in several places, alert at scan + locations shown in the series view
+
+## 📤 Loans (like a real library)
+- Loan records: borrower, date, **due date**
+- **Late returns flagged** in red
+- **Complete per-borrower history** (kept after returns): active loans, returned loans, total count
+
+## 🔎 Shelf inventory (stocktaking)
+- Rescan a shelf: the app compares scanned vs expected live
+- ✅ Confirmed · ⚠ **Intruders** (supposed to be elsewhere — "Shelve here" in 1 click) · ❌ **Missing** · ❓ **Unknown** ("Integrate" adds them)
+- **📜 Inventory history**: date each stocktake, track changes
+
+## 🤖 Built-in AI (optional)
+- **Natural language search**: "crime novels from the 90s rated 4+"
+- **Shelf photo**: spine reading by vision AI (vision model required: Pixtral, GPT-4o, llama3.2-vision…)
+- **Record completion**: summary, genre, Dewey number generated by AI
+- Works with **API** (Mistral, OpenAI…, key stored locally) or **local Ollama** (free, private)
+
+## 💾 Backups and exchange
+- **Auto backup** every N scans (configurable) + instant backup
+- **☁️ GitHub cloud backup (private)**: pushes the full library to **your private GitHub repository** (versioned file, version history included) — restoring merges intelligently (nothing ever overwritten). Your personal token stays in your browser; data never transits through a third-party server. Ideal multi-device: push from the PC, pull from mobile
+- **Exports**: **JSON** (complete, with shelves/lists/covers), **CSV** (Excel), printable **HTML**, **Markdown** (Obsidian, Notion, GitHub)
+- **Merging JSON import**: adds new items, updates existing, no duplicates
+- **Saved dynamic lists**: memorize your filters (e.g. a purchase list that empties as you buy)
+- **Embedded covers** (PC option): images stored in the app, visible offline forever
+
+## 📊 Statistics
+- Totals, authors, publishers, average rating, statuses, loans, favorites
+- **Breakdown by location** (heat bars)
+- **Additions curve** over time (12 months) · **Top authors**
+
+## 🏷️ Advanced editing
+- **Printable spine labels** (50×30 mm): Dewey, location, title — ready to stick
+- **☑ Multi-select**: change status/shelf/genre/location of N books at once
+- **Complete editable record**: front/back covers, summary, **back-cover text** (the best summary for French editions), all references
+
+## 📖 Reading tracking
+- **Annual goal** 🎯: X books/year with progress and required pace
+- **"Read next" queue** and **🎲 random pick**
+- **Reading position**: current page → % progress with progress bar
+- **Dated reading journal**: timestamped notes as you read
+- Reading end **auto-timestamped** → yearly stats (pages read, estimated hours, average/book)
+
+## 🔄 Book life cycle
+- **Acquisition**: date, source, price paid
+- **Reverse loans**: "this book comes from…" (tracks who lent it to you)
+- **Disposal**: sold / given / lost / lent not returned, with date and price — the record stays, the book leaves active views
+- **Catalog value** (cumulative list prices)
+
+## 📥 Import
+- **JSON** (smart merge, no duplicates) · **CSV** (Libib, CLZ, Excel — title/author/ISBN/status columns recognized, FR or EN)
+- **UNIMARC / ISO 2709**: holdings takeover from a professional ILS (Koha, PMB…) — records 010/200/210/215/330/690/910 are converted into records and merged
+
+## 🏛️ Professional interoperability
+- **📤 UNIMARC export** (ISO 2709, Koha/PMB compatible)
+- **📤 MARC21 XML export** (the international ILS format)
+- **📥 UNIMARC import**: takeover of an existing professional catalog
+- **🏷️ QR labels**: scan QR = record opens instantly
+
+## ⚡ Actions on view
+- **⚡ Actions** (toolbar): works on the current filter **or the ☑ selection** (which takes precedence) — Complete with AI · Update sources · Diagnose · Share covers/records · Delete · Select all
+- **Grouped menu**: 3 sections (Collection & capture · Back up & exchange · Professional & settings) + **feature search** (type "unimarc", "labels"…)
+
+## 🎨 Ergonomics (v2.4)
+- **Grouped record view**: actions in 2 clear sections — **Verify & complete** (🔍 Diagnose · 🔄 Update · 🤖 Complete with AI) and **Share to the bank** (🤝 front/back cover · 📝 record)
+- **Context bar**: as soon as a filter/search is active, a bar shows "X / total shown" with direct access to ⚡ Actions, ☑ Selection and ✕ Clear filter
+
+## 🔒 Technical
+- **🌐 Fully bilingual FR/EN**: instant toggle (🌐 button), automatic language detection, remembered choice — UI, records, Help center AND messages (confirmations, notifications) translated
+- Progressive web app (PWA) — works **offline** after installation, **scanner included** (no CDN dependency)
+- Data **100% local** (IndexedDB): no account, no server, nothing sent
+- **Automatic updates**: private repository → public mirror → online site architecture; every change propagates by itself
+- Built-in **⬇️ Install** button (Android/PC); on iPhone, install via Safari's Share menu
+- **❓ Built-in Help center** (top button): condensed offline guide + links to the full documentation
+- **Automatic dark mode** (follows system setting)
+- **Accessibility**: button labels, keyboard navigation
+- **Loan reminders** on open (late and due-today)
+- Lightweight, no framework
+---
+*My Library — by PrimAlph*
+
+> 🇫🇷 **Version française** : [`docs/3-FONCTIONNALITES.md`](../3-FONCTIONNALITES.md)

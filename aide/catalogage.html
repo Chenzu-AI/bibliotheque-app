@@ -1,0 +1,789 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Guide de catalogage — Aide</title>
+<style>
+  :root {
+    --bg: #fafaf7;
+    --surface: #ffffff;
+    --border: #e2e0d8;
+    --text: #2c2c2a;
+    --text-muted: #6b6b66;
+    --accent: #2f5d50;
+    --accent-soft: #eaf1ee;
+    --warn: #b8860b;
+    --warn-soft: #fdf6e3;
+    --error: #a13d2d;
+    --error-soft: #fbeae6;
+    --ok: #3d7a4f;
+    --ok-soft: #eaf3ec;
+    --radius: 6px;
+    --mono: ui-monospace, "SF Mono", Menlo, Consolas, monospace;
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--text);
+    background: var(--bg);
+  }
+  .layout {
+    display: grid;
+    grid-template-columns: 240px 1fr;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    min-height: 100vh;
+  }
+  /* --- Navigation latérale --- */
+  nav {
+    position: sticky;
+    top: 0;
+    align-self: start;
+    height: 100vh;
+    overflow-y: auto;
+    padding: 2rem 1.25rem;
+    border-right: 1px solid var(--border);
+    background: var(--surface);
+  }
+  nav h2 {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin: 0 0 1rem;
+  }
+  nav ol {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 2rem;
+    counter-reset: navstep;
+  }
+  nav ol li { counter-increment: navstep; margin: 0 0 0.15rem; }
+  nav ol li a {
+    display: block;
+    padding: 0.4rem 0.5rem 0.4rem 2rem;
+    position: relative;
+    color: var(--text);
+    text-decoration: none;
+    border-radius: var(--radius);
+    font-size: 0.9rem;
+  }
+  nav ol li a::before {
+    content: counter(navstep);
+    position: absolute;
+    left: 0.4rem;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 1.25rem; height: 1.25rem;
+    display: grid; place-items: center;
+    font-size: 0.7rem;
+    font-weight: 600;
+    color: var(--accent);
+    background: var(--accent-soft);
+    border-radius: 50%;
+  }
+  nav ol li a:hover { background: var(--accent-soft); }
+  nav ul.plain { list-style: none; padding: 0; margin: 0 0 2rem; }
+  nav ul.plain li a {
+    display: block;
+    padding: 0.35rem 0.5rem;
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: var(--radius);
+  }
+  nav ul.plain li a:hover { color: var(--accent); background: var(--accent-soft); }
+
+  /* --- Contenu --- */
+  main { padding: 2rem 2.5rem 4rem; min-width: 0; }
+  header.page-head {
+    padding-bottom: 1.5rem;
+    margin-bottom: 2rem;
+    border-bottom: 2px solid var(--border);
+  }
+  header.page-head h1 {
+    font-size: 2rem;
+    margin: 0 0 0.5rem;
+    line-height: 1.2;
+    color: var(--accent);
+  }
+  header.page-head p {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: 1.05rem;
+  }
+  section { margin-bottom: 3rem; scroll-margin-top: 1rem; }
+  section > h2 {
+    font-size: 1.5rem;
+    color: var(--accent);
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+    margin: 0 0 1.5rem;
+  }
+  section > h3 {
+    font-size: 1.15rem;
+    margin: 2rem 0 0.75rem;
+    color: var(--text);
+  }
+  p { margin: 0 0 1rem; }
+  ul, ol { padding-left: 1.5rem; margin: 0 0 1rem; }
+  li { margin-bottom: 0.4rem; }
+  code {
+    font-family: var(--mono);
+    font-size: 0.9em;
+    background: var(--accent-soft);
+    padding: 0.1em 0.4em;
+    border-radius: 3px;
+    color: var(--accent);
+  }
+  pre {
+    font-family: var(--mono);
+    font-size: 0.85rem;
+    background: #f4f4f0;
+    border-left: 3px solid var(--accent);
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin: 0 0 1.25rem;
+    line-height: 1.5;
+  }
+  pre code { background: none; padding: 0; color: inherit; }
+
+  /* --- Encadrés --- */
+  .callout {
+    padding: 1rem 1.25rem;
+    border-radius: var(--radius);
+    margin: 0 0 1.25rem;
+    border-left: 4px solid;
+  }
+  .callout p:last-child { margin-bottom: 0; }
+  .callout.info { background: var(--accent-soft); border-color: var(--accent); }
+  .callout.warn { background: var(--warn-soft); border-color: var(--warn); }
+  .callout.error { background: var(--error-soft); border-color: var(--error); }
+  .callout.ok { background: var(--ok-soft); border-color: var(--ok); }
+  .callout strong { display: block; margin-bottom: 0.25rem; }
+
+  /* --- Tableaux --- */
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 0 1.5rem;
+    font-size: 0.92rem;
+    background: var(--surface);
+    border-radius: var(--radius);
+    overflow: hidden;
+    box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+  }
+  th, td {
+    padding: 0.65rem 0.85rem;
+    text-align: left;
+    border-bottom: 1px solid var(--border);
+    vertical-align: top;
+  }
+  th {
+    background: #f0efe9;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+  }
+  tbody tr:last-child td { border-bottom: none; }
+  tbody tr:hover { background: #fbfbf8; }
+
+  /* --- Étapes --- */
+  .steps { list-style: none; padding: 0; margin: 0 0 2rem; counter-reset: step; }
+  .steps > li {
+    counter-increment: step;
+    position: relative;
+    padding: 1.25rem 1.25rem 1.25rem 4rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    margin-bottom: 0.75rem;
+  }
+  .steps > li::before {
+    content: counter(step);
+    position: absolute;
+    left: 1rem;
+    top: 1.25rem;
+    width: 2rem; height: 2rem;
+    display: grid; place-items: center;
+    background: var(--accent);
+    color: white;
+    font-weight: 700;
+    border-radius: 50%;
+    font-size: 1rem;
+  }
+  .steps > li h4 {
+    margin: 0 0 0.4rem;
+    font-size: 1.05rem;
+    color: var(--accent);
+  }
+  .steps > li .duration {
+    display: inline-block;
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    background: #f0efe9;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    margin-left: 0.5rem;
+    vertical-align: middle;
+  }
+  .steps > li p:last-child { margin-bottom: 0; }
+
+  /* --- Checklist interactive --- */
+  .checklist {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 1.5rem;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: 1rem 1.25rem;
+  }
+  .checklist li {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+    padding: 0.35rem 0;
+    margin: 0;
+  }
+  .checklist input[type="checkbox"] {
+    margin-top: 0.25rem;
+    accent-color: var(--accent);
+    width: 1rem; height: 1rem;
+    flex-shrink: 0;
+    cursor: pointer;
+  }
+  .checklist label { cursor: pointer; flex: 1; }
+  .checklist input:checked + label {
+    color: var(--text-muted);
+    text-decoration: line-through;
+  }
+
+  /* --- Badges --- */
+  .badge {
+    display: inline-block;
+    font-size: 0.72rem;
+    font-weight: 600;
+    padding: 0.15rem 0.55rem;
+    border-radius: 999px;
+    vertical-align: middle;
+  }
+  .badge.error { background: var(--error-soft); color: var(--error); }
+  .badge.warn  { background: var(--warn-soft); color: var(--warn); }
+  .badge.ok    { background: var(--ok-soft); color: var(--ok); }
+  .badge.info  { background: var(--accent-soft); color: var(--accent); }
+
+  /* --- Responsive --- */
+  @media (max-width: 860px) {
+    .layout { grid-template-columns: 1fr; }
+    nav {
+      position: static;
+      height: auto;
+      border-right: none;
+      border-bottom: 1px solid var(--border);
+      padding: 1.25rem;
+    }
+    nav ol, nav ul.plain { display: flex; flex-wrap: wrap; gap: 0.25rem; margin-bottom: 1rem; }
+    nav ol li, nav ul.plain li { margin: 0; }
+    main { padding: 1.5rem 1.25rem 3rem; }
+    header.page-head h1 { font-size: 1.5rem; }
+    section > h2 { font-size: 1.25rem; }
+  }
+  @media print {
+    nav { display: none; }
+    .layout { display: block; }
+    main { padding: 0; }
+    .callout, table, .steps > li { break-inside: avoid; }
+  }
+</style>
+</head>
+<body>
+
+<div class="layout">
+
+  <nav aria-label="Sommaire">
+    <h2>Étapes</h2>
+    <ol>
+      <li><a href="#scan">Scan</a></li>
+      <li><a href="#structurants">Structurants</a></li>
+      <li><a href="#facettes">Facettes</a></li>
+      <li><a href="#cote">Cote</a></li>
+      <li><a href="#sujets">Sujets</a></li>
+      <li><a href="#relations">Relations</a></li>
+      <li><a href="#verifications">Vérifications</a></li>
+    </ol>
+    <h2>Références</h2>
+    <ul class="plain">
+      <li><a href="#principes">Principes</a></li>
+      <li><a href="#checklist">Checklist</a></li>
+      <li><a href="#pieges">10 pièges</a></li>
+      <li><a href="#temps">Temps cibles</a></li>
+      <li><a href="#familles">Par document</a></li>
+      <li><a href="#cas">Cas particuliers</a></li>
+      <li><a href="#stock">Rattrapage du stock</a></li>
+    </ul>
+  </nav>
+
+  <main>
+
+    <header class="page-head">
+      <h1>Guide de catalogage</h1>
+      <p>Ordre des gestes, bonnes pratiques et pièges à éviter — pour une fiche complète en 2 à 5 minutes.</p>
+    </header>
+
+    <!-- ============ PRINCIPES ============ -->
+    <section id="principes">
+      <h2>Principes</h2>
+      <p>Trois principes gouvernent tout le catalogage. Si vous ne retenez qu'une chose de ce guide, retenez l'<strong>ordre</strong>.</p>
+
+      <div class="callout info">
+        <strong>P1 — Le scan d'abord, jamais après.</strong>
+        <p>Le scan (ISBN ou EAN) fournit 60 à 80 % des champs en 10 secondes. Remplir manuellement ce que le scan peut fournir est une perte de temps pure.</p>
+      </div>
+
+      <div class="callout info">
+        <strong>P2 — Les champs structurants avant les champs libres.</strong>
+        <p>Medium, sous-type, support, édition : ces 4 champs verrouillent 80 % des règles de cohérence et déterminent la cote. Les genres, sujets et relations se construisent <em>après</em>, parce qu'ils dépendent des champs structurants.</p>
+      </div>
+
+      <div class="callout info">
+        <strong>P3 — La cote se génère, elle ne se saisit pas.</strong>
+        <p>Une cote saisie à la main est une cote incohérente dans 6 mois. Une cote générée par le bouton 🎯 est reproductible, triable et corrigeable en masse.</p>
+      </div>
+    </section>
+
+    <!-- ============ ÉTAPES ============ -->
+    <section id="etapes">
+      <h2>Les 7 étapes</h2>
+      <p>Total : <strong>2 min 12 s</strong> pour une fiche simple, <strong>4 min</strong> pour une fiche complexe.</p>
+
+      <ol class="steps">
+
+        <li id="scan">
+          <h4>Scanner <span class="duration">10 s</span></h4>
+          <p>Scanner l'ISBN (livres, BD, mangas), l'EAN (DVD, Blu-ray, CD, jeux) ou saisir le titre pour les documents sans code-barres.</p>
+          <p><strong>Ce que le scan doit produire :</strong> titre, créateur principal, éditeur, date de publication, langue, identifiant.</p>
+          <div class="callout warn">
+            <strong>Ne corrigez pas les champs du scan maintenant.</strong>
+            <p>Vous les corrigerez après avoir verrouillé les structurants. Corriger maintenant = corriger deux fois.</p>
+          </div>
+        </li>
+
+        <li id="structurants">
+          <h4>Champs structurants <span class="duration">30 s</span></h4>
+          <p>Cinq champs, dans cet ordre strict. Chaque champ <strong>filtre la liste du suivant</strong> :</p>
+          <table>
+            <thead>
+              <tr><th>#</th><th>Champ</th><th>Rôle</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>1</td><td><code>medium</code></td><td>Détermine la liste des sous-types disponibles</td></tr>
+              <tr><td>2</td><td><code>mediaSubtype</code></td><td>Détermine les genres, supports et éditions disponibles</td></tr>
+              <tr><td>3</td><td><code>genre</code></td><td>Détermine les sujets suggérés (étape 5)</td></tr>
+              <tr><td>4</td><td><code>carrier</code></td><td>Détermine les éditions disponibles</td></tr>
+              <tr><td>5</td><td><code>editionType</code></td><td>Dernier champ structurant, avant les facettes</td></tr>
+            </tbody>
+          </table>
+          <p><strong>Exemple :</strong> <code>LIV</code> → <code>ROM</code> → <code>POL</code> → <code>POC</code> → <code>STD</code> → cote <code>LIVRP POC-STD</code>.</p>
+          <div class="callout warn">
+            <strong>Si vous dépassez 45 s sur cette étape.</strong>
+            <p>Vous hésitez sur un genre ou un sous-type. Passez à l'étape suivante et revenez plus tard. Ne bloquez pas la fiche pour un débat sémantique.</p>
+          </div>
+        </li>
+
+        <li id="facettes">
+          <h4>Facettes <span class="duration">20 s</span></h4>
+          <p>Les facettes <strong>conditionnent la cote</strong> : saisissez-les avant de générer la cote.</p>
+          <table>
+            <thead>
+              <tr><th>Facette</th><th>Obligatoire</th><th>Impact cote</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><code>public</code></td><td>Recommandé</td><td>Oui</td></tr>
+              <tr><td><code>langue</code></td><td>Recommandé</td><td>Oui (audiovisuel)</td></tr>
+              <tr><td><code>zone</code></td><td>Vidéo / jeux</td><td>Oui</td></tr>
+              <tr><td><code>accessibilité</code></td><td>Si applicable</td><td>Non</td></tr>
+              <tr><td><code>périodicité</code>, <code>collectionState</code></td><td>Presse</td><td>Non</td></tr>
+              <tr><td><code>droits</code>, <code>conservation</code></td><td>Patrimonial</td><td>Non</td></tr>
+            </tbody>
+          </table>
+          <p>Ne saisissez que les facettes <strong>pertinentes pour le medium</strong>.</p>
+        </li>
+
+        <li id="cote">
+          <h4>Générer la cote <span class="duration">2 s</span></h4>
+          <p>Cliquer sur <strong>🎯</strong>. La cote se génère à partir des étapes 2 et 3.</p>
+          <p><strong>Ce que vous devez vérifier :</strong></p>
+          <ul>
+            <li>Longueur ≤ <strong>35 caractères</strong> (l'outil le vérifie).</li>
+            <li><strong>Lisibilité</strong> : si la cote est trop longue, retirez les facettes secondaires.</li>
+            <li><strong>Unicité</strong> : si la cote existe, l'outil ajoute <code>-2</code>. Vérifiez que c'est un doublon physique.</li>
+          </ul>
+          <div class="callout error">
+            <strong>Ne corrigez jamais une cote manuellement.</strong>
+            <p>Sauf pour raccourcir. Une cote corrigée à la main casse la cohérence et vous perdrez la possibilité de la régénérer.</p>
+          </div>
+        </li>
+
+        <li id="sujets">
+          <h4>Sujets <span class="duration">30 s</span></h4>
+          <p>Sélectionner <strong>1 à 3 sujets</strong> parmi les 10 suggérés pour le(s) genre(s) choisi(s).</p>
+          <ul>
+            <li><strong>0 sujet</strong> : autorisé si aucun sujet ne correspond (rare, fictions très génériques).</li>
+            <li><strong>1 sujet</strong> : cas standard.</li>
+            <li><strong>2 sujets</strong> : double thématique (ex. <code>HIST-EGY</code> + <code>HIST-ANT</code>).</li>
+            <li><strong>3 sujets maximum</strong> : au-delà, l'indexation devient bruitée.</li>
+          </ul>
+          <p>Le premier sujet sélectionné est le <strong>sujet principal</strong>. Choisissez le plus spécifique en premier.</p>
+          <div class="callout warn">
+            <strong>1 sujet précis vaut mieux que 3 approximatifs.</strong>
+            <p>Si vous hésitez : « Si un usager cherche ce sujet, ce document doit-il apparaître dans les 10 premiers résultats ? » Si non, retirez-le.</p>
+          </div>
+        </li>
+
+        <li id="relations">
+          <h4>Relations <span class="duration">30 s</span></h4>
+          <p>Ajouter 0, 1 ou plusieurs relations typées :</p>
+          <table>
+            <thead>
+              <tr><th>Cas</th><th>Relation</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Adaptation d'une autre œuvre</td><td><code>adapt</code></td></tr>
+              <tr><td>Série / saga</td><td><code>suite</code>, <code>prequel</code></td></tr>
+              <tr><td>Même univers fictionnel</td><td><code>univers</code></td></tr>
+              <tr><td>Traduction</td><td><code>trad</code></td></tr>
+              <tr><td>Refonte d'un film</td><td><code>remake</code></td></tr>
+            </tbody>
+          </table>
+          <div class="callout warn">
+            <strong>Une relation doit être justifiable par une phrase.</strong>
+            <p>Si vous ne pouvez pas écrire « A est lié à B parce que… », ne créez pas la relation.</p>
+          </div>
+          <p><strong>Ordre de priorité :</strong> <code>adapt</code> &gt; <code>suite</code> / <code>prequel</code> &gt; <code>remake</code> &gt; <code>trad</code> &gt; <code>univers</code>.</p>
+        </li>
+
+        <li id="verifications">
+          <h4>Vérifications <span class="duration">10 s</span></h4>
+          <p>Avant d'enregistrer, vérifier 4 points :</p>
+          <ol>
+            <li>Genre et medium cohérents.</li>
+            <li>Cote ≤ 35 caractères et lisible.</li>
+            <li>Sujets ≤ 3 et pertinents.</li>
+            <li>Relations typées (source/cible dans le bon sens).</li>
+          </ol>
+          <p><span class="badge error">error</span> → corriger. <span class="badge warn">warning</span> → lire puis décider (ignorer est acceptable si la règle ne s'applique pas).</p>
+        </li>
+
+      </ol>
+    </section>
+
+    <!-- ============ CHECKLIST ============ -->
+    <section id="checklist">
+      <h2>Checklist avant enregistrement</h2>
+      <p>Cochez mentalement, ou utilisez cette liste interactive.</p>
+
+      <ul class="checklist">
+        <li><input type="checkbox" id="c1"><label for="c1"><code>medium</code>, <code>mediaSubtype</code>, <code>genre</code> renseignés</label></li>
+        <li><input type="checkbox" id="c2"><label for="c2"><code>carrier</code> et <code>editionType</code> renseignés</label></li>
+        <li><input type="checkbox" id="c3"><label for="c3"><code>public</code> renseigné</label></li>
+        <li><input type="checkbox" id="c4"><label for="c4"><code>langue</code> renseignée (textuel / audiovisuel)</label></li>
+        <li><input type="checkbox" id="c5"><label for="c5"><code>zone</code> renseignée (vidéo / jeux)</label></li>
+        <li><input type="checkbox" id="c6"><label for="c6">Cote ≤ 35 caractères, générée, unique</label></li>
+        <li><input type="checkbox" id="c7"><label for="c7">Sujets ≤ 3, pertinents</label></li>
+        <li><input type="checkbox" id="c8"><label for="c8">Relations typées correctement (sens source → cible)</label></li>
+        <li><input type="checkbox" id="c9"><label for="c9">Aucune alerte <span class="badge error">error</span> non résolue</label></li>
+        <li><input type="checkbox" id="c10"><label for="c10">Alertes <span class="badge warn">warning</span> lues (ignorées si non applicables)</label></li>
+      </ul>
+
+      <div class="callout ok">
+        <strong>Trois cases ou plus non cochées.</strong>
+        <p>La fiche n'est pas prête. Une ou deux : enregistrez, complétez plus tard.</p>
+      </div>
+    </section>
+
+    <!-- ============ PIÈGES ============ -->
+    <section id="pieges">
+      <h2>Les 10 pièges les plus fréquents</h2>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Piège</th><th>Conséquence</th><th>Correction</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Corriger les champs du scan avant les structurants</td><td>Double saisie</td><td>Attendre l'étape 2</td></tr>
+          <tr><td>2</td><td>Saisir la cote manuellement</td><td>Incohérence à 6 mois</td><td>Bouton 🎯 uniquement</td></tr>
+          <tr><td>3</td><td>Sélectionner 3 sujets « pour être sûr »</td><td>Bruit de recherche</td><td>1 sujet précis &gt; 3 approximatifs</td></tr>
+          <tr><td>4</td><td>Créer une relation sans justification</td><td>Relations fantômes</td><td>Une phrase de justification</td></tr>
+          <tr><td>5</td><td>Confondre <code>POC</code> et <code>POCHE-ED</code></td><td>Cote fausse</td><td>Poche = <code>POC + STD</code></td></tr>
+          <tr><td>6</td><td>Classer un comics en <code>BD-FB</code></td><td>Mauvais rayon</td><td>Comics = <code>BD-COM</code></td></tr>
+          <tr><td>7</td><td>Cataloguer un DLC seul</td><td>Fiche orpheline</td><td><code>opus_parent</code> obligatoire</td></tr>
+          <tr><td>8</td><td>Cataloguer chaque numéro de revue</td><td>Fiches en doublon</td><td>Une fiche titre + numéro</td></tr>
+          <tr><td>9</td><td>Ignorer la zone pour la vidéo</td><td>Prêt impossible</td><td><code>A</code> / <code>B</code> / <code>C</code> ou <code>Z1</code>–<code>Z6</code></td></tr>
+          <tr><td>10</td><td>Ignorer l'accessibilité d'un document adapté</td><td>Document inutilisable</td><td><code>accessibility</code> obligatoire</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <!-- ============ TEMPS ============ -->
+    <section id="temps">
+      <h2>Temps cibles par type de document</h2>
+      <table>
+        <thead>
+          <tr><th>Type</th><th>Cible</th><th>Maximum</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Livre courant</td><td>2 min</td><td>4 min</td></tr>
+          <tr><td>BD one-shot</td><td>2 min</td><td>4 min</td></tr>
+          <tr><td>Manga (tome)</td><td>2 min</td><td>3 min</td></tr>
+          <tr><td>Film</td><td>2 min 30</td><td>5 min</td></tr>
+          <tr><td>Série (coffret intégral)</td><td>3 min</td><td>6 min</td></tr>
+          <tr><td>Album musique</td><td>2 min</td><td>4 min</td></tr>
+          <tr><td>Jeu vidéo</td><td>3 min</td><td>5 min</td></tr>
+          <tr><td>Jeu de société</td><td>3 min</td><td>5 min</td></tr>
+          <tr><td>Revue</td><td>1 min 30</td><td>3 min</td></tr>
+          <tr><td>Partition</td><td>3 min</td><td>6 min</td></tr>
+          <tr><td>Carte</td><td>2 min</td><td>4 min</td></tr>
+          <tr><td>Document patrimonial</td><td>5 min</td><td>15 min</td></tr>
+          <tr><td>Document adapté</td><td>2 min</td><td>3 min</td></tr>
+          <tr><td>Ressource numérique</td><td>3 min</td><td>5 min</td></tr>
+        </tbody>
+      </table>
+      <div class="callout warn">
+        <strong>Dépassement du temps maximum.</strong>
+        <p>Enregistrez en l'état. Une fiche incomplète mais enregistrée vaut mieux qu'une fiche parfaite jamais finie. Vous compléterez plus tard.</p>
+      </div>
+    </section>
+
+    <!-- ============ FAMILLES ============ -->
+    <section id="familles">
+      <h2>Bonnes pratiques par famille de documents</h2>
+
+      <h3>Livres (LIV)</h3>
+      <p><strong>Ordre :</strong> scan ISBN → <code>ROM</code> / <code>ESS</code> / <code>BIO</code> / <code>AUTO</code> / <code>DOC</code> / <code>BEAU</code> / <code>JEU</code> / <code>POE</code> / <code>THE</code> / <code>GUI</code> → genre → carrier → edition → public → langue → cote → 1 à 2 sujets.</p>
+      <ul>
+        <li><strong>ISBN-13 obligatoire</strong> (le scan le fournit).</li>
+        <li><strong>Collection</strong> (Folio, Points) : à saisir dans <code>collection</code>, pas dans <code>editionType</code>.</li>
+        <li><strong>Traducteur</strong> : créateur secondaire, pas principal.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Confondre <code>POC</code> (support poche) et <code>POCHE-ED</code> (édition de poche). Un livre de poche est <code>POC + STD</code>.</p>
+      </div>
+
+      <h3>BD (BD)</h3>
+      <p><strong>Ordre :</strong> scan ISBN → <code>BD-FB</code> / <code>BD-RG</code> / <code>BD-COM</code> / <code>BD-STR</code> / <code>BD-WEB</code> / <code>BD-DOC</code> / <code>BD-AUT</code> → genre → carrier (<code>ALB-CAR</code> / <code>ALB-48</code> / <code>TPB</code> / <code>HC</code>) → edition → public → langue → cote → 1 à 2 sujets.</p>
+      <ul>
+        <li><strong>Sens de lecture</strong> : <code>FB</code> (franco-belge), <code>US</code> (comics), <code>JPN</code> (manga).</li>
+        <li><strong>One-shot</strong> (roman graphique) : pas de numérotation.</li>
+        <li><strong>Série</strong> : <code>volume = 1</code>, <code>2</code>, <code>3</code>… en chiffres arabes.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Classer un comics en <code>BD-FB</code>. Un <em>Batman</em> est <code>BD-COM</code>.</p>
+      </div>
+
+      <h3>Mangas (MAN)</h3>
+      <p><strong>Ordre :</strong> scan ISBN → démographie (<code>KOD</code> / <code>SHO</code> / <code>SHOJO</code> / <code>SEI</code> / <code>JOS</code> / <code>SEIJIN</code>) → genre → carrier (<code>TANKO</code> / <code>BUNKO</code> / <code>KANZEN</code>) → edition → public → langue → cote → 1 sujet.</p>
+      <ul>
+        <li><strong>Démographie ≠ public réel</strong> : un seinen est démographiquement adulte, mais peut être lu par des ados.</li>
+        <li><strong>Sens de lecture</strong> : <code>JPN</code> par défaut.</li>
+        <li><strong>Format standard</strong> : <code>TANKO</code>. <code>KANZEN</code> = deluxe (Perfect Edition).</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Classer tous les mangas en <code>SHO</code>. Vérifier la démographie d'origine (Shueisha Jump = shonen, Kodansha Nakayoshi = shojo).</p>
+      </div>
+
+      <h3>Films (FIL) et Séries (SER)</h3>
+      <p><strong>Ordre :</strong> scan EAN → famille → sous-type → genre → carrier (<code>BLU</code> / <code>BLU4K</code> / <code>DVD</code> / <code>VHS</code>) → edition → public → langue → zone → cote → 1 à 2 sujets → relations.</p>
+      <ul>
+        <li><strong>Zone</strong> : <code>A</code> / <code>B</code> / <code>C</code> / <code>region-free</code> (Blu-ray), <code>Z1</code>–<code>Z6</code> (DVD).</li>
+        <li><strong>Version audio</strong> : <code>VO</code> / <code>VF</code> / <code>VOST</code>.</li>
+        <li><strong>Série</strong> : <code>seasonsCount</code> et <code>episodesCount</code> obligatoires.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Un film d'animation japonais est <code>FIL-AN-JP</code>, pas <code>SER-AN</code>. La distinction tient au format de diffusion d'origine (salle = FIL, télévision = SER).</p>
+      </div>
+
+      <h3>Musique (MUS)</h3>
+      <p><strong>Ordre :</strong> scan EAN → classe PCDM (<code>mus-jazz</code> / <code>mus-rock</code> / <code>mus-classique</code>…) → genre → carrier (<code>CD</code> / <code>VIN-33</code> / <code>SACD</code>) → edition → public → langue → cote → 1 à 2 sujets.</p>
+      <ul>
+        <li><strong>Numérotation classique</strong> : <code>OP.</code>, <code>K.</code> (Mozart), <code>BWV</code> (Bach), <code>HOB</code> (Haydn).</li>
+        <li><strong>Formation</strong> : <code>SOLO</code> / <code>DUO</code> / <code>TRIO</code> / <code>QUATUOR</code> / <code>ORCH</code> / <code>BIGBAND</code> / <code>CHORALE</code>.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Ignorer la classe PCDM et tout classer en <code>mus-rock</code>. Un album de Miles Davis est <code>mus-jazz</code>.</p>
+      </div>
+
+      <h3>Jeux vidéo (JV)</h3>
+      <p><strong>Ordre :</strong> scan EAN → genre → carrier (<code>BLU-ROM</code> / <code>CART-SW</code> / <code>DEMAT</code>) → edition → public (PEGI) → langue → cote → 1 à 2 sujets.</p>
+      <ul>
+        <li><strong>DLC / extensions</strong> : jamais seuls. <code>opus_parent</code> obligatoire.</li>
+        <li><strong>GOTY / Complete</strong> : versions qui regroupent le jeu + tous les DLC.</li>
+        <li><strong>Plateforme</strong> : <code>PS5</code> / <code>XSX</code> / <code>NSW</code> / <code>PC</code> — obligatoire pour le prêt.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Cataloguer un DLC comme un jeu. Un DLC est une extension, il a toujours un <code>opus_parent</code>.</p>
+      </div>
+
+      <h3>Jeux de société (JDS)</h3>
+      <p><strong>Ordre :</strong> scan EAN → famille ESAR → type BGG → mécanisme → carrier → edition → public (âge) → nombre de joueurs → cote → 1 sujet.</p>
+      <ul>
+        <li><strong>Nombre de joueurs</strong> : <code>players_min</code> et <code>players_max</code> obligatoires.</li>
+        <li><strong>Durée</strong> : <code>-15</code>, <code>15-30</code>, <code>30-60</code>, <code>60-120</code>, <code>120+</code>.</li>
+        <li><strong>Complexité</strong> : <code>LEGER</code> / <code>MOYEN</code> / <code>LOURD</code> (poids BGG 1–5).</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Ne pas saisir le nombre de joueurs. C'est le filtre n°1 des usagers.</p>
+      </div>
+
+      <h3>Presse (PRE)</h3>
+      <p><strong>Ordre :</strong> scan ISSN → type → périodicité → carrier → edition → <code>collectionState</code> → public → cote → 1 sujet.</p>
+      <ul>
+        <li><strong>ISSN</strong> : identifiant du titre, pas du numéro.</li>
+        <li><strong>Numérotation</strong> : <code>N°1234-2024-10</code> (numéro + date).</li>
+        <li><strong>État de collection</strong> : <code>EN_COURS</code> / <code>ARRETE</code> / <code>COMPLET</code> / <code>PILON</code>.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Cataloguer chaque numéro comme une fiche. Une revue = une fiche titre, avec un champ numéro.</p>
+      </div>
+
+      <h3>Documents patrimoniaux</h3>
+      <p><strong>Ordre :</strong> saisie manuelle → medium → sous-type → carrier → edition (<code>ORIG</code> / <code>FAC-SIM</code> / <code>TIRAGE-TARDIF</code>) → facettes spécifiques (technique, état, conservation) → cote → 1 à 2 sujets.</p>
+      <ul>
+        <li><strong>Conservation</strong> : <code>perenne</code> par défaut, sauf document éphémère.</li>
+        <li><strong>État de conservation</strong> : <code>bon</code> / <code>moyen</code> / <code>mauvais</code>.</li>
+        <li><strong>Numéro d'inventaire</strong> : obligatoire.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Cataloguer une reproduction comme un original. Une affiche <code>REPRO</code> n'est pas <code>ORIG</code>.</p>
+      </div>
+
+      <h3>Documents adaptés (ADA)</h3>
+      <p><strong>Ordre :</strong> scan → sous-type (<code>braille</code> / <code>falc</code> / <code>gros-car</code> / <code>dys</code> / <code>audio-desc</code>) → carrier → accessibilité (obligatoire) → edition → cote → 1 sujet.</p>
+      <ul>
+        <li><strong>Accessibilité obligatoire</strong> : sans elle, le document est inutilisable.</li>
+        <li><strong>Norme utilisée</strong> : braille intégral / abrégé, FALC, dys.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Cataloguer un livre en gros caractères comme un livre standard. Le sous-type et l'accessibilité doivent être renseignés.</p>
+      </div>
+
+      <h3>Ressources numériques (RNU)</h3>
+      <p><strong>Ordre :</strong> saisie manuelle → sous-type → carrier → edition → accès (URL, authentification) → cote (souvent <code>INT</code>) → 1 sujet.</p>
+      <ul>
+        <li><strong>URL obligatoire</strong>.</li>
+        <li><strong>Mode d'authentification</strong> : <code>IP</code> / <code>identifiant</code> / <code>SSO</code>.</li>
+        <li><strong>Licence</strong> : <code>abonnement</code> / <code>perpetuel</code> / <code>freemium</code>.</li>
+      </ul>
+      <div class="callout warn">
+        <strong>Erreur fréquente.</strong>
+        <p>Cataloguer une base de données avec une cote physique. Les ressources numériques n'ont souvent pas de cote.</p>
+      </div>
+    </section>
+
+    <!-- ============ CAS PARTICULIERS ============ -->
+    <section id="cas">
+      <h2>Cas particuliers</h2>
+
+      <h3>Doublons physiques (3 copies du même livre)</h3>
+      <div class="callout ok">
+        <strong>À faire.</strong>
+        <p><strong>Une seule fiche</strong> + 3 exemplaires. Le champ <code>exemplaires</code> gère la quantité, l'état et l'emplacement.</p>
+      </div>
+      <div class="callout error">
+        <strong>À ne pas faire.</strong>
+        <p>3 fiches distinctes. Vous perdriez la recherche par œuvre.</p>
+      </div>
+
+      <h3>Œuvres liées (Le Nom de la rose : roman → film → BD)</h3>
+      <div class="callout ok">
+        <strong>À faire.</strong>
+        <p><strong>3 fiches</strong> liées par <code>adapt</code> : roman (source) → film (cible), roman → BD (cible). Le film et la BD ne sont <strong>pas</strong> liés entre eux.</p>
+      </div>
+      <div class="callout error">
+        <strong>À ne pas faire.</strong>
+        <p>Une fiche unique. Vous perdriez la spécificité de chaque support.</p>
+      </div>
+
+      <h3>Saisons multiples (série en coffret intégral)</h3>
+      <div class="callout ok">
+        <strong>À faire.</strong>
+        <p><strong>Une fiche</strong> : <code>serie-fic</code>, <code>INT</code>, <code>seasonsCount = 5</code>, <code>episodesCount = 62</code>. Cote : <code>SERFIC BLU-INT INT ADU-ENG-B</code>.</p>
+      </div>
+      <div class="callout error">
+        <strong>À ne pas faire.</strong>
+        <p>5 fiches (une par saison), sauf si vous avez 5 coffrets séparés.</p>
+      </div>
+
+      <h3>DLC / extensions (jeu vidéo)</h3>
+      <div class="callout ok">
+        <strong>À faire.</strong>
+        <p><strong>Une fiche</strong> jeu de base (<code>GOTY</code> si version complète) + <strong>fiches DLC</strong> avec <code>opus_parent = &lt;id du jeu de base&gt;</code>.</p>
+      </div>
+      <div class="callout error">
+        <strong>À ne pas faire.</strong>
+        <p>Les DLC seuls. Ils sont orphelins et inutilisables.</p>
+      </div>
+    </section>
+
+    <!-- ============ STOCK ============ -->
+    <section id="stock">
+      <h2>Rattrapage du stock</h2>
+      <p>Vous avez 44 Simplissime + films + jeux en attente. Voici comment les traiter efficacement.</p>
+
+      <h3>Par lots, pas en une fois</h3>
+      <p><strong>Erreur :</strong> cataloguer 44 livres d'affilée. <strong>Conséquence :</strong> fatigue, erreurs, abandon au bout de 20 fiches.</p>
+      <p><strong>Méthode :</strong> par lots de <strong>5 à 10 fiches</strong>, avec une pause entre chaque lot. 44 Simplissime = 5 lots de ~9 livres = 5 sessions de 20 min.</p>
+
+      <h3>Commencer par le plus simple</h3>
+      <ol>
+        <li>Livres courants (les plus rapides à scanner).</li>
+        <li>Films (scan EAN facile).</li>
+        <li>Séries (plus longues, garder pour la fin).</li>
+        <li>Jeux vidéo (scan EAN + PEGI).</li>
+        <li>Jeux de société (pas toujours de scan, plus manuel).</li>
+        <li>Patrimoniaux (les plus longs, sessions dédiées).</li>
+      </ol>
+
+      <h3>Ne pas chercher l'exhaustivité sur les sujets</h3>
+      <p>Sur les 130 fiches existantes, <strong>ne remplissez pas les sujets rétroactivement</strong>. Laissez vide. Complétez au fil de l'usage : quand vous cherchez « Égypte antique » et que vous ne trouvez pas un livre, ajoutez le sujet à ce moment-là. C'est la curation par l'usage, la plus efficace.</p>
+
+      <h3>Utiliser les alertes comme file de travail</h3>
+      <p>Après import des 44 Simplissime, lancez l'audit. Les alertes <span class="badge warn">warning</span> (sujets manquants, langue manquante) vous donnent une <strong>liste de tâches concrètes</strong> à traiter en 10 min, plutôt qu'un sentiment diffus d'incomplétude.</p>
+    </section>
+
+    <!-- ============ CONCLUSION ============ -->
+    <section id="conclusion">
+      <h2>Conclusion</h2>
+      <p>Un guide de catalogage n'a de valeur que s'il est <strong>court, précis et appliqué</strong>. Les 7 étapes tiennent en une page, les bonnes pratiques en 5 pages, les pièges en une table.</p>
+      <p><strong>Le vrai test :</strong> sur vos 3 prochaines fiches, chronométrez-vous. Si vous tenez les temps cibles, le guide fonctionne. Si vous dépassez, c'est que vous cherchez la perfection — relâchez. <strong>Une fiche à 80 % vaut mieux qu'une fiche à 100 % jamais faite.</strong></p>
+      <p><strong>Le meilleur retour sur investissement</strong>, c'est vos vraies fiches. Le prochain progrès ne viendra pas d'une nouvelle fonctionnalité, mais de la <strong>régularité du catalogage</strong>.</p>
+      <div class="callout ok">
+        <strong>Bon catalogage.</strong>
+        <p>Les 7 étapes, la checklist et les temps cibles sont sur la fiche de poste à afficher près de votre poste de travail.</p>
+      </div>
+    </section>
+
+  </main>
+</div>
+
+</body>
+</html>

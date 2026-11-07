@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>My Library PRO — for bookstores, libraries and institutions</title>
+<style>
+:root { --bg:#f6f3ec; --panel:#fff; --ink:#2b2118; --muted:#8a7f70; --accent:#a5552a; --blue:#2f5d8a; --line:#e7e0d2; }
+* { box-sizing:border-box; margin:0; padding:0; }
+body { font-family:"Segoe UI",system-ui,sans-serif; background:var(--bg); color:var(--ink); line-height:1.55; }
+.hero { background:linear-gradient(135deg,#1c2733,#2f5d8a); color:#f9f5ee; padding:64px 20px 72px; text-align:center; position:relative; }
+.hero h1 { font-size:clamp(1.8rem,5vw,2.8rem); margin-bottom:12px; }
+.hero p { max-width:680px; margin:0 auto 28px; font-size:1.05rem; opacity:.92; }
+.cta { display:inline-block; background:var(--accent); color:#fff; padding:14px 34px; border-radius:999px; text-decoration:none; font-weight:600; font-size:1.05rem; }
+.cta.blue { background:var(--blue); }
+.badge { display:inline-block; background:#ffffff22; border-radius:999px; padding:4px 14px; font-size:.8rem; margin-top:18px; }
+.lang { position:absolute; top:14px; right:16px; color:#f9f5eecc; font-size:.85rem; text-decoration:none; }
+.wrap { max-width:1040px; margin:0 auto; padding:0 20px; }
+.grid { display:grid; grid-template-columns:repeat(auto-fit,minmax(290px,1fr)); gap:18px; margin:48px 0; }
+.card { background:var(--panel); border:1px solid var(--line); border-radius:14px; padding:22px; }
+.card h3 { font-size:1.05rem; margin-bottom:8px; }
+.card p { font-size:.9rem; color:var(--muted); }
+section { padding:28px 0; }
+h2 { text-align:center; font-size:1.6rem; margin-bottom:8px; }
+.center { text-align:center; }
+table { width:100%; border-collapse:collapse; background:var(--panel); border-radius:12px; overflow:hidden; margin:20px 0; }
+th,td { padding:12px 14px; text-align:left; border-bottom:1px solid var(--line); font-size:.9rem; }
+th { background:#e3ecf5; }
+.price-card { background:var(--panel); border:2px solid var(--line); border-radius:16px; padding:28px; text-align:center; max-width:420px; margin:24px auto; }
+.price { font-size:2.6rem; font-weight:700; color:var(--blue); }
+.per { color:var(--muted); }
+footer { text-align:center; padding:40px 20px; color:var(--muted); font-size:.85rem; border-top:1px solid var(--line); }
+.check { color:#3c7a4d; font-weight:700; }
+.tag { display:inline-block; font-size:.68rem; font-weight:700; border-radius:999px; padding:2px 10px; margin-left:8px; vertical-align:middle; letter-spacing:.02em; }
+.tag.soon { background:#e3ecf5; color:#2f5d8a; }
+.tag.dev { background:#f5e8d3; color:#8a5a2a; }
+</style>
+</head>
+<body>
+<div class="hero">
+  <a class="lang" href="../pro.html">🇫🇷 Français</a>
+  <h1>🏛️ My Library <span style="color:#7ba7d0">PRO</span></h1>
+  <p>For <b>bookstores, neighborhood libraries, media libraries, associations and professional collections</b> — the fastest cataloging power on the market, compatible with your existing tools.</p>
+  <a class="cta blue" href="mailto:contact@primalph.lu?subject=My%20Library%20PRO">Request a demo</a><br>
+  <span class="badge">by PrimAlph</span>
+</div>
+<div class="wrap">
+  <section>
+    <h2>Built for book professionals</h2>
+    <div class="grid">
+      <div class="card"><h3>⚡ Fastest cataloging on the market</h3><p>USB scanner + burst mode: ~2 seconds per book. French recognition (BnF, Google Books, Fnac) fills the records automatically — title, summary, cover, publisher.</p></div>
+      <div class="card"><h3>📷 AI photo inventory</h3><p>One shelf photo = a complete inventory with missing, misplaced and unknown items. Stocktaking takes minutes, not days.</p></div>
+      <div class="card"><h3>📤 Compatible with Koha, PMB & UNIMARC</h3><p><b>UNIMARC</b> and <b>MARC21 XML</b> export: your records integrate into your existing ILS. And above all: <b>holdings takeover</b> — import your existing Koha/PMB catalog, every record becomes an app record, no duplicates. No lock-in: free export in JSON, CSV, MARC.</p></div>
+      <div class="card"><h3>🏷️ QR labels & call numbers</h3><p>Printable label generation (Dewey call numbers + item QR codes): scan QR = record opens, lending and returning in one gesture.</p></div>
+      <div class="card"><h3>📤 Loans & members</h3><p>Borrowers, due dates, late flags, complete per-person history, reservations, reminders on launch.</p></div>
+      <div class="card"><h3>👁️ Guest catalog / OPAC<span class="tag dev">In development</span></h3><p>The PIN-protected guest catalog works today (tablet in store, library front desk). The hosted public OPAC on your own domain is coming<span class="tag soon">Coming soon</span>.</p></div>
+    </div>
+  </section>
+  <section>
+    <h2>Field cataloging — the comparison</h2>
+    <table>
+      <tr><th></th><th>My Library PRO</th><th>Classic ILS (Koha, PMB…)</th></tr>
+      <tr><td>Time to enter one book</td><td class="check">~2 s (scan)</td><td>5-15 min (manual entry)</td></tr>
+      <tr><td>Hardware required</td><td class="check">Phone or PC + USB scanner (€20)</td><td>Server, dedicated workstation, training</td></tr>
+      <tr><td>Installation</td><td class="check">None — a browser</td><td>Days to weeks</td></tr>
+      <tr><td>AI photo inventory</td><td class="check">Yes</td><td>No</td></tr>
+      <tr><td>UNIMARC export</td><td class="check">Yes</td><td>Yes (native format)</td></tr>
+      <tr><td>Starting cost</td><td class="check">€0, hardware included</td><td>Server + integrator</td></tr>
+    </table>
+    <p class="center" style="color:var(--muted)">The positioning: not replacing your ILS — being the fastest <b>field entry tool</b> that feeds your professional system via UNIMARC.</p>
+  </section>
+  <section>
+    <h2>PRO plan</h2>
+    <div class="price-card">
+      <div class="price">€19<span class="per">/month</span></div>
+      <p style="color:var(--muted);margin:8px 0 18px">per institution · no commitment</p>
+      <p style="text-align:left;font-size:.9rem">
+        <span class="check">✓</span> All the free version features<br>
+        <span class="check">✓</span> <b>UNIMARC holdings takeover</b> (Koha/PMB import)<br>
+        <span class="check">✓</span> Managed cloud backup (zero configuration)<br>
+        <span class="check">✓</span> Customizable guest catalog (your logo)<br>
+        <span class="check">✓</span> Shared cover bank (contribution)<br>
+        <span class="check">✓</span> Priority support & setup<br>
+        <span class="check">✓</span> Team training included (video call)<br>
+        <span style="color:var(--muted);font-size:.82rem;display:block;margin-top:12px">Included as soon as available:</span>
+        <span class="check">✓</span> Hosted public OPAC<span class="tag soon">Coming soon</span><br>
+        <span class="check">✓</span> Multiple agents on the same collection<span class="tag soon">Coming soon</span><br>
+        <span class="check">✓</span> Reader activity statistics<span class="tag soon">Coming soon</span>
+      </p>
+    </div>
+    <p class="center" style="color:var(--muted);font-size:.85rem">Associations and tight budgets: solidarity rate on simple request.<br>30-day free trial.</p>
+  </section>
+  <section class="center">
+    <h2>Let's talk about your institution</h2>
+    <p style="color:var(--muted)">Every library is different — tailored demo in 30 minutes.</p>
+    <p><a class="cta blue" href="mailto:contact@primalph.lu?subject=PRO%20demo%20request">Request a demo</a></p>
+  </section>
+</div>
+<footer>My Library PRO — by PrimAlph · PrimAlph S.à r.l.-S (Luxembourg) · <a href="public.html" style="color:inherit">Free personal version</a> · contact@primalph.lu</footer>
+</body>
+</html>
