@@ -1,0 +1,350 @@
+code,label_fr,label_en,domaine,genres,priorite
+HIST-PRE,Préhistoire,Prehistory,Histoire,HIST|HIS-D|SCI|AV,4
+HIST-ANT,Antiquité,Antiquity,Histoire,HIST|HIS-D|PHI,4
+HIST-EGY,Égypte -- Antiquité,Ancient Egypt,Histoire,HIST|HIS-D|AV|REL,5
+HIST-GRE,Grèce -- Antiquité,Ancient Greece,Histoire,HIST|HIS-D|PHI|REL,5
+HIST-ROM,Rome -- Antiquité,Ancient Rome,Histoire,HIST|HIS-D|POL|REL,5
+HIST-MES,Antiquité -- Mésopotamie,Mesopotamia,Histoire,HIST|HIS-D|REL,3
+HIST-CHI,Chine -- Antiquité,Ancient China,Histoire,HIST|HIS-D|PHI,3
+HIST-IND,Inde -- Antiquité,Ancient India,Histoire,HIST|HIS-D|REL,3
+HIST-PRC,Amérique précolombienne,Pre-Columbian America,Histoire,HIST|HIS-D|REL,3
+HIST-MED,Moyen Âge,Middle Ages,Histoire,HIST|HIS-D|FAN|REL,5
+HIST-MED-H,Haut Moyen Âge,Early Middle Ages,Histoire,HIST|HIS-D,3
+HIST-MED-B,Bas Moyen Âge,High Middle Ages,Histoire,HIST|HIS-D,3
+HIST-REN,Renaissance,Renaissance,Histoire,HIST|HIS-D|ART,4
+HIST-MOD,Époque moderne,Early modern period,Histoire,HIST|HIS-D,3
+HIST-REV,Révolution française,French Revolution,Histoire,HIST|HIS-D|POL,5
+HIST-EMP,Premier Empire,First French Empire,Histoire,HIST|HIS-D|POL,3
+HIST-RES,Restauration,Restoration,Histoire,HIST|HIS-D,2
+HIST-JUL,Monarchie de Juillet,July Monarchy,Histoire,HIST|HIS-D,2
+HIST-SEC,Second Empire,Second French Empire,Histoire,HIST|HIS-D,2
+HIST-TRO,Troisième République,Third Republic,Histoire,HIST|HIS-D,3
+HIST-GM1,Première Guerre mondiale,World War I,Histoire,HIST|HIS-D|POL|AV,5
+HIST-ENT,Entre-deux-guerres,Interwar period,Histoire,HIST|HIS-D,3
+HIST-GM2,Seconde Guerre mondiale,World War II,Histoire,HIST|HIS-D|POL|AV,5
+HIST-SHO,Shoah,Shoah,Histoire,HIST|HIS-D|REL,5
+HIST-RES2,Résistance,French Resistance,Histoire,HIST|HIS-D,4
+HIST-GF,Guerre froide,Cold War,Histoire,HIST|HIS-D|POL|SF,5
+HIST-DEC,Décolonisation,Decolonization,Histoire,HIST|HIS-D|POL,4
+HIST-VE,Cinquième République,Fifth Republic,Histoire,HIST|HIS-D|POL,3
+HIST-FR,Histoire de France,History of France,Histoire,HIST|HIS-D,5
+HIST-CN,Histoire de la Chine,History of China,Histoire,HIST|HIS-D|GEO,4
+HIST-JP,Histoire du Japon,History of Japan,Histoire,HIST|HIS-D|GEO,4
+HIST-KR,Histoire de la Corée,History of Korea,Histoire,HIST|HIS-D|GEO,3
+HIST-US,Histoire des États-Unis,History of the United States,Histoire,HIST|HIS-D|POL,4
+HIST-RU,Histoire de la Russie,History of Russia,Histoire,HIST|HIS-D|POL,3
+HIST-DE,Histoire de l'Allemagne,History of Germany,Histoire,HIST|HIS-D,3
+HIST-GB,Histoire du Royaume-Uni,History of the United Kingdom,Histoire,HIST|HIS-D,3
+HIST-IT,Histoire de l'Italie,History of Italy,Histoire,HIST|HIS-D,3
+HIST-ES,Histoire de l'Espagne,History of Spain,Histoire,HIST|HIS-D,3
+HIST-TR,Histoire de la Turquie,History of Turkey,Histoire,HIST|HIS-D|GEO,3
+HIST-EU,Histoire de l'Europe,History of Europe,Histoire,HIST|HIS-D,4
+HIST-AF,Histoire de l'Afrique,History of Africa,Histoire,HIST|HIS-D,3
+HIST-AS,Histoire de l'Asie,History of Asia,Histoire,HIST|HIS-D,3
+HIST-AMN,Histoire de l'Amérique du Nord,History of North America,Histoire,HIST|HIS-D,3
+HIST-AMS,Histoire de l'Amérique du Sud,History of South America,Histoire,HIST|HIS-D,3
+HIST-MO,Histoire du Moyen-Orient,History of the Middle East,Histoire,HIST|HIS-D|POL,3
+HIST-OC,Histoire de l'Océanie,History of Oceania,Histoire,HIST|HIS-D,2
+HIST-MED2,Histoire -- Méditerranée,Mediterranean history,Histoire,HIST|HIS-D,3
+HIST-REG,Histoire régionale,Regional history,Histoire,HIST|HIS-D,3
+HIST-COL,Colonisation,Colonization,Histoire,HIST|HIS-D|POL,4
+HIST-ESC,Esclavage,Slavery,Histoire,HIST|HIS-D|POL|SOC,4
+HIST-MIG,Migrations -- Histoire,Migrations -- History,Histoire,HIST|HIS-D|SOC,3
+HIST-IND2,Révolution industrielle,Industrial Revolution,Histoire,HIST|HIS-D|SCI|SOC,3
+HIST-GEN,Histoire -- Généralités,History -- General,Histoire,HIST|HIS-D,4
+GEO-AF,Afrique,Africa,Géographie,GEO|HIS-D|VOY,4
+GEO-AMN,Amérique du Nord,North America,Géographie,GEO|HIS-D|VOY,3
+GEO-AMS,Amérique du Sud,South America,Géographie,GEO|HIS-D|VOY,3
+GEO-AMC,Amérique centrale,Central America,Géographie,GEO|HIS-D|VOY,2
+GEO-AS,Asie,Asia,Géographie,GEO|HIS-D|VOY,4
+GEO-ASE,Asie du Sud-Est,Southeast Asia,Géographie,GEO|HIS-D|VOY,3
+GEO-ASC,Asie centrale,Central Asia,Géographie,GEO|HIS-D|VOY,2
+GEO-EU,Europe,Europe,Géographie,GEO|HIS-D|VOY,5
+GEO-EUE,Europe de l'Est,Eastern Europe,Géographie,GEO|HIS-D|VOY,3
+GEO-EUN,Europe du Nord,Northern Europe,Géographie,GEO|HIS-D|VOY,3
+GEO-EUS,Europe du Sud,Southern Europe,Géographie,GEO|HIS-D|VOY,3
+GEO-OC,Océanie,Oceania,Géographie,GEO|HIS-D|VOY,2
+GEO-MO,Moyen-Orient,Middle East,Géographie,GEO|HIS-D|VOY,3
+GEO-MAG,Maghreb,Maghreb,Géographie,GEO|HIS-D|VOY,3
+GEO-SAH,Afrique subsaharienne,Sub-Saharan Africa,Géographie,GEO|HIS-D|VOY,3
+GEO-FR,France,France,Géographie,GEO|HIS-D|VOY,5
+GEO-DE,Allemagne,Germany,Géographie,GEO|HIS-D|VOY,4
+GEO-IT,Italie,Italy,Géographie,GEO|HIS-D|VOY,4
+GEO-ES,Espagne,Spain,Géographie,GEO|HIS-D|VOY,4
+GEO-UK,Royaume-Uni,United Kingdom,Géographie,GEO|HIS-D|VOY,4
+GEO-US,États-Unis,United States,Géographie,GEO|HIS-D|VOY,5
+GEO-JP,Japon,Japan,Géographie,GEO|HIS-D|VOY|ART,5
+GEO-CN,Chine,China,Géographie,GEO|HIS-D|VOY,4
+GEO-IN,Inde,India,Géographie,GEO|HIS-D|VOY,4
+GEO-RU,Russie,Russia,Géographie,GEO|HIS-D|VOY,4
+GEO-BR,Brésil,Brazil,Géographie,GEO|HIS-D|VOY,3
+GEO-CA,Canada,Canada,Géographie,GEO|HIS-D|VOY,3
+GEO-AU,Australie,Australia,Géographie,GEO|HIS-D|VOY,2
+GEO-EG,Égypte,Egypt,Géographie,GEO|HIS-D|VOY,4
+GEO-MA,Maroc,Morocco,Géographie,GEO|HIS-D|VOY,3
+GEO-DZ,Algérie,Algeria,Géographie,GEO|HIS-D|VOY,3
+GEO-TN,Tunisie,Tunisia,Géographie,GEO|HIS-D|VOY,3
+GEO-SN,Sénégal,Senegal,Géographie,GEO|HIS-D|VOY,2
+GEO-GR,Grèce,Greece,Géographie,GEO|HIS-D|VOY,3
+GEO-TR,Turquie,Turkey,Géographie,GEO|HIS-D|VOY,3
+GEO-IL,Israël,Israel,Géographie,GEO|HIS-D|VOY,3
+GEO-IR,Iran,Iran,Géographie,GEO|HIS-D|VOY,2
+GEO-MX,Mexique,Mexico,Géographie,GEO|HIS-D|VOY,3
+GEO-CU,Cuba,Cuba,Géographie,GEO|HIS-D|VOY,2
+GEO-MED,Méditerranée,Mediterranean,Géographie,GEO|HIS-D|VOY|NAT,3
+GEO-ALP,Alpes,Alps,Géographie,GEO|NAT|SPO|VOY,2
+GEO-PYR,Pyrénées,Pyrenees,Géographie,GEO|NAT|SPO|VOY,2
+SCI-AST,Astronomie,Astronomy,Sciences,SCI|SF|NAT,5
+SCI-ASP,Astrophysique,Astrophysics,Sciences,SCI|SF,4
+SCI-COS,Cosmologie,Cosmology,Sciences,SCI|SF,4
+SCI-SYS,Système solaire,Solar System,Sciences,SCI|SF,5
+SCI-ETO,Étoiles,Stars,Sciences,SCI|SF,4
+SCI-GAL,Galaxies,Galaxies,Sciences,SCI|SF,3
+SCI-UNI,Univers,Universe,Sciences,SCI|SF,4
+SCI-EXP,Exploration spatiale,Space exploration,Sciences,SCI|SF|HIS-D,5
+SCI-PHY,Physique,Physics,Sciences,SCI,4
+SCI-PHQ,Physique quantique,Quantum physics,Sciences,SCI,3
+SCI-REL,Relativité,Relativity,Sciences,SCI,3
+SCI-CHI,Chimie,Chemistry,Sciences,SCI,4
+SCI-BIO,Biologie,Biology,Sciences,SCI|NAT,4
+SCI-GEN,Génétique,Genetics,Sciences,SCI|NAT,4
+SCI-EVO,Évolution,Evolution,Sciences,SCI|NAT,4
+SCI-ECO,Écologie,Ecology,Sciences,SCI|NAT|SOC,5
+SCI-ENV,Environnement,Environment,Sciences,SCI|NAT|SOC,5
+SCI-CLI,Climat,Climate,Sciences,SCI|NAT|SOC,5
+SCI-RC,Réchauffement climatique,Global warming,Sciences,SCI|NAT|SOC,5
+SCI-DD,Développement durable,Sustainable development,Sciences,SCI|SOC,4
+SCI-MAT,Mathématiques,Mathematics,Sciences,SCI,4
+SCI-INF,Informatique,Computer science,Sciences,SCI|SF,4
+SCI-IA,Intelligence artificielle,Artificial intelligence,Sciences,SCI|SF|SOC,5
+SCI-MED,Médecine,Medicine,Sciences,SCI,5
+SCI-NEU,Neurosciences,Neuroscience,Sciences,SCI,4
+SCI-ANA,Anatomie,Anatomy,Sciences,SCI|NAT,3
+SCI-SAN,Santé,Health,Sciences,SCI|SOC,4
+SCI-NUT,Nutrition,Nutrition,Sciences,SCI|CUI|SAN,3
+SCI-GEO,Géologie,Geology,Sciences,SCI|NAT,3
+SCI-VOL,Volcanologie,Volcanology,Sciences,SCI|NAT,2
+SCI-OCE,Océanographie,Oceanography,Sciences,SCI|NAT,3
+SCI-MET,Météorologie,Meteorology,Sciences,SCI|NAT,3
+PHI-ANT,Philosophie antique,Ancient philosophy,Philosophie,PHI|HIS-D,3
+PHI-MOD,Philosophie moderne,Modern philosophy,Philosophie,PHI,3
+PHI-CON,Philosophie contemporaine,Contemporary philosophy,Philosophie,PHI,3
+PHI-ETH,Éthique,Ethics,Philosophie,PHI|SOC,4
+PHI-MET2,Métaphysique,Metaphysics,Philosophie,PHI,3
+PHI-EPI,Épistémologie,Epistemology,Philosophie,PHI|SCI,3
+PHI-LOG,Logique,Logic,Philosophie,PHI|SCI,3
+PHI-EST,Esthétique,Aesthetics,Philosophie,PHI|ART,3
+PHI-POL,Philosophie politique,Political philosophy,Philosophie,PHI|POL|SOC,4
+PHI-STO,Stoïcisme,Stoicism,Philosophie,PHI,2
+PHI-EXI,Existentialisme,Existentialism,Philosophie,PHI,3
+PHI-PHE,Phénoménologie,Phenomenology,Philosophie,PHI,2
+REL-CHR,Christianisme,Christianity,Religion,REL|HIS-D,5
+REL-CAT,Catholicisme,Catholicism,Religion,REL|HIS-D,4
+REL-PRO,Protestantisme,Protestantism,Religion,REL|HIS-D,3
+REL-ORT,Orthodoxie,Orthodoxy,Religion,REL|HIS-D,2
+REL-BIB,Bible,Bible,Religion,REL,5
+REL-JUD,Judaïsme,Judaism,Religion,REL|HIS-D,4
+REL-ISL,Islam,Islam,Religion,REL|HIS-D|SOC,5
+REL-COR,Coran,Quran,Religion,REL,4
+REL-SUN,Sunnisme,Sunni Islam,Religion,REL,3
+REL-CHI2,Chiisme,Shia Islam,Religion,REL,3
+REL-SOU,Soufisme,Sufism,Religion,REL,2
+REL-BOU,Bouddhisme,Buddhism,Religion,REL|HIS-D,4
+REL-HIN,Hindouisme,Hinduism,Religion,REL|HIS-D,3
+REL-SIK,Sikhisme,Sikhism,Religion,REL,2
+REL-TAO,Taoïsme,Taoism,Religion,REL|PHI,2
+REL-CON2,Confucianisme,Confucianism,Religion,REL|PHI,2
+REL-SHI,Shintoïsme,Shinto,Religion,REL,2
+REL-ANT,Religions de l'Antiquité,Ancient religions,Religion,REL|HIS-D,3
+REL-MYG,Mythologie grecque,Greek mythology,Religion,REL|HIS-D|FAN,5
+REL-MYR,Mythologie romaine,Roman mythology,Religion,REL|HIS-D|FAN,4
+REL-MYN,Mythologie nordique,Norse mythology,Religion,REL|FAN,4
+REL-MYE,Mythologie égyptienne,Egyptian mythology,Religion,REL|HIS-D|FAN,4
+REL-MYM,Mythologie mésopotamienne,Mesopotamian mythology,Religion,REL|HIS-D,2
+REL-MYH,Mythologie hindoue,Hindu mythology,Religion,REL|FAN,3
+REL-MYC,Mythologie chinoise,Chinese mythology,Religion,REL|FAN,2
+REL-MYJ,Mythologie japonaise,Japanese mythology,Religion,REL|FAN,2
+REL-MYP,Mythologie précolombienne,Pre-Columbian mythology,Religion,REL|HIS-D,2
+REL-SPI,Spiritualité,Spirituality,Religion,REL|PHI|SOC,4
+REL-MED2,Méditation,Meditation,Religion,REL|SOC|SAN,3
+REL-YOG,Yoga,Yoga,Religion,REL|SAN|SPO,3
+REL-ESO,Ésotérisme,Esotericism,Religion,REL|FANT,3
+SOC-SOC,Sociologie,Sociology,Sciences humaines,SOC|HIS-D,4
+SOC-ANT,Anthropologie,Anthropology,Sciences humaines,SOC|HIS-D,4
+SOC-ETH,Ethnologie,Ethnology,Sciences humaines,SOC|HIS-D,3
+SOC-PSY,Psychologie,Psychology,Sciences humaines,SOC|PHI|SAN,5
+SOC-PSA,Psychanalyse,Psychoanalysis,Sciences humaines,SOC|PHI,3
+SOC-PSS,Psychologie sociale,Social psychology,Sciences humaines,SOC,3
+SOC-POL,Politique,Politics,Sciences humaines,SOC|POL|HIS-D,5
+SOC-ECO,Économie,Economics,Sciences humaines,SOC|POL,4
+SOC-ECP,Économie politique,Political economy,Sciences humaines,SOC|POL,3
+SOC-MON,Mondialisation,Globalization,Sciences humaines,SOC|POL|ECO,4
+SOC-DRO,Droit,Law,Sciences humaines,SOC,4
+SOC-DRC,Droit constitutionnel,Constitutional law,Sciences humaines,SOC|POL,2
+SOC-JUS,Justice,Justice,Sciences humaines,SOC|POL,3
+SOC-EDU,Éducation,Education,Sciences humaines,SOC|SCO,4
+SOC-PED,Pédagogie,Pedagogy,Sciences humaines,SOC|SCO,3
+SOC-FAM,Famille,Family,Sciences humaines,SOC,5
+SOC-GEN,Études de genre,Gender studies,Sciences humaines,SOC|POL,3
+SOC-FEM,Féminisme,Feminism,Sciences humaines,SOC|POL,4
+SOC-MIG,Migrations,Migrations,Sciences humaines,SOC|POL|HIS-D,4
+SOC-IMM,Immigration,Immigration,Sciences humaines,SOC|POL,3
+SOC-RAC,Racisme,Racism,Sciences humaines,SOC|POL|HIS-D,4
+SOC-DIS,Discrimination,Discrimination,Sciences humaines,SOC|POL,4
+SOC-INE,Inégalités sociales,Social inequality,Sciences humaines,SOC|POL|ECO,4
+SOC-PAU,Pauvreté,Poverty,Sciences humaines,SOC|ECO,4
+SOC-TRA,Travail,Work,Sciences humaines,SOC|ECO,3
+SOC-CHO,Chômage,Unemployment,Sciences humaines,SOC|ECO,3
+SOC-SYN,Syndicalisme,Trade unionism,Sciences humaines,SOC|POL|HIS-D,3
+SOC-MED3,Médias,Media,Sciences humaines,SOC|ART,3
+SOC-JOU,Journalisme,Journalism,Sciences humaines,SOC|ART,3
+SOC-PRO,Propagande,Propaganda,Sciences humaines,SOC|POL|HIS-D,3
+SOC-COM,Communication,Communication,Sciences humaines,SOC,3
+ART-PEI,Peinture,Painting,Arts,ART|HIS-D,5
+ART-SCU,Sculpture,Sculpture,Arts,ART|HIS-D,4
+ART-ARC,Architecture,Architecture,Arts,ART|HIS-D|GEO,4
+ART-PHO,Photographie,Photography,Arts,ART|HIS-D,5
+ART-CIN,Cinéma,Cinema,Arts,ART|SOC,5
+ART-THE,Théâtre,Theater,Arts,ART|HIS-D,4
+ART-DAN,Danse,Dance,Arts,ART|SPO,3
+ART-MUS,Musique,Music,Arts,ART|HIS-D,5
+ART-MUC,Musique classique,Classical music,Arts,ART|HIS-D,4
+ART-OPE,Opéra,Opera,Arts,ART|HIS-D,3
+ART-JAZ,Jazz,Jazz,Arts,ART|HIS-D,4
+ART-ROC,Rock,Rock music,Arts,ART|SOC,4
+ART-BD,Bande dessinée,Comic books,Arts,ART|BD,5
+ART-LIT,Littérature,Literature,Arts,ART|HIS-D,5
+ART-POE,Poésie,Poetry,Arts,ART,4
+ART-ROM,Roman (genre littéraire),Novel,Arts,ART,4
+ART-DEC,Arts décoratifs,Decorative arts,Arts,ART|HIS-D,3
+ART-DES,Design,Design,Arts,ART|SOC,3
+ART-MOD,Mode,Fashion,Arts,ART|SOC,3
+ART-CAL,Calligraphie,Calligraphy,Arts,ART|HIS-D,2
+ART-GRA,Gravure,Engraving,Arts,ART|HIS-D,2
+ART-CER,Céramique,Ceramics,Arts,ART|HIS-D,2
+ART-CON,Art contemporain,Contemporary art,Arts,ART,4
+ART-MOD2,Art moderne,Modern art,Arts,ART,3
+ART-MED3,Art médiéval,Medieval art,Arts,ART|HIS-D,3
+ART-REN2,Art de la Renaissance,Renaissance art,Arts,ART|HIS-D,3
+ART-BAR,Art baroque,Baroque art,Arts,ART|HIS-D,3
+ART-IMP,Impressionnisme,Impressionism,Arts,ART|HIS-D,3
+ART-SUR,Surréalisme,Surrealism,Arts,ART,3
+ART-CUB,Cubisme,Cubism,Arts,ART,2
+NAT-ANI,Animaux,Animals,Nature,NAT|SCI,5
+NAT-MAM,Mammifères,Mammals,Nature,NAT|SCI,4
+NAT-OIS,Oiseaux,Birds,Nature,NAT|SCI,4
+NAT-REP,Reptiles,Reptiles,Nature,NAT|SCI,3
+NAT-AMP,Amphibiens,Amphibians,Nature,NAT|SCI,2
+NAT-POI,Poissons,Fish,Nature,NAT|SCI,3
+NAT-INS,Insectes,Insects,Nature,NAT|SCI,3
+NAT-ARA,Arachnides,Arachnids,Nature,NAT|SCI,2
+NAT-MAR,Animaux marins,Marine animals,Nature,NAT|SCI,4
+NAT-DIN,Dinosaures,Dinosaurs,Nature,NAT|SCI,5
+NAT-PLA,Plantes,Plants,Nature,NAT|SCI,4
+NAT-FLE,Fleurs,Flowers,Nature,NAT|SCI,3
+NAT-ARB,Arbres,Trees,Nature,NAT|SCI,3
+NAT-FOR,Forêts,Forests,Nature,NAT|SCI,3
+NAT-JAR,Jardins,Gardens,Nature,NAT|ART|CUI,3
+NAT-CHA,Champignons,Mushrooms,Nature,NAT|SCI|CUI,2
+NAT-ECO,Écosystèmes,Ecosystems,Nature,NAT|SCI,3
+NAT-BIO,Biodiversité,Biodiversity,Nature,NAT|SCI|SOC,4
+NAT-PRO,Protection de la nature,Nature conservation,Nature,NAT|SCI|SOC,4
+NAT-PAR,Parcs naturels,Natural parks,Nature,NAT|GEO|VOY,2
+NAT-MON,Montagnes,Mountains,Nature,NAT|GEO|SPO,3
+NAT-OCE2,Océans,Oceans,Nature,NAT|SCI|GEO,4
+NAT-MER,Mers,Seas,Nature,NAT|SCI|GEO,3
+NAT-RIV,Rivières,Rivers,Nature,NAT|SCI|GEO,2
+NAT-DES2,Déserts,Deserts,Nature,NAT|SCI|GEO,3
+SPO-FOOT,Football,Football,Sports,SPO,5
+SPO-RUG,Rugby,Rugby,Sports,SPO,4
+SPO-TEN,Tennis,Tennis,Sports,SPO,4
+SPO-CYC,Cyclisme,Cycling,Sports,SPO,4
+SPO-ATH,Athlétisme,Athletics,Sports,SPO,3
+SPO-NAT2,Natation,Swimming,Sports,SPO,3
+SPO-BAS,Basketball,Basketball,Sports,SPO,3
+SPO-HAN,Handball,Handball,Sports,SPO,3
+SPO-GOL,Golf,Golf,Sports,SPO,2
+SPO-COM,Sports de combat,Combat sports,Sports,SPO,4
+SPO-JUD,Judo,Judo,Sports,SPO,3
+SPO-BOX,Boxe,Boxing,Sports,SPO,3
+SPO-ESC,Escrime,Fencing,Sports,SPO,2
+SPO-EXT,Sports extrêmes,Extreme sports,Sports,SPO,3
+SPO-RAN,Randonnée,Hiking,Sports,SPO|NAT|VOY,4
+SPO-ALP,Alpinisme,Mountaineering,Sports,SPO|NAT,3
+SPO-VOI,Voile,Sailing,Sports,SPO,2
+SPO-AUT,Sports automobiles,Motorsport,Sports,SPO,3
+SPO-F1,Formule 1,Formula One,Sports,SPO,4
+SPO-JO,Jeux olympiques,Olympic Games,Sports,SPO|HIS-D,4
+CUI-FR,Cuisine française,French cuisine,Cuisine,CUI|ART,5
+CUI-IT,Cuisine italienne,Italian cuisine,Cuisine,CUI,4
+CUI-AS,Cuisine asiatique,Asian cuisine,Cuisine,CUI,4
+CUI-JP,Cuisine japonaise,Japanese cuisine,Cuisine,CUI,4
+CUI-CN,Cuisine chinoise,Chinese cuisine,Cuisine,CUI,3
+CUI-IN,Cuisine indienne,Indian cuisine,Cuisine,CUI,3
+CUI-MX,Cuisine mexicaine,Mexican cuisine,Cuisine,CUI,2
+CUI-MED4,Cuisine méditerranéenne,Mediterranean cuisine,Cuisine,CUI,3
+CUI-PAT,Pâtisserie,Pastry,Cuisine,CUI,4
+CUI-BOU,Boulangerie,Bakery,Cuisine,CUI,3
+CUI-VIN,Vins et spiritueux,Wine and spirits,Cuisine,CUI|SOC,4
+CUI-BIE,Bières,Beer,Cuisine,CUI,3
+CUI-REG,Régimes alimentaires,Diets,Cuisine,CUI|SAN,3
+CUI-VEG,Végétarisme,Vegetarianism,Cuisine,CUI|SAN|SOC,3
+CUI-VGN,Veganisme,Veganism,Cuisine,CUI|SAN|SOC,3
+VOY-GUI,Guides de voyage,Travel guides,Voyage,VOY|GEO,5
+VOY-REC,Récits de voyage,Travel narratives,Voyage,VOY|ART,4
+VOY-TOU,Tourisme,Tourism,Voyage,VOY|SOC,3
+VOY-VEL,Voyage à vélo,Bicycle touring,Voyage,VOY|SPO,2
+VOY-TRA,Voyage en train,Train travel,Voyage,VOY|HIS-D,2
+VOY-RAN2,Randonnée pédestre,Hiking,Voyage,VOY|SPO|NAT,3
+VOY-CAM,Camping,Camping,Voyage,VOY|NAT,2
+VOY-CRO,Croisières,Cruises,Voyage,VOY,2
+SF-SCI,Science-fiction,Science fiction,SF/Fantasy,SF|FAN|ART,5
+SF-ANT2,Anticipation,Anticipation,SF/Fantasy,SF,4
+SF-DYS,Dystopie,Dystopia,SF/Fantasy,SF|FANT|SOC,5
+SF-UCH,Uchronie,Alternate history,SF/Fantasy,SF|HIS-D,3
+SF-VSP,Voyage spatial,Space travel,SF/Fantasy,SF|SCI,4
+SF-EXT,Extraterrestres,Aliens,SF/Fantasy,SF,4
+SF-ROB,Robots,Robots,SF/Fantasy,SF|SCI,4
+SF-CYP,Cyberpunk,Cyberpunk,SF/Fantasy,SF|SCI,3
+SF-POS,Post-apocalyptique,Post-apocalyptic,SF/Fantasy,SF|FANT,4
+SF-FAN,Fantasy,Fantasy,SF/Fantasy,FAN|FANT,5
+SF-HEF,Heroic fantasy,Heroic fantasy,SF/Fantasy,FAN,4
+SF-MAG,Magie,Magic,SF/Fantasy,FAN|FANT,4
+SF-DRA,Dragons,Dragons,SF/Fantasy,FAN,4
+SF-ELF,Elfes,Elves,SF/Fantasy,FAN,3
+SF-MPA,Mondes parallèles,Parallel worlds,SF/Fantasy,SF|FANT,3
+SF-VTM,Voyage temporel,Time travel,SF/Fantasy,SF|FANT,3
+SF-FANT,Fantastique,The fantastic,SF/Fantasy,FANT,4
+SF-HOR,Horreur,Horror,SF/Fantasy,FANT|POL,4
+SF-VAM,Vampires,Vampires,SF/Fantasy,FANT|FAN,4
+SF-ZOM,Zombies,Zombies,SF/Fantasy,FANT|SF,3
+SF-LGR,Loups-garous,Werewolves,SF/Fantasy,FANT|FAN,3
+SF-FAN2,Fantômes,Ghosts,SF/Fantasy,FANT,3
+POL-POL,Roman policier,Detective fiction,Polar/Thriller,POL|ART,5
+POL-NOI,Roman noir,Noir fiction,Polar/Thriller,POL,4
+POL-THR,Thriller,Thriller,Polar/Thriller,POL|FIL,5
+POL-ESP,Espionnage,Espionage,Polar/Thriller,POL|HIS-D,4
+POL-ENQ,Enquête,Investigation,Polar/Thriller,POL|SOC,4
+POL-MEU,Meurtre,Murder,Polar/Thriller,POL|SOC,3
+POL-CRI,Crime,Crime,Polar/Thriller,POL|SOC,3
+POL-CRM,Criminalité,Criminality,Polar/Thriller,POL|SOC,4
+POL-MAF,Mafia,Mafia,Polar/Thriller,POL|SOC,3
+POL-TER,Terrorisme,Terrorism,Polar/Thriller,POL|SOC|HIS-D,3
+POL-DET,Détective,Detectives,Polar/Thriller,POL,3
+DIV-JV,Jeux vidéo,Video games,Divers,JV|SOC,4
+DIV-JDS,Jeux de société,Board games,Divers,JDS|SOC,3
+DIV-LOI,Loisirs créatifs,Crafts,Divers,SOC|ART,3
+DIV-COU,Couture,Sewing,Divers,ART|SOC,2
+DIV-TRI,Tricot,Knitting,Divers,ART|SOC,2
+DIV-BRI,Bricolage,DIY,Divers,SOC,3
+DIV-ANI,Animaux de compagnie,Pets,Divers,NAT|SOC,3
+DIV-CHA2,Chats,Cats,Divers,NAT|SOC,3
+DIV-CHI,Chiens,Dogs,Divers,NAT|SOC,3
+DIV-CHE,Chevaux,Horses,Divers,NAT|SPO,2
+DIV-ENE,Énergies renouvelables,Renewable energy,Divers,SCI|SOC,3
+DIV-NUC,Nucléaire,Nuclear energy,Divers,SCI|SOC|HIS-D,3
+DIV-PET,Pétrole,Petroleum,Divers,SCI|SOC|HIS-D,3
+DIV-CON3,Consommation,Consumption,Divers,SOC|ECO,2
+DIV-MON2,Monnaie,Money,Divers,SOC|ECO,3
+DIV-BAN,Banques,Banks,Divers,SOC|ECO,3
+DIV-BOU,Bourse,Stock exchange,Divers,SOC|ECO,3

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fiche de poste — Catalogage d'un document · Ma Bibliothèque</title>
+<style>
+  :root { --ink:#1a1a1a; --accent:#2c5f8a; --line:#c8c8c8; }
+  * { box-sizing:border-box; }
+  body { font:12.5pt/1.45 "Segoe UI", Arial, sans-serif; color:var(--ink); margin:0; padding:18px; background:#fff; }
+  h1 { font-size:15pt; text-align:center; letter-spacing:.06em; margin:0 0 2px; }
+  .sub { text-align:center; font-size:9.5pt; color:#555; margin:0 0 14px; }
+  h2 { font-size:10.5pt; text-transform:uppercase; letter-spacing:.08em; background:var(--accent); color:#fff;
+       padding:4px 10px; margin:16px 0 8px; border-radius:3px; }
+  .steps { border:2px solid var(--ink); border-radius:6px; padding:10px 14px; }
+  .step { display:flex; gap:10px; margin:7px 0; align-items:baseline; }
+  .step .n { font-weight:700; color:var(--accent); min-width:150px; }
+  .step .d { flex:1; }
+  .t { color:#777; }
+  ul { margin:6px 0; padding-left:20px; }
+  li { margin:2px 0; }
+  .cols { display:flex; gap:18px; }
+  .cols > div { flex:1; }
+  table { width:100%; border-collapse:collapse; font-size:10.5pt; }
+  th, td { border:1px solid var(--line); padding:3px 7px; text-align:left; }
+  th { background:#eef3f7; }
+  .gold { border:2px solid var(--accent); border-radius:6px; padding:8px 14px; font-weight:600; }
+  .gold ul { font-weight:400; }
+  .foot { text-align:center; font-size:9pt; color:#777; margin-top:16px; border-top:1px solid var(--line); padding-top:6px; }
+  .avoid-break { break-inside:avoid; }
+  @media print {
+    body { padding:0; font-size:10pt; }
+    .page-break { break-before:page; }
+    h2 { -webkit-print-color-adjust:exact; print-color-adjust:exact; }
+  }
+</style>
+</head>
+<body>
+
+<h1>FICHE DE POSTE — CATALOGAGE D'UN DOCUMENT</h1>
+<p class="sub">À suivre dans l'ordre. Ne pas sauter d'étape. · Ma Bibliothèque · v1.0</p>
+
+<h2>Les 7 étapes — 2 à 5 minutes</h2>
+<div class="steps avoid-break">
+  <div class="step"><span class="n">1. SCAN <span class="t">(10 s)</span></span><span class="d">Scanner ISBN ou EAN. <b>Ne rien corriger.</b> → Titre, auteur, éditeur, date, langue, identifiant.</span></div>
+  <div class="step"><span class="n">2. STRUCTURANTS <span class="t">(30 s)</span></span><span class="d">Ordre strict : <b>medium → mediaSubtype → genre → carrier → editionType</b>. Chaque champ filtre la liste du suivant.</span></div>
+  <div class="step"><span class="n">3. FACETTES <span class="t">(20 s)</span></span><span class="d">Uniquement celles du medium : public · langue · zone (vidéo) · accessibilité. → <b>Elles conditionnent la cote.</b></span></div>
+  <div class="step"><span class="n">4. COTE <span class="t">(2 s)</span></span><span class="d">Cliquer sur 🎯. Vérifier : ≤ 35 caractères, lisible. <b>Ne jamais corriger à la main</b> (sauf raccourcir).</span></div>
+  <div class="step"><span class="n">5. SUJETS <span class="t">(30 s)</span></span><span class="d">1 à 3 sujets dans le picker. <b>1 sujet précis &gt; 3 approximatifs.</b> Le 1<sup>er</sup> = sujet principal.</span></div>
+  <div class="step"><span class="n">6. RELATIONS <span class="t">(30 s)</span></span><span class="d">Seulement si justifiables par une phrase : adapt · suite · prequel · remake · trad · univers.</span></div>
+  <div class="step"><span class="n">7. VÉRIFICATIONS <span class="t">(10 s)</span></span><span class="d">4 points : genre/medium · cote · sujets · relations. <b>Errors → corriger. Warnings → lire puis décider.</b></span></div>
+</div>
+
+<h2>Checklist avant enregistrement</h2>
+<ul class="avoid-break">
+  <li>☐ medium, mediaSubtype, genre renseignés</li>
+  <li>☐ carrier et editionType renseignés</li>
+  <li>☐ public renseigné</li>
+  <li>☐ langue renseignée (textuel / audiovisuel)</li>
+  <li>☐ zone renseignée (vidéo / jeux)</li>
+  <li>☐ cote ≤ 35 caractères, générée, unique</li>
+  <li>☐ sujets ≤ 3, pertinents</li>
+  <li>☐ relations typées (sens source → cible)</li>
+  <li>☐ aucune alerte error non résolue</li>
+</ul>
+<p><b>3 cases non cochées → la fiche n'est pas prête. 1 ou 2 → enregistrer, compléter plus tard.</b></p>
+
+<div class="page-break"></div>
+
+<div class="cols">
+  <div>
+    <h2>Les 10 pièges à éviter</h2>
+    <ol class="avoid-break">
+      <li>Corriger les champs du scan avant les structurants</li>
+      <li>Saisir la cote manuellement (utiliser 🎯)</li>
+      <li>Sélectionner 3 sujets « pour être sûr »</li>
+      <li>Créer une relation sans pouvoir la justifier</li>
+      <li>Confondre POC (support) et POCHE-ED (édition)</li>
+      <li>Classer un comics en BD-FB (→ BD-COM)</li>
+      <li>Cataloguer un DLC seul (→ opus_parent obligatoire)</li>
+      <li>Cataloguer chaque numéro de revue (→ 1 fiche titre)</li>
+      <li>Ignorer la zone vidéo (→ prêt impossible)</li>
+      <li>Ignorer l'accessibilité d'un document adapté</li>
+    </ol>
+  </div>
+  <div>
+    <h2>Temps cibles</h2>
+    <table class="avoid-break">
+      <tr><th>Type</th><th>Cible</th><th>Max</th></tr>
+      <tr><td>Livre, BD, manga, musique</td><td>2 min</td><td>4</td></tr>
+      <tr><td>Film, document adapté</td><td>2 min 30</td><td>5</td></tr>
+      <tr><td>Série, jeu vidéo, jeu de société</td><td>3 min</td><td>6</td></tr>
+      <tr><td>Revue</td><td>1 min 30</td><td>3</td></tr>
+      <tr><td>Partition</td><td>3 min</td><td>6</td></tr>
+      <tr><td>Document patrimonial</td><td>5 min</td><td>15</td></tr>
+    </table>
+    <p>Dépassement du temps max → <b>enregistrer en l'état.</b><br>
+    Une fiche à 80 % vaut mieux qu'une fiche à 100 % jamais faite.</p>
+  </div>
+</div>
+
+<h2>Règles d'or</h2>
+<div class="gold avoid-break">
+  <ul>
+    <li>► Le scan d'abord, jamais après.</li>
+    <li>► Les structurants avant les champs libres.</li>
+    <li>► La cote se génère, elle ne se saisit pas.</li>
+    <li>► 1 sujet précis &gt; 3 sujets approximatifs.</li>
+    <li>► Une relation = une phrase de justification.</li>
+  </ul>
+</div>
+
+<p class="foot">Document interne — Version 1.0 — À afficher près du poste de catalogage · Reproduit dans l'aide en ligne de l'application (FR + EN)</p>
+
+</body>
+</html>

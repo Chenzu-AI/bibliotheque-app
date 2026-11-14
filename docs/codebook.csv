@@ -1,0 +1,881 @@
+referential,axis,code,label_fr,label_en
+LIV,medium,LIV,livre,book
+BD,medium,BD,bande dessinée,comic
+MAN,medium,MAN,manga,manga
+FIL,medium,FIL,film,film
+SER,medium,SER,série,series
+MUS,medium,MUS,musique,music
+LIV,mediaSubtype,ROM,roman,novel
+LIV,mediaSubtype,ESS,essai,essay
+LIV,mediaSubtype,BIO,biographie,biography
+LIV,mediaSubtype,AUTO,autobiographie,autobiography
+LIV,mediaSubtype,DOC,documentaire,documentary
+LIV,mediaSubtype,BEAU,beau-livre,art book
+LIV,mediaSubtype,JEU,album jeunesse,children's book
+LIV,mediaSubtype,POE,poésie,poetry
+LIV,mediaSubtype,THE,théâtre,drama
+LIV,mediaSubtype,GUI,guide pratique,practical guide
+LIV,carrier,broche,broché,paperback
+LIV,carrier,poche,poche,pocket
+LIV,carrier,relie,relié,hardcover
+LIV,carrier,semi-poche,semi-poche,semi-pocket
+LIV,carrier,album,album,album
+LIV,carrier,beau-format,beau format,large format
+LIV,carrier,epub,EPUB,EPUB
+LIV,carrier,pdf,PDF,PDF
+LIV,carrier,mobi,MOBI / Kindle,MOBI
+LIV,carrier,audio-livre,livre audio,audiobook
+LIV,editionType,std,standard,standard
+LIV,editionType,poche-ed,édition de poche,pocket edition
+LIV,editionType,col,collector,collector
+LIV,editionType,dlx,deluxe,deluxe
+LIV,editionType,int,intégrale,complete
+LIV,editionType,ann,anniversaire,anniversary
+LIV,editionType,luxe,luxe,luxury
+LIV,editionType,rem,remasterisée,remastered
+LIV,editionType,reed,réédition,reissue
+LIV,editionType,num,numérotée,numbered
+LIV,editionType,demat,numérique standard,digital
+LIV,editionType,demat-int,numérique intégrale,digital complete
+LIV,numerotation,t,tome,volume
+LIV,numerotation,vol,volume,volume
+LIV,numerotation,liv,livre,book
+LIV,numerotation,part,partie,part
+LIV,numerotation,hs,hors-série,special issue
+LIV,numerotation,int,intégrale,complete
+BD,mediaSubtype,bd-franco-belge,BD franco-belge,franco-belgian comic
+BD,mediaSubtype,bd-roman-graphique,roman graphique,graphic novel
+BD,mediaSubtype,bd-comics,comics,comics
+BD,mediaSubtype,bd-strips,recueil de strips,strip collection
+BD,mediaSubtype,bd-webcomic,webcomic,webcomic
+BD,mediaSubtype,bd-documentaire,BD documentaire,non-fiction comic
+BD,mediaSubtype,bd-auteur,BD d'auteur,alternative comic
+BD,carrier,album-card,album cartonné,hardcover album
+BD,carrier,album-souple,album souple,softcover album
+BD,carrier,album-48,format 48 CC,48-page standard
+BD,carrier,album-grand,grand format,large format
+BD,carrier,album-petit,petit format,small format
+BD,carrier,integrale,intégrale,complete
+BD,carrier,omnibus,omnibus,omnibus
+BD,carrier,coffret,coffret,box set
+BD,carrier,comic-book,comic book,comic book
+BD,carrier,tpb,trade paperback,trade paperback
+BD,carrier,hardcover,hardcover,hardcover
+BD,carrier,strip-recueil,recueil de strips,strip collection
+BD,carrier,numerique,numérique,digital
+BD,carrier,webtoon,webtoon,webtoon
+BD,editionType,std,standard,standard
+BD,editionType,poche,poche,pocket
+BD,editionType,col,collector,collector
+BD,editionType,dlx,deluxe,deluxe
+BD,editionType,int-col,intégrale collector,collector complete
+BD,editionType,ann,anniversaire,anniversary
+BD,editionType,luxe,luxe,luxury
+BD,editionType,rem,remasterisée,remastered
+BD,editionType,reed,réédition,reissue
+BD,editionType,num,numérotée,numbered
+BD,editionType,omni,omnibus,omnibus
+BD,numerotation,t,tome,volume
+BD,numerotation,vol,volume,volume
+BD,numerotation,cyc,cycle,cycle
+BD,numerotation,arc,arc,arc
+BD,numerotation,hs,hors-série,special issue
+BD,numerotation,sp,spécial,special
+BD,numerotation,int,intégrale,complete
+BD,numerotation,omni,omnibus,omnibus
+MAN,mediaSubtype,manga-kodomo,kodomo,kodomo
+MAN,mediaSubtype,manga-shonen,shonen,shonen
+MAN,mediaSubtype,manga-shojo,shojo,shojo
+MAN,mediaSubtype,manga-seinen,seinen,seinen
+MAN,mediaSubtype,manga-josei,josei,josei
+MAN,mediaSubtype,manga-seijin,seijin,adult
+MAN,carrier,tanko,tankobon,tankobon
+MAN,carrier,bunko,bunkoban,bunkoban
+MAN,carrier,kanzen,kanzenban,kanzenban
+MAN,carrier,a5,format A5,A5 format
+MAN,carrier,b6,format B6,B6 format
+MAN,carrier,omnibus,omnibus,omnibus
+MAN,carrier,demat,numérique,digital
+MAN,carrier,webtoon,webtoon,webtoon
+MAN,editionType,std,standard,standard
+MAN,editionType,poche,poche,pocket
+MAN,editionType,col,collector,collector
+MAN,editionType,dlx,deluxe,deluxe
+MAN,editionType,perf,perfect edition,perfect edition
+MAN,editionType,ult,ultime,ultimate
+MAN,editionType,int,intégrale,complete
+MAN,editionType,coffret,coffret,box set
+MAN,editionType,ann,anniversaire,anniversary
+MAN,editionType,rem,remasterisée,remastered
+MAN,editionType,reed,réédition,reissue
+MAN,numerotation,t,tome,volume
+MAN,numerotation,vol,volume,volume
+MAN,numerotation,ch,chapitre,chapter
+MAN,numerotation,arc,arc,arc
+MAN,numerotation,sai,saison,season
+MAN,numerotation,hs,hors-série,special issue
+MAN,numerotation,sp,spécial,special
+MAN,numerotation,int,intégrale,complete
+MAN,numerotation,omni,omnibus,omnibus
+FIL,mediaSubtype,film-cinema,film de cinéma,cinema film
+FIL,mediaSubtype,film-court,court métrage,short film
+FIL,mediaSubtype,film-moyen,moyen métrage,medium-length film
+FIL,mediaSubtype,film-long,long métrage,feature film
+FIL,mediaSubtype,film-anim-occ,film d'animation occidental,western animated film
+FIL,mediaSubtype,film-anim-jp,film d'animation japonais,japanese animated film
+FIL,mediaSubtype,film-doc-cinema,film documentaire,documentary film
+FIL,carrier,vhs,VHS,VHS
+FIL,carrier,vhs-c,VHS-C,VHS-C
+FIL,carrier,s-vhs,S-VHS,S-VHS
+FIL,carrier,beta,Betamax,Betamax
+FIL,carrier,laser,LaserDisc,LaserDisc
+FIL,carrier,dvd,DVD,DVD
+FIL,carrier,blu-ray,Blu-ray,Blu-ray
+FIL,carrier,blu-ray-3d,Blu-ray 3D,Blu-ray 3D
+FIL,carrier,blu-ray-uhd,Blu-ray 4K Ultra HD,4K Ultra HD Blu-ray
+FIL,carrier,divx,DivX,DivX
+FIL,carrier,mkv,MKV,MKV
+FIL,carrier,mp4,MP4,MP4
+FIL,carrier,avi,AVI,AVI
+FIL,carrier,mov,QuickTime,QuickTime
+FIL,carrier,webm,WebM,WebM
+FIL,carrier,streaming,streaming,streaming
+FIL,carrier,demat,téléchargement,download
+FIL,carrier,vod,VOD,VOD
+FIL,editionType,std,standard,standard
+FIL,editionType,sim,simple,simple
+FIL,editionType,dig,digipack,digipack
+FIL,editionType,digibook,digibook,digibook
+FIL,editionType,steel,steelbook,steelbook
+FIL,editionType,keep,keep case,keep case
+FIL,editionType,spe,spéciale,special
+FIL,editionType,col,collector,collector
+FIL,editionType,ult,ultime,ultimate
+FIL,editionType,dlx,deluxe,deluxe
+FIL,editionType,lim,limitée,limited
+FIL,editionType,num,numérotée,numbered
+FIL,editionType,sig,signée,signed
+FIL,editionType,coffret,coffret,box set
+FIL,editionType,coffret-int,coffret intégral,complete box
+FIL,editionType,coffret-sai,coffret saison,season box
+FIL,editionType,coffret-tri,coffret trilogie,trilogy box
+FIL,editionType,ann-10,10e anniversaire,10th anniversary
+FIL,editionType,ann-20,20e anniversaire,20th anniversary
+FIL,editionType,ann-25,25e anniversaire,25th anniversary
+FIL,editionType,ann-30,30e anniversaire,30th anniversary
+FIL,editionType,ann-40,40e anniversaire,40th anniversary
+FIL,editionType,ann-50,50e anniversaire,50th anniversary
+FIL,editionType,rem,remasterisée,remastered
+FIL,editionType,rest,restaurée,restored
+FIL,editionType,4k-rest,restauration 4K,4K restoration
+FIL,editionType,hdr,HDR,HDR
+FIL,editionType,dc,director's cut,director's cut
+FIL,editionType,ec,extended cut,extended cut
+FIL,editionType,uc,ultimate cut,ultimate cut
+FIL,editionType,tc,theatrical cut,theatrical cut
+FIL,editionType,se,special edition,special edition
+FIL,editionType,vo,version originale,original version
+FIL,editionType,vf,version française,french version
+FIL,editionType,vost,version originale sous-titrée,subtitled original version
+FIL,editionType,multi,multilingue,multilingual
+FIL,editionType,unrated,non censurée,unrated
+FIL,editionType,rated,classée,rated
+FIL,editionType,demat,numérique standard,digital
+FIL,editionType,vod,VOD,VOD
+FIL,editionType,svod,abonnement,SVOD
+FIL,editionType,est,achat définitif,EST
+FIL,editionType,loc,location,rental
+FIL,editionType,free,gratuit,free
+FIL,editionType,ped,pédagogique,educational
+FIL,editionType,sco,scolaire,school
+FIL,editionType,bib,bibliothèque,library
+FIL,editionType,admin,administrative,administrative
+FIL,editionType,arch,archive,archive
+FIL,editionType,presse,presse,press
+FIL,editionType,promo,promotionnelle,promotional
+FIL,numerotation,opus,opus,opus
+FIL,numerotation,ep,épisode,episode
+FIL,numerotation,sai,saison,season
+FIL,numerotation,vol,volume,volume
+FIL,numerotation,ch,chapitre,chapter
+FIL,numerotation,dlc,contenu téléchargeable,DLC
+FIL,numerotation,exp,extension,expansion
+FIL,numerotation,sp,season pass,season pass
+FIL,numerotation,spin,spin-off,spin-off
+FIL,numerotation,rem,remaster,remaster
+FIL,numerotation,port,portage,port
+FIL,numerotation,int,intégrale,complete
+FIL,numerotation,hs,hors-série,special issue
+SER,mediaSubtype,serie-fic,série de fiction,fiction series
+SER,mediaSubtype,serie-an-occ,série d'animation occidentale,western animated series
+SER,mediaSubtype,serie-anime-jp,anime,anime
+SER,mediaSubtype,serie-mini,mini-série,miniseries
+SER,mediaSubtype,serie-feuilleton,feuilleton,serial
+SER,mediaSubtype,serie-soap,soap opera,soap opera
+SER,mediaSubtype,serie-web,web-série,web series
+SER,mediaSubtype,serie-doc,série documentaire,documentary series
+SER,mediaSubtype,serie-docufi,docufiction,docufiction
+SER,mediaSubtype,serie-telefilm,téléfilm,TV film
+SER,mediaSubtype,serie-telerealite,téléréalité,reality TV
+SER,mediaSubtype,serie-jeu,jeu / divertissement,game show
+SER,carrier,vhs,VHS,VHS
+SER,carrier,dvd,DVD,DVD
+SER,carrier,blu-ray,Blu-ray,Blu-ray
+SER,carrier,blu-ray-3d,Blu-ray 3D,Blu-ray 3D
+SER,carrier,blu-ray-uhd,Blu-ray 4K Ultra HD,4K Ultra HD Blu-ray
+SER,carrier,streaming,streaming,streaming
+SER,carrier,demat,téléchargement,download
+SER,carrier,vod,VOD,VOD
+SER,editionType,std,standard,standard
+SER,editionType,coffret,coffret,box set
+SER,editionType,coffret-sai,coffret saison,season box
+SER,editionType,coffret-int,coffret intégral,complete box
+SER,editionType,col,collector,collector
+SER,editionType,dlx,deluxe,deluxe
+SER,editionType,ult,ultime,ultimate
+SER,editionType,ann,anniversaire,anniversary
+SER,editionType,rem,remasterisée,remastered
+SER,editionType,rest,restaurée,restored
+SER,editionType,num,numérotée,numbered
+SER,editionType,svod,abonnement,SVOD
+SER,editionType,demat,numérique standard,digital
+SER,numerotation,s,saison,season
+SER,numerotation,e,épisode,episode
+SER,numerotation,ep,épisode global,global episode
+SER,numerotation,int,intégrale,complete
+SER,numerotation,cof,coffret,box set
+SER,numerotation,hs,hors-série,special issue
+SER,numerotation,sp,spécial,special
+SER,numerotation,pil,pilote,pilot
+MUS,mediaSubtype,mus-jazz,jazz,jazz
+MUS,mediaSubtype,mus-blues,blues,blues
+MUS,mediaSubtype,mus-gospel,gospel,gospel
+MUS,mediaSubtype,mus-soul,soul / funk,soul / funk
+MUS,mediaSubtype,mus-rap,rap / hip-hop,rap / hip-hop
+MUS,mediaSubtype,mus-reggae,reggae,reggae
+MUS,mediaSubtype,mus-rock,rock,rock
+MUS,mediaSubtype,mus-pop,pop,pop
+MUS,mediaSubtype,mus-metal,métal,metal
+MUS,mediaSubtype,mus-punk,punk,punk
+MUS,mediaSubtype,mus-classique,classique,classical
+MUS,mediaSubtype,mus-electro,électronique,electronic
+MUS,mediaSubtype,mus-folk,folk,folk
+MUS,mediaSubtype,mus-monde,musiques du monde,world music
+MUS,mediaSubtype,mus-bo,bande originale,soundtrack
+MUS,mediaSubtype,mus-chanson-fr,chanson française,french chanson
+MUS,mediaSubtype,mus-variete,variété,variety
+MUS,carrier,vinyl-33,vinyle 33 tours,33 RPM vinyl
+MUS,carrier,vinyl-45,vinyle 45 tours,45 RPM vinyl
+MUS,carrier,vinyl-78,shellac 78 tours,78 RPM shellac
+MUS,carrier,cassette,cassette audio,audio cassette
+MUS,carrier,cassette-metal,cassette métal,metal cassette
+MUS,carrier,8-track,cartouche 8 pistes,8-track cartridge
+MUS,carrier,bobine,bobine magnétique,reel-to-reel
+MUS,carrier,dat,DAT,DAT
+MUS,carrier,dcc,DCC,DCC
+MUS,carrier,cd,CD audio,audio CD
+MUS,carrier,cd-r,CD-R,CD-R
+MUS,carrier,sacd,SACD,SACD
+MUS,carrier,dvd-audio,DVD-Audio,DVD-Audio
+MUS,carrier,blu-ray-audio,Blu-ray audio,Blu-ray audio
+MUS,carrier,hdcd,HDCD,HDCD
+MUS,carrier,shm-cd,SHM-CD,SHM-CD
+MUS,carrier,blu-spec,Blu-spec CD,Blu-spec CD
+MUS,carrier,minidisc,MiniDisc,MiniDisc
+MUS,carrier,dualdisc,DualDisc,DualDisc
+MUS,carrier,dl,téléchargement,download
+MUS,carrier,streaming,streaming,streaming
+MUS,carrier,web,écoute en ligne,web streaming
+MUS,editionType,std,standard,standard
+MUS,editionType,dig,digipack,digipack
+MUS,editionType,digibook,digibook,digibook
+MUS,editionType,gatefold,gatefold,gatefold
+MUS,editionType,dlx,deluxe,deluxe
+MUS,editionType,col,collector,collector
+MUS,editionType,lim,limitée,limited
+MUS,editionType,num,numérotée,numbered
+MUS,editionType,luxe,luxe,luxury
+MUS,editionType,box,coffret,box set
+MUS,editionType,rem,remasterisée,remastered
+MUS,editionType,ann,anniversaire,anniversary
+MUS,editionType,reed,réédition,reissue
+MUS,editionType,exp,étendue,extended
+MUS,editionType,demat,numérique standard,digital
+MUS,editionType,demat-dlx,numérique deluxe,digital deluxe
+MUS,editionType,str-ed,édition streaming,streaming edition
+MUS,numerotation,op,opus,opus
+MUS,numerotation,vol,volume,volume
+MUS,numerotation,alb,album,album
+MUS,numerotation,piste,piste,track
+MUS,numerotation,face,face,side
+MUS,numerotation,hs,hors-série,special issue
+MUS,numerotation,sp,spécial,special
+MUS,numerotation,int,intégrale,complete
+JV,medium,JV,jeu vidéo,video game
+LOG,medium,LOG,logiciel,software
+JDS,medium,JDS,jeu de société,board game
+PRE,medium,PRE,presse,press
+PAR,medium,PAR,partition,music score
+CAR,medium,CAR,carte,carte
+JV,mediaSubtype,action,action,action
+JV,mediaSubtype,action-aventure,action-aventure,action-adventure
+JV,mediaSubtype,aventure,aventure,adventure
+JV,mediaSubtype,rpg,RPG,RPG
+JV,mediaSubtype,jrpg,JRPG,JRPG
+JV,mediaSubtype,arpg,action-RPG,action-RPG
+JV,mediaSubtype,mmorpg,MMORPG,MMORPG
+JV,mediaSubtype,strategie,stratégie,strategy
+JV,mediaSubtype,rts,RTS,RTS
+JV,mediaSubtype,tbs,tour par tour,turn-based
+JV,mediaSubtype,simulation,simulation,simulation
+JV,mediaSubtype,gestion,gestion,management
+JV,mediaSubtype,course,course,racing
+JV,mediaSubtype,sport,sport,sports
+JV,mediaSubtype,puzzle,puzzle / réflexion,puzzle
+JV,mediaSubtype,infiltration,infiltration,stealth
+JV,mediaSubtype,plateforme,plateforme,platformer
+JV,mediaSubtype,fps,FPS,FPS
+JV,mediaSubtype,tps,TPS,TPS
+JV,mediaSubtype,jeu-educatif,éducatif,educational
+JV,mediaSubtype,party,party game,party game
+JV,carrier,cartouche,cartouche,cartridge
+JV,carrier,cd-rom,CD-ROM,CD-ROM
+JV,carrier,dvd-rom,DVD-ROM,DVD-ROM
+JV,carrier,blu-ray-rom,Blu-ray,Blu-ray
+JV,carrier,blu-ray-uhd-rom,Blu-ray 4K Ultra HD,4K Ultra HD Blu-ray
+JV,carrier,umd,UMD,UMD
+JV,carrier,cartouche-sw,cartouche Switch,Switch cartridge
+JV,carrier,disquette,disquette,floppy disk
+JV,carrier,demat,téléchargement,download
+JV,carrier,cloud,cloud gaming,cloud gaming
+JV,editionType,std,standard,standard
+JV,editionType,dlc,contenu téléchargeable,DLC
+JV,editionType,exp,extension,expansion
+JV,editionType,goty,game of the year,game of the year
+JV,editionType,complete,complète,complete
+JV,editionType,col,collector,collector
+JV,editionType,steel,steelbook,steelbook
+JV,editionType,lim,limitée,limited
+JV,editionType,ult,ultime,ultimate
+JV,editionType,dlx,deluxe,deluxe
+JV,editionType,demat-std,numérique standard,digital standard
+JV,editionType,demat-dlx,numérique deluxe,digital deluxe
+JV,editionType,rem,remaster,remaster
+JV,editionType,remake,remake,remake
+JV,editionType,port,portage,port
+JV,editionType,compil,compilation,compilation
+JV,editionType,anth,anthologie,anthology
+JV,editionType,promo,promotionnelle,promotional
+JV,editionType,bib,bibliothèque,library
+JV,editionType,day1,day one,day one
+JV,editionType,preorder,précommande,preorder
+JV,numerotation,opus,opus,opus
+JV,numerotation,ep,épisode,episode
+JV,numerotation,sai,saison,season
+JV,numerotation,vol,volume,volume
+JV,numerotation,dlc,DLC,DLC
+JV,numerotation,exp,extension,expansion
+JV,numerotation,sp,season pass,season pass
+JV,numerotation,spin,spin-off,spin-off
+JV,numerotation,rem,remaster,remaster
+JV,numerotation,port,portage,port
+JV,numerotation,int,intégrale,complete
+JV,numerotation,hs,hors-série,special issue
+LOG,mediaSubtype,systeme,système / utilitaire,system / utility
+LOG,mediaSubtype,bureautique,bureautique,office
+LOG,mediaSubtype,graphisme,graphisme / PAO / DAO,graphics / DTP / CAD
+LOG,mediaSubtype,mao,musique assistée par ordinateur,music production
+LOG,mediaSubtype,montage-video,montage vidéo / animation,video editing / animation
+LOG,mediaSubtype,web,dev web,web dev
+LOG,mediaSubtype,dev,développement logiciel,software development
+LOG,mediaSubtype,sgbd,base de données,database
+LOG,mediaSubtype,gestion,gestion / métier,business
+LOG,mediaSubtype,educatif,éducatif,educational
+LOG,mediaSubtype,catalogage,catalogage / documentation,cataloging
+LOG,mediaSubtype,securite,sécurité,security
+LOG,mediaSubtype,reseau,réseau / internet,network / internet
+LOG,mediaSubtype,libre,libre / open source,free / open source
+LOG,carrier,cd-rom,CD-ROM,CD-ROM
+LOG,carrier,dvd-rom,DVD-ROM,DVD-ROM
+LOG,carrier,blu-ray-rom,Blu-ray,Blu-ray
+LOG,carrier,usb,clé USB,USB key
+LOG,carrier,disquette,disquette,floppy disk
+LOG,carrier,download,téléchargement,download
+LOG,carrier,saas,SaaS,SaaS
+LOG,carrier,cloud,cloud,cloud
+LOG,carrier,app-mobile,application mobile,mobile app
+LOG,carrier,web,webapp,webapp
+LOG,editionType,std,standard,standard
+LOG,editionType,pro,professionnelle,professional
+LOG,editionType,ent,entreprise,enterprise
+LOG,editionType,educ,éducation,education
+LOG,editionType,etudiant,étudiant,student
+LOG,editionType,home,famille / personnel,home / personal
+LOG,editionType,oem,OEM,OEM
+LOG,editionType,trial,démo / essai,trial
+LOG,editionType,free,gratuite,free
+LOG,editionType,perp,perpétuelle,perpetual
+LOG,editionType,abonnement,abonnement,subscription
+LOG,editionType,site,licence site,site license
+LOG,editionType,volume,licence volume,volume license
+LOG,editionType,nominative,licence nominative,named license
+LOG,numerotation,maj,majeure,major
+LOG,numerotation,min,mineure,minor
+LOG,numerotation,pat,correctif,patch
+LOG,numerotation,rev,révision,revision
+LOG,numerotation,ann,version annuelle,annual version
+JDS,mediaSubtype,party,party game,party game
+JDS,mediaSubtype,famille,familial,family
+JDS,mediaSubtype,strategie,stratégie,strategy
+JDS,mediaSubtype,cooperatif,coopératif,cooperative
+JDS,mediaSubtype,ambiance,ambiance,party
+JDS,mediaSubtype,enquete,enquête,d deduction
+JDS,mediaSubtype,gestion,gestion,management
+JDS,mediaSubtype,jdr,JDR,RPG
+JDS,mediaSubtype,quiz,quiz,quiz
+JDS,mediaSubtype,abstrait,stratégie abstraite,abstract strategy
+JDS,mediaSubtype,cartes,jeu de cartes,card game
+JDS,mediaSubtype,cartes-col,cartes à collectionner,collectible card game
+JDS,mediaSubtype,wargame,wargame,wargame
+JDS,mediaSubtype,figurines,figurines,miniatures
+JDS,mediaSubtype,escape,escape game,escape room
+JDS,carrier,boite-standard,boîte standard,standard box
+JDS,carrier,petite-boite,petite boîte,small box
+JDS,carrier,grande-boite,grande boîte,large box
+JDS,carrier,coffret,coffret,box set
+JDS,carrier,sachet,sachet / pochette,bag / pouch
+JDS,editionType,std,standard,standard
+JDS,editionType,init,initiation,starter
+JDS,editionType,demo,démo,demo
+JDS,editionType,deluxe,deluxe,deluxe
+JDS,editionType,col,collector,collector
+JDS,editionType,ks,kickstarter,kickstarter
+JDS,editionType,anniv,anniversaire,anniversary
+JDS,editionType,big-box,big box,big box
+JDS,editionType,ext,extension,expansion
+JDS,editionType,camp,campagne,campaign
+JDS,editionType,scen,scénario,scenario
+JDS,editionType,fam,famille,family
+JDS,editionType,jeu,jeunesse,children
+JDS,editionType,expert,expert,expert
+JDS,numerotation,vol,volume,volume
+JDS,numerotation,ep,épisode,episode
+JDS,numerotation,sai,saison,season
+JDS,numerotation,ext,extension,expansion
+JDS,numerotation,hs,hors-série,special issue
+JDS,numerotation,int,intégrale,complete
+PRE,mediaSubtype,quotidien,quotidien,daily
+PRE,mediaSubtype,hebdomadaire,hebdomadaire,weekly
+PRE,mediaSubtype,magazine,magazine,magazine
+PRE,mediaSubtype,revue,revue,journal
+PRE,mediaSubtype,bulletin,bulletin,bulletin
+PRE,mediaSubtype,annuaire,annuaire,directory
+PRE,mediaSubtype,journal,journal,journal
+PRE,mediaSubtype,presse-spec,presse spécialisée,specialized press
+PRE,carrier,papier,papier,paper
+PRE,carrier,tabloid,tabloïd,tabloid
+PRE,carrier,berliner,berlinois,berliner
+PRE,carrier,broadsheet,grand format,broadsheet
+PRE,carrier,microfilm,microfilm,microfilm
+PRE,carrier,web,web,web
+PRE,editionType,std,standard,standard
+PRE,editionType,abo,abonnement,subscription
+PRE,editionType,int,édition internationale,international edition
+PRE,editionType,reg,édition régionale,regional edition
+PRE,editionType,spec,numéro spécial,special issue
+PRE,editionType,anniv,anniversaire,anniversary
+PRE,numerotation,no,numéro,issue
+PRE,numerotation,date,date,date
+PRE,numerotation,vol,volume,volume
+PRE,numerotation,hs,hors-série,special issue
+PRE,periodicity,quot,quotidienne,daily
+PRE,periodicity,hebdo,hebdomadaire,weekly
+PRE,periodicity,bimen,bimensuelle,semi-monthly
+PRE,periodicity,men,mensuelle,monthly
+PRE,periodicity,bimes,bimestrielle,bi-monthly
+PRE,periodicity,trim,trimestrielle,quarterly
+PRE,periodicity,sem,semestrielle,semi-annual
+PRE,periodicity,ann,annuelle,annual
+PRE,periodicity,irr,irrégulière,irregular
+PRE,periodicity,hs,hors-série,special issue
+PRE,collectionState,en_cours,en cours,ongoing
+PRE,collectionState,arrete,arrêtée,stopped
+PRE,collectionState,complet,complète,complete
+PRE,collectionState,partiel,partielle,partial
+PRE,collectionState,pilon,pilon,weeded
+PAR,mediaSubtype,partition,partition,score
+PAR,mediaSubtype,partition-ch,partition de chœur,choral score
+PAR,mediaSubtype,partition-red,partition réduite,vocal score
+PAR,mediaSubtype,partition-con,partition condensée,condensed score
+PAR,mediaSubtype,partition-prt,partie séparée,part
+PAR,mediaSubtype,partition-condu,conducteur,full score
+PAR,mediaSubtype,partition-etu,partition de travail,study score
+PAR,mediaSubtype,partition-voc,partition vocale,vocal score
+PAR,carrier,papier,papier,paper
+PAR,carrier,braille,braille,braille
+PAR,carrier,pdf,PDF,PDF
+PAR,carrier,xml,MusicXML,MusicXML
+PAR,carrier,app,application,app
+PAR,editionType,std,standard,standard
+PAR,editionType,urtext,Urtext,Urtext
+PAR,editionType,fac-sim,fac-similé,facsimile
+PAR,editionType,rev,révision,revision
+PAR,editionType,num,numérotée,numbered
+PAR,numerotation,op,opus,opus
+PAR,numerotation,k,Köchel,Köchel
+PAR,numerotation,bwv,BWV,BWV
+PAR,numerotation,hob,Hoboken,Hoboken
+PAR,numerotation,d,Deutsch,Deutsch
+PAR,numerotation,ismn,ISMN,ISMN
+CAR,mediaSubtype,carte,carte,map
+CAR,mediaSubtype,plan,plan,plan
+CAR,mediaSubtype,atlas,atlas,atlas
+CAR,mediaSubtype,globe,globe,globe
+CAR,mediaSubtype,sphere-cel,sphere céleste,celestial sphere
+CAR,mediaSubtype,portulan,portulan,portolan
+CAR,mediaSubtype,spatiocarte,image satellite,satellite image
+CAR,mediaSubtype,calque,calque,overlay
+CAR,mediaSubtype,carte-3d,carte en relief,relief map
+CAR,mediaSubtype,carte-naut,carte nautique,nautical chart
+CAR,mediaSubtype,carte-aero,carte aéronautique,aeronautical chart
+CAR,carrier,papier,papier,paper
+CAR,carrier,toile,toile,canvas
+CAR,carrier,numerique,numérique,digital
+CAR,carrier,web,carte interactive,interactive map
+CAR,editionType,std,standard,standard
+CAR,editionType,ancienne,ancienne,ancient
+CAR,editionType,reed,réédition,reissue
+CAR,editionType,mise-a-jour,mise à jour,update
+CAR,editionType,fac-sim,fac-similé,facsimile
+CAR,numerotation,feuille,feuille,sheet
+CAR,numerotation,serie,série,series
+CAR,numerotation,vol,volume,volume
+CAR,numerotation,echelle,échelle,scale
+PHO,medium,PHO,photographie,photograph
+EST,medium,EST,estampe,print
+AFF,medium,AFF,affiche,poster
+MSN,medium,MSN,manuscrit,manuscript
+ADA,medium,ADA,document adapté,adapted document
+THE,medium,THE,thèse,thesis
+RNU,medium,RNU,ressource numérique,digital resource
+PHO,mediaSubtype,photo-nb,noir et blanc,black and white
+PHO,mediaSubtype,photo-coul,couleur,color
+PHO,mediaSubtype,photo-arg,argentique,silver gelatin
+PHO,mediaSubtype,photo-num,numérique,digital
+PHO,mediaSubtype,photo-aer,aérienne,aerial
+PHO,mediaSubtype,photo-sub,sous-marine,underwater
+PHO,mediaSubtype,photo-sci,scientifique,scientific
+PHO,mediaSubtype,photo-jour,photojournalisme,photojournalism
+PHO,mediaSubtype,photo-studio,portrait studio,studio portrait
+PHO,mediaSubtype,photo-art,photographie d'art,art photography
+PHO,carrier,tirage,tirage papier,print
+PHO,carrier,negatif,négatif,negative
+PHO,carrier,diapo,diapositive,slide
+PHO,carrier,fichier,fichier numérique,digital file
+PHO,carrier,plaque,plaque de verre,glass plate
+PHO,carrier,album,album photo,photo album
+PHO,editionType,orig,original,original
+PHO,editionType,tirage-tardif,tirage tardif,late print
+PHO,editionType,retirage,retirage,reprint
+PHO,editionType,num,numérisation,digitization
+PHO,numerotation,no-inv,numéro d'inventaire,inventory number
+PHO,numerotation,no-cliche,numéro de cliché,negative number
+PHO,numerotation,serie,série,series
+EST,mediaSubtype,grav-bois,gravure sur bois,woodcut
+EST,mediaSubtype,grav-cuivre,taille-douce,copper engraving
+EST,mediaSubtype,eau-forte,eau-forte,etching
+EST,mediaSubtype,litho,lithographie,lithograph
+EST,mediaSubtype,serigr,sérigraphie,screen print
+EST,mediaSubtype,pointe-seche,pointe sèche,drypoint
+EST,mediaSubtype,aquatinte,aquatinte,aquatint
+EST,mediaSubtype,maniere-noire,manière noire,mezzotint
+EST,carrier,papier,papier,paper
+EST,carrier,parchemin,parchemin,parchment
+EST,carrier,toile,toile,canvas
+EST,editionType,epreuve-art,épreuve d'artiste,artist's proof
+EST,editionType,tirage-limite,tirage limité,limited edition
+EST,editionType,tirage-com,tirage commercial,commercial print
+EST,editionType,etat,état,state
+EST,numerotation,no-epreuve,numéro d'épreuve,proof number
+EST,numerotation,no-planche,numéro de planche,plate number
+EST,numerotation,no-catalogue,numéro de catalogue,catalogue number
+AFF,mediaSubtype,aff-cinema,affiche de cinéma,movie poster
+AFF,mediaSubtype,aff-spectacle,affiche de spectacle,show poster
+AFF,mediaSubtype,aff-politique,affiche politique,political poster
+AFF,mediaSubtype,aff-pub,affiche publicitaire,advertising poster
+AFF,mediaSubtype,aff-culturelle,affiche culturelle,cultural poster
+AFF,mediaSubtype,aff-touristique,affiche touristique,travel poster
+AFF,mediaSubtype,aff-sociale,affiche sociale,social poster
+AFF,mediaSubtype,aff-evenement,affiche d'événement,event poster
+AFF,carrier,papier,papier,paper
+AFF,carrier,toile,toile,canvas
+AFF,carrier,numerique,numérique,digital
+AFF,editionType,orig,original,original
+AFF,editionType,repro,reproduction,reproduction
+AFF,editionType,reed,réédition,reissue
+AFF,editionType,sig,signée,signed
+AFF,numerotation,no-inv,numéro d'inventaire,inventory number
+AFF,numerotation,format,format,format
+AFF,numerotation,serie,série,series
+MSN,mediaSubtype,manuscrit,manuscrit moderne,modern manuscript
+MSN,mediaSubtype,manuscrit-med,manuscrit médiéval,medieval manuscript
+MSN,mediaSubtype,archive,archive,archive
+MSN,mediaSubtype,corresp,correspondance,correspondence
+MSN,mediaSubtype,journal,journal personnel,diary
+MSN,mediaSubtype,brouillon,brouillon,draft
+MSN,mediaSubtype,doc-admin,document administratif,administrative document
+MSN,carrier,parchemin,parchemin,parchment
+MSN,carrier,papier,papier,paper
+MSN,carrier,papyrus,papyrus,papyrus
+MSN,carrier,numerique,numérisation,digitization
+MSN,editionType,orig,original,original
+MSN,editionType,copie,copie,copy
+MSN,editionType,fac-sim,fac-similé,facsimile
+MSN,editionType,ed-crit,édition critique,critical edition
+MSN,numerotation,cote,cote d'archives,archival reference
+MSN,numerotation,no-inv,numéro d'inventaire,inventory number
+MSN,numerotation,no-folio,numéro de folio,folio number
+MSN,numerotation,no-piece,numéro de pièce,item number
+ADA,mediaSubtype,braille,braille intégral,uncontracted braille
+ADA,mediaSubtype,braille-abr,braille abrégé,contracted braille
+ADA,mediaSubtype,gros-car,gros caractères,large print
+ADA,mediaSubtype,falc,FALC,easy-to-read
+ADA,mediaSubtype,dys,dyslexie,dyslexia-friendly
+ADA,mediaSubtype,audio-desc,audiodescription,audio description
+ADA,mediaSubtype,lsf,langue des signes,sign language
+ADA,mediaSubtype,lpc,LPC,cued speech
+ADA,mediaSubtype,tactile,livre tactile,tactile book
+ADA,carrier,papier,papier,paper
+ADA,carrier,pdf-access,PDF accessible,accessible PDF
+ADA,carrier,epub-access,EPUB accessible,accessible EPUB
+ADA,carrier,audio,audio DAISY,DAISY audio
+ADA,carrier,video,video sous-titrée,subtitled video
+ADA,editionType,adapte,adaptation,adaptation
+ADA,editionType,trad,traduction,translation
+ADA,editionType,reed-access,réédition accessible,accessible reissue
+ADA,numerotation,vol,volume,volume
+ADA,numerotation,plage,plage audio,audio range
+ADA,numerotation,niv,niveau de lecture,reading level
+THE,mediaSubtype,these-doc,thèse de doctorat,doctoral thesis
+THE,mediaSubtype,these-master,thèse de master,master's thesis
+THE,mediaSubtype,hdr,HDR,habilitation
+THE,mediaSubtype,memoire,mémoire professionnel,professional thesis
+THE,mediaSubtype,rapport-stage,rapport de stage,internship report
+THE,carrier,papier,papier,paper
+THE,carrier,pdf,PDF,PDF
+THE,carrier,numerique,dépôt électronique,electronic deposit
+THE,editionType,soutenue,version de soutenance,defense version
+THE,editionType,publiee,version publiée,published version
+THE,editionType,abregee,version abrégée,abridged version
+THE,numerotation,no-these,numéro national de thèse,national thesis number
+THE,numerotation,annee,année de soutenance,defense year
+THE,numerotation,vol,volume,volume
+RNU,mediaSubtype,base-donnees,base de données,database
+RNU,mediaSubtype,plateforme,plateforme,platform
+RNU,mediaSubtype,revue-num,revue en ligne,online journal
+RNU,mediaSubtype,livre-num,bibliothèque numérique,digital library
+RNU,mediaSubtype,musique-str,streaming musical,music streaming
+RNU,mediaSubtype,video-str,streaming vidéo,video streaming
+RNU,mediaSubtype,jeu-str,jeu en ligne,online game
+RNU,carrier,web,web,web
+RNU,carrier,app,application,app
+RNU,carrier,api,API,API
+RNU,editionType,abonnement,abonnement,subscription
+RNU,editionType,perpetuel,licence perpétuelle,perpetual license
+RNU,editionType,free,accès gratuit limité,freemium
+RNU,numerotation,url,URL,URL
+RNU,numerotation,doi,DOI,DOI
+RNU,numerotation,no-licence,numéro de licence,license number
+COMMUN,public,TP,tout public,general audience
+COMMUN,public,J,jeunesse,children
+COMMUN,public,ADO,adolescent,teen
+COMMUN,public,ADU,adulte,adult
+COMMUN,public,18+,averti 18+,adults only
+COMMUN,public,PRO,professionnel,professional
+COMMUN,public,ENS,enseignant,teacher
+COMMUN,public,ETU,etudiant,student
+COMMUN,public,ALL,allophone,non-native speaker
+COMMUN,public,EMP,public empêché,housebound
+COMMUN,langue,fre,français,french
+COMMUN,langue,eng,anglais,english
+COMMUN,langue,ger,allemand,german
+COMMUN,langue,spa,espagnol,spanish
+COMMUN,langue,ita,italien,italian
+COMMUN,langue,por,portugais,portuguese
+COMMUN,langue,rus,russe,russian
+COMMUN,langue,jpn,japonais,japanese
+COMMUN,langue,kor,coréen,korean
+COMMUN,langue,chi,chinois,chinese
+COMMUN,langue,ara,arabe,arabic
+COMMUN,langue,heb,hébreu,hebrew
+COMMUN,langue,gre,grec,greek
+COMMUN,langue,lat,latin,latin
+COMMUN,langue,dut,néerlandais,dutch
+COMMUN,langue,pol,polonais,polish
+COMMUN,langue,tur,turc,turkish
+COMMUN,langue,swe,suédois,swedish
+COMMUN,langue,nor,norvégien,norwegian
+COMMUN,langue,dan,danois,danish
+COMMUN,langue,fin,finnois,finnish
+COMMUN,langue,cze,tchèque,czech
+COMMUN,langue,hun,hongrois,hungarian
+COMMUN,langue,rum,roumain,romanian
+COMMUN,langue,ukr,ukrainien,ukrainian
+COMMUN,langue,vie,vietnamien,vietnamese
+COMMUN,langue,tha,thaï,thai
+COMMUN,langue,hin,hindi,hindi
+COMMUN,langue,per,persan,persian
+COMMUN,langue,ind,indonésien,indonesian
+COMMUN,langue,may,malais,malay
+COMMUN,langue,fil,filippin,filippino
+COMMUN,langue,swa,swahili,swahili
+COMMUN,langue,afr,afrikaans,afrikaans
+COMMUN,langue,amh,amharique,amharic
+COMMUN,langue,yid,yiddish,yiddish
+COMMUN,langue,multi,multilingue,multilingual
+COMMUN,langue,und,indéterminé,undetermined
+COMMUN,zone,Z0,DVD region-free,DVD region free
+COMMUN,zone,Z1,DVD zone 1 (USA/Canada),DVD region 1
+COMMUN,zone,Z2,DVD zone 2 (Europe/Japon),DVD region 2
+COMMUN,zone,Z3,DVD zone 3 (Asie du Sud-Est),DVD region 3
+COMMUN,zone,Z4,DVD zone 4 (Amérique latine/Océanie),DVD region 4
+COMMUN,zone,Z5,DVD zone 5 (Afrique/Russie),DVD region 5
+COMMUN,zone,Z6,DVD zone 6 (Chine),DVD region 6
+COMMUN,zone,A,Blu-ray zone A,Blu-ray region A
+COMMUN,zone,B,Blu-ray zone B,Blu-ray region B
+COMMUN,zone,C,Blu-ray zone C,Blu-ray region C
+COMMUN,zone,region-free,Blu-ray region-free,Blu-ray region free
+COMMUN,zone,PAL,PAL,PAL
+COMMUN,zone,NTSC,NTSC,NTSC
+COMMUN,zone,NTSC-J,NTSC-J,NTSC-J
+COMMUN,accessibilite,braille,braille intégral,uncontracted braille
+COMMUN,accessibilite,braille-abr,braille abrégé,contracted braille
+COMMUN,accessibilite,gros-car,gros caractères,large print
+COMMUN,accessibilite,falc,FALC,easy-to-read
+COMMUN,accessibilite,dys,dyslexie,dyslexia-friendly
+COMMUN,accessibilite,audio-desc,audiodescription,audio description
+COMMUN,accessibilite,lsf,langue des signes,sign language
+COMMUN,accessibilite,lpc,LPC,cued speech
+COMMUN,accessibilite,tactile,livre tactile,tactile book
+COMMUN,accessibilite,sme,sous-titres SME,SDH subtitles
+COMMUN,accessibilite,ad,audiodescription (variante),audio description (alt)
+COMMUN,accessibilite,uc,accessibilité universelle,universal accessibility
+COMMUN,accessibilite,aucune,aucune,none
+COMMUN,periodicite,quot,quotidienne,daily
+COMMUN,periodicite,hebdo,hebdomadaire,weekly
+COMMUN,periodicite,bimen,bimensuelle,semi-monthly
+COMMUN,periodicite,men,mensuelle,monthly
+COMMUN,periodicite,bimes,bimestrielle,bi-monthly
+COMMUN,periodicite,trim,trimestrielle,quarterly
+COMMUN,periodicite,sem,semestrielle,semi-annual
+COMMUN,periodicite,ann,annuelle,annual
+COMMUN,periodicite,irr,irrégulière,irregular
+COMMUN,periodicite,hs,hors-série,special issue
+COMMUN,collectionState,en_cours,en cours,ongoing
+COMMUN,collectionState,arrete,arrêtée,stopped
+COMMUN,collectionState,complet,complète,complete
+COMMUN,collectionState,partiel,partielle,partial
+COMMUN,collectionState,pilon,pilon,weeded
+COMMUN,collectionState,en_reparation,en réparation,under repair
+COMMUN,formatImage,4:3,4:3,4:3
+COMMUN,formatImage,16:9,16:9,16:9
+COMMUN,formatImage,1.66:1,1.66:1,1.66:1
+COMMUN,formatImage,1.85:1,1.85:1,1.85:1
+COMMUN,formatImage,2.35:1,2.35:1,2.35:1
+COMMUN,formatImage,2.39:1,2.39:1,2.39:1
+COMMUN,sousTitres,fre,français,french
+COMMUN,sousTitres,eng,anglais,english
+COMMUN,sousTitres,ger,allemand,german
+COMMUN,sousTitres,spa,espagnol,spanish
+COMMUN,sousTitres,ita,italien,italian
+COMMUN,sousTitres,jpn,japonais,japanese
+COMMUN,sousTitres,chi,chinois,chinese
+COMMUN,sousTitres,ara,arabe,arabic
+COMMUN,sousTitres,rus,russe,russian
+COMMUN,sousTitres,por,portugais,portuguese
+COMMUN,sousTitres,multi,multilingue,multilingual
+COMMUN,sousTitres,auncun,aucun,none
+COMMUN,versionAudio,vo,version originale,original version
+COMMUN,versionAudio,vf,version française,french dubbed
+COMMUN,versionAudio,vost,version originale sous-titrée,subtitled original
+COMMUN,versionAudio,vostfr,version originale sous-titrée français,subtitled french
+COMMUN,versionAudio,multi,multilingue,multilingual
+COMMUN,pays,FR,France,France
+COMMUN,pays,US,États-Unis,United States
+COMMUN,pays,GB,Royaume-Uni,United Kingdom
+COMMUN,pays,JP,Japon,Japan
+COMMUN,pays,KR,Corée du Sud,South Korea
+COMMUN,pays,DE,Allemagne,Germany
+COMMUN,pays,IT,Italie,Italy
+COMMUN,pays,ES,Espagne,Spain
+COMMUN,pays,BE,Belgique,Belgium
+COMMUN,pays,CH,Suisse,Switzerland
+COMMUN,pays,CA,Canada,Canada
+COMMUN,pays,AU,Australie,Australia
+COMMUN,pays,NZ,Nouvelle-Zélande,New Zealand
+COMMUN,pays,CN,Chine,China
+COMMUN,pays,IN,Inde,India
+COMMUN,pays,RU,Russie,Russia
+COMMUN,pays,BR,Brésil,Brazil
+COMMUN,pays,AR,Argentine,Argentina
+COMMUN,pays,MX,Mexique,Mexico
+COMMUN,pays,CU,Cuba,Cuba
+COMMUN,pays,SE,Suède,Sweden
+COMMUN,pays,NO,Norvège,Norway
+COMMUN,pays,DK,Danemark,Denmark
+COMMUN,pays,FI,Finlande,Finland
+COMMUN,pays,NL,Pays-Bas,Netherlands
+COMMUN,pays,PL,Pologne,Poland
+COMMUN,pays,CZ,Tchéquie,Czech Republic
+COMMUN,pays,HU,Hongrie,Hungary
+COMMUN,pays,RO,Roumanie,Romania
+COMMUN,pays,GR,Grèce,Greece
+COMMUN,pays,TR,Turquie,Turkey
+COMMUN,pays,IL,Israël,Israel
+COMMUN,pays,IR,Iran,Iran
+COMMUN,pays,EG,Égypte,Egypt
+COMMUN,pays,MA,Maroc,Morocco
+COMMUN,pays,ZA,Afrique du Sud,South Africa
+COMMUN,pays,NG,Nigéria,Nigeria
+COMMUN,pays,SN,Sénégal,Senegal
+COMMUN,pays,CI,Côte d'Ivoire,Ivory Coast
+COMMUN,niveauLecture,maternelle,maternelle,preschool
+COMMUN,niveauLecture,primaire,primaire,primary
+COMMUN,niveauLecture,college,collège,middle school
+COMMUN,niveauLecture,lycee,lycée,high school
+COMMUN,niveauLecture,debutant,débutant,beginner
+COMMUN,niveauLecture,confirme,confirmé,intermediate
+COMMUN,niveauLecture,expert,expert,expert
+COMMUN,niveauLecture,recherche,niveau recherche,research
+COMMUN,droits,domaine-public,domaine public,public domain
+COMMUN,droits,sous-droits,sous droits,in copyright
+COMMUN,droits,libre,licence libre,free license
+COMMUN,droits,cc,creative commons,creative commons
+COMMUN,droits,proprietaire,propriétaire,proprietary
+COMMUN,droits,abonnement,abonnement,subscription
+COMMUN,conservation,1_an,1 an,1 year
+COMMUN,conservation,3_ans,3 ans,3 years
+COMMUN,conservation,5_ans,5 ans,5 years
+COMMUN,conservation,10_ans,10 ans,10 years
+COMMUN,conservation,perenne,pérenne,permanent
+COMMUN,conservation,temporaire,temporaire,temporary
+COMMUN,statutPret,disponible,disponible,available
+COMMUN,statutPret,emprunte,emprunté,on loan
+COMMUN,statutPret,reserve,réservé,reserved
+COMMUN,statutPret,reparation,en réparation,under repair
+COMMUN,statutPret,perdu,perdu,lost
+COMMUN,statutPret,pilon,pilon,weeded
+COMMUN,localisation,libre-acces,libre accès,open shelves
+COMMUN,localisation,magasin,magasin,closed stacks
+COMMUN,localisation,reserve,réserve,rare books
+COMMUN,localisation,numerique,numérique,digital
+COMMUN,localisation,portage,portage à domicile,home delivery
+COMMUN,fonds,courant,fonds courant,current collection
+COMMUN,fonds,local,fonds local,local collection
+COMMUN,fonds,regional,fonds régional,regional collection
+COMMUN,fonds,patrimonial,fonds patrimonial,heritage collection
+COMMUN,fonds,jeunesse,fonds jeunesse,children's collection
+COMMUN,fonds,ado,fonds ado,teen collection
+COMMUN,fonds,adulte,fonds adulte,adult collection
+COMMUN,fonds,numerique,fonds numérique,digital collection
+COMMUN,fonds,pro,fonds professionnel,professional collection
